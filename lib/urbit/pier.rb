@@ -3,9 +3,20 @@ require 'faraday'
 module Urbit
   module Api
 
+    class Channel
+      def initialize(name)
+         @name = name
+      end
+
+      def name
+        @name
+      end
+    end
+
     class Pier
       def initialize
         @c = Config.new
+        @channels = []
         @logged_in = false
       end
 
