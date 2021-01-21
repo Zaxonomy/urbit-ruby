@@ -1,11 +1,17 @@
 require 'faraday'
+require 'SecureRandom'
 
 module Urbit
   module Api
 
     class Channel
       def initialize(name)
-         @name = name
+        @key = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
+        @name = name
+      end
+
+      def key
+        @key
       end
 
       def name
