@@ -24,6 +24,10 @@ module Urbit
       def as_json
         JSON.generate(self.as_hash)
       end
+
+      def transmit
+       true
+      end
     end
 
   end

@@ -25,4 +25,9 @@ class Urbit::PierTest < Minitest::Test
      @p.open_channel "Test Channel"
      assert_equal 1, @p.open_channels.size
    end
+
+  def test_opening_the_channel_answers_the_new_channel
+    c = @p.open_channel "Test Channel"
+    assert_equal Urbit::Api::Channel, c.class
+  end
 end

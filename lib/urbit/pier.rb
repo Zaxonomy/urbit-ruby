@@ -44,6 +44,7 @@ module Urbit
         # cc = @channels.size
         c = Channel.new a_name
         @channels << c
+        c
       end
 
       def open_channels
