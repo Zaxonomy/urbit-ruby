@@ -21,7 +21,8 @@ class Urbit::PierTest < Minitest::Test
     refute_nil @p.cookie
   end
 
-  # def test_can_open_a_channel
-  #   @p.open
-  # end
+   def test_can_open_a_channel
+     @p.open_channel "Test Channel"
+     assert_equal 1, @p.open_channels.size
+   end
 end

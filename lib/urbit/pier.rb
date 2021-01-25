@@ -36,6 +36,19 @@ module Urbit
       def pat_p
         @c.pier_name
       end
+
+      # Opening a channel always creates a new channel which will
+      # remain open until this pier is disconnected at which point it
+      # will be closed.
+      def open_channel(a_name)
+        # cc = @channels.size
+        c = Channel.new a_name
+        @channels << c
+      end
+
+      def open_channels
+        @channels
+      end
     end
 
   end
