@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["daryl@deliverycircle.com"]
 
   spec.summary       = %q{The Ruby interface to the Urbit HTTP API}
-  spec.description   = %q{Access your urbit pier the ruby way. It's a Martian gem.}
+  spec.description   = %q{Access your urbit ship the ruby way. It's a Martian gem.}
   spec.homepage      = "https://www.ngzax.com"
   spec.license       = "MIT"
 

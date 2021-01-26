@@ -3,8 +3,8 @@ require 'json'
 
 class Urbit::MessageTest < Minitest::Test
   def setup
-    @p = Urbit::Api::Pier.new
-    @c = Urbit::Api::Channel.new @p, "Test Channel"
+    @ship = Urbit::Api::Ship.new
+    @c = Urbit::Api::Channel.new @ship, "Test Channel"
   end
 
   def test_Message_initialization

@@ -2,8 +2,8 @@ require "test_helper"
 
 class Urbit::ChannelTest < Minitest::Test
   def setup
-    @p = Urbit::Api::Pier.new
-    @c = Urbit::Api::Channel.new @p, "Test Channel"
+    @ship = Urbit::Api::Ship.new
+    @c = Urbit::Api::Channel.new @ship, "Test Channel"
   end
 
   def test_a_Channel_is_initialized_with_a_name
@@ -20,8 +20,8 @@ class Urbit::ChannelTest < Minitest::Test
   end
 
   def test_can_send_a_message_once_opened
-    @p = Urbit::Api::Pier.new
-    c = @p.open_channel "Test Channel"
-    assert_equal "a", c.send_message("Opening Airlock")
+    @ship = Urbit::Api::Ship.new
+    c = @ship.open_channel "Test Channel"
+    assert_equal "ok", c.send_message("Opening Airlock")
   end
 end

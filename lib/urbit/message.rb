@@ -44,7 +44,7 @@ module Urbit
           req.headers['Content-Type'] = 'application/json'
           req.body = "[#{self.as_json}]"
         end
-        response
+        response.reason_phrase
       end
     end
 
@@ -56,3 +56,12 @@ end
 #      --request PUT
 #       --data '[{"id":1,"action":"poke","ship":"zod","app":"hood","mark":"helm-hi","json":"Opening airlock"}]'
 #   http://localhost:8080/~/channel/1601844290-ae45b
+
+# @response_headers={"date"=>"Tue, 26 Jan 2021 22:28:00 GMT",
+# "connection"=>"keep-alive",
+# "server"=>"urbit/vere-1.0",
+# "set-cookie"=>"urbauth-~zod=0v4.bbb64.ttfql.sn6cf.oobo4.g4m7h; Path=/;
+# Max-Age=604800"}
+# @status=204
+# @reason_phrase="ok"
+# @response_body="">>@status=204 @reason_phrase="ok" @response_body="">>
