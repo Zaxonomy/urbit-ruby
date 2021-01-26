@@ -5,7 +5,8 @@ module Urbit
   module Api
 
     class Channel
-      def initialize(name)
+      def initialize(ship, name)
+        @ship = ship
         @key = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
         @messages = []
         @name = name
@@ -19,14 +20,14 @@ module Urbit
         @name
       end
 
-      def pier
-        "zod"
+      def ship
+        @ship
       end
 
       #(id, ship, action, app, mark, json)
       def send_message(a_message_string)
        m_id = self.sent_messages.size + 1
-       m = Message.new  m_id, self.pier, "poke", "hood", "helm-hi", a_message_string
+       m = Message.new  self, m_id, "poke", "hood", "helm-hi", a_message_string
        m.transmit
       end
 

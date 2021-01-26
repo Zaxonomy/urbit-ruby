@@ -2,20 +2,25 @@ require "test_helper"
 require 'json'
 
 class Urbit::MessageTest < Minitest::Test
+  def setup
+    @p = Urbit::Api::Pier.new
+    @c = Urbit::Api::Channel.new @p, "Test Channel"
+  end
+
   def test_Message_initialization
-    m = Urbit::Api::Message.new 1, "zod", "poke", "hood", "helm-hi", "Test Message"
+    m = Urbit::Api::Message.new @c, 1, "poke", "hood", "helm-hi", "Test Message"
     refute_nil m.id
   end
 
   def test_Message_can_serialize_itself_as_json
-    m = Urbit::Api::Message.new 1, "zod", "poke", "hood", "helm-hi", "Test Message"
+    m = Urbit::Api::Message.new @c, 1, "poke", "hood", "helm-hi", "Test Message"
     j = JSON.parse m.as_json
     assert_equal 1, j['id']
     assert_equal "zod", j['ship']
   end
 
   def test_Message_can_serialize_itself_as_a_json_string
-    m = Urbit::Api::Message.new 1, "zod", "poke", "hood", "helm-hi", "Opening airlock"
+    m = Urbit::Api::Message.new @c, 1, "poke", "hood", "helm-hi", "Opening airlock"
     assert_equal '{"id":1,"ship":"zod","action":"poke","app":"hood","mark":"helm-hi","json":"Opening airlock"}', m.as_json
   end
 end

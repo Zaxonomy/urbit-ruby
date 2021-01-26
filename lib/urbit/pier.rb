@@ -25,6 +25,10 @@ module Urbit
         @logged_in = parse_cookie response
       end
 
+      def name
+        self.pat_p[1..-1]
+      end
+
       def parse_cookie(resp)
         if cookie = resp.headers['set-cookie']
           @urbauth, @path, @max_age = cookie.split(';')
@@ -41,8 +45,8 @@ module Urbit
       # remain open until this pier is disconnected at which point it
       # will be closed.
       def open_channel(a_name)
-        # cc = @channels.size
-        c = Channel.new a_name
+        self.login
+        c = Channel.new self, a_name
         @channels << c
         c
       end
