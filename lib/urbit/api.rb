@@ -6,16 +6,16 @@ module Urbit
       def initialize
         require 'yaml'
         config_file = YAML.load_file('_config.yml.example')
-        @pier_code = config_file['code']
-        @pier_name = config_file['pier']
+        @ship_code = config_file['code']
+        @ship_name = config_file['ship']
       end
 
-      def pier_code
-        @pier_code
+      def ship_code
+        @ship_code
       end
 
-      def pier_name
-        @pier_name
+      def ship_name
+        @ship_name
       end
     end
 

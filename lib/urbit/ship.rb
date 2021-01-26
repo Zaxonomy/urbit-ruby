@@ -4,22 +4,7 @@ require 'SecureRandom'
 module Urbit
   module Api
 
-    class Channel
-      def initialize(name)
-        @key = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
-        @name = name
-      end
-
-      def key
-        @key
-      end
-
-      def name
-        @name
-      end
-    end
-
-    class Pier
+    class Ship
       def initialize
         @c = Config.new
         @channels = []
@@ -36,8 +21,12 @@ module Urbit
 
       def login
         return if logged_in?
-        response = Faraday.post('http://localhost:8080/~/login', "password=#{@c.pier_code}")
+        response = Faraday.post('http://localhost:8080/~/login', "password=#{@c.ship_code}")
         @logged_in = parse_cookie response
+      end
+
+      def name
+        self.pat_p[1..-1]
       end
 
       def parse_cookie(resp)
@@ -49,7 +38,21 @@ module Urbit
       end
 
       def pat_p
-        @c.pier_name
+        @c.ship_name
+      end
+
+      # Opening a channel always creates a new channel which will
+      # remain open until this ship is disconnected at which point it
+      # will be closed.
+      def open_channel(a_name)
+        self.login
+        c = Channel.new self, a_name
+        @channels << c
+        c
+      end
+
+      def open_channels
+        @channels
       end
     end
 
