@@ -11,6 +11,10 @@ module Urbit
         @logged_in = false
       end
 
+      def close
+        response = Faraday.post('http://localhost:8080/~/login', "password=#{@c.ship_code}")
+      end
+
       def cookie
         @urbauth
       end
