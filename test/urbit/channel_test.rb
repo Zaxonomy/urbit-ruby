@@ -22,6 +22,17 @@ class Urbit::ChannelTest < Minitest::Test
   def test_can_send_a_message_once_opened
     @ship = Urbit::Api::Ship.new
     c = @ship.open_channel "Test Channel"
-    assert_equal "ok", c.send_message("Opening Airlock")
+    assert_equal 1, c.sent_messages.size
+    assert c.open?
+  end
+
+  def test_can_close
+    @ship = Urbit::Api::Ship.new
+    c = @ship.open_channel "Test Channel"
+    assert_equal 1, c.sent_messages.size
+
+    assert_equal "ok", c.close
+    assert_equal 2, c.sent_messages.size
+    assert c.closed?
   end
 end

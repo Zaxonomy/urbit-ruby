@@ -5,35 +5,45 @@ module Urbit
   module Api
 
     class Channel
+      attr_reader :key, :name, :ship
+
       def initialize(ship, name)
-        @ship = ship
-        @key = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
-        @messages = []
-        @name = name
+        @ship      = ship
+        @key       = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
+        @messages  = []
+        @name      = name
+        @is_open   = false
       end
 
-      def key
-        @key
+      def close
+        # puts "closing #{name}"
+        @messages << (m = CloseMessage.new self, self.next_id)
+        @is_open = (r = m.transmit) != "ok"
+        r
       end
 
-      def name
-        @name
+      def closed?
+        !@is_open
       end
 
-      def ship
-        @ship
+      def next_id
+        self.sent_messages.size + 1
       end
 
-      #(id, ship, action, app, mark, json)
+      def open?
+        @is_open
+      end
+
       def send_message(a_message_string)
-       m_id = self.sent_messages.size + 1
-       m = Message.new  self, m_id, "poke", "hood", "helm-hi", a_message_string
-       m.transmit
+        @messages << (m = Message.new  self, self.next_id, "poke", "hood", "helm-hi", a_message_string)
+        @is_open = (r = m.transmit) == "ok"
+        r
       end
 
       def sent_messages
-       @messages
+        @messages
       end
+
     end
 
   end

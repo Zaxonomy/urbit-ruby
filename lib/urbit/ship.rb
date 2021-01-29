@@ -9,6 +9,13 @@ module Urbit
         @c = Config.new
         @channels = []
         @logged_in = false
+
+        # Make sure all our created channels are closed by the GC
+        ObjectSpace.define_finalizer( self, self.class.finalize(@channels) )
+      end
+
+      def self.finalize(channels)
+        proc {channels.each {|c| c.close}}
       end
 
       def cookie
@@ -46,13 +53,13 @@ module Urbit
       # will be closed.
       def open_channel(a_name)
         self.login
-        c = Channel.new self, a_name
+        (c = Channel.new self, a_name).send_message("Opening Airlock")
         @channels << c
         c
       end
 
       def open_channels
-        @channels
+        @channels.select {|c| c.open?}
       end
     end
 
