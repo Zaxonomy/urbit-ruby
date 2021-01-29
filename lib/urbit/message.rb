@@ -4,6 +4,8 @@ module Urbit
   module Api
 
     class Message
+      attr_reader :channel, :id
+
       def initialize(channel, id, action, app, mark, json)
         @channel = channel
         @id      = id
@@ -16,14 +18,6 @@ module Urbit
 
       def attributes
         instance_variables.reject {|var| :@channel == var }
-      end
-
-      def channel
-        @channel
-      end
-
-      def id
-        @id
       end
 
       def as_hash

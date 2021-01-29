@@ -10,6 +10,7 @@ module Urbit
         @channels = []
         @logged_in = false
 
+        # Make sure all our created channels are closed by the GC
         ObjectSpace.define_finalizer( self, self.class.finalize(@channels) )
       end
 

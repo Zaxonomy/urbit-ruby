@@ -5,6 +5,8 @@ module Urbit
   module Api
 
     class Channel
+      attr_reader :key, :name, :ship
+
       def initialize(ship, name)
         @ship      = ship
         @key       = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
@@ -24,14 +26,6 @@ module Urbit
         !@is_open
       end
 
-      def key
-        @key
-      end
-
-      def name
-        @name
-      end
-
       def next_id
         self.sent_messages.size + 1
       end
@@ -48,10 +42,6 @@ module Urbit
 
       def sent_messages
         @messages
-      end
-
-      def ship
-        @ship
       end
 
     end
