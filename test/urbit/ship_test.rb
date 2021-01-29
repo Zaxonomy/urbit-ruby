@@ -30,4 +30,27 @@ class Urbit::ShipTest < Minitest::Test
     c = @ship.open_channel "Test Channel"
     assert_equal Urbit::Api::Channel, c.class
   end
+
+  def test_closing_the_channel_makes_it_unavailable
+    c = @ship.open_channel "Test Channel"
+    assert_equal 1, @ship.open_channels.size
+    c.close
+    assert_equal 0, @ship.open_channels.size
+  end
+
+  #-------------------------------------------------------------------
+  # This test is a tricky one and I couldn't get it to work.
+  # You can, however, assure yourself that it is actually true by
+  # uncommenting the "puts" in channel.close and you'll see it is
+  # called when your program ends.
+  #-------------------------------------------------------------------
+  # def test_destroying_a_ship_closes_all_its_channels
+  #   c = @ship.open_channel "Test Channel"
+  #   assert_equal 1, @ship.open_channels.size
+  #   assert c.open?
+  #   @ship = nil
+  #   GC.start(full_mark: true, immediate_sweep: true)
+  #   sleep 15
+  #   assert c.closed?
+  # end
 end

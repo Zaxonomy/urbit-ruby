@@ -14,6 +14,7 @@ module Urbit
       end
 
       def close
+        # puts "closing #{name}"
         @messages << (m = CloseMessage.new self, self.next_id)
         @is_open = (r = m.transmit) != "ok"
         r
