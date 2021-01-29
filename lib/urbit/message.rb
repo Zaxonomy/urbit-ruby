@@ -16,10 +16,6 @@ module Urbit
         @json    = json
       end
 
-      def attributes
-        instance_variables.reject {|var| :@channel == var }
-      end
-
       def as_hash
         self.attributes.each_with_object(Hash.new(0)) { |element, hash| hash["#{element}".delete("@").to_sym] = instance_variable_get(element) }
       end
@@ -40,6 +36,13 @@ module Urbit
         end
         response.reason_phrase
       end
+
+      private
+
+      def attributes
+        instance_variables.reject {|var| :@channel == var }
+      end
+
     end
 
     class CloseMessage < Message
