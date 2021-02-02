@@ -8,11 +8,12 @@ module Urbit
       attr_reader :key, :name, :ship
 
       def initialize(ship, name)
-        @ship      = ship
-        @key       = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
-        @messages  = []
-        @name      = name
-        @is_open   = false
+        @ship          = ship
+        @key           = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
+        @messages      = []
+        @name          = name
+        @is_open       = false
+        @is_subscribed = false
       end
 
       def close
@@ -44,6 +45,15 @@ module Urbit
         @messages
       end
 
+      def subscribe
+        @messages << (m = SubscribeMessage.new self, self.next_id)
+        @is_subscribed = (r = m.transmit) != "ok"
+        r
+      end
+
+      def subscribed?
+        @is_subscribed
+      end
     end
 
   end

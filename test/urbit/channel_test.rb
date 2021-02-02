@@ -3,7 +3,8 @@ require "test_helper"
 class Urbit::ChannelTest < Minitest::Test
   def setup
     @ship = Urbit::Api::Ship.new
-    @c = Urbit::Api::Channel.new @ship, "Test Channel"
+    @c = @ship.open_channel "Test Channel"
+    # @c = Urbit::Api::Channel.new @ship, "Test Channel"
   end
 
   def test_a_Channel_is_initialized_with_a_name
@@ -20,19 +21,22 @@ class Urbit::ChannelTest < Minitest::Test
   end
 
   def test_can_send_a_message_once_opened
-    @ship = Urbit::Api::Ship.new
-    c = @ship.open_channel "Test Channel"
-    assert_equal 1, c.sent_messages.size
-    assert c.open?
+    assert_equal 1, @c.sent_messages.size
+    assert @c.open?
   end
 
   def test_can_close
-    @ship = Urbit::Api::Ship.new
-    c = @ship.open_channel "Test Channel"
-    assert_equal 1, c.sent_messages.size
+    assert_equal 1, @c.sent_messages.size
 
-    assert_equal "ok", c.close
-    assert_equal 2, c.sent_messages.size
-    assert c.closed?
+    assert_equal "ok", @c.close
+    assert_equal 2, @c.sent_messages.size
+    assert @c.closed?
+  end
+
+  def test_can_subscribe
+    assert_equal 1, @c.sent_messages.size
+    assert_equal 'ok', @c.subscribe
+    # Subscribing sends a message to the ship
+    assert_equal 2, @c.sent_messages.size
   end
 end

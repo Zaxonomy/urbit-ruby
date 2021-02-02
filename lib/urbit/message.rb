@@ -53,5 +53,16 @@ module Urbit
       end
     end
 
+    class SubscribeMessage < Message
+      def initialize(channel, id)
+        @channel = channel
+        @ship    = channel.ship.name
+        @id      = id
+        @action  = 'subscribe'
+        @app     = 'chat-view'
+        @path    = '/primary'
+      end
+    end
+
   end
 end
