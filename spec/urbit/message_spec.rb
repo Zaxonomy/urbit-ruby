@@ -1,27 +1,24 @@
-require "test_helper"
-require 'json'
-
-class Urbit::MessageTest < Minitest::Test
-  def setup
+describe Urbit::Api::Message do
+  before(:all) do
     @ship = Urbit::Api::Ship.new
     @c = Urbit::Api::Channel.new @ship, "Test Channel"
   end
 
-  def test_Message_initialization
+  it "can be initialized" do
     m = Urbit::Api::Message.new @c, 1, "poke", "hood", "helm-hi", "Test Message"
-    refute_nil m.id
+    expect(m.id).to_not be_nil
   end
 
-  def test_Message_can_serialize_itself_as_json
+  it "can serialize itself as json" do
     m = Urbit::Api::Message.new @c, 1, "poke", "hood", "helm-hi", "Test Message"
     j = JSON.parse m.as_json
-    assert_equal 1, j['id']
-    assert_equal "zod", j['ship']
+    expect(j['id']).to eq(1)
+    expect(j['ship']).to eq("zod")
   end
 
-  def test_Message_can_serialize_itself_as_a_json_string
+  it "can serialize itself as a json string" do
     m = Urbit::Api::Message.new @c, 1, "poke", "hood", "helm-hi", "Opening airlock"
-    assert_equal '{"id":1,"ship":"zod","action":"poke","app":"hood","mark":"helm-hi","json":"Opening airlock"}', m.as_json
+    expect(m.as_json).to eq('{"id":1,"ship":"zod","action":"poke","app":"hood","mark":"helm-hi","json":"Opening airlock"}')
   end
 end
 
