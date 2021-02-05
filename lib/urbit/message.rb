@@ -29,7 +29,7 @@ module Urbit
       end
 
       def transmit
-        response = Faraday.put("http://localhost:8080/~/channel/#{self.channel.key}") do |req|
+        response = Faraday.put(self.channel.url) do |req|
           req.headers['Cookie'] = self.channel.ship.cookie
           req.headers['Content-Type'] = 'application/json'
           req.body = "[#{self.as_json}]"

@@ -35,8 +35,11 @@ class Urbit::ChannelTest < Minitest::Test
 
   def test_can_subscribe
     assert_equal 1, @c.sent_messages.size
-    assert_equal 'ok', @c.subscribe
+    refute_nil (s = @c.subscribe)
     # Subscribing sends a message to the ship
     assert_equal 2, @c.sent_messages.size
+    # Let's send a message to the channel?
+    # m = Urbit::Api::Message.new @c, 3, "poke", "chat-view", "/primary", "Test Subscriber Message"
+    # sleep(10)
   end
 end
