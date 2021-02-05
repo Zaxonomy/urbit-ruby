@@ -1,9 +1,13 @@
 require "urbit/ship"
 
 describe Urbit::Api::Channel do
-  before(:all) do
+  before(:each) do
     @ship = Urbit::Api::Ship.new
     @c = @ship.open_channel "Test Channel"
+  end
+
+  after(:each) do
+    @c.close if @c.open?
   end
 
   it "is initialized with a name" do
@@ -29,6 +33,18 @@ describe Urbit::Api::Channel do
     expect(@c.close).to eq("ok")
     expect(@c.sent_messages.size).to eq(2)
     expect(@c.closed?)
+  end
+
+  it "can subscribe" do
+    expect(@c.sent_messages.size).to eq(1)
+    expect(s = @c.subscribe).to_not be_nil
+
+    # Subscribing sends a message to the ship
+    expect(@c.sent_messages.size).to eq(2)
+
+    # Let's send a message to the channel?
+    # m = Urbit::Api::Message.new @c, 3, "poke", "chat-view", "/primary", "Test Subscriber Message"
+    # sleep(10)
   end
 end
 

@@ -1,5 +1,5 @@
 describe Urbit::Api::Ship do
-  before(:all) do
+  before(:each) do
     @ship = Urbit::Api::Ship.new
   end
 

@@ -1,7 +1,7 @@
 require "urbit/api"
 
 describe Urbit::Api::Config do
-  before(:all) do
+  before(:each) do
     @c = Urbit::Api::Config.new
   end
 

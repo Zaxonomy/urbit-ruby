@@ -1,5 +1,5 @@
 describe Urbit::Api::Message do
-  before(:all) do
+  before(:each) do
     @ship = Urbit::Api::Ship.new
     @c = Urbit::Api::Channel.new @ship, "Test Channel"
   end
