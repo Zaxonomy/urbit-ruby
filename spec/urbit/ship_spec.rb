@@ -1,41 +1,41 @@
-require "test_helper"
-
-class Urbit::ShipTest < Minitest::Test
-  def setup
+describe Urbit::Api::Ship do
+  before(:all) do
     @ship = Urbit::Api::Ship.new
   end
 
-  def test_a_ship_has_a_pat_p
-    refute_nil @ship.pat_p
-    assert_equal "~zod", @ship.pat_p
+  it "has a pat p" do
+    expect(@ship.pat_p).to_not be_nil
+    expect(@ship.pat_p).to     eq("~zod")
   end
 
-  def test_is_not_initially_logged_in
-    refute @ship.logged_in?
+  it "is not initially logged in" do
+    expect(@ship.logged_in?).to be false
   end
 
-  def test_can_log_in
+  it "can log in" do
     # NOTE: This test will fail if you don''t have a fake zod running.
     @ship.login
-    assert @ship.logged_in?
-    refute_nil @ship.cookie
+    expect(@ship.logged_in?)
+    expect(@ship.cookie).to_not be_nil
   end
 
-   def test_can_open_a_channel
-     @ship.open_channel "Test Channel"
-     assert_equal 1, @ship.open_channels.size
+   it "can open a channel" do
+     c = @ship.open_channel "Test Channel"
+     expect(@ship.open_channels.size).to eq(1)
+    c.close
    end
 
-  def test_opening_the_channel_answers_the_new_channel
+  it "test opening the channel answers the new channel" do
     c = @ship.open_channel "Test Channel"
-    assert_equal Urbit::Api::Channel, c.class
+    expect(c).to be_instance_of(Urbit::Api::Channel)
+    c.close
   end
 
-  def test_closing_the_channel_makes_it_unavailable
+  it "closing the channel makes it unavailable" do
     c = @ship.open_channel "Test Channel"
-    assert_equal 1, @ship.open_channels.size
+    expect(@ship.open_channels.size).to eq(1)
     c.close
-    assert_equal 0, @ship.open_channels.size
+    expect(@ship.open_channels.size).to eq(0)
   end
 
   #-------------------------------------------------------------------
@@ -44,7 +44,7 @@ class Urbit::ShipTest < Minitest::Test
   # uncommenting the "puts" in channel.close and you'll see it is
   # called when your program ends.
   #-------------------------------------------------------------------
-  # def test_destroying_a_ship_closes_all_its_channels
+  # it test_destroying_a_ship_closes_all_its_channels
   #   c = @ship.open_channel "Test Channel"
   #   assert_equal 1, @ship.open_channels.size
   #   assert c.open?
