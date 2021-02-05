@@ -2,6 +2,7 @@ require 'faraday'
 # require 'em-eventsource'
 require 'ld-eventsource'
 require 'SecureRandom'
+require 'urbit/message'
 
 module Urbit
   module Api

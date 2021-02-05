@@ -1,6 +1,8 @@
 require 'faraday'
 require 'SecureRandom'
 
+require 'urbit/channel'
+
 module Urbit
   module Api
 
