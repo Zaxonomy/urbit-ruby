@@ -1,5 +1,4 @@
 require 'faraday'
-require 'SecureRandom'
 
 require 'urbit/channel'
 require 'urbit/config'
@@ -40,14 +39,10 @@ module Urbit
       config.name
     end
     
-    def parse_cookie(resp)
-      cookie = resp.headers['set-cookie']
-      return unless cookie
-      
-      @auth_cookie, @path, @max_age = cookie.split(';')
-      self.logged_in = true if @auth_cookie
+    def untilded_name
+      name.gsub('~', '')
     end
-    
+
     def pat_p
       config.name
     end
@@ -72,6 +67,14 @@ module Urbit
     def ensure_connections_closed
       # Make sure all our created channels are closed by the GC
       ObjectSpace.define_finalizer( self, self.class.finalize(channels) )
+    end
+
+    def parse_cookie(resp)
+      cookie = resp.headers['set-cookie']
+      return unless cookie
+      
+      @auth_cookie, @path, @max_age = cookie.split(';')
+      self.logged_in = true if @auth_cookie
     end
 
     def login_url
