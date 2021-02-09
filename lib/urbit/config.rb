@@ -8,9 +8,9 @@ module Urbit
 
     DEFAULT_CODE = 'lidlut-tabwed-pillex-ridrup'.freeze
     DEFAULT_CONFIG_FILE = 'config.yml'.freeze
-    DEFAULT_HOST = 'localhost'.freeze
+    DEFAULT_HOST = 'http://localhost'.freeze
     DEFAULT_PORT = '80'.freeze
-    DEFAULT_NAME = 'zod'.freeze
+    DEFAULT_NAME = '~zod'.freeze
 
     def initialize(code: nil,  config_file: nil, host: nil, name: nil, port: nil)
       @config_file = config_file || DEFAULT_CONFIG_FILE
@@ -18,6 +18,10 @@ module Urbit
       @host = host || loaded_config['host'] || DEFAULT_HOST
       @name = name || loaded_config['name'] || DEFAULT_NAME
       @port = port || loaded_config['port'] || DEFAULT_PORT
+    end
+
+    def api_base_url
+      @api_base_url ||= "#{host}:#{port}"
     end
 
     private
