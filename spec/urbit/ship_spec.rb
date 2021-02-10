@@ -1,4 +1,3 @@
-require 'pry'
 require "urbit/ship"
 
 describe Urbit::Ship do

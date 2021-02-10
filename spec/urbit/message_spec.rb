@@ -14,13 +14,13 @@ describe Urbit::Message do
   it "can serialize itself as json" do
     m = Urbit::Message.new channel, 1, "poke", "hood", "helm-hi", "Test Message"
     j = JSON.parse m.request_body
-    expect(j['id']).to eq(1)
-    expect(j['ship']).to eq("zod")
+    expect(j.first['id']).to eq(1)
+    expect(j.first['ship']).to eq("zod")
   end
 
   it "can serialize itself as a json string" do
     m = Urbit::Message.new channel, 1, "poke", "hood", "helm-hi", "Opening airlock"
-    expect(m.request_body).to eq('{"action":"poke","app":"hood","id":1,"json":"Opening airlock","mark":"helm-hi","ship":"zod"}')
+    expect(m.request_body).to eq('[{"action":"poke","app":"hood","id":1,"json":"Opening airlock","mark":"helm-hi","ship":"zod"}]')
   end
 end
 

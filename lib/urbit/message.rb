@@ -15,23 +15,31 @@ module Urbit
     end
 
     def transmit
-      response = Faraday.put("#{self.ship.config.api_base_url}/~/channel/#{self.channel.key}") do |req|
+      response = Faraday.put(channel_url) do |req|
         req.headers['Cookie'] = self.ship.cookie
         req.headers['Content-Type'] = 'application/json'
         req.body = request_body
       end
+
+      # TODO
+      # handle_error if response.status != 204
+
       response.reason_phrase
     end
 
     def request_body
-      {
+      [{
         action: action,
         app: app,
         id: id,
         json: json,
         mark: mark,
         ship: ship.untilded_name
-      }.to_json
+      }].to_json
+    end
+
+    def channel_url
+      "#{self.ship.config.api_base_url}/~/channel/#{self.channel.key}"
     end
   end
 
@@ -44,11 +52,10 @@ module Urbit
     end
 
     def request_body
-      {
+      [{
         action: action,
-        id: id,
-        ship: ship.untilded_name
-      }.to_json
+        id: id
+      }].to_json
     end
   end
 end

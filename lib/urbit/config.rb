@@ -1,5 +1,4 @@
 require 'yaml'
-require 'pry'
 
 module Urbit
   #  Injected into a Ship to provide configuration
