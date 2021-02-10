@@ -25,8 +25,43 @@ Or install it yourself as:
 # TODO: fix namespacing :)
 require 'urbit/urbit'
 
-ship = Urbit.new(config_file: 'my_moon.yml')
-ship.open_channel('my-cool-channel')
+# This will instantiate a ship that connects to the fake `~zod` dev server by default
+# See Urbit docs for more info: https://urbit.org/using/develop/
+ship = Urbit.new
+
+ship.logged_in?
+# false
+
+ship.login
+
+ship.logged_in?
+# true
+
+ship.open_channel('my-channel')
+```
+
+### Configuration
+
+Configure your ship using a config file or constructor keyword arguments. Either or both can be used; the keyword args will override any values set via config file.
+
+Supported keys:
+- `code` - the auth code 
+- `host` - the ship's host (e.g., 'localhost' or 'myship.net')
+- `name` - the ship's name (e.g, '~zod')
+- `port` - the open www port on your ship ('80' by default)
+
+#### Config File
+
+See [`_config.yml.example`](_config.yml.example) for an example config file
+
+```rb
+ship = Urbit.new(config_file: 'my-moon.yml')
+```
+
+#### Constructor Keyword Arguments
+
+```rb
+ship = Urbit.new(host: '127.0.0.1', port: '8080')
 ```
 
 ## Development
