@@ -1,5 +1,5 @@
-require_relative 'urbit/config'
-require_relative 'urbit/ship'
+require_relative './config'
+require_relative './ship'
 
 # This is the main namespace for Urbit.
 #
@@ -11,7 +11,7 @@ require_relative 'urbit/ship'
 module Urbit
   class << self
     def new(**config_options)
-      config = Urbit::Config.merge(config_options)
+      config = Urbit::Config.new(**config_options)
       Urbit::Ship.new(config: config)
     end
   end

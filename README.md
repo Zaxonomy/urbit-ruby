@@ -21,7 +21,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```rb
+# TODO: fix namespacing :)
+require 'urbit/urbit'
+
+ship = Urbit.new(config_file: 'my_moon.yml')
+ship.open_channel('my-cool-channel')
+```
 
 ## Development
 
