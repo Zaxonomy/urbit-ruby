@@ -64,6 +64,19 @@ ship = Urbit.new(config_file: 'my-moon.yml')
 ship = Urbit.new(host: '127.0.0.1', port: '8080')
 ```
 
+## Testing
+
+```sh
+bin/test
+```
+### ~zod
+
+Tests assume that an instance of a ["fake" development Urbit ship](https://urbit.org/using/develop/) (one not connected to the live network) will be running, available at `http://localhost:80`.
+
+To create a development ship:
+```sh
+./urbit -F zod
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
