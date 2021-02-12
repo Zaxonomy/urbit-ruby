@@ -5,11 +5,11 @@ module Urbit
   class Config
     attr_reader :code, :config_file, :host, :port, :name
 
-    DEFAULT_CODE = 'lidlut-tabwed-pillex-ridrup'.freeze
-    DEFAULT_CONFIG_FILE = 'config.yml'.freeze
-    DEFAULT_HOST = 'http://localhost'.freeze
-    DEFAULT_PORT = '80'.freeze
-    DEFAULT_NAME = '~zod'.freeze
+    DEFAULT_CODE        = 'lidlut-tabwed-pillex-ridrup'.freeze
+    DEFAULT_CONFIG_FILE = '_config.yml'.freeze
+    DEFAULT_HOST        = 'http://localhost'.freeze
+    DEFAULT_PORT        = '8080'.freeze
+    DEFAULT_NAME        = '~zod'.freeze
 
     def initialize(code: nil,  config_file: nil, host: nil, name: nil, port: nil)
       @config_file = config_file || DEFAULT_CONFIG_FILE
