@@ -21,8 +21,62 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```rb
+# TODO: fix namespacing :)
+require 'urbit/urbit'
 
+# This will instantiate a ship that connects to the fake `~zod` dev server by default
+# See Urbit docs for more info: https://urbit.org/using/develop/
+ship = Urbit.new
+
+ship.logged_in?
+# false
+
+ship.login
+
+ship.logged_in?
+# true
+
+ship.open_channel('my-channel')
+```
+
+### Configuration
+
+Configure your ship using a config file or constructor keyword arguments. Either or both can be used; the keyword args will override any values set via config file.
+
+Supported keys:
+- `code` - the auth code 
+- `host` - the ship's host (e.g., 'localhost' or 'myship.net')
+- `name` - the ship's name (e.g, '~zod')
+- `port` - the open www port on your ship ('80' by default)
+
+#### Config File
+
+See [`_config.yml.example`](_config.yml.example) for an example config file
+
+```rb
+ship = Urbit.new(config_file: 'my-moon.yml')
+```
+
+#### Constructor Keyword Arguments
+
+```rb
+ship = Urbit.new(host: '127.0.0.1', port: '8080')
+```
+
+## Testing
+
+```sh
+bin/test
+```
+### ~zod
+
+Tests assume that an instance of a ["fake" development Urbit ship](https://urbit.org/using/develop/) (one not connected to the live network) will be running, available at `http://localhost:80`.
+
+To create a development ship:
+```sh
+./urbit -F zod
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
