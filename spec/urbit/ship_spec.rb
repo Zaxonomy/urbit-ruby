@@ -1,41 +1,41 @@
-describe Urbit::Api::Ship do
-  before(:each) do
-    @ship = Urbit::Api::Ship.new
-  end
+require "urbit/ship"
+
+describe Urbit::Ship do
+  let(:instance) { described_class.new }
 
   it "has a pat p" do
-    expect(@ship.pat_p).to_not be_nil
-    expect(@ship.pat_p).to     eq("~zod")
+    expect(instance.pat_p).to_not be_nil
+    expect(instance.pat_p).to eq("~zod")
   end
 
   it "is not initially logged in" do
-    expect(@ship.logged_in?).to be false
+    expect(instance.logged_in?).to be false
   end
 
   it "can log in" do
     # NOTE: This test will fail if you don''t have a fake zod running.
-    @ship.login
-    expect(@ship.logged_in?)
-    expect(@ship.cookie).to_not be_nil
+    instance.login
+    expect(instance.logged_in?)
+    expect(instance.cookie).to_not be_nil
   end
 
    it "can open a channel" do
-     c = @ship.open_channel "Test Channel"
-     expect(@ship.open_channels.size).to eq(1)
+     c = instance.open_channel "Test Channel"
+     expect(instance.open_channels.size).to eq(1)
     c.close
    end
 
   it "test opening the channel answers the new channel" do
-    c = @ship.open_channel "Test Channel"
-    expect(c).to be_instance_of(Urbit::Api::Channel)
+    c = instance.open_channel "Test Channel"
+    expect(c).to be_instance_of(Urbit::Channel)
     c.close
   end
 
   it "closing the channel makes it unavailable" do
-    c = @ship.open_channel "Test Channel"
-    expect(@ship.open_channels.size).to eq(1)
+    c = instance.open_channel "Test Channel"
+    expect(instance.open_channels.size).to eq(1)
     c.close
-    expect(@ship.open_channels.size).to eq(0)
+    expect(instance.open_channels.size).to eq(0)
   end
 
   #-------------------------------------------------------------------
@@ -45,10 +45,10 @@ describe Urbit::Api::Ship do
   # called when your program ends.
   #-------------------------------------------------------------------
   # it test_destroying_a_ship_closes_all_its_channels
-  #   c = @ship.open_channel "Test Channel"
-  #   assert_equal 1, @ship.open_channels.size
+  #   c = instance.open_channel "Test Channel"
+  #   assert_equal 1, instance.open_channels.size
   #   assert c.open?
-  #   @ship = nil
+  #   instance = nil
   #   GC.start(full_mark: true, immediate_sweep: true)
   #   sleep 15
   #   assert c.closed?

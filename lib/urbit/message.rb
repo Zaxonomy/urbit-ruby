@@ -1,55 +1,54 @@
 require 'json'
 
 module Urbit
-  module Api
+  class Message
+    attr_reader :action, :app, :channel, :id, :json, :mark, :ship
 
-    class Message
-      attr_reader :channel, :id
-
-      def initialize(channel, id, action, app, mark, json)
-        @channel = channel
-        @id      = id
-        @ship    = channel.ship.name
-        @action  = action
-        @app     = app
-        @mark    = mark
-        @json    = json
-      end
-
-      def as_hash
-        self.attributes.each_with_object(Hash.new(0)) { |element, hash| hash["#{element}".delete("@").to_sym] = instance_variable_get(element) }
-      end
-
-      def as_json
-        JSON.generate(self.as_hash)
-      end
-
-      def ship
-        @ship.name
-      end
-
-      def transmit
-        response = Faraday.put(self.channel.url) do |req|
-          req.headers['Cookie'] = self.channel.ship.cookie
-          req.headers['Content-Type'] = 'application/json'
-          req.body = "[#{self.as_json}]"
-        end
-        response.reason_phrase
-      end
-
-      private
-
-      def attributes
-        instance_variables.reject {|var| :@channel == var }
-      end
-
+    def initialize(channel, id, action, app, mark, json)
+      @channel = channel
+      @id      = id
+      @ship    = channel.ship
+      @action  = action
+      @app     = app
+      @mark    = mark
+      @json    = json
     end
 
-    class CloseMessage < Message
-      def initialize(channel, id)
-        @channel = channel
-        @id      = id
-        @action  = 'delete'
+    def transmit
+      response = Faraday.put(channel_url) do |req|
+        req.headers['Cookie'] = self.ship.cookie
+        req.headers['Content-Type'] = 'application/json'
+        req.body = request_body
+      end
+
+      # TODO
+      # handle_error if response.status != 204
+
+      response.reason_phrase
+    end
+
+    def request_body
+      [{
+        action: action,
+        app: app,
+        id: id,
+        json: json,
+        mark: mark,
+        ship: ship.untilded_name
+      }].to_json
+    end
+
+    def channel_url
+      "#{self.ship.config.api_base_url}/~/channel/#{self.channel.key}"
+    end
+  end
+
+  class CloseMessage < Message
+    def initialize(channel, id)
+      @channel = channel
+      @ship = channel.ship
+      @id      = id
+      @action  = 'delete'
       end
     end
 
@@ -61,8 +60,13 @@ module Urbit
         @action  = 'subscribe'
         @app     = 'chat-view'
         @path    = '/primary'
-      end
     end
 
+    def request_body
+      [{
+        action: action,
+        id: id
+      }].to_json
+    end
   end
 end
