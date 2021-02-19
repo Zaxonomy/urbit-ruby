@@ -2,29 +2,19 @@ require 'json'
 
 module Urbit
   class Message
-    attr_reader :action, :app, :channel, :id, :json, :mark, :ship
+    attr_reader :action, :app, :channel, :id, :json, :mark
 
     def initialize(channel, id, action, app, mark, json)
+      @action  = action
       @channel = channel
       @id      = id
-      @ship    = channel.ship
-      @action  = action
       @app     = app
       @mark    = mark
       @json    = json
     end
 
-    def transmit
-      response = Faraday.put(channel_url) do |req|
-        req.headers['Cookie'] = self.ship.cookie
-        req.headers['Content-Type'] = 'application/json'
-        req.body = request_body
-      end
-
-      # TODO
-      # handle_error if response.status != 204
-
-      response.reason_phrase
+    def channel_url
+      "#{self.ship.config.api_base_url}/~/channel/#{self.channel.key}"
     end
 
     def request_body
@@ -38,34 +28,59 @@ module Urbit
       }].to_json
     end
 
-    def channel_url
-      "#{self.ship.config.api_base_url}/~/channel/#{self.channel.key}"
+    def ship
+      self.channel.ship
+    end
+
+    def transmit
+      response = Faraday.put(channel_url) do |req|
+        req.headers['Cookie'] = self.ship.cookie
+        req.headers['Content-Type'] = 'application/json'
+        req.body = request_body
+        puts req.body.to_s
+      end
+
+      # TODO
+      # handle_error if response.status != 204
+      response
     end
   end
 
   class CloseMessage < Message
     def initialize(channel, id)
       @channel = channel
-      @ship = channel.ship
+      @ship    = channel.ship
       @id      = id
       @action  = 'delete'
-      end
     end
 
-    class SubscribeMessage < Message
-      def initialize(channel, id)
-        @channel = channel
-        @ship    = channel.ship.name
-        @id      = id
-        @action  = 'subscribe'
-        @app     = 'chat-view'
-        @path    = '/primary'
+    def request_body
+      [{
+        id:     id,
+        action: action
+      }].to_json
+    end
+  end
+
+  class SubscribeMessage < Message
+    attr_reader :path
+
+    def initialize(channel, id)
+      @channel = channel
+      @ship    = channel.ship
+      @id      = id
+      @action  = 'subscribe'
+      @app     = 'graph-store'
+      @path    = '/updates'
     end
 
     def request_body
       [{
         action: action,
-        id: id
+        app:    app,
+        id:     id,
+        path:   path,
+        ship:   ship.untilded_name
       }].to_json
     end
   end

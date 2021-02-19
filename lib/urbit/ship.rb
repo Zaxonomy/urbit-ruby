@@ -10,9 +10,9 @@ module Urbit
 
     def initialize(config: Config.new)
       @auth_cookie = nil
-      @channels = []
-      @config = config
-      @logged_in = false
+      @channels    = []
+      @config      = config
+      @logged_in   = false
     end
 
     def self.finalize(channels)
@@ -28,17 +28,18 @@ module Urbit
     end
 
     def login
-      return if logged_in?
+      return self if logged_in?
 
       ensure_connections_closed
       response = Faraday.post(login_url, "password=#{config.code}")
       parse_cookie(response)
+      self
     end
 
     def name
       config.name
     end
-    
+
     def untilded_name
       name.gsub('~', '')
     end
@@ -72,7 +73,7 @@ module Urbit
     def parse_cookie(resp)
       cookie = resp.headers['set-cookie']
       return unless cookie
-      
+
       @auth_cookie, @path, @max_age = cookie.split(';')
       self.logged_in = true if @auth_cookie
     end

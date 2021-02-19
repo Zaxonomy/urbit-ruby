@@ -45,14 +45,14 @@ ship.open_channel('my-channel')
 Configure your ship using a config file or constructor keyword arguments. Either or both can be used; the keyword args will override any values set via config file.
 
 Supported keys:
-- `code` - the auth code 
+- `code` - the auth code
 - `host` - the ship's host (e.g., 'localhost' or 'myship.net')
 - `name` - the ship's name (e.g, '~zod')
 - `port` - the open www port on your ship ('80' by default)
 
 #### Config File
 
-See [`_config.yml.example`](_config.yml.example) for an example config file
+See [`_config.yml`](_config.yml) for an example config file. This will connect to a local fake zod, see creation instructions below.
 
 ```rb
 ship = Urbit.new(config_file: 'my-moon.yml')
@@ -71,7 +71,7 @@ bin/test
 ```
 ### ~zod
 
-Tests assume that an instance of a ["fake" development Urbit ship](https://urbit.org/using/develop/) (one not connected to the live network) will be running, available at `http://localhost:80`.
+Tests assume that an instance of a ["fake" development Urbit ship](https://urbit.org/using/develop/) (one not connected to the live network) will be running, available at `http://localhost:8080`.
 
 To create a development ship:
 ```sh

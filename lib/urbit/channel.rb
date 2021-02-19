@@ -1,11 +1,12 @@
 require 'faraday'
-# require 'em-eventsource'
-require 'ld-eventsource'
 require 'SecureRandom'
+
 require 'urbit/message'
+require 'urbit/ld-receiver'
 
 module Urbit
   class Channel
+    attr_accessor :messages
     attr_reader :key, :name, :ship
 
     def initialize(ship, name)
@@ -20,8 +21,8 @@ module Urbit
     def close
       # puts "closing #{name}"
       @messages << (m = CloseMessage.new self, self.next_id)
-      @is_open = (r = m.transmit) != "ok"
-      r
+      @is_open = (r = m.transmit).reason_phrase != "ok"
+      r.reason_phrase
     end
 
     def closed?
@@ -38,7 +39,7 @@ module Urbit
 
     def send_message(a_message_string)
       @messages << (m = Message.new  self, self.next_id, "poke", "hood", "helm-hi", a_message_string)
-      @is_open = (r = m.transmit) == "ok"
+      @is_open = (r = m.transmit).reason_phrase == "ok"
       r
     end
 
@@ -46,34 +47,31 @@ module Urbit
       @messages
     end
 
-      def subscribe
-        @messages << (m = SubscribeMessage.new self, self.next_id)
-        @is_subscribed = (r = m.transmit) != "ok"
+    def subscribe
+      @messages << (m = SubscribeMessage.new self, self.next_id)
+      @is_subscribed = (response = m.transmit).reason_phrase == "ok"
 
-        sse_client = SSE::Client.new(self.url) do |client|
-          client.on_event do |event|
-            puts "I received an event: #{event.type}, #{event.data}"
-          end
-        end
+      receiver = Receiver.new(self)
+      receiver
 
-        # EM.run do
-        #   @source = EventMachine::EventSource.new(self.url)
-        #   @source.message do |message|
-        #     puts "new message #{message}"
-        #   end
-        #   @source.start # Start listening
+      # EM.run do
+        # source = Receiver.new(self.ship, self.url)
+        # source.message do |message|
+        #   puts "I received an event: #{message}"
         # end
+        # source.start # Start listening
+      # end
 
-        # r
-      end
+      # source
+    end
 
-      def subscribed?
-        @is_subscribed
-      end
+    def subscribed?
+      @is_subscribed
+    end
 
-      def url
-        "http://localhost:8080/~/channel/#{self.key}"
-      end
+    def url
+      "http://localhost:8080/~/channel/#{self.key}"
+    end
   end
 end
 
