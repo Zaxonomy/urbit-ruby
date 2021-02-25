@@ -46,6 +46,10 @@ module Urbit
       @messages
     end
 
+    def status
+      self.open? ? "Open" : "Closed"
+    end
+
     def subscribe
       @messages << (m = SubscribeMessage.new self, self.next_id)
       @is_subscribed = (response = m.transmit).reason_phrase == "ok"
@@ -54,6 +58,10 @@ module Urbit
 
     def subscribed?
       @is_subscribed
+    end
+
+    def to_s
+      "a Channel (#{self.status}) on #{self.ship.name}(name: '#{self.name}', key: '#{self.key}')"
     end
 
     def url

@@ -63,6 +63,10 @@ module Urbit
       @channels.select {|c| c.open?}
     end
 
+    def to_s
+      "a Ship(name: '#{self.pat_p}', host: '#{self.config.host}', port: '#{self.config.port}')"
+    end
+
     private
 
     def ensure_connections_closed

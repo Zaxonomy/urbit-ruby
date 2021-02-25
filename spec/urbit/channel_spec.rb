@@ -44,4 +44,9 @@ describe Urbit::Channel do
     # m = Urbit::Api::Message.new channel, 3, "poke", "chat-view", "/primary", "Test Subscriber Message"
     # sleep(10)
   end
+
+  it "can be represented as a string" do
+    expect(channel.to_s).to eq("a Channel (Open) on ~zod(name: 'Test Channel', key: '#{channel.key}')")
+  end
+
 end
