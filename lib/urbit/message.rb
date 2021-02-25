@@ -4,13 +4,13 @@ module Urbit
   class Message
     attr_reader :action, :app, :channel, :id, :json, :mark
 
-    def initialize(channel, id, action, app, mark, json)
+    def initialize(channel, action, app, mark, json)
       @action  = action
-      @channel = channel
-      @id      = id
       @app     = app
-      @mark    = mark
+      @channel = channel
+      @id      = 0
       @json    = json
+      @mark    = mark
     end
 
     def channel_url
@@ -18,13 +18,14 @@ module Urbit
     end
 
     def request_body
+      @id = channel.next_id.dup
       [{
         action: action,
-        app: app,
-        id: id,
-        json: json,
-        mark: mark,
-        ship: ship.untilded_name
+        app:    app,
+        id:     @id,
+        json:   json,
+        mark:   mark,
+        ship:   ship.untilded_name
       }].to_json
     end
 
@@ -46,40 +47,15 @@ module Urbit
   end
 
   class CloseMessage < Message
-    def initialize(channel, id)
+    def initialize(channel)
       @channel = channel
-      @ship    = channel.ship
-      @id      = id
       @action  = 'delete'
     end
 
     def request_body
       [{
-        id:     id,
+        id:     channel.next_id,
         action: action
-      }].to_json
-    end
-  end
-
-  class SubscribeMessage < Message
-    attr_reader :path
-
-    def initialize(channel, id)
-      @channel = channel
-      @ship    = channel.ship
-      @id      = id
-      @action  = 'subscribe'
-      @app     = 'graph-store'
-      @path    = '/updates'
-    end
-
-    def request_body
-      [{
-        action: action,
-        app:    app,
-        id:     id,
-        path:   path,
-        ship:   ship.untilded_name
       }].to_json
     end
   end

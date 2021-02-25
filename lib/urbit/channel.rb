@@ -19,7 +19,7 @@ module Urbit
 
     def close
       # puts "closing #{name}"
-      @messages << (m = CloseMessage.new self, self.next_id)
+      @messages << (m = CloseMessage.new self)
       @is_open = (r = m.transmit).reason_phrase != "ok"
       r.reason_phrase
     end
@@ -37,7 +37,7 @@ module Urbit
     end
 
     def send_message(a_message_string)
-      @messages << (m = Message.new  self, self.next_id, "poke", "hood", "helm-hi", a_message_string)
+      @messages << (m = Message.new  self, "poke", "hood", "helm-hi", a_message_string)
       @is_open = (r = m.transmit).reason_phrase == "ok"
       r
     end
@@ -51,7 +51,7 @@ module Urbit
     end
 
     def subscribe
-      @messages << (m = SubscribeMessage.new self, self.next_id)
+      @messages << (m = SubscribeMessage.new self)
       @is_subscribed = (response = m.transmit).reason_phrase == "ok"
       receiver = Receiver.new(self)
     end
