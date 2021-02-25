@@ -37,11 +37,10 @@ module Urbit
         req.headers['Cookie'] = self.ship.cookie
         req.headers['Content-Type'] = 'application/json'
         req.body = request_body
-        puts req.body.to_s
+        # puts req.body.to_s
       end
 
-      # TODO
-      # handle_error if response.status != 204
+      # TODO: handle_error if response.status != 204
       response
     end
   end

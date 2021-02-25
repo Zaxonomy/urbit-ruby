@@ -1,8 +1,7 @@
 require 'faraday'
-require 'SecureRandom'
 
 require 'urbit/message'
-require 'urbit/ld-receiver'
+require 'urbit/receiver'
 
 module Urbit
   class Channel
@@ -50,19 +49,7 @@ module Urbit
     def subscribe
       @messages << (m = SubscribeMessage.new self, self.next_id)
       @is_subscribed = (response = m.transmit).reason_phrase == "ok"
-
       receiver = Receiver.new(self)
-      receiver
-
-      # EM.run do
-        # source = Receiver.new(self.ship, self.url)
-        # source.message do |message|
-        #   puts "I received an event: #{message}"
-        # end
-        # source.start # Start listening
-      # end
-
-      # source
     end
 
     def subscribed?
@@ -74,18 +61,3 @@ module Urbit
     end
   end
 end
-
-# const eventSource = new EventSource('http://localhost:8080/~/channel/1601844290-ae45b', {
-#   withCredentials: true // Required, sends your cookie
-# });
-#
-# eventSource.addEventListener('message', function (event) {
-#   ack(Number(event.lastEventId)); // See section below
-#   const payload = JSON.parse(event.data); // Data is sent in JSON format
-#   payload.id === event.lastEventId; // The SSE spec includes event IDs. This information is duplicated in the payload.
-#   const data = payload.json; // Beyond this, the actual data will vary between apps
-# });
-#
-# eventSource.addEventListener('error', function (event) {
-#   handleError(event);
-# });
