@@ -26,5 +26,3 @@ module Urbit
 
   end
 end
-
-#<struct SSE::StreamEvent type=:message, data="{\"ok\":\"ok\",\"id\":2,\"response\":\"subscribe\"}", id="1">
