@@ -19,18 +19,30 @@ module Urbit
     end
 
     def request_body
-      [{
+      self.to_a.to_json
+    end
+
+    def ship
+      self.channel.ship
+    end
+
+    def to_a
+      [self.to_h]
+    end
+
+    def to_h
+      {
         action: action,
         app:    app,
         id:     id,
         json:   json,
         mark:   mark,
         ship:   ship.untilded_name
-      }].to_json
+      }
     end
 
-    def ship
-      self.channel.ship
+    def to_s
+      "a Message(#{self.to_h})"
     end
 
     def transmit
@@ -53,11 +65,8 @@ module Urbit
       @id      = 0
     end
 
-    def request_body
-      [{
-        id:     id,
-        action: action
-      }].to_json
+    def to_h
+      {id: id, action: action}
     end
   end
 end

@@ -11,12 +11,8 @@ module Urbit
       @ack_id  = sse_message_id
     end
 
-    def request_body
-      [{
-        'id'       => id,
-        'action'   => action,
-        'event-id' => @ack_id
-      }].to_json
+    def to_h
+      {'id' => id, 'action' => action, 'event-id' => @ack_id}
     end
   end
 end

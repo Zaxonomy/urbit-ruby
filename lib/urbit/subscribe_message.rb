@@ -12,18 +12,8 @@ module Urbit
       @path    = '/updates'
     end
 
-    def request_body
-      [{
-        action: action,
-        app:    app,
-        id:     id,
-        path:   path,
-        ship:   ship.untilded_name
-      }].to_json
-    end
-
-    def ship
-      channel.ship
+    def to_h
+      {action: action, app: app, id: id, path: path, ship: ship.untilded_name}
     end
   end
 end
