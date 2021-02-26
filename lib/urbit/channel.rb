@@ -1,47 +1,79 @@
 require 'faraday'
-require 'SecureRandom'
+require 'securerandom'
+
 require 'urbit/message'
+require 'urbit/receiver'
+require 'urbit/subscribe_message'
 
 module Urbit
   class Channel
+    attr_accessor :messages
     attr_reader :key, :name, :ship
 
     def initialize(ship, name)
-      @ship      = ship
-      @key       = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
-      @messages  = []
-      @name      = name
-      @is_open   = false
+      @ship          = ship
+      @key           = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
+      @messages      = []
+      @name          = name
+      @is_open       = false
+      @is_subscribed = false
     end
 
     def close
       # puts "closing #{name}"
-      @messages << (m = CloseMessage.new self, self.next_id)
-      @is_open = (r = m.transmit) != "ok"
-      r
+      m = Urbit::CloseMessage.new(self)
+      @is_open = !self.send_message(m)
     end
 
     def closed?
       !@is_open
     end
 
-    def next_id
-      self.sent_messages.size + 1
+    def open(a_message_string)
+      m = Urbit::Message.new(self, "poke", "hood", "helm-hi", a_message_string)
+      @is_open = self.send_message(m)
     end
 
     def open?
       @is_open
     end
 
-    def send_message(a_message_string)
-      @messages << (m = Message.new  self, self.next_id, "poke", "hood", "helm-hi", a_message_string)
-      @is_open = (r = m.transmit) == "ok"
-      r
+    def queue_message(a_message)
+      a_message.id = self.sent_messages.size + 1
+      @messages << a_message
+    end
+
+    # Answers true if message was successfully sent.
+    def send_message(a_message)
+      self.queue_message(a_message)
+      resp = a_message.transmit
+      resp.reason_phrase == "ok"
     end
 
     def sent_messages
       @messages
     end
 
+    def status
+      self.open? ? "Open" : "Closed"
+    end
+
+    def subscribe(app, path)
+      m = Urbit::SubscribeMessage.new(self, app, path)
+      @is_subscribed = self.send_message(m)
+      receiver = Urbit::Receiver.new(self)
+    end
+
+    def subscribed?
+      @is_subscribed
+    end
+
+    def to_s
+      "a Channel (#{self.status}) on #{self.ship.name}(name: '#{self.name}', key: '#{self.key}')"
+    end
+
+    def url
+      "http://localhost:8080/~/channel/#{self.key}"
+    end
   end
 end

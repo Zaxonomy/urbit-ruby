@@ -10,6 +10,12 @@ require_relative './ship'
 #   conn.get '/'
 module Urbit
   class << self
+    def connect(**config_options)
+      config = Urbit::Config.new(**config_options)
+      ship = Urbit::Ship.new(config: config)
+      ship.login
+    end
+
     def new(**config_options)
       config = Urbit::Config.new(**config_options)
       Urbit::Ship.new(config: config)

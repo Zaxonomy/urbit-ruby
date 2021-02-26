@@ -28,16 +28,30 @@ require 'urbit/urbit'
 # This will instantiate a ship that connects to the fake `~zod` dev server by default
 # See Urbit docs for more info: https://urbit.org/using/develop/
 ship = Urbit.new
+# => #<Urbit::Ship:0x00007fa74b87f920 ...
 
 ship.logged_in?
-# false
+# => false
 
 ship.login
+# => #<Urbit::Ship:0x00007fa74b87f920 ...
 
 ship.logged_in?
-# true
+# => true
 
-ship.open_channel('my-channel')
+channel = ship.open_channel('my-channel')
+# => #<Urbit::Channel:0x00007fa74b291e50 ...
+
+channel.key
+# => "16142890875c348d"
+
+ship.channels.first.key
+# => "16142890875c348d"
+
+receiver = channel.subscribe(app: 'graph-store', path: '/updates')
+# => #<Urbit::Receiver:0x00007fd3928eba58
+
+# This receiver will now be listening on the app and path you specified. Each time an event is sent in it will be stored in the receiver's events collection.
 ```
 
 ### Configuration
@@ -45,14 +59,14 @@ ship.open_channel('my-channel')
 Configure your ship using a config file or constructor keyword arguments. Either or both can be used; the keyword args will override any values set via config file.
 
 Supported keys:
-- `code` - the auth code 
+- `code` - the auth code
 - `host` - the ship's host (e.g., 'localhost' or 'myship.net')
 - `name` - the ship's name (e.g, '~zod')
 - `port` - the open www port on your ship ('80' by default)
 
 #### Config File
 
-See [`_config.yml.example`](_config.yml.example) for an example config file
+See [`_config.yml`](_config.yml) for an example config file. This will connect to a local fake zod, see creation instructions below.
 
 ```rb
 ship = Urbit.new(config_file: 'my-moon.yml')
@@ -71,7 +85,7 @@ bin/test
 ```
 ### ~zod
 
-Tests assume that an instance of a ["fake" development Urbit ship](https://urbit.org/using/develop/) (one not connected to the live network) will be running, available at `http://localhost:80`.
+Tests assume that an instance of a ["fake" development Urbit ship](https://urbit.org/using/develop/) (one not connected to the live network) will be running, available at `http://localhost:8080`.
 
 To create a development ship:
 ```sh

@@ -38,6 +38,10 @@ describe Urbit::Ship do
     expect(instance.open_channels.size).to eq(0)
   end
 
+  it "can be represented as a string" do
+    expect(instance.to_s).to eq("a Ship(name: '~zod', host: 'http://localhost', port: '8080')")
+  end
+
   #-------------------------------------------------------------------
   # This test is a tricky one and I couldn't get it to work.
   # You can, however, assure yourself that it is actually true by

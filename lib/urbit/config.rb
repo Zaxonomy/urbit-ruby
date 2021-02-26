@@ -15,7 +15,7 @@ module Urbit
       @config_file = config_file || DEFAULT_CONFIG_FILE
       @code = code || loaded_config['code'] || DEFAULT_CODE
       @host = host || loaded_config['host'] || DEFAULT_HOST
-      @name = name || loaded_config['name'] || DEFAULT_NAME
+      @name = name || loaded_config['ship'] || DEFAULT_NAME
       @port = port || loaded_config['port'] || DEFAULT_PORT
     end
 

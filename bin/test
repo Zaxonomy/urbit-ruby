@@ -1,1 +1,2 @@
-bundle exec rspec 
+#!/bin/sh
+bundle exec rspec -f d spec

@@ -2,16 +2,47 @@ require 'json'
 
 module Urbit
   class Message
-    attr_reader :action, :app, :channel, :id, :json, :mark, :ship
+    attr_accessor :id
+    attr_reader :action, :app, :channel, :json, :mark
 
-    def initialize(channel, id, action, app, mark, json)
-      @channel = channel
-      @id      = id
-      @ship    = channel.ship
+    def initialize(channel, action, app, mark, json)
       @action  = action
       @app     = app
-      @mark    = mark
+      @channel = channel
+      @id      = 0
       @json    = json
+      @mark    = mark
+    end
+
+    def channel_url
+      "#{self.ship.config.api_base_url}/~/channel/#{self.channel.key}"
+    end
+
+    def request_body
+      self.to_a.to_json
+    end
+
+    def ship
+      self.channel.ship
+    end
+
+    def to_a
+      [self.to_h]
+    end
+
+    def to_h
+      {
+        action: action,
+        app:    app,
+        id:     id,
+        json:   json,
+        mark:   mark,
+        ship:   ship.untilded_name
+      }
+    end
+
+    def to_s
+      "a Message(#{self.to_h})"
     end
 
     def transmit
@@ -19,43 +50,23 @@ module Urbit
         req.headers['Cookie'] = self.ship.cookie
         req.headers['Content-Type'] = 'application/json'
         req.body = request_body
+        # puts req.body.to_s
       end
 
-      # TODO
-      # handle_error if response.status != 204
-
-      response.reason_phrase
-    end
-
-    def request_body
-      [{
-        action: action,
-        app: app,
-        id: id,
-        json: json,
-        mark: mark,
-        ship: ship.untilded_name
-      }].to_json
-    end
-
-    def channel_url
-      "#{self.ship.config.api_base_url}/~/channel/#{self.channel.key}"
+      # TODO: handle_error if response.status != 204
+      response
     end
   end
 
   class CloseMessage < Message
-    def initialize(channel, id)
-      @channel = channel
-      @ship = channel.ship
-      @id      = id
+    def initialize(channel)
       @action  = 'delete'
+      @channel = channel
+      @id      = 0
     end
 
-    def request_body
-      [{
-        action: action,
-        id: id
-      }].to_json
+    def to_h
+      {id: id, action: action}
     end
   end
 end
