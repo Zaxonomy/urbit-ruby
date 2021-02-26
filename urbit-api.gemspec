@@ -13,8 +13,6 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new(">= 2.7.2")
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-
   spec.metadata["homepage_uri"]    = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/Zaxonomy/urbit-ruby"
   spec.metadata["changelog_uri"]   = "https://github.com/Zaxonomy/urbit-ruby/CHANGELOG.md"
