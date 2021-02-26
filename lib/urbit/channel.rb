@@ -58,8 +58,8 @@ module Urbit
       self.open? ? "Open" : "Closed"
     end
 
-    def subscribe
-      m = Urbit::SubscribeMessage.new self
+    def subscribe(app, path)
+      m = Urbit::SubscribeMessage.new(self, app, path)
       @is_subscribed = self.send_message(m)
       receiver = Urbit::Receiver.new(self)
     end
