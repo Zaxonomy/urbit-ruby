@@ -29,8 +29,10 @@ describe Urbit::Channel do
   it "can be closed" do
     expect(channel.sent_messages.size).to eq(1)
     expect(channel.open?)
-    expect(channel.close).to eq("ok")
+    expect(channel.close)
+    expect(channel.open?).to be false
     expect(channel.sent_messages.size).to eq(2)
+    expect(channel.sent_messages.last.id).to eq(2)
   end
 
   it "can subscribe" do

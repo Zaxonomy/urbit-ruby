@@ -2,7 +2,8 @@ require 'json'
 
 module Urbit
   class Message
-    attr_reader :action, :app, :channel, :id, :json, :mark
+    attr_accessor :id
+    attr_reader :action, :app, :channel, :json, :mark
 
     def initialize(channel, action, app, mark, json)
       @action  = action
@@ -18,11 +19,10 @@ module Urbit
     end
 
     def request_body
-      @id = channel.next_id.dup
       [{
         action: action,
         app:    app,
-        id:     @id,
+        id:     id,
         json:   json,
         mark:   mark,
         ship:   ship.untilded_name
@@ -48,13 +48,14 @@ module Urbit
 
   class CloseMessage < Message
     def initialize(channel)
-      @channel = channel
       @action  = 'delete'
+      @channel = channel
+      @id      = 0
     end
 
     def request_body
       [{
-        id:     channel.next_id,
+        id:     id,
         action: action
       }].to_json
     end

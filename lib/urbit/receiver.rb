@@ -1,4 +1,5 @@
 require 'ld-eventsource'
+
 require 'urbit/ack_message'
 
 module Urbit
@@ -13,9 +14,7 @@ module Urbit
           typ = event.type
           dat = JSON.parse(event.data)
           self.events << {typ => dat}
-          m = AckMessage.new(channel, event.id)
-          m.transmit
-          channel.messages << m
+          channel.send_message(AckMessage.new(channel, event.id))
         end
 
         rec.on_error do |error|

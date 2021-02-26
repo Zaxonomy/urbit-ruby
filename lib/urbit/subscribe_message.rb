@@ -5,9 +5,10 @@ module Urbit
     attr_reader :path
 
     def initialize(channel)
-      @channel = channel
       @action  = 'subscribe'
       @app     = 'graph-store'
+      @channel = channel
+      @id      = 0
       @path    = '/updates'
     end
 
@@ -15,7 +16,7 @@ module Urbit
       [{
         action: action,
         app:    app,
-        id:     channel.next_id,
+        id:     id,
         path:   path,
         ship:   ship.untilded_name
       }].to_json

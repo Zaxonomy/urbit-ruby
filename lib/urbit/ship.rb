@@ -53,9 +53,8 @@ module Urbit
     # will be closed.
     def open_channel(a_name)
       login
-      (c = Channel.new self, a_name).send_message("Opening Airlock")
+      (c = Channel.new self, a_name).open("Opening Airlock")
       self.channels << c
-
       c
     end
 

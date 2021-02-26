@@ -1,4 +1,5 @@
 require 'json'
+
 require 'urbit/message'
 
 module Urbit
@@ -6,7 +7,7 @@ module Urbit
     def initialize(channel, sse_message_id)
       @action  = 'ack'
       @channel = channel
-      @id      = channel.next_id
+      @id      = 0
       @ack_id  = sse_message_id
     end
 
