@@ -28,16 +28,30 @@ require 'urbit/urbit'
 # This will instantiate a ship that connects to the fake `~zod` dev server by default
 # See Urbit docs for more info: https://urbit.org/using/develop/
 ship = Urbit.new
+# => #<Urbit::Ship:0x00007fa74b87f920 ...
 
 ship.logged_in?
-# false
+# => false
 
 ship.login
+# => #<Urbit::Ship:0x00007fa74b87f920 ...
 
 ship.logged_in?
-# true
+# => true
 
-ship.open_channel('my-channel')
+channel = ship.open_channel('my-channel')
+# => #<Urbit::Channel:0x00007fa74b291e50 ...
+
+channel.key
+# => "16142890875c348d"
+
+ship.channels.first.key
+# => "16142890875c348d"
+
+receiver = channel.subscribe(app: 'graph-store', path: '/updates')
+# => #<Urbit::Receiver:0x00007fd3928eba58
+
+# This receiver will now be listening on the app and path you specified. Each time an event is sent in it will be stored in the receiver's events collection.
 ```
 
 ### Configuration
