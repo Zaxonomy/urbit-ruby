@@ -3,6 +3,8 @@
 
 This library wraps the Urbit ship http interface exposing it as a Ruby gem.
 
+[![awesome urbit badge](https://img.shields.io/badge/~-awesome%20urbit-lightgrey)](https://github.com/urbit/awesome-urbit)
+
 ## Installation
 
 Add this line to your application's Gemfile:
