@@ -1,7 +1,3 @@
-require 'json'
-
-require 'urbit/message'
-
 module Urbit
   class AckMessage < Message
     def initialize(channel, sse_message_id)

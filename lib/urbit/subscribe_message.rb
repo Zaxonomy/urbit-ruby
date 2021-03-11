@@ -1,5 +1,3 @@
-require 'json'
-
 module Urbit
   class SubscribeMessage < Message
     attr_reader :path
