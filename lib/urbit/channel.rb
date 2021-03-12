@@ -1,4 +1,3 @@
-require 'faraday'
 require 'securerandom'
 
 require 'urbit/message'
