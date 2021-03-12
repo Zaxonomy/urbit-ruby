@@ -3,15 +3,12 @@ module Urbit
     attr_reader :path
 
     def initialize(channel, app, path)
-      @action  = 'subscribe'
-      @app     = app
-      @channel = channel
-      @id      = 0
-      @path    = path
+      super(channel, 'subscribe', app)
+      @path = path
     end
 
     def to_h
-      {action: action, app: app, id: id, path: path, ship: ship.untilded_name}
+      {action: self.action, app: self.app, id: self.id, path: self.path, ship: self.ship.untilded_name}
     end
   end
 end

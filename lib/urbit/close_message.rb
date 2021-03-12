@@ -1,13 +1,11 @@
 module Urbit
   class CloseMessage < Message
     def initialize(channel)
-      @action  = 'delete'
-      @channel = channel
-      @id      = 0
+      super(channel, 'delete')
     end
 
     def to_h
-      {id: id, action: action}
+      {id: self.id, action: self.action}
     end
   end
 end

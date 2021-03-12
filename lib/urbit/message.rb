@@ -5,7 +5,7 @@ module Urbit
     attr_accessor :id
     attr_reader :action, :app, :channel, :json, :mark
 
-    def initialize(channel, action, app, mark, json)
+    def initialize(channel, action, app = nil, mark = nil, json = nil)
       @action  = action
       @app     = app
       @channel = channel
