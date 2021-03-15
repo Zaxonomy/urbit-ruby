@@ -1,18 +1,15 @@
-require 'json'
-
-require 'urbit/message'
-
 module Urbit
   class AckMessage < Message
+    attr_reader :ack_id
+
     def initialize(channel, sse_message_id)
-      @action  = 'ack'
-      @channel = channel
-      @id      = 0
+      super(channel, 'ack')
       @ack_id  = sse_message_id
     end
 
     def to_h
-      {'id' => id, 'action' => action, 'event-id' => @ack_id}
+      # Need to use the older hash style due to the key having a dash.
+      {'id' => self.id, 'action' => self.action, 'event-id' => self.ack_id}
     end
   end
 end

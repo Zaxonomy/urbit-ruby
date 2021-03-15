@@ -42,6 +42,17 @@ describe Urbit::Ship do
     expect(instance.to_s).to eq("a Ship(name: '~zod', host: 'http://localhost', port: '8080')")
   end
 
+  it "can scry" do
+    # per https://urbit.org/using/integrating-api/
+    # "In this example we're scrying the file-server app at the path /clay/base/hash and using the json mark,
+    # which is most common. We receive "0" which is correct because we are at the top level of the hierarchy using a fake ship."
+    instance.login
+    scry = instance.scry('file-server', '/clay/base/hash', 'json')
+    expect(scry[:status]).to eq(200)
+    expect(scry[:code]).to eq("ok")
+    expect(scry[:body]).to eq("\"0\"")
+  end
+
   #-------------------------------------------------------------------
   # This test is a tricky one and I couldn't get it to work.
   # You can, however, assure yourself that it is actually true by

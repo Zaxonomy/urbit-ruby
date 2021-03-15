@@ -1,8 +1,9 @@
-require 'faraday'
 require 'securerandom'
 
 require 'urbit/message'
 require 'urbit/receiver'
+require 'urbit/close_message'
+require 'urbit/poke_message'
 require 'urbit/subscribe_message'
 
 module Urbit
@@ -29,8 +30,11 @@ module Urbit
       !@is_open
     end
 
+    #
+    # We open a channel by "poking" the urbit app 'hood' using the mark 'helm-hi'
+    #
     def open(a_message_string)
-      m = Urbit::Message.new(self, "poke", "hood", "helm-hi", a_message_string)
+      m = Urbit::PokeMessage.new(self, "hood", "helm-hi", a_message_string)
       @is_open = self.send_message(m)
     end
 
