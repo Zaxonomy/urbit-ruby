@@ -53,6 +53,14 @@ describe Urbit::Ship do
     expect(scry[:body]).to eq("\"0\"")
   end
 
+  it "returns 404/missing when scrying nonsense" do
+    instance.login
+    scry = instance.scry('soft-server', '/vanilla/fudge/hash', 'json')
+    expect(scry[:status]).to eq(404)
+    expect(scry[:code]).to eq("missing")
+    expect(scry[:body]).to include("There was an error")
+  end
+
   #-------------------------------------------------------------------
   # This test is a tricky one and I couldn't get it to work.
   # You can, however, assure yourself that it is actually true by
