@@ -54,8 +54,72 @@ receiver = channel.subscribe(app: 'graph-store', path: '/updates')
 # => #<Urbit::Receiver:0x00007fd3928eba58
 
 # This receiver will now be listening on the app and path you specified. Each time an event is sent in it will be stored in the receiver's events collection.
-```
+receiver.events.count
+=> 12
 
+receiver.events.last
+=> {:message=>
+     {"json"=>
+       {"graph-update"=>
+         {"add-nodes"=>
+           {"resource"=>{"name"=>"test0-996", "ship"=>"barsyr-latreb"},
+            "nodes"=>
+             {"/170141184504954066298369929365830487769"=>
+               {"post"=>
+                 {"index"=>"/170141184504954066298369929365830487769",
+                  "author"=>"barsyr-latreb",
+                  "time-sent"=>1615564146267,
+                  "signatures"=>[],
+                  "contents"=>[],
+                  "hash"=>"0x92b0.c976.58f0.3035.c126.64a0.3043.b962"},
+                "children"=>
+                 {"2"=>
+                   {"post"=>
+                     {"index"=>"/170141184504954066298369929365830487769/2",
+                      "author"=>"barsyr-latreb",
+                      "time-sent"=>1615564146267,
+                      "signatures"=>[],
+                      "contents"=>[],
+                      "hash"=>"0x2ffe.3ca7.20eb.11af.51f8.fbab.2b88.9f48"},
+                    "children"=>nil},
+                  "1"=>
+                   {"post"=>
+                     {"index"=>"/170141184504954066298369929365830487769/1",
+                      "author"=>"barsyr-latreb",
+                      "time-sent"=>1615564146267,
+                      "signatures"=>[],
+                      "contents"=>[],
+                      "hash"=>"0x2ffe.3ca7.20eb.11af.51f8.fbab.2b88.9f48"},
+                    "children"=>
+                     {"1"=>
+                       {"post"=>
+                         {"index"=>"/170141184504954066298369929365830487769/1/1",
+                          "author"=>"barsyr-latreb",
+                          "time-sent"=>1615564146267,
+                          "signatures"=>[],
+                          "contents"=>[{"text"=>"Test 0.8"}, {"text"=>"Test 0.8"}],
+                          "hash"=>"0x9516.25fc.ca7a.5bb9.356b.2fce.b29a.f372"},
+                        "children"=>nil}}}}}}}}},
+      "id"=>2,
+      "response"=>"diff"
+    }
+  }
+
+#  Your ship keeps a collection of all the messages sent to urbit:
+channel.sent_messages.collect {|m| m.to_s}
+=> [
+    "a Message({:action=>"poke", :app=>"hood", :id=>1, :json=>"Opening Airlock", :mark=>"helm-hi", :ship=>"barsyr-latreb"})",
+    "a Message({:action=>"subscribe", :app=>"graph-store", :id=>2, :path=>"/updates", :ship=>"barsyr-latreb"})",
+    "a Message({"id"=>3, "action"=>"ack", "event-id"=>"0"})",
+    "a Message({"id"=>4, "action"=>"ack", "event-id"=>"1"})",
+    "a Message({"id"=>5, "action"=>"ack", "event-id"=>"2"})"
+   ]
+
+# Retrieving your ship's base hash using scry....
+ship.scry('file-server', '/clay/base/hash', 'json')
+# => {:status=>200, :code=>"ok", :body=>"\"e75k5\""}
+
+```
 ### Configuration
 
 Configure your ship using a config file or constructor keyword arguments. Either or both can be used; the keyword args will override any values set via config file.
