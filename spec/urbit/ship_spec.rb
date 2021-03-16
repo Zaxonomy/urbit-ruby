@@ -1,3 +1,4 @@
+require 'json'
 require "urbit/ship"
 
 describe Urbit::Ship do
@@ -43,6 +44,11 @@ describe Urbit::Ship do
   end
 
   it "can scry" do
+    # curl --header "Content-Type: application/json" \
+    #      --cookie "urbauth-~zod=0v3.fvaqc.nnjda.vude1.vb5l6.kmjmg" \
+    #      --request GET \
+    #
+    #  http://localhost:8080/~/scry/file-server/clay/base/hash.json
     # per https://urbit.org/using/integrating-api/
     # "In this example we're scrying the file-server app at the path /clay/base/hash and using the json mark,
     # which is most common. We receive "0" which is correct because we are at the top level of the hierarchy using a fake ship."
@@ -58,7 +64,36 @@ describe Urbit::Ship do
     scry = instance.scry('soft-server', '/vanilla/fudge/hash', 'json')
     expect(scry[:status]).to eq(404)
     expect(scry[:code]).to eq("missing")
-    expect(scry[:body]).to include("There was an error")
+    expect(scry[:body]).to include("")
+  end
+
+  it "can spider" do
+    # curl --header "Content-Type: application/json" \
+    #      --cookie "urbauth-~zod=0v3.fvaqc.nnjda.vude1.vb5l6.kmjmg" \
+    #      --request POST \
+    #      --data '[{"foo": "bar"}]' \
+    #      http://localhost:8080/spider/graph-view-action/graph-create/json.json
+
+    # Running threads is an exception to the rule that we outlined in the section on channels.
+    # It uses a POST request and both manipulates state and receives information back.
+    # It also exposes the ability to send a sequence of commands, i.e. a "thread," hence the name.
+    #
+    # It takes the form {url}/spider/{inputMark}/{threadname}/{outputmark}.json
+    instance.login
+    create_json = %q({
+      "create": {
+         "resource": {"ship": "~zod", "name": "test2"},
+         "title": "Testing creation",
+         "description": "test",
+         "associated": {"policy": {"invite": {"pending": []}}},
+         "module": "chat",
+         "mark": "graph-validator-chat"
+      }
+    })
+    spider = instance.spider('graph-view-action', 'json', 'graph-create', create_json)
+    expect(spider[:status]).to eq(200)
+    expect(spider[:code]).to eq("ok")
+    expect(spider[:body]).to eq("null")
   end
 
   #-------------------------------------------------------------------
