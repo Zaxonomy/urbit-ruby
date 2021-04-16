@@ -62,18 +62,26 @@ module Urbit
       @channels.select {|c| c.open?}
     end
 
-    # curl --header "Content-Type: application/json" \
-    # --cookie "urbauth-~zod=0v3.fvaqc.nnjda.vude1.vb5l6.kmjmg" \
-    # --request GET \
-    #  http://localhost:8080/~/scry/file-server/clay/base/hash.json
     def scry(app, path, mark)
       return nil unless self.logged_in?
-
       scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}.#{mark}"
 
       response = Faraday.get(scry_url) do |req|
         req.headers['Accept'] = 'application/json'
         req.headers['Cookie'] = self.cookie
+      end
+
+      {status: response.status, code: response.reason_phrase, body: response.body}
+    end
+
+    def spider(mark_in, mark_out, thread, data)
+      return nil unless self.logged_in?
+      url = "#{self.config.api_base_url}/spider/#{mark_in}/#{thread}/#{mark_out}.json"
+
+      response = Faraday.post(url) do |req|
+        req.headers['Accept'] = 'application/json'
+        req.headers['Cookie'] = self.cookie
+        req.body = data
       end
 
       {status: response.status, code: response.reason_phrase, body: response.body}
