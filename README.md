@@ -23,13 +23,12 @@ Or install it yourself as:
 
 ## Usage
 
-```rb
-# TODO: fix namespacing :)
-require 'urbit/urbit'
+```sh
+> bin/console
 
 # This will instantiate a ship that connects to the fake `~zod` dev server by default
 # See Urbit docs for more info: https://urbit.org/using/develop/
-ship = Urbit.new
+[1] pry(main)> ship = Urbit.new
 # => #<Urbit::Ship:0x00007fa74b87f920 ...
 
 ship.logged_in?
