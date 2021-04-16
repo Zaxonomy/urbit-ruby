@@ -67,7 +67,7 @@ describe Urbit::Ship do
     expect(scry[:body]).to include("")
   end
 
-  it "can spider" do
+  it "can create a graph using spider" do
     # curl --header "Content-Type: application/json" \
     #      --cookie "urbauth-~zod=0v3.fvaqc.nnjda.vude1.vb5l6.kmjmg" \
     #      --request POST \
@@ -79,15 +79,29 @@ describe Urbit::Ship do
     # It also exposes the ability to send a sequence of commands, i.e. a "thread," hence the name.
     #
     # It takes the form {url}/spider/{inputMark}/{threadname}/{outputmark}.json
+
+    # We need a unique name for the graph each time or the test will fail.
+    # TODO: This test is "polluting" our fake zod with lots of graphs but I haven't figured out how to remove them yet.
+    random_name = SecureRandom.hex(5)
+
     instance.login
-    create_json = %q({
+    create_json = %Q({
       "create": {
-         "resource": {"ship": "~zod", "name": "test2"},
-         "title": "Testing creation",
-         "description": "test",
-         "associated": {"policy": {"invite": {"pending": []}}},
-         "module": "chat",
-         "mark": "graph-validator-chat"
+        "resource"   : {
+          "ship": "~zod",
+          "name": "#{random_name}"
+        },
+        "title"      : "Testing creation",
+        "description": "test",
+        "associated" : {
+          "policy": {
+            "invite": {
+              "pending": []
+            }
+          }
+        },
+        "module"     : "chat",
+        "mark"       : "graph-validator-chat"
       }
     })
     spider = instance.spider('graph-view-action', 'json', 'graph-create', create_json)
@@ -95,6 +109,24 @@ describe Urbit::Ship do
     expect(spider[:code]).to eq("ok")
     expect(spider[:body]).to eq("null")
   end
+
+  # it "can fetch a url using spider" do
+  #   instance.login
+  #   fetch_json = %q({
+  #     "create": {
+  #        "resource"   : {"ship": "~zod", "name": "test2"},
+  #        "title"      : "Testing URL Fetch",
+  #        "description": "test",
+  #        "associated" : {"policy": {"invite": {"pending": []}}},
+  #        "module"     : "chat",
+  #        "mark"       : "graph-validator-chat"
+  #     }
+  #   })
+  #   spider = instance.spider('graph-view-action', 'json', 'graph-create', fetch_json)
+  #   expect(spider[:status]).to eq(200)
+  #   expect(spider[:code]).to eq("ok")
+  #   expect(spider[:body]).to eq("null")
+  # end
 
   #-------------------------------------------------------------------
   # This test is a tricky one and I couldn't get it to work.
