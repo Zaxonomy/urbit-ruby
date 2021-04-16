@@ -53,11 +53,11 @@ ship.channels.first.key
 receiver = channel.subscribe(app: 'graph-store', path: '/updates')
 # => #<Urbit::Receiver:0x00007fd3928eba58
 
-# This receiver will now be listening on the app and path you specified. Each time an event is sent in it will be stored in the receiver's events collection.
-receiver.events.count
+# This receiver will now be listening on the app and path you specified. Each time an event is sent in it will be stored in the receiver's facts collection.
+receiver.facts.count
 => 12
 
-receiver.events.last
+receiver.facts.last
 => {:message=>
      {"json"=>
        {"graph-update"=>
