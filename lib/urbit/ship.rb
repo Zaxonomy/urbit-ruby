@@ -48,22 +48,12 @@ module Urbit
       config.name
     end
 
-    # Opening a channel always creates a new channel which will
-    # remain open until this ship is disconnected at which point it
-    # will be closed.
-    def open_channel(a_name)
-      login
-      (c = Channel.new self, a_name).open("Opening Airlock")
-      self.channels << c
-      c
-    end
-
     def open_channels
       @channels.select {|c| c.open?}
     end
 
     def scry(app, path, mark)
-      return nil unless self.logged_in?
+      self.login
       scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}.#{mark}"
 
       response = Faraday.get(scry_url) do |req|
@@ -75,7 +65,7 @@ module Urbit
     end
 
     def spider(mark_in, mark_out, thread, data)
-      return nil unless self.logged_in?
+      self.login
       url = "#{self.config.api_base_url}/spider/#{mark_in}/#{thread}/#{mark_out}.json"
 
       response = Faraday.post(url) do |req|
@@ -87,15 +77,34 @@ module Urbit
       {status: response.status, code: response.reason_phrase, body: response.body}
     end
 
+    #
+    # Subscribe to an app at a path.
+    # Returns a Receiver which will begin to get back a stream of facts... which is a... Dictionary? Encyclopedia?
+    #
+    def subscribe(app, path)
+      self.login
+      (c = Channel.new self, self.make_channel_name).open("Creating a Subscription Channel.")
+      self.channels << c
+      c.subscribe(app, path)
+    end
+
     def to_s
       "a Ship(name: '#{self.pat_p}', host: '#{self.config.host}', port: '#{self.config.port}')"
     end
 
     private
 
+    def make_channel_name
+      "Channel-#{self.open_channels.count}"
+    end
+
     def ensure_connections_closed
       # Make sure all our created channels are closed by the GC
       ObjectSpace.define_finalizer( self, self.class.finalize(channels) )
+    end
+
+    def login_url
+      "#{config.api_base_url}/~/login"
     end
 
     def parse_cookie(resp)
@@ -104,10 +113,6 @@ module Urbit
 
       @auth_cookie, @path, @max_age = cookie.split(';')
       self.logged_in = true if @auth_cookie
-    end
-
-    def login_url
-      "#{config.api_base_url}/~/login"
     end
   end
 end

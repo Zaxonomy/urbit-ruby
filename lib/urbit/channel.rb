@@ -63,7 +63,8 @@ module Urbit
     end
 
     #
-    # Subscribe to a path and begin to get back a stream of facts... which is a... Dictionary? Encyclopedia?
+    # Subscribe to an app at a path.
+    # Returns a Receiver which will begin to get back a stream of facts... which is a... Dictionary? Encyclopedia?
     #
     def subscribe(app, path)
       m = Urbit::SubscribeMessage.new(self, app, path)

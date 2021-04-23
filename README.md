@@ -31,32 +31,37 @@ Or install it yourself as:
 [1] pry(main)> ship = Urbit.new
 # => #<Urbit::Ship:0x00007fa74b87f920 ...
 
-ship.logged_in?
+OR... with config file...
+> ship = Urbit.connect(config_file: '_config-barsyr-latreb.yml')
+
+> ship.logged_in?
 # => false
 
-ship.login
+> ship.login
 # => #<Urbit::Ship:0x00007fa74b87f920 ...
 
-ship.logged_in?
+> ship.logged_in?
 # => true
 
-channel = ship.open_channel('my-channel')
-# => #<Urbit::Channel:0x00007fa74b291e50 ...
+> ship.to_s
+# => "a Ship(name: '~barsyr-latreb', host: 'http://localhost', port: '8080')"
 
-channel.key
-# => "16142890875c348d"
-
-ship.channels.first.key
-# => "16142890875c348d"
-
-receiver = channel.subscribe(app: 'graph-store', path: '/updates')
+> receiver = ship.subscribe('graph-store', '/updates')
 # => #<Urbit::Receiver:0x00007fd3928eba58
 
-# This receiver will now be listening on the app and path you specified. Each time an event is sent in it will be stored in the receiver's facts collection.
-receiver.facts.count
+# Subscribing works by opening a Channel. Your ships has a collection of all it's open Channels.
+> channel = ship.open_channels.first
+# => #<Urbit::Channel:0x00007fa74b291e50 ...
+
+# Every Channel has a unique key to identify it.
+> channel.key
+# => "16142890875c348d"
+
+# The receiver will now be listening on the app and path you specified. Each time an event is sent in it will be stored in the receiver's facts collection.
+> receiver.facts.count
 => 12
 
-receiver.facts.last
+> receiver.facts.last
 => {:message=>
      {"json"=>
        {"graph-update"=>
@@ -105,7 +110,7 @@ receiver.facts.last
   }
 
 #  Your ship keeps a collection of all the messages sent to urbit:
-channel.sent_messages.collect {|m| m.to_s}
+> channel.sent_messages.collect {|m| m.to_s}
 => [
     "a Message({:action=>"poke", :app=>"hood", :id=>1, :json=>"Opening Airlock", :mark=>"helm-hi", :ship=>"barsyr-latreb"})",
     "a Message({:action=>"subscribe", :app=>"graph-store", :id=>2, :path=>"/updates", :ship=>"barsyr-latreb"})",
@@ -115,7 +120,7 @@ channel.sent_messages.collect {|m| m.to_s}
    ]
 
 # Retrieving your ship's base hash using scry....
-ship.scry('file-server', '/clay/base/hash', 'json')
+> ship.scry('file-server', '/clay/base/hash', 'json')
 # => {:status=>200, :code=>"ok", :body=>"\"e75k5\""}
 
 ```
