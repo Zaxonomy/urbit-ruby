@@ -52,7 +52,7 @@ module Urbit
     # remain open until this ship is disconnected at which point it
     # will be closed.
     def open_channel(a_name)
-      login
+      self.login
       (c = Channel.new self, a_name).open("Opening Airlock")
       self.channels << c
       c
@@ -63,7 +63,7 @@ module Urbit
     end
 
     def scry(app, path, mark)
-      return nil unless self.logged_in?
+      self.login
       scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}.#{mark}"
 
       response = Faraday.get(scry_url) do |req|
@@ -75,7 +75,7 @@ module Urbit
     end
 
     def spider(mark_in, mark_out, thread, data)
-      return nil unless self.logged_in?
+      self.login
       url = "#{self.config.api_base_url}/spider/#{mark_in}/#{thread}/#{mark_out}.json"
 
       response = Faraday.post(url) do |req|
