@@ -48,16 +48,6 @@ module Urbit
       config.name
     end
 
-    # Opening a channel always creates a new channel which will
-    # remain open until this ship is disconnected at which point it
-    # will be closed.
-    def open_channel(a_name)
-      self.login
-      (c = Channel.new self, a_name).open("Opening Airlock")
-      self.channels << c
-      c
-    end
-
     def open_channels
       @channels.select {|c| c.open?}
     end
