@@ -1,0 +1,20 @@
+{
+  :message=> {
+    "json"=> {
+      "graph-update"=> {
+        "add-graph"=> {
+          "graph" => {
+          },
+          "resource" => {
+            "name" => "test1-4287",
+            "ship" => "barsyr-latreb"
+          },
+          "mark" => "graph-validator-publish",
+          "overwrite" => true
+        }
+      }
+    },
+    "id" => 2,
+    "response" => "diff"
+  }
+}
