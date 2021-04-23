@@ -20,11 +20,11 @@ describe Urbit::Ship do
     expect(instance.cookie).to_not be_nil
   end
 
-   it "can open a channel" do
-     c = instance.open_channel "Test Channel"
-     expect(instance.open_channels.size).to eq(1)
-    c.close
-   end
+  it "can open a channel" do
+    c = instance.open_channel "Test Channel"
+    expect(instance.open_channels.size).to eq(1)
+   c.close
+  end
 
   it "test opening the channel answers the new channel" do
     c = instance.open_channel "Test Channel"
@@ -127,6 +127,12 @@ describe Urbit::Ship do
   #   expect(spider[:code]).to eq("ok")
   #   expect(spider[:body]).to eq("null")
   # end
+
+
+  it "can subscribe" do
+    # expect(channel.sent_messages.size).to eq(1)
+    expect(receiver = instance.subscribe('graph_store', '/updates')).to_not be_nil
+  end
 
   #-------------------------------------------------------------------
   # This test is a tricky one and I couldn't get it to work.
