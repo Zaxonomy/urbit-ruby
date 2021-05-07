@@ -52,7 +52,7 @@ module Urbit
       @channels.select {|c| c.open?}
     end
 
-    def scry(app, path, mark)
+    def scry(app, path, mark = 'json')
       self.login
       scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}.#{mark}"
 

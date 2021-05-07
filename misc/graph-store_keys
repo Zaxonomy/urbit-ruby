@@ -1,0 +1,15 @@
+{
+  :status => 200,
+  :code   => "ok",
+  :body   => {
+    "graph-update": {
+      "keys": [
+        {"name": "announce", "ship": "darlur"},
+        {"name": "test0-996", "ship": "barsyr-latreb"},
+        {"name": "test1-4287", "ship": "barsyr-latreb"},
+        {"name": "welcome-to-urbit-community", "ship": "darrux-landes"},
+        {"name": "help-desk-4556", "ship": "darlur"}
+      ]
+    }
+  }
+}

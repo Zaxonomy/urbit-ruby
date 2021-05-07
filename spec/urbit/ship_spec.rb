@@ -53,6 +53,9 @@ describe Urbit::Ship do
     expect(ship.open_channels.size).to eq(0)
   end
 
+  # ------------------------------------------------------------------
+  # Scry
+  # ------------------------------------------------------------------
   it "can scry" do
     ship.login
     scry = ship.scry('file-server', '/clay/base/hash', 'json')
@@ -69,19 +72,30 @@ describe Urbit::Ship do
     expect(scry[:body]).to include("")
   end
 
-  it "can create a graph using spider" do
-    # curl --header "Content-Type: application/json" \
-    #      --cookie "urbauth-~zod=0v3.fvaqc.nnjda.vude1.vb5l6.kmjmg" \
-    #      --request POST \
-    #      --data '[{"foo": "bar"}]' \
-    #      http://localhost:8080/spider/graph-view-action/graph-create/json.json
+  it "uses json as the default mark for scry" do
+    ship.login
+    scry = ship.scry('graph-store', '/keys')
+    expect(scry[:status]).to eq(200)
+    expect(scry[:code]).to eq("ok")
+    expect(scry[:body]).to match(/graph-update/)
+  end
 
-    # Running threads is an exception to the rule that we outlined in the section on channels.
-    # It uses a POST request and both manipulates state and receives information back.
-    # It also exposes the ability to send a sequence of commands, i.e. a "thread," hence the name.
-    #
-    # It takes the form {url}/spider/{inputMark}/{threadname}/{outputmark}.json
-
+  # ------------------------------------------------------------------
+  # Spider
+  #
+  # curl --header "Content-Type: application/json" \
+  #      --cookie "urbauth-~zod=0v3.fvaqc.nnjda.vude1.vb5l6.kmjmg" \
+  #      --request POST \
+  #      --data '[{"foo": "bar"}]' \
+  #      http://localhost:8080/spider/graph-view-action/graph-create/json.json
+  #
+  # Running threads is an exception to the rule that we outlined in the section on channels.
+  # It uses a POST request and both manipulates state and receives information back.
+  # It also exposes the ability to send a sequence of commands, i.e. a "thread," hence the name.
+  #
+  # It takes the form {url}/spider/{inputMark}/{threadname}/{outputmark}.json
+  # ------------------------------------------------------------------
+  it "can create a chat graph using spider" do
     # We need a unique name for the graph each time or the test will fail.
     # TODO: This test is "polluting" our fake zod with lots of graphs but I haven't figured out how to remove them yet.
     random_name = SecureRandom.hex(5)
@@ -106,6 +120,7 @@ describe Urbit::Ship do
         "mark"       : "graph-validator-chat"
       }
     })
+
     spider = ship.spider('graph-view-action', 'json', 'graph-create', create_json)
     expect(spider[:status]).to eq(200)
     expect(spider[:code]).to eq("ok")
