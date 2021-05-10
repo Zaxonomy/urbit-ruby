@@ -6,12 +6,13 @@ require 'urbit/config'
 module Urbit
   class Ship
     attr_accessor :logged_in
-    attr_reader :auth_cookie, :channels, :config
+    attr_reader :auth_cookie, :channels, :config, :graphs
 
     def initialize(config: Config.new)
       @auth_cookie = nil
       @channels    = []
       @config      = config
+      @graphs      = []
       @logged_in   = false
     end
 

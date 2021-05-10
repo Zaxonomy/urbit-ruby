@@ -82,13 +82,7 @@ describe Urbit::Ship do
 
   # ------------------------------------------------------------------
   # Spider
-  #
-  # curl --header "Content-Type: application/json" \
-  #      --cookie "urbauth-~zod=0v3.fvaqc.nnjda.vude1.vb5l6.kmjmg" \
-  #      --request POST \
-  #      --data '[{"foo": "bar"}]' \
-  #      http://localhost:8080/spider/graph-view-action/graph-create/json.json
-  #
+  # ------------------------------------------------------------------
   # Running threads is an exception to the rule that we outlined in the section on channels.
   # It uses a POST request and both manipulates state and receives information back.
   # It also exposes the ability to send a sequence of commands, i.e. a "thread," hence the name.
@@ -160,4 +154,17 @@ describe Urbit::Ship do
   #   sleep 15
   #   assert c.closed?
   # end
+
+  # ------------------------------------------------------------------
+  # Graph Store
+  # ------------------------------------------------------------------
+  it "has an empty collection of Graphs if never logged in" do
+    expect(ship.logged_in?).to be false
+    expect(ship.graphs).to eq([])
+    # ship.login
+    # scry = ship.scry('graph-store', '/keys')
+    # expect(scry[:status]).to eq(200)
+    # expect(scry[:code]).to eq("ok")
+    # expect(scry[:body]).to match(/graph-update/)
+  end
 end
