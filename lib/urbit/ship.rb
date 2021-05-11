@@ -2,11 +2,12 @@ require 'faraday'
 
 require 'urbit/channel'
 require 'urbit/config'
+require 'urbit/graph'
 
 module Urbit
   class Ship
     attr_accessor :logged_in
-    attr_reader :auth_cookie, :channels, :config, :graphs
+    attr_reader :auth_cookie, :channels, :config
 
     def initialize(config: Config.new)
       @auth_cookie = nil
@@ -26,6 +27,19 @@ module Urbit
 
     def cookie
       auth_cookie
+    end
+
+    def graphs
+      if self.logged_in?
+        r = self.scry('graph-store', '/keys')
+        if r[:body]
+          body = JSON.parse r[:body]
+          body["graph-update"]["keys"].each do |k|
+            @graphs << Graph.new(k["name"], k["ship"])
+          end
+        end
+      end
+      @graphs
     end
 
     def login

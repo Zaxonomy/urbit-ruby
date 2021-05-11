@@ -160,11 +160,13 @@ describe Urbit::Ship do
   # ------------------------------------------------------------------
   it "has an empty collection of Graphs if never logged in" do
     expect(ship.logged_in?).to be false
-    expect(ship.graphs).to eq([])
-    # ship.login
-    # scry = ship.scry('graph-store', '/keys')
-    # expect(scry[:status]).to eq(200)
-    # expect(scry[:code]).to eq("ok")
-    # expect(scry[:body]).to match(/graph-update/)
+    expect(ship.graphs).to be_empty
+  end
+
+  it "queries and retrieves graphs if logged in" do
+    ship.login
+    expect(ship.logged_in?)
+    expect(ship.graphs).to_not eq([])
+    expect(ship.graphs.first).to be_instance_of(Urbit::Graph)
   end
 end
