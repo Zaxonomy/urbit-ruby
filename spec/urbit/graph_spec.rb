@@ -24,4 +24,14 @@ describe Urbit::Graph do
   it "retrieving the newest messages from an empty graph is an empty set" do
     expect(graph.newest_messages).to be_empty
   end
+
+  it "rejects adding the same node index twice" do
+    n1 = Urbit::Node.new('/123', '"post" => {"time-sent" => 1619191801085, "contents" => []}')
+    n2 = Urbit::Node.new('/123', '"post" => {"time-sent" => 1619191801085, "contents" => []}')
+    expect(graph.nodes.empty?)
+    graph.add_node(n1)
+    expect(graph.nodes.size).to eq(1)
+    graph.add_node(n2)
+    expect(graph.nodes.size).to eq(1)
+  end
 end
