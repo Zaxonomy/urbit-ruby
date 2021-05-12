@@ -168,5 +168,13 @@ describe Urbit::Ship do
     expect(ship.logged_in?)
     expect(ship.graphs).to_not eq([])
     expect(ship.graphs.first).to be_instance_of(Urbit::Graph)
+    # expect(ship.graphs.count).to be(5)
   end
+
+  # it "can retrieve the newest messages from one of its graphs" do
+  #   ship.login
+  #   expect(ship.logged_in?)
+  #   expect(ship.graphs).to_not eq([])
+  #   expect(ship.graphs.first.newest_messages).to_not be_empty
+  # end
 end

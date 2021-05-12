@@ -30,12 +30,14 @@ module Urbit
     end
 
     def graphs
-      if self.logged_in?
-        r = self.scry('graph-store', '/keys')
-        if r[:body]
-          body = JSON.parse r[:body]
-          body["graph-update"]["keys"].each do |k|
-            @graphs << Graph.new(k["name"], k["ship"])
+      if @graphs.empty?
+        if self.logged_in?
+          r = self.scry('graph-store', '/keys')
+          if r[:body]
+            body = JSON.parse r[:body]
+            body["graph-update"]["keys"].each do |k|
+              @graphs << Graph.new(self, k["name"], k["ship"])
+            end
           end
         end
       end
