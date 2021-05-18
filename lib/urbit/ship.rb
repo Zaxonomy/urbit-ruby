@@ -100,7 +100,7 @@ module Urbit
     #
     def subscribe(app, path)
       self.login
-      (c = Channel.new self, self.make_channel_name).open("Creating a Subscription Channel.")
+      (c = Channel.new self, self.make_channel_name)
       self.channels << c
       c.subscribe(app, path)
     end

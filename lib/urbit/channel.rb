@@ -17,7 +17,6 @@ module Urbit
       @messages      = []
       @name          = name
       @is_open       = false
-      @is_subscribed = false
     end
 
     def close
@@ -30,16 +29,17 @@ module Urbit
       !@is_open
     end
 
-    #
-    # We open a channel by "poking" the urbit app 'hood' using the mark 'helm-hi'
-    #
-    def open(a_message_string)
-      m = Urbit::PokeMessage.new(self, "hood", "helm-hi", a_message_string)
-      @is_open = self.send_message(m)
-    end
-
     def open?
       @is_open
+    end
+
+    #
+    # One way to open a channel by "poking" an urbit app with a mark and a json payload.
+    # A typical example of this is poking the 'hood' app using the mark 'helm-hi' to start a DM chat.
+    #
+    def poke(an_app, a_mark, a_payload)
+      m = Urbit::PokeMessage.new(self, an_app, a_mark, a_message_string)
+      @is_open = self.send_message(m)
     end
 
     def queue_message(a_message)
@@ -68,12 +68,12 @@ module Urbit
     #
     def subscribe(app, path)
       m = Urbit::SubscribeMessage.new(self, app, path)
-      @is_subscribed = self.send_message(m)
+      @is_open = self.send_message(m)
       receiver = Urbit::Receiver.new(self)
     end
 
     def subscribed?
-      @is_subscribed
+      @is_open
     end
 
     def to_s
