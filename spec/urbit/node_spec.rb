@@ -47,6 +47,11 @@ describe Urbit::Node do
     expect(node2).to eq(node)
   end
 
+  it "knows whether it was fetched/saved from/to urbit and hence is persistent" do
+    # This node was just contructed so it isn't persistent.
+    expect(node.persistent?).to be false
+  end
+
   # it "retrieving the newest messages from an empty graph is an empty set" do
   #   expect(graph.newest_messages).to be_empty
   # end

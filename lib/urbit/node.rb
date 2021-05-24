@@ -7,6 +7,7 @@ module Urbit
       data = node_json['post']
       @contents   = data['contents']
       @time_sent  = data['time-sent']
+      @persistent = false
     end
 
     def ==(another_node)
@@ -15,6 +16,10 @@ module Urbit
 
     def eql?(another_node)
       another_node.index == @index
+    end
+
+    def persistent?
+      @persistent
     end
 
     def hash
