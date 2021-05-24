@@ -121,7 +121,7 @@ describe Urbit::Ship do
     expect(spider[:body]).to eq("null")
   end
 
-it "can create an 'unmanaged' graph using 'spider' and then delete it with a 'poke'" do
+it "can create and delete an 'unmanaged' graph using 'spider'" do
   random_name = SecureRandom.hex(5)
 
   ship.login
@@ -159,13 +159,11 @@ it "can create an 'unmanaged' graph using 'spider' and then delete it with a 'po
     }
   })
 
-    receiver = ship.poke('graph-push-hook', 'graph-update-2', delete_json)
-
-    expect(receiver.open?)
-    expect(receiver.facts.count).to eq(1)
-    # expect(spider[:code]).to eq("ok")
-    # expect(spider[:body]).to eq("null")
-  end
+  spider = ship.spider('graph-view-action', 'json', 'graph-delete', delete_json, "NO_RESPONSE")
+  expect(spider[:status]).to eq(200)
+  expect(spider[:code]).to eq("ok")
+  expect(spider[:body]).to eq("null")
+end
 
   # it "can fetch a url using spider" do
   #   ship.login

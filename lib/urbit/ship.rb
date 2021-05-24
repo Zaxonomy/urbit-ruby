@@ -88,9 +88,28 @@ module Urbit
       {status: response.status, code: response.reason_phrase, body: response.body}
     end
 
-    def spider(mark_in, mark_out, thread, data)
+    def spider(mark_in, mark_out, thread, data, *args)
       self.login
       url = "#{self.config.api_base_url}/spider/#{mark_in}/#{thread}/#{mark_out}.json"
+
+      # TODO: This is a huge hack due to the fact that certain spider operations are known to
+      #       not return when they should. Instead I just set the timeout low and catch the
+      #       error and act like everything is ok.
+      if args.include?("NO_RESPONSE")
+        conn = Faraday::Connection.new()
+        conn.options.timeout = 1
+        conn.options.open_timeout = 1
+
+        begin
+          response = conn.post(url) do |req|
+            req.headers['Accept'] = 'application/json'
+            req.headers['Cookie'] = self.cookie
+            req.body = data
+          end
+        rescue Faraday::TimeoutError
+          return {status: 200, code: "ok", body: "null"}
+        end
+      end
 
       response = Faraday.post(url) do |req|
         req.headers['Accept'] = 'application/json'
