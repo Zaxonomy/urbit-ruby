@@ -34,12 +34,12 @@ module Urbit
     end
 
     #
-    # One way to open a channel by "poking" an urbit app with a mark and a json payload.
+    # One way to open a channel by "poking" an urbit app with a mark and a (json) message.
     # A typical example of this is poking the 'hood' app using the mark 'helm-hi' to start a DM chat.
     #
-    def poke(an_app, a_mark, a_payload)
-      m = Urbit::PokeMessage.new(self, an_app, a_mark, a_message_string)
-      @is_open = self.send_message(m)
+    def poke(app, mark, message)
+      @is_open = self.send_message(Urbit::PokeMessage.new(self, app, mark, message))
+      receiver = Urbit::Receiver.new(self)
     end
 
     def queue_message(a_message)

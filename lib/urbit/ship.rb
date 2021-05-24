@@ -69,6 +69,13 @@ module Urbit
       @channels.select {|c| c.open?}
     end
 
+    def poke(app, mark, message)
+      self.login
+      (c = Channel.new self, self.make_channel_name)
+      self.channels << c
+      c.poke(app, mark, message)
+    end
+
     def scry(app, path, mark = 'json')
       self.login
       scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}.#{mark}"
