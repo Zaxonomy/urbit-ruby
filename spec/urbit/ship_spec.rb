@@ -121,6 +121,52 @@ describe Urbit::Ship do
     expect(spider[:body]).to eq("null")
   end
 
+it "can create an 'unmanaged' graph using 'spider' and then delete it with a 'poke'" do
+  random_name = SecureRandom.hex(5)
+
+  ship.login
+  create_json = %Q({
+    "create": {
+      "resource": {
+        "ship": "~zod",
+        "name": "#{random_name}"
+      },
+      "title": "TUG",
+      "description": "Testing Un-Managed Graph Creation",
+      "associated": {
+        "policy": {
+          "invite": {
+            "pending": []
+          }
+        }
+      },
+      "module"     : "publish",
+      "mark"       : "graph-validator-publish"
+    }
+  })
+
+  spider = ship.spider('graph-view-action', 'json', 'graph-create', create_json)
+  expect(spider[:status]).to eq(200)
+  expect(spider[:code]).to eq("ok")
+  expect(spider[:body]).to eq("null")
+
+  delete_json = %Q({
+    "delete": {
+      "resource": {
+        "ship": "~zod",
+        "name": "#{random_name}"
+      }
+    }
+  })
+
+    receiver = ship.poke('graph-push-hook', 'graph-update-2', delete_json)
+
+    expect(receiver.open?)
+    expect(receiver.facts.count).to eq(1)
+    # expect(spider[:code]).to eq("ok")
+    # expect(spider[:body]).to eq("null")
+  end
+
   # it "can fetch a url using spider" do
   #   ship.login
   #   fetch_json = %q({
@@ -148,7 +194,7 @@ describe Urbit::Ship do
   # it test_destroying_a_ship_closes_all_its_channels
   #   c = ship.open_channel "Test Channel"
   #   assert_equal 1, ship.open_channels.size
-  #   assert c.open?
+  #   assert c.subscribed?
   #   instance = nil
   #   GC.start(full_mark: true, immediate_sweep: true)
   #   sleep 15

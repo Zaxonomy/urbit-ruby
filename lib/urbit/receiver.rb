@@ -21,7 +21,11 @@ module Urbit
           self.facts += ["I received an error fact: #{error.class}"]
         end
       end
+      @is_open = true
     end
 
+    def open?
+      @is_open
+    end
   end
 end
