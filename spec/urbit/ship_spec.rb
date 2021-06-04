@@ -28,7 +28,7 @@ describe Urbit::Ship do
   # Subscribing
   # ------------------------------------------------------------------
   it "can subscribe" do
-    expect(receiver = ship.subscribe('graph-store', '/updates')).to_not be_nil
+    expect(channel = ship.subscribe('graph-store', '/updates')).to_not be_nil
   end
 
   it "can subscribe which opens a channel" do
@@ -41,9 +41,10 @@ describe Urbit::Ship do
     c.close
   end
 
-  it "subscribe answers a new receiver listening to response messages" do
-    receiver = ship.subscribe('graph-store', '/updates')
-    expect(receiver).to be_instance_of(Urbit::Receiver)
+  it "subscribe answers a new Channel with a Receiver listening to response messages" do
+    channel = ship.subscribe('graph-store', '/updates')
+    expect(channel).to be_instance_of(Urbit::Channel)
+    expect(channel.receiver).to be_instance_of(Urbit::Receiver)
   end
 
   it "closing the channel makes it unavailable" do
@@ -51,6 +52,14 @@ describe Urbit::Ship do
     c = ship.open_channels.last
     c.close
     expect(ship.open_channels.size).to eq(0)
+  end
+
+  # ------------------------------------------------------------------
+  # Poke
+  # ------------------------------------------------------------------
+  it "can initiate a DM by poking the %hood app with a message using the %helm-hi mark" do
+    poke_channel = ship.poke('hood', 'helm-hi', 'Opening Airlock')
+    expect(poke_channel.subscribed?)
   end
 
   # ------------------------------------------------------------------

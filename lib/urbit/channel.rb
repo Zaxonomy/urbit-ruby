@@ -9,13 +9,14 @@ require 'urbit/subscribe_message'
 module Urbit
   class Channel
     attr_accessor :messages
-    attr_reader :key, :name, :ship
+    attr_reader :key, :name, :receiver, :ship
 
     def initialize(ship, name)
       @ship          = ship
       @key           = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
       @messages      = []
       @name          = name
+      @receiver      = nil
       @is_open       = false
     end
 
@@ -39,7 +40,8 @@ module Urbit
     #
     def poke(app, mark, message)
       @is_open = self.send_message(Urbit::PokeMessage.new(self, app, mark, message))
-      receiver = Urbit::Receiver.new(self)
+      @receiver = Urbit::Receiver.new(self)
+      self
     end
 
     def queue_message(a_message)
@@ -69,7 +71,8 @@ module Urbit
     def subscribe(app, path)
       m = Urbit::SubscribeMessage.new(self, app, path)
       @is_open = self.send_message(m)
-      receiver = Urbit::Receiver.new(self)
+      @receiver = Urbit::Receiver.new(self)
+      self
     end
 
     def subscribed?

@@ -69,11 +69,14 @@ module Urbit
       @channels.select {|c| c.open?}
     end
 
+    #
+    # Poke an app with a message using a mark.
+    #
+    # Returns a Channel which has been created and opened and will begin
+    #   to get back a stream of facts via its Receiver.
+    #
     def poke(app, mark, message)
-      self.login
-      (c = Channel.new self, self.make_channel_name)
-      self.channels << c
-      c.poke(app, mark, message)
+      (self.add_channel).poke(app, mark, message)
     end
 
     def scry(app, path, mark = 'json')
@@ -122,13 +125,12 @@ module Urbit
 
     #
     # Subscribe to an app at a path.
-    # Returns a Receiver which will begin to get back a stream of facts... which is a... Dictionary? Encyclopedia?
+    #
+    # Returns a Channel which has been created and opened and will begin
+    #   to get back a stream of facts via its Receiver.
     #
     def subscribe(app, path)
-      self.login
-      (c = Channel.new self, self.make_channel_name)
-      self.channels << c
-      c.subscribe(app, path)
+      (self.add_channel).subscribe(app, path)
     end
 
     def to_s
@@ -136,6 +138,13 @@ module Urbit
     end
 
     private
+
+    def add_channel
+      self.login
+      (c = Channel.new self, self.make_channel_name)
+      self.channels << c
+      c
+    end
 
     def make_channel_name
       "Channel-#{self.open_channels.count}"
