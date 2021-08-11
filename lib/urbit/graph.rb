@@ -2,6 +2,24 @@ require 'set'
 require 'urbit/node'
 
 module Urbit
+  class AddGraphResponse
+    def initialize(response_json)
+      @j = response_json
+    end
+
+    def graph
+      @j["graph"]
+    end
+
+    def resource
+      @j["resource"]
+    end
+
+    def resource_name
+      "~#{self.resource["ship"]}/#{self.resource["name"]}"
+    end
+  end
+
   class Graph
     attr_reader :host_ship_name, :nodes, :name, :ship
 
@@ -20,18 +38,43 @@ module Urbit
       "~#{@host_ship_name}"
     end
 
+    def messages
+      self.fetch_all_nodes if @nodes.empty?
+      @nodes
+    end
+
     def newest_messages
       self.fetch_newest_messages if @nodes.empty?
       @nodes
     end
 
-    #
-    # the canonical printed representation of a Graph
-    def to_s
+    def resource_name
       "#{self.host_ship}/#{self.name}"
     end
 
+    #
+    # the canonical printed representation of a Graph
+    def to_s
+      self.resource_name
+    end
+
     private
+
+    def fetch_all_nodes
+      r = self.ship.scry('graph-store', "/graph/#{self.to_s}/")
+      if (200 == r[:status])
+        body = JSON.parse(r[:body])
+        if (added_graph = AddGraphResponse.new(body["graph-update"]["add-graph"]))
+          # Make sure we are adding to the correct graph...
+          if (added_graph.resource_name == self.resource_name)
+            added_graph.graph.each do |k, v|
+              self.add_node(Urbit::Node.new(k, v))
+            end
+          end
+        end
+      end
+      nil
+    end
 
     def fetch_newest_messages
       r = self.ship.scry('graph-store', "/newest/~#{self.host_ship_name}/#{self.name}/100")

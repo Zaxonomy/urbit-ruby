@@ -1,3 +1,5 @@
+require 'set'
+
 require "urbit/graph"
 require "urbit/ship"
 
@@ -18,7 +20,7 @@ describe Urbit::Graph do
   end
 
   it "can be represented as a string" do
-    expect(graph.to_s).to eq("a Graph named 'announce' hosted on ~darlur")
+    expect(graph.to_s).to eq("~darlur/announce")
   end
 
   it "retrieving the newest messages from an empty graph is an empty set" do
@@ -33,5 +35,13 @@ describe Urbit::Graph do
     expect(graph.nodes.size).to eq(1)
     graph.add_node(n2)
     expect(graph.nodes.size).to eq(1)
+  end
+
+  it "can fetch the newest messages from a graph" do
+    # NOTE: This test will fail if you don''t have a fake zod running.
+    ship.login
+    expect(ship.graphs.first).to be_instance_of(Urbit::Graph)
+    expect(ship.graphs.first.newest_messages).to be_instance_of(Set)
+    expect(ship.graphs.first.newest_messages).to_not be_empty
   end
 end

@@ -3,8 +3,8 @@ module Urbit
     attr_reader :contents, :index, :post, :time_sent
 
     def initialize(index, node_json)
-      @index = index.delete_prefix('/')
-      data = node_json['post']
+      @index      = index.delete_prefix('/')
+      data        = node_json['post']
       @contents   = data['contents']
       @time_sent  = data['time-sent']
       @persistent = false
@@ -12,6 +12,10 @@ module Urbit
 
     def ==(another_node)
       another_node.index == @index
+    end
+
+    def <=>(another_node)
+      @time_sent <=> another_node.time_sent
     end
 
     def eql?(another_node)
