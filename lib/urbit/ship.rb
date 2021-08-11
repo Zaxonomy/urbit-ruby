@@ -29,6 +29,10 @@ module Urbit
       auth_cookie
     end
 
+    #
+    # Answers a collection of all the top-level graphs on this ship.
+    # This collection is cached and will need to be invalidated to discover new graphs.
+    #
     def graphs
       if @graphs.empty?
         if self.logged_in?
@@ -42,6 +46,12 @@ module Urbit
         end
       end
       @graphs
+    end
+
+    #
+    # A helper method to just print out the descriptive names of all the ship's graphs.
+    def graph_names
+      self.graphs.collect {|g| g.to_s}
     end
 
     def login

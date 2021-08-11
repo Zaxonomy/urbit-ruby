@@ -159,19 +159,19 @@ it "can create and delete an 'unmanaged' graph using 'spider'" do
   expect(spider[:code]).to eq("ok")
   expect(spider[:body]).to eq("null")
 
-  delete_json = %Q({
-    "delete": {
-      "resource": {
-        "ship": "~zod",
-        "name": "#{random_name}"
-      }
-    }
-  })
+  # delete_json = %Q({
+  #   "delete": {
+  #     "resource": {
+  #       "ship": "~zod",
+  #       "name": "#{random_name}"
+  #     }
+  #   }
+  # })
 
-  spider = ship.spider('graph-view-action', 'json', 'graph-delete', delete_json, "NO_RESPONSE")
-  expect(spider[:status]).to eq(200)
-  expect(spider[:code]).to eq("ok")
-  expect(spider[:body]).to eq("null")
+  # spider = ship.spider('graph-view-action', 'json', 'graph-delete', delete_json, "NO_RESPONSE")
+  # expect(spider[:status]).to eq(200)
+  # expect(spider[:code]).to eq("ok")
+  # expect(spider[:body]).to eq("null")
 end
 
   # it "can fetch a url using spider" do

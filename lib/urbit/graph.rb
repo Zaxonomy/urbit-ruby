@@ -16,13 +16,19 @@ module Urbit
       @nodes << a_node
     end
 
+    def host_ship
+      "~#{@host_ship_name}"
+    end
+
     def newest_messages
       self.fetch_newest_messages if @nodes.empty?
       @nodes
     end
 
+    #
+    # the canonical printed representation of a Graph
     def to_s
-      "a Graph named '#{self.name}' hosted on ~#{self.host_ship_name}"
+      "#{self.host_ship}/#{self.name}"
     end
 
     private

@@ -46,22 +46,22 @@ OR... with config file...
 > ship.to_s
 # => "a Ship(name: '~barsyr-latreb', host: 'http://localhost', port: '8080')"
 
-> receiver = ship.subscribe('graph-store', '/updates')
-# => #<Urbit::Receiver:0x00007fd3928eba58
+> channel = ship.subscribe('graph-store', '/updates')
+# => a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '1622836437b540b4')
 
 # Subscribing works by opening a Channel. Your ships has a collection of all it's open Channels.
 > channel = ship.open_channels.first
-# => #<Urbit::Channel:0x00007fa74b291e50 ...
+# => a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '1622836437b540b4') ... [it's the same one.]
 
 # Every Channel has a unique key to identify it.
 > channel.key
 # => "16142890875c348d"
 
-# The receiver will now be listening on the app and path you specified. Each time an event is sent in it will be stored in the receiver's facts collection.
-> receiver.facts.count
+# The Channel has a Receiver that will now be listening on the app and path you specified. Each time an event is sent in it will be stored in the receiver's facts collection.
+> channel.receiver.facts.count
 => 12
 
-> receiver.facts.last
+> channel.receiver.facts.last
 => {:message=>
      {"json"=>
        {"graph-update"=>
@@ -120,7 +120,18 @@ OR... with config file...
    ]
 
 # Retrieving your ship's base hash using scry....
-> ship.scry('file-server', '/clay/base/hash', 'json')
+> ship.scry('file-server', '/clay/base/hash')
+# => {:status=>200, :code=>"ok", :body=>"\"e75k5\""}
+
+# Creating a new Notebook in "My Channels" using %spider....
+> create_json = %Q(
+        {"create": {"resource": { "ship": "~zod", "name": "random_name"},
+        "title": "Testing",
+        "description": "Testing Un-Managed Graph Creation",
+        "associated" : {"policy": {"invite": {"pending": []}}},
+        "module": "publish", "mark": "graph-validator-publish"}}
+  )
+> ship.spider('graph-view-action', 'json', 'graph-create', create_json)
 # => {:status=>200, :code=>"ok", :body=>"\"e75k5\""}
 
 ```
