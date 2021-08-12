@@ -30,10 +30,6 @@ module Urbit
       @index.hash
     end
 
-    # def <=>(another_node)
-    #   return another_node.index <=> self.index
-    # end
-
     def to_s
       "a Node(#{@index}) => {time_sent: #{@time_sent}, contents: #{@contents}}"
     end

@@ -33,7 +33,8 @@ module Urbit
     # Answers a collection of all the top-level graphs on this ship.
     # This collection is cached and will need to be invalidated to discover new graphs.
     #
-    def graphs
+    def graphs(flush_cache = false)
+      @graphs = [] if flush_cache
       if @graphs.empty?
         if self.logged_in?
           r = self.scry('graph-store', '/keys')
@@ -65,6 +66,23 @@ module Urbit
 
     def name
       config.name
+    end
+
+    def remove_graph(a_graph)
+      delete_json = %Q({
+        "delete": {
+          "resource": {
+            "ship": "#{self.name}",
+            "name": "#{a_graph.name}"
+          }
+        }
+      })
+
+      spider = self.spider('graph-view-action', 'json', 'graph-delete', delete_json, "NO_RESPONSE")
+      if (retcode = (200 == spider[:status]))
+        self.graphs.delete a_graph
+      end
+      retcode
     end
 
     def untilded_name
