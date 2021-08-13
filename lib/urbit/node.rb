@@ -30,6 +30,10 @@ module Urbit
       @index.hash
     end
 
+    def to_atom
+      @index.scan(/.{1,3}/).join('.')
+    end
+
     def to_s
       "a Node(#{@index}) => {time_sent: #{@time_sent}, contents: #{@contents}}"
     end
