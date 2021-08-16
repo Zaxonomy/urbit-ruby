@@ -5,23 +5,25 @@ describe Urbit::Node do
   let(:ship) { Urbit::Ship.new }
   let(:graph) { ship.login.graphs.first }
 
-  let(:raw_index) { '/170141184505020984719232265951207489536/2' }
-  let(:index) { '170141184505020984719232265951207489536/2' }
+  let(:raw_index) { '/170141184505036957608427254348286787584' }
+  let(:index) { '170141184505036957608427254348286787584' }
 
   let(:node_json) {{
     "post" => {
-      "index" => "/170141184505020984719232265951207489536/2",
-      "author" => "barsyr-latreb",
-      "time-sent" => 1619191801085,
+      "index" => "/170141184505036957608427254348286787584",
+      "author" => "darlur",
+      "time-sent" => 1620057693019,
       "signatures"=> [{
-          "signature" => "0x1.284d.9ddd.b0ca", "life" => 3, "ship" => "barsyr-latreb"
+          "signature" => "0x5468.e5ec.1955.3e10.14a6.5fc0.054e.0e1b.fe01.1272.0a2c.e3c8.37a5.6717.ed7d.4b0c.3102.3966.4caa.edeb.e89e.3194.be17.f6a7.0622.4775.5e8f.7e92.16d2.c552.5ecd.d28b.17a6.aad5.089b.3623.eb8b.1b62.1525.0571.2d9f.9001",
+          "life" => 3,
+          "ship" => "darlur"
       }],
-      "contents" => [],
-      "hash"     =>"0x9426.ceee.d865.1dbb.e711.5f52.27d6.880c"
+      "contents" => [{"text" => "We are now running urbit v1.5."}],
+      "hash"     => "0x5468.e5ec.1955.3e10.14a6.5fc0.054e.0e1b"
     }
   }}
 
-  let(:node) { described_class.new(index, node_json)}
+  let(:node) { described_class.new(raw_index, node_json)}
 
   after(:each) do
   end
@@ -31,15 +33,15 @@ describe Urbit::Node do
   end
 
   it "knows the time it was sent" do
-    expect(node.time_sent).to eq(1619191801085)
+    expect(node.time_sent).to eq(1620057693019)
   end
 
   it "constructs the contents from the post" do
-    expect(node.contents).to eq([])
+    expect(node.contents).to eq([{"text" => "We are now running urbit v1.5."}])
   end
 
   it "can be represented as a string" do
-    expect(node.to_s).to eq("a Node(#{index}) => {time_sent: 1619191801085, contents: []}")
+    expect(node.to_s).to eq("a Node(#{index})")
   end
 
   it "considers nodes with the same index to be the same" do
@@ -52,6 +54,16 @@ describe Urbit::Node do
     expect(node.persistent?).to be false
   end
 
+  it "can represent the index as an atom" do
+    expect(node.to_atom).to eq("170.141.184.505.036.957.608.427.254.348.286.787.584")
+  end
+
+  it "properly converts smaller indexes to atoms" do
+    min_json = {"post" => {"index" => "/17014", "author" => "darlur", "time-sent" => 1620057693019, "contents" => [], "hash" => "0x5468.e5ec.1955.3e10.14a6.5fc0.054e.0e1b"}}
+    n = Urbit::Node.new("/17014", min_json)
+    expect(n.to_atom).to eq("17.014")
+
+  end
   # it "retrieving the newest messages from an empty graph is an empty set" do
   #   expect(graph.newest_messages).to be_empty
   # end

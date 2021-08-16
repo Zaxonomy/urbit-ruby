@@ -31,11 +31,11 @@ module Urbit
     end
 
     def to_atom
-      @index.scan(/.{1,3}/).join('.')
+      @index.reverse.scan(/.{1,3}/).join('.').reverse
     end
 
     def to_s
-      "a Node(#{@index}) => {time_sent: #{@time_sent}, contents: #{@contents}}"
+      "a Node(#{@index})"
     end
   end
 end
