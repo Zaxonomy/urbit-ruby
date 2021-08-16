@@ -1,12 +1,10 @@
 module Urbit
   class Node
-    attr_reader :contents, :index, :post, :time_sent
+    attr_reader :index, :post, :time_sent
 
     def initialize(index, node_json)
       @index      = index.delete_prefix('/')
-      data        = node_json['post']
-      @contents   = data['contents']
-      @time_sent  = data['time-sent']
+      @data       = node_json['post']
       @persistent = false
     end
 
@@ -15,7 +13,11 @@ module Urbit
     end
 
     def <=>(another_node)
-      @time_sent <=> another_node.time_sent
+      self.time_sent <=> another_node.time_sent
+    end
+
+    def contents
+      @data['contents']
     end
 
     def eql?(another_node)
@@ -28,6 +30,10 @@ module Urbit
 
     def hash
       @index.hash
+    end
+
+    def time_sent
+      @data['time-sent']
     end
 
     def to_atom
