@@ -109,7 +109,8 @@ module Urbit
 
     def scry(app, path, mark = 'json')
       self.login
-      scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}.#{mark}"
+      mark = ".#{mark}" unless mark.empty?
+      scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}#{mark}"
 
       response = Faraday.get(scry_url) do |req|
         req.headers['Accept'] = 'application/json'

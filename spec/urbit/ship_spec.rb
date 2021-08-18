@@ -3,6 +3,30 @@ require "urbit/ship"
 
 describe Urbit::Ship do
   let(:ship) { described_class.new }
+  # We need a unique name for the graph each time or the test will fail.
+  let(:random_name) {SecureRandom.hex(5)}
+
+  let(:create_json) {
+    %Q({
+      "create": {
+        "resource"   : {
+          "ship": "~zod",
+          "name": "#{random_name}"
+        },
+        "title"      : "Testing creation",
+        "description": "test",
+        "associated" : {
+          "policy": {
+            "invite": {
+              "pending": []
+            }
+          }
+        },
+        "module"     : "chat",
+        "mark"       : "graph-validator-chat"
+      }
+    })
+  }
 
   it "has a pat p" do
     expect(ship.pat_p).to_not be_nil
@@ -99,31 +123,7 @@ describe Urbit::Ship do
   # It takes the form {url}/spider/{inputMark}/{threadname}/{outputmark}.json
   # ------------------------------------------------------------------
   it "can create a chat graph using spider" do
-    # We need a unique name for the graph each time or the test will fail.
-    # TODO: This test is "polluting" our fake zod with lots of graphs but I haven't figured out how to remove them yet.
-    random_name = SecureRandom.hex(5)
-
     ship.login
-    create_json = %Q({
-      "create": {
-        "resource"   : {
-          "ship": "~zod",
-          "name": "#{random_name}"
-        },
-        "title"      : "Testing creation",
-        "description": "test",
-        "associated" : {
-          "policy": {
-            "invite": {
-              "pending": []
-            }
-          }
-        },
-        "module"     : "chat",
-        "mark"       : "graph-validator-chat"
-      }
-    })
-
     expect(ship.graphs.count).to eq(1)   # this is the default dm-inbox
 
     spider = ship.spider('graph-view-action', 'json', 'graph-create', create_json)
@@ -138,8 +138,6 @@ describe Urbit::Ship do
   end
 
 it "can create and delete an 'unmanaged' graph using 'spider'" do
-  random_name = SecureRandom.hex(5)
-
   ship.login
   create_json = %Q({
     "create": {
@@ -231,10 +229,15 @@ end
     # expect(ship.graphs.count).to be(5)
   end
 
-  # it "can retrieve the newest messages from one of its graphs" do
-  #   ship.login
-  #   expect(ship.logged_in?)
-  #   expect(ship.graphs).to_not eq([])
-  #   expect(ship.graphs.first.newest_messages).to_not be_empty
-  # end
+  it "can retrieve the newest messages from one of its graphs" do
+    ship.login
+    # Make a graph...
+    spider = ship.spider('graph-view-action', 'json', 'graph-create', create_json)
+    expect(ship.graphs(true).count).to eq(2)   # add in our new graph
+    new_graph = ship.graphs.select {|g| random_name == g.name}.first
+    puts new_graph.messages
+    # expect(new_graph.newest_messages).to_not be_empty
+    # Clean up
+    ship.remove_graph(new_graph)
+  end
 end

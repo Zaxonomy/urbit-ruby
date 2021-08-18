@@ -3,18 +3,34 @@ require 'ld-eventsource'
 require 'urbit/ack_message'
 
 module Urbit
+  class Fact
+    def initialize(event)
+      @type = event.type
+      @data = JSON.parse(event.data)
+    end
+
+    def to_h
+      {'type' => @type, 'data' => @data}
+    end
+
+    def to_s
+      "aFact(#{self.to_h}"
+    end
+  end
+
   class Receiver < SSE::Client
     attr_accessor :facts
 
     def initialize(channel)
       @facts = []
-      @headers = {'cookie' => channel.ship.cookie}
-      super(channel.url, {headers: @headers}) do |rec|
+      super(channel.url, {headers: self.headers(channel)}) do |rec|
+        # We are now listening on a socket for SSE::Events. This block will be called for each one.
         rec.on_event do |event|
-          typ = event.type
-          dat = JSON.parse(event.data)
-          self.facts << {typ => dat}
-          channel.send_message(AckMessage.new(channel, event.id))
+          @facts << Fact.new(event)
+
+          ack = AckMessage.new(channel, event.id)
+          # @facts << {:ack => ack.to_h}
+          channel.send_message(ack)
         end
 
         rec.on_error do |error|
@@ -26,6 +42,18 @@ module Urbit
 
     def open?
       @is_open
+    end
+
+    private
+
+    def headers(channel)
+      {
+        "Accept"        => "text/event-stream",
+        "Cache-Control" => "no-cache",
+        'Cookie'        => channel.ship.cookie,
+        "Connection"    => "keep-alive",
+        "User-Agent"    => "urbit-ruby"
+      }
     end
   end
 end
