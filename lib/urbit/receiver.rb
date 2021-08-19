@@ -6,21 +6,30 @@ module Urbit
   class Fact
     attr_reader :ack
 
-    def initialize(event)
+    def initialize(channel, event)
+      @channel = channel
+      @data = event.data
       @type = event.type
-      @data = JSON.parse(event.data)
     end
 
     def add_ack(an_ack)
       @ack = an_ack
     end
 
+    def contents
+      JSON.parse(@data)
+    end
+
     def is_acknowledged?
       !@ack.nil?
     end
 
+    def ship
+      @channel.ship
+    end
+
     def to_h
-      {type: @type, data: @data, acknowleged: self.is_acknowledged?}
+      {contents: self.contents, ship: "#{self.ship}", acknowleged: self.is_acknowledged?}
     end
 
     def to_s
@@ -37,7 +46,7 @@ module Urbit
         # We are now listening on a socket for SSE::Events. This block will be called for each one.
         rec.on_event do |event|
           # Wrap the returned event in a Fact.
-          @facts << (f = Fact.new event)
+          @facts << (f = Fact.new channel, event)
 
           # We need to acknowlege each message or urbit will eventually disconnect us.
           # We record the ack with the Fact itself.
