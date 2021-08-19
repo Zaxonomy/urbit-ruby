@@ -13,7 +13,7 @@ module Urbit
     end
 
     def to_s
-      "#{self.to_h}"
+      "an AckMessage(#{self.to_h})"
     end
   end
 end
