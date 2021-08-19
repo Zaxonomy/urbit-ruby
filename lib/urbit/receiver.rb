@@ -1,42 +1,9 @@
 require 'ld-eventsource'
 
 require 'urbit/ack_message'
+require 'urbit/fact'
 
 module Urbit
-  class Fact
-    attr_reader :ack
-
-    def initialize(channel, event)
-      @channel = channel
-      @data = event.data
-      @type = event.type
-    end
-
-    def add_ack(an_ack)
-      @ack = an_ack
-    end
-
-    def contents
-      JSON.parse(@data)
-    end
-
-    def is_acknowledged?
-      !@ack.nil?
-    end
-
-    def ship
-      @channel.ship
-    end
-
-    def to_h
-      {contents: self.contents, ship: "#{self.ship}", acknowleged: self.is_acknowledged?}
-    end
-
-    def to_s
-      "a Fact(#{self.to_h}"
-    end
-  end
-
   class Receiver < SSE::Client
     attr_accessor :facts
 

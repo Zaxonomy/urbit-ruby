@@ -162,8 +162,12 @@ module Urbit
       (self.add_channel).subscribe(app, path)
     end
 
+    def to_h
+      {name: "#{self.pat_p}", host: "#{self.config.host}", port: "#{self.config.port}"}
+    end
+
     def to_s
-      "a Ship(name: '#{self.pat_p}', host: '#{self.config.host}', port: '#{self.config.port}')"
+      "a Ship(#{self.to_h})"
     end
 
     private
