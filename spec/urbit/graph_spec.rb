@@ -20,7 +20,7 @@ describe Urbit::Graph do
   end
 
   it "can be represented as a string" do
-    expect(graph.to_s).to eq("~darlur/announce")
+    expect(graph.to_s).to eq("a Graph(~darlur/announce)")
   end
 
   it "retrieving the newest messages from an empty graph is an empty set" do

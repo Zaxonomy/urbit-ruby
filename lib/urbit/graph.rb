@@ -12,29 +12,37 @@ module Urbit
     end
 
     def resource
-      @j["resource"]
+      "~#{self.resource_node["ship"]}/#{self.resource_node["name"]}"
     end
 
-    def resource_name
-      "~#{self.resource["ship"]}/#{self.resource["name"]}"
+    def resource_node
+      @j["resource"]
     end
   end
 
-  class AddNodesResponse
+  class AddNodesParser
     def initialize(response_json)
       @j = response_json
     end
 
     def nodes
+      nodes = []
+      self.nodes_hash.each do |k, v|
+        nodes << Urbit::Node.new(k, v)
+      end
+      nodes
+    end
+
+    def nodes_hash
       @j["nodes"]
     end
 
     def resource
-      @j["resource"]
+      "~#{self.resource_hash["ship"]}/#{self.resource_hash["name"]}"
     end
 
-    def resource_name
-      "~#{self.resource["ship"]}/#{self.resource["name"]}"
+    def resource_hash
+      @j["resource"]
     end
   end
 
@@ -74,25 +82,25 @@ module Urbit
       @nodes
     end
 
-    def resource_name
+    def resource
       "#{self.host_ship}/#{self.name}"
     end
 
     #
     # the canonical printed representation of a Graph
     def to_s
-      self.resource_name
+      "a Graph(#{self.resource})"
     end
 
     private
 
     def fetch_all_nodes
-      r = self.ship.scry('graph-store', "/graph/#{self.resource_name}/")
+      r = self.ship.scry('graph-store', "/graph/#{self.resource}/")
       if (200 == r[:status])
         body = JSON.parse(r[:body])
         if (added_graph = AddGraphResponse.new(body["graph-update"]["add-graph"]))
           # Make sure we are adding to the correct graph...
-          if (added_graph.resource_name == self.resource_name)
+          if (added_graph.resource == self.resource)
             added_graph.graph.each do |k, v|
               self.add_node(Urbit::Node.new(k, v))
             end
@@ -103,16 +111,12 @@ module Urbit
     end
 
     def fetch_newest_nodes(count)
-      r = self.ship.scry('graph-store', "/graph/#{self.resource_name}/node/siblings/newest/lone/#{count}/")
+      r = self.ship.scry('graph-store', "/graph/#{self.resource}/node/siblings/newest/kith/#{count}/")
       if (200 == r[:status])
         body = JSON.parse(r[:body])
-        if (added_nodes = AddNodesResponse.new(body["graph-update"]["add-nodes"]))
+        if (parser = AddNodesParser.new(body["graph-update"]["add-nodes"]))
           # Make sure we are adding to the correct graph...
-          if (added_nodes.resource_name == self.resource_name)
-            added_nodes.nodes.each do |k, v|
-              self.add_node(Urbit::Node.new(k, v))
-            end
-          end
+          parser.nodes.each {|n| self.add_node(n)} if (parser.resource == self.resource)
         end
       end
       nil

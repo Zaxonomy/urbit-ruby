@@ -45,7 +45,7 @@ describe Urbit::Ship do
   end
 
   it "can be represented as a string" do
-    expect(ship.to_s).to eq("a Ship(name: '~zod', host: 'http://localhost', port: '8080')")
+    expect(ship.to_s).to eq('a Ship({:name=>"~zod", :host=>"http://localhost", :port=>"8080"})')
   end
 
   # ------------------------------------------------------------------
@@ -131,7 +131,7 @@ describe Urbit::Ship do
     expect(spider[:code]).to eq("ok")
     expect(spider[:body]).to eq("null")
 
-    expect(ship.graphs(true).count).to eq(2)   # add in our new graph
+    expect(ship.graphs(flush_cache: true).count).to eq(2)   # add in our new graph
     new_graph = ship.graphs.select {|g| random_name == g.name}.first
     ship.remove_graph(new_graph)
     expect(ship.graphs.count).to eq(1)   # this is just the default dm-inbox again
@@ -233,9 +233,8 @@ end
     ship.login
     # Make a graph...
     spider = ship.spider('graph-view-action', 'json', 'graph-create', create_json)
-    expect(ship.graphs(true).count).to eq(2)   # add in our new graph
+    expect(ship.graphs(flush_cache: true).count).to eq(2)   # add in our new graph
     new_graph = ship.graphs.select {|g| random_name == g.name}.first
-    puts new_graph.messages
     # expect(new_graph.newest_messages).to_not be_empty
     # Clean up
     ship.remove_graph(new_graph)

@@ -29,11 +29,15 @@ module Urbit
       auth_cookie
     end
 
+    def graph(resource:)
+      self.graphs.find {|g| g.resource == resource}
+    end
+
     #
     # Answers a collection of all the top-level graphs on this ship.
     # This collection is cached and will need to be invalidated to discover new graphs.
     #
-    def graphs(flush_cache = false)
+    def graphs(flush_cache: false)
       @graphs = [] if flush_cache
       if @graphs.empty?
         if self.logged_in?

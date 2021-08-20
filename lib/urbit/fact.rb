@@ -1,3 +1,6 @@
+require 'urbit/graph'
+require 'urbit/node'
+
 module Urbit
   class Fact
     attr_reader :ack
@@ -6,10 +9,23 @@ module Urbit
       @channel = channel
       @data = event.data
       @type = event.type
+
+      # Attach this fact as a node to its Graph.
+      # if self.graph_update?
+      #   added_nodes = Urbit::AddNodesResponse.new(self.add_nodes_json)
+      #   added_nodes.nodes.each do |k, v|
+      #     self.ship.graph(resource: self.resource).add_node(Urbit::Node.new(k, v))
+      #   end
+      # end
     end
 
     def add_ack(an_ack)
       @ack = an_ack
+    end
+
+    def add_nodes_json
+      return nil unless self.graph_update?
+      self.contents["json"]["graph-update"]
     end
 
     def contents
@@ -27,7 +43,7 @@ module Urbit
     def resource
       return nil unless self.graph_update?
       r = self.contents["json"]["graph-update"]["add-nodes"]["resource"]
-      "#{r["ship"]}/#{r["name"]}"
+      "~#{r["ship"]}/#{r["name"]}"
     end
 
     def ship
