@@ -45,10 +45,16 @@ module Urbit
       @all_n
     end
 
-    def newest_nodes(count = 10)
+    def newest_nodes(count: 10)
       count = 1 if count < 1
       self.fetch_newest_nodes(count) if @nodes.empty?
       Set.new(self.nodes.sort.reverse[0..(count - 1)])
+    end
+
+    def oldest_nodes(count: 10)
+      count = 1 if count < 1
+      self.fetch_oldest_nodes(count) if @nodes.empty?
+      Set.new(self.nodes.sort[0..(count - 1)])
     end
 
     def resource
@@ -71,6 +77,12 @@ module Urbit
 
     def fetch_newest_nodes(count)
       self.fetch_nodes(endpoint: "/graph/#{self.resource}/node/siblings/newest/kith/#{count}/",
+                       parser:   AddNodesParser,
+                       node:     "add-nodes")
+    end
+
+    def fetch_oldest_nodes(count)
+      self.fetch_nodes(endpoint: "/graph/#{self.resource}/node/siblings/oldest/kith/#{count}/",
                        parser:   AddNodesParser,
                        node:     "add-nodes")
     end
