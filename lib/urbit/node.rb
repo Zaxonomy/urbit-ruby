@@ -1,16 +1,14 @@
 module Urbit
   class Node
-    attr_reader :children, :index, :post, :time_sent
-
-    def initialize(index, node_json)
-      @index      = index.delete_prefix('/')
-      @post       = node_json['post']
+    def initialize(a_graph, node_json)
+      @graph      = a_graph
+      @post_h     = node_json['post']
       @children_h = node_json['children']
       @persistent = false
     end
 
     def ==(another_node)
-      another_node.index == @index
+      another_node.index == self.index
     end
 
     def <=>(another_node)
@@ -18,23 +16,25 @@ module Urbit
     end
 
     def author
-      @post["author"]
+      @post_h["author"]
     end
 
     def children
       @children = []
-      @children_h.each do |k, v|
-        @children << Urbit::Node.new(k, v)
+      if @children_h
+        @children_h.each do |k, v|
+          @children << Urbit::Node.new(@graph, v)
+        end
       end
       @children
     end
 
     def contents
-      @post['contents']
+      @post_h['contents']
     end
 
     def eql?(another_node)
-      another_node.index == @index
+      another_node.index == self.index
     end
 
     def persistent?
@@ -45,12 +45,16 @@ module Urbit
       @index.hash
     end
 
+    def index
+      @post_h["index"].delete_prefix('/')
+    end
+
     def time_sent
-      @post['time-sent']
+      @post_h['time-sent']
     end
 
     def to_atom
-      subkeys = @index.split("/")
+      subkeys = self.index.split("/")
       subatoms = []
       subkeys.each do |s|
         subatoms << s.reverse.scan(/.{1,3}/).join('.').reverse
@@ -58,8 +62,19 @@ module Urbit
       subatoms.join('/')
     end
 
+    def to_h
+      {
+        index: self.to_atom,
+        author: self.author,
+        contents: self.contents,
+        time_sent: self.time_sent,
+        is_parent: !self.children.empty?,
+        child_count: self.children.count
+      }
+    end
+
     def to_s
-      "a Node(#{@index})"
+      "a Node(#{self.to_h})"
     end
   end
 end

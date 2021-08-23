@@ -28,12 +28,17 @@ describe Urbit::Graph do
   end
 
   it "rejects adding the same node index twice" do
-    n1 = Urbit::Node.new('/123', '"post" => {"time-sent" => 1619191801085, "contents" => []}')
-    n2 = Urbit::Node.new('/123', '"post" => {"time-sent" => 1619191801085, "contents" => []}')
     expect(graph.nodes.empty?)
-    graph.add_node(n1)
+    np1 = Urbit::AddNodesParser.new(for_graph: graph,
+                                    with_json: {'resource' => {'name' => 'announce', 'ship' => 'darlur'},
+                                           'nodes' => { '/17014' => {'post' => {'index' => '/17014', 'time-sent' => 1619191801085, 'contents' => []}}}})
+    np1.add_nodes
     expect(graph.nodes.size).to eq(1)
-    graph.add_node(n2)
+
+    np2 = Urbit::AddNodesParser.new(for_graph: graph,
+                                    with_json: {'resource' => {'name' => 'announce', 'ship' => 'darlur'},
+                                     'nodes' => { '/17014' => {'post' => {'index' => '/17014', 'time-sent' => 1619191801085, 'contents' => []}}}})
+    np2.add_nodes
     expect(graph.nodes.size).to eq(1)
   end
 
