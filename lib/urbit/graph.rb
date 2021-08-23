@@ -64,22 +64,23 @@ module Urbit
     private
 
     def fetch_all_nodes
-      r = self.ship.scry('graph-store', "/graph/#{self.resource}/")
-      if (200 == r[:status])
-        body = JSON.parse(r[:body])
-        if (parser = AddGraphParser.new(for_graph: self, with_json: body["graph-update"]["add-graph"]))
-          parser.add_nodes
-        end
-      end
-      nil
+      self.fetch_nodes(endpoint: "/graph/#{self.resource}/",
+                       parser:   AddGraphParser,
+                       node:     "add-graph")
     end
 
     def fetch_newest_nodes(count)
-      r = self.ship.scry('graph-store', "/graph/#{self.resource}/node/siblings/newest/kith/#{count}/")
+      self.fetch_nodes(endpoint: "/graph/#{self.resource}/node/siblings/newest/kith/#{count}/",
+                       parser:   AddNodesParser,
+                       node:     "add-nodes")
+    end
+
+    def fetch_nodes(endpoint:, parser:, node:)
+      r = self.ship.scry('graph-store', endpoint)
       if (200 == r[:status])
         body = JSON.parse(r[:body])
-        if (parser = AddNodesParser.new(for_graph: self, with_json: body["graph-update"]["add-nodes"]))
-          parser.add_nodes
+        if (p = parser.new(for_graph: self, with_json: body["graph-update"][node]))
+          p.add_nodes
         end
       end
       nil
