@@ -17,6 +17,13 @@ module Urbit
       @nodes << a_node
     end
 
+    #
+    # Finds a node in this graph by index
+    #
+    def find(node_index:)
+      self.fetch_node(node_index)
+    end
+
     def host_ship
       "~#{@host_ship_name}"
     end
@@ -70,24 +77,30 @@ module Urbit
     private
 
     def fetch_all_nodes
-      self.fetch_nodes(endpoint: "/graph/#{self.resource}/",
-                       parser:   AddGraphParser,
-                       node:     "add-graph")
+      self.fetch_nodes("#{self.graph_resource}/",
+                       AddGraphParser,
+                       "add-graph")
     end
 
     def fetch_newest_nodes(count)
-      self.fetch_nodes(endpoint: "/graph/#{self.resource}/node/siblings/newest/kith/#{count}/",
-                       parser:   AddNodesParser,
-                       node:     "add-nodes")
+      self.fetch_nodes("#{self.graph_resource}/node/siblings/newest/kith/#{count}/",
+                       AddNodesParser,
+                       "add-nodes")
+    end
+
+    def fetch_node(index_atom)
+      self.fetch_nodes("#{self.graph_resource}/node/index/kith/#{index_atom}/",
+                       AddNodesParser,
+                       "add-nodes")
     end
 
     def fetch_oldest_nodes(count)
-      self.fetch_nodes(endpoint: "/graph/#{self.resource}/node/siblings/oldest/kith/#{count}/",
-                       parser:   AddNodesParser,
-                       node:     "add-nodes")
+      self.fetch_nodes("#{self.graph_resource}/node/siblings/oldest/kith/#{count}/",
+                       AddNodesParser,
+                       "add-nodes")
     end
 
-    def fetch_nodes(endpoint:, parser:, node:)
+    def fetch_nodes(endpoint, parser, node)
       r = self.ship.scry('graph-store', endpoint)
       if (200 == r[:status])
         body = JSON.parse(r[:body])
@@ -98,5 +111,8 @@ module Urbit
       nil
     end
 
+    def graph_resource
+      "/graph/#{self.resource}"
+    end
   end
 end
