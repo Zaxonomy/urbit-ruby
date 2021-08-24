@@ -46,7 +46,7 @@ describe Urbit::Graph do
     # NOTE: This test will fail if you don''t have a fake zod running.
     ship.login
     expect(ship.graphs.first).to be_instance_of(Urbit::Graph)
-    expect(ship.graphs.first.newest_nodes).to be_instance_of(Set)
+    expect(ship.graphs.first.newest_nodes).to be_instance_of(Array)
     # expect(ship.graphs.first.newest_messages).to_not be_empty
   end
 end

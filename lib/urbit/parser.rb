@@ -8,14 +8,20 @@ module Urbit
       @j = with_json
     end
 
+    #
+    # Parses the embedded json and adds any found nodes to the graph.
+    # Answers an array of nodes.
+    #
     def add_nodes
+      added_nodes = []
       # Make sure we are adding to the correct graph...
       if (@g.resource == self.resource)
         self.nodes_hash.each do |k, v|
-          @g.add_node(Urbit::Node.new(@g, v))
+          added_nodes << (n = Urbit::Node.new(@g, v))
+          @g.add_node(n)
         end
       end
-      nil
+      added_nodes
     end
 
     def resource

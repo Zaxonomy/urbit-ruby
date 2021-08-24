@@ -37,12 +37,12 @@ module Urbit
     # end
 
     #
-    # Answers all of this Graph's currently attached Nodes, recursively
+    # Answers an array with all of this Graph's currently attached Nodes, recursively
     # inluding all of the Node's children.
     #
     def nodes
       self.fetch_all_nodes if @nodes.empty?
-      @all_n = Set.new
+      @all_n = []
       @nodes.each do |n|
         @all_n << n
         n.children.each do |c|
@@ -54,14 +54,14 @@ module Urbit
 
     def newest_nodes(count: 10)
       count = 1 if count < 1
-      self.fetch_newest_nodes(count) if @nodes.empty?
-      Set.new(self.nodes.sort.reverse[0..(count - 1)])
+      return self.fetch_newest_nodes(count) if @nodes.empty? || @nodes.count < count
+      self.nodes.sort.reverse[0..(count - 1)]
     end
 
     def oldest_nodes(count: 10)
       count = 1 if count < 1
-      self.fetch_oldest_nodes(count) if @nodes.empty?
-      Set.new(self.nodes.sort[0..(count - 1)])
+      return self.fetch_oldest_nodes(count) if @nodes.empty? || @nodes.count < count
+      self.nodes.sort[0..(count - 1)]
     end
 
     def resource
@@ -100,15 +100,18 @@ module Urbit
                        "add-nodes")
     end
 
+    #
+    # Answers an array of Nodes that were fetched or an empty array if nothing found.
+    #
     def fetch_nodes(endpoint, parser, node)
       r = self.ship.scry('graph-store', endpoint)
       if (200 == r[:status])
         body = JSON.parse(r[:body])
         if (p = parser.new(for_graph: self, with_json: body["graph-update"][node]))
-          p.add_nodes
+          return p.add_nodes
         end
       end
-      nil
+      []
     end
 
     def graph_resource
