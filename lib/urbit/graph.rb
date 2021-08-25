@@ -17,13 +17,6 @@ module Urbit
       @nodes << a_node
     end
 
-    #
-    # Finds a node in this graph by index
-    #
-    def find(node_index:)
-      self.fetch_node(node_index)
-    end
-
     def host_ship
       "~#{@host_ship_name}"
     end
@@ -35,6 +28,14 @@ module Urbit
     # def mark
     #   r = self.ship.scry('graph-store', "/graph/#{self.to_s}/mark")
     # end
+
+    #
+    # Finds a single node in this graph by its index.
+    # The index here should be the atom representation (as returned by Node#index).
+    #
+    def node(index:)
+      self.fetch_node(index)
+    end
 
     #
     # Answers an array with all of this Graph's currently attached Nodes, recursively

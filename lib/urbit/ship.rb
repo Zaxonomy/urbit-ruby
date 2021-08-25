@@ -55,8 +55,9 @@ module Urbit
 
     #
     # A helper method to just print out the descriptive names of all the ship's graphs.
+    #
     def graph_names
-      self.graphs.collect {|g| g.to_s}
+      self.graphs.collect {|g| g.resource}
     end
 
     def login

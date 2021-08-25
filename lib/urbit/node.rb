@@ -5,10 +5,11 @@ module Urbit
       @post_h     = node_json['post']
       @children_h = node_json['children']
       @persistent = false
+      @index      = nil
     end
 
     def ==(another_node)
-      another_node.index == self.index
+      another_node.raw_index == self.raw_index
     end
 
     def <=>(another_node)
@@ -34,7 +35,7 @@ module Urbit
     end
 
     def eql?(another_node)
-      another_node.index == self.index
+      another_node.raw_index == self.raw_index
     end
 
     def persistent?
@@ -42,10 +43,17 @@ module Urbit
     end
 
     def hash
-      @index.hash
+      self.raw_index.hash
     end
 
+    #
+    # Returns the memoized @index or calculates it from the raw_index.
     def index
+      return @index if @index
+      @index = self.index_to_atom
+    end
+
+    def raw_index
       @post_h["index"].delete_prefix('/')
     end
 
@@ -53,18 +61,9 @@ module Urbit
       @post_h['time-sent']
     end
 
-    def to_atom
-      subkeys = self.index.split("/")
-      subatoms = []
-      subkeys.each do |s|
-        subatoms << s.reverse.scan(/.{1,3}/).join('.').reverse
-      end
-      subatoms.join('/')
-    end
-
     def to_h
       {
-        index: self.to_atom,
+        index: self.index,
         author: self.author,
         contents: self.contents,
         time_sent: self.time_sent,
@@ -75,6 +74,17 @@ module Urbit
 
     def to_s
       "a Node(#{self.to_h})"
+    end
+
+    private
+
+    def index_to_atom
+      subkeys = self.raw_index.split("/")
+      subatoms = []
+      subkeys.each do |s|
+        subatoms << s.reverse.scan(/.{1,3}/).join('.').reverse
+      end
+      subatoms.join('/')
     end
   end
 end

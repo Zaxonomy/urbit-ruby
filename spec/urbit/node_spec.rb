@@ -28,8 +28,8 @@ describe Urbit::Node do
   after(:each) do
   end
 
-  it "is initialized with an index derived by stripping off the initial forward slash" do
-    expect(node.index).to eq(index)
+  it "is initialized with an index derived by stripping off the initial forward slash and stored as the raw_index" do
+    expect(node.raw_index).to eq(index)
   end
 
   it "knows the time it was sent" do
@@ -54,21 +54,21 @@ describe Urbit::Node do
     expect(node.persistent?).to be false
   end
 
-  it "can represent the index as an atom" do
-    expect(node.to_atom).to eq("170.141.184.505.036.957.608.427.254.348.286.787.584")
+  it "represents the index as an atom" do
+    expect(node.index).to eq("170.141.184.505.036.957.608.427.254.348.286.787.584")
   end
 
   it "properly converts smaller indexes to atoms" do
     min_json = {"post" => {"index" => "/17014", "author" => "darlur", "time-sent" => 1620057693019, "contents" => [], "hash" => "0x5468.e5ec.1955.3e10.14a6.5fc0.054e.0e1b"}}
     n = Urbit::Node.new(graph, min_json)
-    expect(n.to_atom).to eq("17.014")
+    expect(n.index).to eq("17.014")
   end
 
   it "properly handles multi-part indexes" do
     min_json = {"post" => {"index" => "/3830645248/170141184505210819602640237844462829568",
                           "author" => "darlur", "time-sent" => 1620057693019, "contents" => [], "hash" => "0x5468.e5ec.1955.3e10.14a6.5fc0.054e.0e1b"}}
     n = Urbit::Node.new(graph, min_json)
-    expect(n.to_atom).to eq("3.830.645.248/170.141.184.505.210.819.602.640.237.844.462.829.568")
+    expect(n.index).to eq("3.830.645.248/170.141.184.505.210.819.602.640.237.844.462.829.568")
   end
   # it "retrieving the newest messages from an empty graph is an empty set" do
   #   expect(graph.newest_messages).to be_empty
