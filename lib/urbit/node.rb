@@ -47,10 +47,19 @@ module Urbit
     end
 
     #
-    # Returns the memoized @index or calculates it from the raw_index.
+    # Answers the memoized @index or calculates it from the raw_index.
+    #
     def index
       return @index if @index
       @index = self.index_to_atom
+    end
+
+    #
+    # Answers the previous {count} Nodes relative to this Node.
+    # Defaults to the next Node if no {count} is passed.
+    #
+    def previous(count: 1)
+      @graph.older_sibling_nodes(node: self, count: count)
     end
 
     def raw_index

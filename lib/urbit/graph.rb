@@ -34,7 +34,7 @@ module Urbit
     # The index here should be the atom representation (as returned by Node#index).
     #
     def node(index:)
-      self.fetch_node(index)
+      self.fetch_node(index).first
     end
 
     #
@@ -70,6 +70,13 @@ module Urbit
     end
 
     #
+    # Answers the {count} older sibling nodes relative to the passed {node}.
+    #
+    def older_sibling_nodes(node:, count:)
+      self.fetch_sibling_nodes(node, count).sort
+    end
+
+    #
     # the canonical printed representation of a Graph
     def to_s
       "a Graph(#{self.resource})"
@@ -97,6 +104,12 @@ module Urbit
 
     def fetch_oldest_nodes(count)
       self.fetch_nodes("#{self.graph_resource}/node/siblings/oldest/kith/#{count}/",
+                       AddNodesParser,
+                       "add-nodes")
+    end
+
+    def fetch_sibling_nodes(node, count)
+      self.fetch_nodes("#{self.graph_resource}/node/siblings/older/kith/#{count}/#{node.index}/",
                        AddNodesParser,
                        "add-nodes")
     end
