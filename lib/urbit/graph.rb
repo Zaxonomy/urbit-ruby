@@ -70,10 +70,17 @@ module Urbit
     end
 
     #
+    # Answers the {count} newer sibling nodes relative to the passed {node}.
+    #
+    def newer_sibling_nodes(node:, count:)
+      self.fetch_sibling_nodes(node, :newer, count).sort[0..(count - 1)]
+    end
+
+    #
     # Answers the {count} older sibling nodes relative to the passed {node}.
     #
     def older_sibling_nodes(node:, count:)
-      self.fetch_sibling_nodes(node, count).sort
+      self.fetch_sibling_nodes(node, :older, count).sort[0..(count - 1)]
     end
 
     #
@@ -108,8 +115,8 @@ module Urbit
                        "add-nodes")
     end
 
-    def fetch_sibling_nodes(node, count)
-      self.fetch_nodes("#{self.graph_resource}/node/siblings/older/kith/#{count}/#{node.index}/",
+    def fetch_sibling_nodes(node, direction, count)
+      self.fetch_nodes("#{self.graph_resource}/node/siblings/#{direction}/kith/#{count}/#{node.index}/",
                        AddNodesParser,
                        "add-nodes")
     end

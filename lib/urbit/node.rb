@@ -55,6 +55,14 @@ module Urbit
     end
 
     #
+    # Answers the next {count} Nodes relative to this Node.
+    # Defaults to the next Node if no {count} is passed.
+    #
+    def next(count: 1)
+      @graph.newer_sibling_nodes(node: self, count: count)
+    end
+
+    #
     # Answers the previous {count} Nodes relative to this Node.
     # Defaults to the next Node if no {count} is passed.
     #
