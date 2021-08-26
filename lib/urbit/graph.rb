@@ -10,7 +10,7 @@ module Urbit
       @ship           = ship
       @name           = graph_name
       @host_ship_name = host_ship_name
-      @nodes          = Set.new
+      @nodes          = SortedSet.new
     end
 
     def add_node(a_node)
@@ -56,13 +56,13 @@ module Urbit
     def newest_nodes(count: 10)
       count = 1 if count < 1
       return self.fetch_newest_nodes(count) if @nodes.empty? || @nodes.count < count
-      self.nodes.sort.reverse[0..(count - 1)]
+      self.nodes.reverse[0..(count - 1)]
     end
 
     def oldest_nodes(count: 10)
       count = 1 if count < 1
       return self.fetch_oldest_nodes(count) if @nodes.empty? || @nodes.count < count
-      self.nodes.sort[0..(count - 1)]
+      self.nodes[0..(count - 1)]
     end
 
     def resource
@@ -73,14 +73,14 @@ module Urbit
     # Answers the {count} newer sibling nodes relative to the passed {node}.
     #
     def newer_sibling_nodes(node:, count:)
-      self.fetch_sibling_nodes(node, :newer, count).sort[0..(count - 1)]
+      self.fetch_sibling_nodes(node, :newer, count)[0..(count - 1)]
     end
 
     #
     # Answers the {count} older sibling nodes relative to the passed {node}.
     #
     def older_sibling_nodes(node:, count:)
-      self.fetch_sibling_nodes(node, :older, count).sort[0..(count - 1)]
+      self.fetch_sibling_nodes(node, :older, count)[0..(count - 1)]
     end
 
     #
