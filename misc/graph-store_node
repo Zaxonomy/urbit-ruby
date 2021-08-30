@@ -1,0 +1,34 @@
+[1] pry(main)> ship = Urbit.connect(config_file: '_config-barsyr-latreb.yml')
+=> a Ship(name: '~barsyr-latreb', host: 'http://localhost', port: '8080')
+
+[2] pry(main)> ship.scry('graph-store', "/graph/~darlur/announce/node/siblings/newest/lone/1")
+=>
+  :status => 200,
+  :code   => "ok",
+  :body   => {
+    "graph-update": {
+      "add-nodes": {
+        "resource": {
+          "name": "announce",
+          "ship": "darlur"
+        },
+        "nodes" : {
+          "/170141184505036957608427254348286787584": {
+            "post" : {
+              "index": "/170141184505036957608427254348286787584",
+              "author": "darlur",
+              "time-sent": 1620057693019,
+              "signatures": [
+                {"signature": "0x5468.e5ec.1955.3e10.14a6.5fc0.054e.0e1b.fe01.1272.0a2c.e3c8.37a5.6717.ed7d.4b0c.3102.3966.4caa.edeb.e89e.3194.be17.f6a7.0622.4775.5e8f.7e92.16d2.c552.5ecd.d28b.17a6.aad5.089b.3623.eb8b.1b62.1525.0571.2d9f.9001", "life ": 3, "ship": "darlur"}
+              ],
+              "contents": [
+                {\"text\":\"We are now running urbit v1.5."}
+              ],
+              "hash": "0x5468.e5ec.1955.3e10.14a6.5fc0.054e.0e1b"
+            },
+          "children":null
+        }
+      }
+    }
+  }
+}
