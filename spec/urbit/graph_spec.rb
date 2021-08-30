@@ -8,7 +8,7 @@ describe Urbit::Graph do
   let(:name) {'announce'}
   let(:graph) {
     ship.login
-    described_class.new(ship, name, 'darlur')
+    described_class.new(ship: ship, graph_name: name, host_ship_name: 'darlur')
   }
 
   after(:each) do

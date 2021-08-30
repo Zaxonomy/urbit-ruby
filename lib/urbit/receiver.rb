@@ -7,18 +7,18 @@ module Urbit
   class Receiver < SSE::Client
     attr_accessor :facts
 
-    def initialize(channel)
+    def initialize(channel:)
       @facts = []
       super(channel.url, {headers: self.headers(channel)}) do |rec|
         # We are now listening on a socket for SSE::Events. This block will be called for each one.
         rec.on_event do |event|
           # Wrap the returned event in a Fact.
-          @facts << (f = Fact.new channel, event)
+          @facts << (f = Fact.new(channel: channel, event: event))
 
           # We need to acknowlege each message or urbit will eventually disconnect us.
           # We record the ack with the Fact itself.
-          f.add_ack (ack = AckMessage.new(channel, event.id))
-          channel.send_message(ack)
+          f.add_ack(ack: (ack = AckMessage.new(channel: channel, sse_message_id: event.id)))
+          channel.send(message: ack)
         end
 
         rec.on_error do |error|

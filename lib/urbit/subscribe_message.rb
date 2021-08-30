@@ -2,8 +2,8 @@ module Urbit
   class SubscribeMessage < Message
     attr_reader :path
 
-    def initialize(channel, app, path)
-      super(channel, 'subscribe', app)
+    def initialize(channel:, app:, path:)
+      super(channel: channel, action: 'subscribe', app: app)
       @path = path
     end
 

@@ -1,7 +1,7 @@
 module Urbit
   class Node
-    def initialize(a_graph, node_json)
-      @graph      = a_graph
+    def initialize(graph:, node_json:)
+      @graph      = graph
       @post_h     = node_json['post']
       @children_h = node_json['children']
       @persistent = false
@@ -16,6 +16,14 @@ module Urbit
       self.time_sent <=> another_node.time_sent
     end
 
+    def eql?(another_node)
+      another_node.raw_index == self.raw_index
+    end
+
+    def hash
+      self.raw_index.hash
+    end
+
     def author
       @post_h["author"]
     end
@@ -24,7 +32,7 @@ module Urbit
       @children = []
       if @children_h
         @children_h.each do |k, v|
-          @children << Urbit::Node.new(@graph, v)
+          @children << Urbit::Node.new(graph: @graph, node_json: v)
         end
       end
       @children
@@ -34,16 +42,8 @@ module Urbit
       @post_h['contents']
     end
 
-    def eql?(another_node)
-      another_node.raw_index == self.raw_index
-    end
-
     def persistent?
       @persistent
-    end
-
-    def hash
-      self.raw_index.hash
     end
 
     #

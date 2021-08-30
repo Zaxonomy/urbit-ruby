@@ -4,7 +4,7 @@ describe Urbit::Channel do
   let(:ship) { Urbit::Ship.new }
 
   let(:channel) {
-    ship.subscribe('graph-store', '/updates')
+    ship.subscribe(app: 'graph-store', path: '/updates')
     ship.open_channels.last
   }
 

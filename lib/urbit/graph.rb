@@ -6,15 +6,15 @@ module Urbit
   class Graph
     attr_reader :host_ship_name, :name, :ship
 
-    def initialize(ship, graph_name, host_ship_name)
+    def initialize(ship:, graph_name:, host_ship_name:)
       @ship           = ship
       @name           = graph_name
       @host_ship_name = host_ship_name
       @nodes          = SortedSet.new
     end
 
-    def add_node(a_node)
-      @nodes << a_node
+    def add_node(node:)
+      @nodes << node
     end
 
     def host_ship
@@ -26,7 +26,7 @@ module Urbit
     # Answers a %noun in `(unit mark)` format.
     #
     # def mark
-    #   r = self.ship.scry('graph-store', "/graph/#{self.to_s}/mark")
+    #   r = self.ship.scry(app: 'graph-store', path: "/graph/#{self.to_s}/mark")
     # end
 
     #
@@ -125,7 +125,7 @@ module Urbit
     # Answers an array of Nodes that were fetched or an empty array if nothing found.
     #
     def fetch_nodes(endpoint, parser, node)
-      r = self.ship.scry('graph-store', endpoint)
+      r = self.ship.scry(app: 'graph-store', path: endpoint)
       if (200 == r[:status])
         body = JSON.parse(r[:body])
         if (p = parser.new(for_graph: self, with_json: body["graph-update"][node]))

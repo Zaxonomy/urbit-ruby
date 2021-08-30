@@ -41,11 +41,11 @@ module Urbit
       @graphs = [] if flush_cache
       if @graphs.empty?
         if self.logged_in?
-          r = self.scry('graph-store', '/keys')
+          r = self.scry(app: 'graph-store', path: '/keys')
           if r[:body]
             body = JSON.parse r[:body]
             body["graph-update"]["keys"].each do |k|
-              @graphs << Graph.new(self, k["name"], k["ship"])
+              @graphs << Graph.new(ship: self, graph_name: k["name"], host_ship_name: k["ship"])
             end
           end
         end
@@ -73,19 +73,19 @@ module Urbit
       config.name
     end
 
-    def remove_graph(a_graph)
+    def remove_graph(graph:)
       delete_json = %Q({
         "delete": {
           "resource": {
             "ship": "#{self.name}",
-            "name": "#{a_graph.name}"
+            "name": "#{graph.name}"
           }
         }
       })
 
-      spider = self.spider('graph-view-action', 'json', 'graph-delete', delete_json, "NO_RESPONSE")
+      spider = self.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: delete_json, args: ["NO_RESPONSE"])
       if (retcode = (200 == spider[:status]))
-        self.graphs.delete a_graph
+        self.graphs.delete graph
       end
       retcode
     end
@@ -108,11 +108,11 @@ module Urbit
     # Returns a Channel which has been created and opened and will begin
     #   to get back a stream of facts via its Receiver.
     #
-    def poke(app, mark, message)
-      (self.add_channel).poke(app, mark, message)
+    def poke(app:, mark:, message:)
+      (self.add_channel).poke(app: app, mark: mark, message: message)
     end
 
-    def scry(app, path, mark = 'json')
+    def scry(app:, path:, mark: 'json')
       self.login
       mark = ".#{mark}" unless mark.empty?
       scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}#{mark}"
@@ -125,7 +125,7 @@ module Urbit
       {status: response.status, code: response.reason_phrase, body: response.body}
     end
 
-    def spider(mark_in, mark_out, thread, data, *args)
+    def spider(mark_in:, mark_out:, thread:, data:, args: [])
       self.login
       url = "#{self.config.api_base_url}/spider/#{mark_in}/#{thread}/#{mark_out}.json"
 
@@ -163,8 +163,8 @@ module Urbit
     # Returns a Channel which has been created and opened and will begin
     #   to get back a stream of facts via its Receiver.
     #
-    def subscribe(app, path)
-      (self.add_channel).subscribe(app, path)
+    def subscribe(app:, path:)
+      (self.add_channel).subscribe(app: app, path: path)
     end
 
     def to_h
@@ -179,8 +179,7 @@ module Urbit
 
     def add_channel
       self.login
-      (c = Channel.new self, self.make_channel_name)
-      self.channels << c
+      self.channels << (c = Channel.new(ship: self, name: self.make_channel_name))
       c
     end
 

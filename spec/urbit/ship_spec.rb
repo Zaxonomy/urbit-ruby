@@ -52,12 +52,12 @@ describe Urbit::Ship do
   # Subscribing
   # ------------------------------------------------------------------
   it "can subscribe" do
-    expect(channel = ship.subscribe('graph-store', '/updates')).to_not be_nil
+    expect(channel = ship.subscribe(app: 'graph-store', path: '/updates')).to_not be_nil
   end
 
   it "can subscribe which opens a channel" do
     expect(ship.open_channels.size).to eq(0)
-    ship.subscribe('graph-store', '/updates')
+    ship.subscribe(app: 'graph-store', path: '/updates')
     expect(ship.open_channels.size).to eq(1)
 
     c = ship.open_channels.last
@@ -66,13 +66,13 @@ describe Urbit::Ship do
   end
 
   it "subscribe answers a new Channel with a Receiver listening to response messages" do
-    channel = ship.subscribe('graph-store', '/updates')
+    channel = ship.subscribe(app: 'graph-store', path:'/updates')
     expect(channel).to be_instance_of(Urbit::Channel)
     expect(channel.receiver).to be_instance_of(Urbit::Receiver)
   end
 
   it "closing the channel makes it unavailable" do
-    ship.subscribe('graph-store', '/updates')
+    ship.subscribe(app: 'graph-store', path: '/updates')
     c = ship.open_channels.last
     c.close
     expect(ship.open_channels.size).to eq(0)
@@ -82,7 +82,7 @@ describe Urbit::Ship do
   # Poke
   # ------------------------------------------------------------------
   it "can initiate a DM by poking the %hood app with a message using the %helm-hi mark" do
-    poke_channel = ship.poke('hood', 'helm-hi', 'Opening Airlock')
+    poke_channel = ship.poke(app: 'hood', mark: 'helm-hi', message: 'Opening Airlock')
     expect(poke_channel.subscribed?)
   end
 
@@ -91,7 +91,7 @@ describe Urbit::Ship do
   # ------------------------------------------------------------------
   it "can scry" do
     ship.login
-    scry = ship.scry('file-server', '/clay/base/hash', 'json')
+    scry = ship.scry(app: 'file-server', path: '/clay/base/hash', mark: 'json')
     expect(scry[:status]).to eq(200)
     expect(scry[:code]).to eq("ok")
     expect(scry[:body]).to eq("\"0\"")
@@ -99,7 +99,7 @@ describe Urbit::Ship do
 
   it "returns 404/missing when scrying nonsense" do
     ship.login
-    scry = ship.scry('soft-server', '/vanilla/fudge/hash', 'json')
+    scry = ship.scry(app: 'soft-server', path: '/vanilla/fudge/hash', mark: 'json')
     expect(scry[:status]).to eq(404)
     expect(scry[:code]).to eq("missing")
     expect(scry[:body]).to include("")
@@ -107,7 +107,7 @@ describe Urbit::Ship do
 
   it "uses json as the default mark for scry" do
     ship.login
-    scry = ship.scry('graph-store', '/keys')
+    scry = ship.scry(app: 'graph-store', path: '/keys')
     expect(scry[:status]).to eq(200)
     expect(scry[:code]).to eq("ok")
     expect(scry[:body]).to match(/graph-update/)
@@ -126,14 +126,14 @@ describe Urbit::Ship do
     ship.login
     expect(ship.graphs.count).to eq(1)   # this is the default dm-inbox
 
-    spider = ship.spider('graph-view-action', 'json', 'graph-create', create_json)
+    spider = ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-create', data: create_json)
     expect(spider[:status]).to eq(200)
     expect(spider[:code]).to eq("ok")
     expect(spider[:body]).to eq("null")
 
     expect(ship.graphs(flush_cache: true).count).to eq(2)   # add in our new graph
     new_graph = ship.graphs.select {|g| random_name == g.name}.first
-    ship.remove_graph(new_graph)
+    ship.remove_graph(graph: new_graph)
     expect(ship.graphs.count).to eq(1)   # this is just the default dm-inbox again
   end
 
@@ -159,7 +159,7 @@ it "can create and delete an 'unmanaged' graph using 'spider'" do
     }
   })
 
-  spider = ship.spider('graph-view-action', 'json', 'graph-create', create_json)
+  spider = ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-create', data: create_json)
   expect(spider[:status]).to eq(200)
   expect(spider[:code]).to eq("ok")
   expect(spider[:body]).to eq("null")
@@ -173,7 +173,7 @@ it "can create and delete an 'unmanaged' graph using 'spider'" do
     }
   })
 
-  spider = ship.spider('graph-view-action', 'json', 'graph-delete', delete_json, "NO_RESPONSE")
+  spider = ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: delete_json, args: ["NO_RESPONSE"])
   expect(spider[:status]).to eq(200)
   expect(spider[:code]).to eq("ok")
   expect(spider[:body]).to eq("null")
@@ -232,11 +232,11 @@ end
   it "can retrieve the newest messages from one of its graphs" do
     ship.login
     # Make a graph...
-    spider = ship.spider('graph-view-action', 'json', 'graph-create', create_json)
+    spider = ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-create', data: create_json)
     expect(ship.graphs(flush_cache: true).count).to eq(2)   # add in our new graph
     new_graph = ship.graphs.select {|g| random_name == g.name}.first
     # expect(new_graph.newest_messages).to_not be_empty
     # Clean up
-    ship.remove_graph(new_graph)
+    ship.remove_graph(graph: new_graph)
   end
 end

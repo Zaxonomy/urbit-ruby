@@ -2,8 +2,8 @@ module Urbit
   class AckMessage < Message
     attr_reader :ack_id
 
-    def initialize(channel, sse_message_id)
-      super(channel, 'ack')
+    def initialize(channel:, sse_message_id:)
+      super(channel: channel, action: 'ack')
       @ack_id  = sse_message_id
     end
 

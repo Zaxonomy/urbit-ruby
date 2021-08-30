@@ -23,7 +23,7 @@ describe Urbit::Node do
     }
   }}
 
-  let(:node) { described_class.new(raw_index, node_json)}
+  let(:node) { described_class.new(graph: raw_index, node_json: node_json)}
 
   after(:each) do
   end
@@ -45,7 +45,7 @@ describe Urbit::Node do
   end
 
   it "considers nodes with the same index to be the same" do
-    node2 = described_class.new(index, node_json)
+    node2 = described_class.new(graph: index, node_json: node_json)
     expect(node2).to eq(node)
   end
 
@@ -60,14 +60,14 @@ describe Urbit::Node do
 
   it "properly converts smaller indexes to atoms" do
     min_json = {"post" => {"index" => "/17014", "author" => "darlur", "time-sent" => 1620057693019, "contents" => [], "hash" => "0x5468.e5ec.1955.3e10.14a6.5fc0.054e.0e1b"}}
-    n = Urbit::Node.new(graph, min_json)
+    n = Urbit::Node.new(graph: graph, node_json: min_json)
     expect(n.index).to eq("17.014")
   end
 
   it "properly handles multi-part indexes" do
     min_json = {"post" => {"index" => "/3830645248/170141184505210819602640237844462829568",
                           "author" => "darlur", "time-sent" => 1620057693019, "contents" => [], "hash" => "0x5468.e5ec.1955.3e10.14a6.5fc0.054e.0e1b"}}
-    n = Urbit::Node.new(graph, min_json)
+    n = Urbit::Node.new(graph: graph, node_json: min_json)
     expect(n.index).to eq("3.830.645.248/170.141.184.505.210.819.602.640.237.844.462.829.568")
   end
   # it "retrieving the newest messages from an empty graph is an empty set" do

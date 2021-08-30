@@ -4,8 +4,8 @@ require 'urbit/ship'
 
 describe Urbit::Message do
   let(:ship) { Urbit::Ship.new }
-  let(:channel) { Urbit::Channel.new ship, "Test Channel" }
-  let(:message) { Urbit::Message.new channel, "poke", "hood", "helm-hi", "Test Message" }
+  let(:channel) { Urbit::Channel.new(ship: ship, name: "Test Channel")}
+  let(:message) { Urbit::Message.new channel: channel, action: "poke", app: "hood", mark: "helm-hi", json: "Test Message" }
 
   it "can be initialized" do
     expect(message.id).to_not be_nil
@@ -19,7 +19,7 @@ describe Urbit::Message do
   end
 
   it "can serialize itself as a json string" do
-    m = Urbit::Message.new channel, "poke", "hood", "helm-hi", "Opening airlock"
+    m = Urbit::Message.new channel: channel, action: "poke", app: "hood", mark: "helm-hi", json: "Opening airlock"
     expect(m.request_body).to eq('[{"action":"poke","app":"hood","id":0,"json":"Opening airlock","mark":"helm-hi","ship":"zod"}]')
   end
 

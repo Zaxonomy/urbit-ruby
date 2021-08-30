@@ -5,7 +5,7 @@ module Urbit
   class Fact
     attr_reader :ack
 
-    def initialize(channel, event)
+    def initialize(channel:, event:)
       @channel = channel
       @data = event.data
       @type = event.type
@@ -14,13 +14,13 @@ module Urbit
       # if self.graph_update?
       #   added_nodes = Urbit::AddNodesResponse.new(self.add_nodes_json)
       #   added_nodes.nodes.each do |k, v|
-      #     self.ship.graph(resource: self.resource).add_node(Urbit::Node.new(k, v))
+      #     self.ship.graph(resource: self.resource).add_node(node: Urbit::Node.new(graph: k, node_json: v))
       #   end
       # end
     end
 
-    def add_ack(an_ack)
-      @ack = an_ack
+    def add_ack(ack:)
+      @ack = :ack
     end
 
     def add_nodes_json

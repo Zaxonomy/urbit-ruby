@@ -17,8 +17,8 @@ module Urbit
       # Make sure we are adding to the correct graph...
       if (@g.resource == self.resource)
         self.nodes_hash.each do |k, v|
-          added_nodes << (n = Urbit::Node.new(@g, v))
-          @g.add_node(n)
+          added_nodes << (n = Urbit::Node.new(graph: @g, node_json: v))
+          @g.add_node(node: n)
         end
       end
       added_nodes
