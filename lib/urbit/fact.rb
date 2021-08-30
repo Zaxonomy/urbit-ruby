@@ -1,5 +1,6 @@
 require 'urbit/graph'
 require 'urbit/node'
+require 'urbit/parser'
 
 module Urbit
   class Fact
@@ -10,13 +11,11 @@ module Urbit
       @data = event.data
       @type = event.type
 
-      # Attach this fact as a node to its Graph.
-      # if self.graph_update?
-      #   added_nodes = Urbit::AddNodesResponse.new(self.add_nodes_json)
-      #   added_nodes.nodes.each do |k, v|
-      #     self.ship.graph(resource: self.resource).add_node(node: Urbit::Node.new(graph: k, node_json: v))
-      #   end
-      # end
+      # Attach this new fact as a node to its Graph.
+      if self.graph_update?
+        puts self.add_nodes_json
+        Urbit::AddNodesParser.new(for_graph: (self.ship.graph(resource: self.resource)),  with_json: self.add_nodes_json).add_nodes
+      end
     end
 
     def add_ack(ack:)
@@ -25,7 +24,7 @@ module Urbit
 
     def add_nodes_json
       return nil unless self.graph_update?
-      self.contents["json"]["graph-update"]
+      self.contents["json"]["graph-update"]["add-nodes"]
     end
 
     def contents
