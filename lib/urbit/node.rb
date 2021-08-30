@@ -1,5 +1,8 @@
+require 'set'
+
 module Urbit
   class Node
+    attr_accessor :node_json
     def initialize(graph:, node_json:)
       @graph      = graph
       @post_h     = node_json['post']
@@ -29,10 +32,12 @@ module Urbit
     end
 
     def children
-      @children = []
+      @children = SortedSet.new
       if @children_h
         @children_h.each do |k, v|
-          @children << Urbit::Node.new(graph: @graph, node_json: v)
+          @children << (n = Urbit::Node.new(graph: @graph, node_json: v))
+          # Recursively fetch all the children's children until we reach the bottom...
+          n.children.each {|c| @children << c} if !n.children.empty?
         end
       end
       @children
