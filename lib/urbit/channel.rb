@@ -9,48 +9,50 @@ require 'urbit/subscribe_message'
 module Urbit
   class Channel
     attr_accessor :messages
-    attr_reader :key, :name, :ship
+    attr_reader :key, :name, :receiver, :ship
 
-    def initialize(ship, name)
+    def initialize(ship:, name:)
       @ship          = ship
       @key           = "#{Time.now.to_i}#{SecureRandom.hex(3)}"
       @messages      = []
       @name          = name
+      @receiver      = nil
       @is_open       = false
-      @is_subscribed = false
     end
 
     def close
       # puts "closing #{name}"
-      m = Urbit::CloseMessage.new(self)
-      @is_open = !self.send_message(m)
+      m = Urbit::CloseMessage.new(channel: self)
+      @is_open = !self.send(message: m)
     end
 
     def closed?
       !@is_open
     end
 
-    #
-    # We open a channel by "poking" the urbit app 'hood' using the mark 'helm-hi'
-    #
-    def open(a_message_string)
-      m = Urbit::PokeMessage.new(self, "hood", "helm-hi", a_message_string)
-      @is_open = self.send_message(m)
-    end
-
     def open?
       @is_open
     end
 
-    def queue_message(a_message)
-      a_message.id = self.sent_messages.size + 1
-      @messages << a_message
+    #
+    # One way to open a channel by "poking" an urbit app with a mark and a (json) message.
+    # A typical example of this is poking the 'hood' app using the mark 'helm-hi' to start a DM chat.
+    #
+    def poke(app:, mark:, message:)
+      @is_open = self.send(message: (Urbit::PokeMessage.new(channel: self, app: app, mark: mark, a_string: message)))
+      @receiver = Urbit::Receiver.new(channel: self)
+      self
+    end
+
+    def queue(message:)
+      message.id = self.sent_messages.size + 1
+      @messages << message
     end
 
     # Answers true if message was successfully sent.
-    def send_message(a_message)
-      self.queue_message(a_message)
-      resp = a_message.transmit
+    def send(message:)
+      self.queue(message: message)
+      resp = message.transmit
       resp.reason_phrase == "ok"
     end
 
@@ -66,14 +68,15 @@ module Urbit
     # Subscribe to an app at a path.
     # Returns a Receiver which will begin to get back a stream of facts... which is a... Dictionary? Encyclopedia?
     #
-    def subscribe(app, path)
-      m = Urbit::SubscribeMessage.new(self, app, path)
-      @is_subscribed = self.send_message(m)
-      receiver = Urbit::Receiver.new(self)
+    def subscribe(app:, path:)
+      m = Urbit::SubscribeMessage.new(channel: self, app: app, path: path)
+      @is_open = self.send(message: m)
+      @receiver = Urbit::Receiver.new(channel: self)
+      self
     end
 
     def subscribed?
-      @is_subscribed
+      @is_open
     end
 
     def to_s

@@ -1,0 +1,12 @@
+"post" => {
+  "index"      => "/170141184504863525594513045663867817951",
+  "author"     => "barsyr-latreb",
+  "time-sent"  => 1610655924876,
+  "signatures" => [],
+  "contents"   => [
+    {"text" => "~all : another new planet has coalesced..."},
+    {"mention"=> "barsyr-latreb"},
+    {"text" => "."}
+  ],
+  "hash"       => nil
+},

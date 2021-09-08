@@ -4,8 +4,11 @@ require "bundler/setup"
 require "pry"
 require "urbit/urbit"
 
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
-
+puts "Welcome! This is an interactive environment to explore your Urbit ship."
+puts "You create a config file with connection details for your ship and off you go."
+puts ""
 puts "e.g., ship = Urbit.new(config_file: 'my_config.yml')"
+puts "=> a Ship(name: '~barsyr-latreb', host: 'http://localhost', port: '8080')"
+
+Pry.config.print = proc { |output, value| output.puts "=> #{value}" }
 Pry.start

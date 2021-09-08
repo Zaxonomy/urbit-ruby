@@ -1,0 +1,75 @@
+{
+  :message => {
+    "json" => {
+      "graph-update" => {
+        "add-nodes" => {
+          "resource" => {
+            "name" => "test1-4287",
+            "ship" => "barsyr-latreb"
+          },
+          "nodes" => {
+            "/170141184505020984719232265951207489536/2" => {
+              "post" => {
+                "index" => "/170141184505020984719232265951207489536/2",
+                "author" => "barsyr-latreb",
+                "time-sent" => 1619191801085,
+                "signatures"=> [
+                  {
+                    "signature" => "0x1.284d.9ddd.b0ca.3b77.ce22.bea4.4fad.1018.0200.fb46.de9e.541a.7c0d.c680.20a3.986c.ce0f.944b.4f48.cdb1.64aa.bc8a.ce34.c7ee.bcc4.47ce.7dd2.8b98.12b8.c69b.98ae.73e3.3a40.592e.11b2.1445.6cbf.bfbc.6e60.6815.e1bf.7001",
+                    "life"=>3,
+                    "ship"=>"barsyr-latreb"
+                  }
+                ],
+                "contents" => [],
+                "hash"     =>"0x9426.ceee.d865.1dbb.e711.5f52.27d6.880c"
+              },
+              "children" => nil
+            },
+            "/170141184505020984719232265951207489536/1/1" => {
+              "post" => {
+                "index" => "/170141184505020984719232265951207489536/1/1",
+                "author" => "barsyr-latreb",
+                "time-sent" =>1619191801085,
+                "signatures" => [
+                  {
+                    "signature" => "0x4abf.c85f.4db6.bda6.a5ca.155c.f479.c1ee.0080.36c0.7fc4.fc07.5492.fba6.0eac.bcd1.6cde.3f05.46cb.7654.cb78.8baa.f398.37d6.5098.a7ce.6a07.6cfe.5f99.6ee2.b3a1.6717.ac2d.c396.6a86.5495.d88e.fc55.cbbf.0e1e.70ff.3001",
+                    "life" =>3,
+                    "ship" => "barsyr-latreb"
+                  }
+                ],
+                "contents" => [
+                  {"text" => "Post 1"},
+                  {"text" => "First post of the graph store portion of the airlock implementation."}
+                ],
+                "hash" => "0x957f.90be.9b6d.7b4d.4b94.2ab9.e8f3.83dc"
+              },
+              "children" => nil
+            },
+           "/170141184505020984719232265951207489536"=>
+            {"post"=>
+              {"index"=>"/170141184505020984719232265951207489536",
+               "author"=>"barsyr-latreb",
+               "time-sent"=>1619191801085,
+               "signatures"=>
+                [{"signature"=>
+                   "0x6401.1904.eca5.c18c.d9a4.cf52.d00d.6bc5.8080.247c.6a06.3709.44ce.ad7e.fd14.bccb.c982.3df6.dba3.c727.cccd.f433.47b5.2342.780c.0b27.4fd8.85eb.4c67.5466.565c.3fc6.66c5.1832.72da.2557.940b.3549.14a7.66ab.e1df.3001",
+                  "life"=>3,
+                  "ship"=>"barsyr-latreb"}],
+               "contents"=>[],
+               "hash"=>"0xc802.3209.d94b.8319.b349.9ea5.a01a.d78b"},
+             "children"=>nil},
+           "/170141184505020984719232265951207489536/1"=>
+            {"post"=>
+              {"index"=>"/170141184505020984719232265951207489536/1",
+               "author"=>"barsyr-latreb",
+               "time-sent"=>1619191801085,
+               "signatures"=>
+                [{"signature"=>
+                   "0x1.284d.9ddd.b0ca.3b77.ce22.bea4.4fad.1018.0200.fb46.de9e.541a.7c0d.c680.20a3.986c.ce0f.944b.4f48.cdb1.64aa.bc8a.ce34.c7ee.bcc4.47ce.7dd2.8b98.12b8.c69b.98ae.73e3.3a40.592e.11b2.1445.6cbf.bfbc.6e60.6815.e1bf.7001",
+                  "life"=>3,
+                  "ship"=>"barsyr-latreb"}],
+               "contents"=>[],
+               "hash"=>"0x9426.ceee.d865.1dbb.e711.5f52.27d6.880c"},
+             "children"=>nil}}}}},
+   "id"=>2,
+   "response"=>"diff"}}

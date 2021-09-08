@@ -1,0 +1,76 @@
+[8] pry(main)> channel.receiver.facts.each {|f| puts f};nil
+{:message => {
+  "ok" => "ok",
+  "id" => 1,
+  "response" => "subscribe"}
+}
+{:message => {
+  "json" => {
+    "graph-update" => {
+      "add-nodes" => {
+        "resource" => {
+          "name" => "top-shelf-6391",
+          "ship" => "winter-paches"
+        },
+        "nodes" => {
+          "/170141184505207442993270453156437819392" => {
+            "post" => {
+              "index"=>"/170141184505207442993270453156437819392",
+              "author"=>"winter-paches",
+              "time-sent"=>1629299723410,
+              "signatures"=>[{"signature"=>"0x1.5003.94a6.2a10.7baf.ba44.a4d9.0353.e61a.0200.fdb2.fccf.f760.e1a0.bd20.dafa.f17e.e759.c8ab.f3b2.bb03.ccfa.1f10.c060.b063.cf32.48f6.ce27.4cae.462a.a228.47e9.5642.6476.5664.a918.839b.4053.91fe.b08c.f18c.525f.7001", "life"=>3, "ship"=>"winter-paches"}],
+              "contents"=>[{"text"=>"i will be really sad if hockey goes even more the way of the other sports."}],
+              "hash"=>"0xa801.ca53.1508.3dd7.dd22.526c.81a9.f30d"},
+              "children"=>nil
+            }
+          }
+        }
+      }
+    }, "id"=>1, "response"=>"diff"}}
+{:message => {
+  "json" => {
+    "graph-update"=>{"add-nodes"=>{"resource"=>{"name"=>"top-shelf-6391", "ship"=>"winter-paches"}, "nodes"=>{"/170141184505207446323799471187231244288"=>{"post"=>{"index"=>"/170141184505207446323799471187231244288", "author"=>"rivlyt-dotnet", "time-sent"=>1629299904766, "signatures"=>[{"signature"=>"0x668d.5edb.31d1.18ee.fb3a.7bd0.e6e6.6582.fe01.d7c0.61a7.aadf.c1b0.7e9c.26ad.8412.c3a5.6221.eff0.d25f.f505.18d9.693c.a888.debd.635d.c692.b138.9f5e.d52d.513d.291f.326b.2261.4a08.7680.58d0.e654.3556.bbd5.d43f.9001", "life"=>1, "ship"=>"rivlyt-dotnet"}], "contents"=>[{"url"=>"http://www.hockeyworldblog.com/wp-content/uploads/2009/07/SamiKapanenKalPa.jpg"}, {"text"=>""}], "hash"=>"0x668d.5edb.31d1.18ee.fb3a.7bd0.e6e6.6582"}, "children"=>nil}}}}}, "id"=>1, "response"=>"diff"}}
+{:message => {
+  "json" => {
+    "graph-update" => {
+      "add-nodes" => {
+        "resource" => {
+          "name" => "dm-inbox",
+          "ship" => "barsyr-latreb"
+        },
+        "nodes" => {
+          "/3830645248/170141184505207462626569476439992696832" => {
+            "post" => {
+              "index" => "/3830645248/170141184505207462626569476439992696832",
+              "author" => "winter-paches",
+              "time-sent" => 1629300788090,
+              "signatures" => [
+                {"signature" => "0x8b2.4b04.d55d.38fb.3561.6840.7312.2c5d.3e80.6494.9c69.0c8c.5480.21d8.87e1.93d4.79ca.e299.8482.17d6.b1d5.075f.837e.e1c9.9776.1a10.1710.f62a.6f68.8415.e85f.62c9.ff0f.b5b7.e605.bb8f.ee6e.d856.8505.08eb.901f.5001",
+                                "life"=>3,
+                                "ship"=>"winter-paches"}
+              ],
+              "contents"=>[
+                {"text"=>"still there?"}
+              ],
+              "hash"     => "0x22c9.2c13.5574.e3ec.d585.a101.cc48.b174"
+            },
+            "children" => {
+                "170141184505210800341365283904498434048" :{
+                  "post" : {
+                    "index": "/3830645248/170141184505210800341365283904498434048",
+                    "author": "winter-paches",
+                    "time-sent\":1629481725905,
+                    "signatures\":[{\"signature\":\"0x2cbc.3fa5.5e05.1851.0bc0.c139.7356.86dc.fa01.24bf.82c7.078d.59b7.7365.de54.87de.6043.7cca.1bcc.5746.cb4e.6585.f81e.ab97.edf4.9b5e.e499.1df3.486f.965b.0247.6cdd.8ed8.2a70.37f1.f9ec.97dd.6d55.19f5.0b0d.e17f.9001\",\"life\":3,\"ship\":\"winter-paches\"}],
+                    "contents\":[{\"text\":\"two\"}],
+                    "hash\":\"0x2cbc.3fa5.5e05.1851.0bc0.c139.7356.86dc\"
+                  },
+                  "children": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "id"=>1,
+    "response"=>"diff"}}

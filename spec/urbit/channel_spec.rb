@@ -4,7 +4,7 @@ describe Urbit::Channel do
   let(:ship) { Urbit::Ship.new }
 
   let(:channel) {
-    ship.subscribe('graph-store', '/updates')
+    ship.subscribe(app: 'graph-store', path: '/updates')
     ship.open_channels.last
   }
 
@@ -26,18 +26,22 @@ describe Urbit::Channel do
   end
 
   it "can send a message once opened" do
-    # Setting up a sub has already sent 2 messages, the subscribe and the ack.
-    expect(channel.sent_messages.size).to eq(2)
+    expect(channel.sent_messages.size).to eq(1)
     expect(channel.open?)
   end
 
-  it "can be closed" do
-    expect(channel.sent_messages.size).to eq(2)
+  it "can use subscribed? as a synonym for open? when context appropriate" do
     expect(channel.open?)
+    expect(channel.subscribed?)
+  end
+
+  it "can be closed" do
+    expect(channel.sent_messages.size).to eq(1)
+    expect(channel.subscribed?)
     expect(channel.close)
     expect(channel.open?).to be false
-    expect(channel.sent_messages.size).to eq(3)   # Closing is itself a message
-    expect(channel.sent_messages.last.id).to eq(3)
+    expect(channel.sent_messages.size).to eq(2)   # Closing is itself a message
+    expect(channel.sent_messages.last.id).to eq(2)
   end
 
   it "can be represented as a string" do

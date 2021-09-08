@@ -1,0 +1,51 @@
+{
+  :status => 200,
+  :code   => "ok",
+  :body   =>" {
+    "graph-update": {
+      "add-graph": {
+        "graph":{},
+        "resource" : {
+          "name": "dec74689ad",
+          "ship": "zod"
+        },
+        "mark" : "graph-validator-chat",
+        "overwrite":true
+      }
+    }
+  }
+}
+
+
+{
+  "status": 200,
+  "code": "ok",
+  "body": {
+    "graph-update": {
+      "add-graph": {
+        "graph": {
+          "170141184505196673936784618510385938432": {
+            "post" : {
+              "index": "/170141184505196673936784618510385938432",
+              "author": "zod",
+              "time-sent": 1628715932642,
+              "signatures": [
+                {"signature": "0x2.7d8e.58d0.ee70.c720.e0c7.0fbe.40be.f68c.0401.950e.1bb8.9eda.cb66.3726.8995.3ca2.2d51.aa34.fcc8.ea00.1193.9145.38c9.7fea.8285.bd4e.d390.a195.f7e6.0870.5f7c.c73b.67a7.d19c.375b.fc29.aac7.6879.04fa.6a0f.cb7f.9001", "life": 1 ,"ship": "zod\}
+              ],
+              "contents": [
+                {"text" : "test?"}
+              ],
+              "hash": "0x9f63.9634.3b9c.31c8.3831.c3ef.902f.bda3"},
+              "children":null
+          }
+        },
+        "resource" : {
+          "name": "dec74689ad",
+          "ship": "zod"
+        },
+        "mark": "graph-validator-chat",
+        "overwrite": true
+      }
+    }
+  }
+}

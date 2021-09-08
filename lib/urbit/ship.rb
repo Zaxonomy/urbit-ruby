@@ -2,6 +2,7 @@ require 'faraday'
 
 require 'urbit/channel'
 require 'urbit/config'
+require 'urbit/graph'
 
 module Urbit
   class Ship
@@ -12,6 +13,7 @@ module Urbit
       @auth_cookie = nil
       @channels    = []
       @config      = config
+      @graphs      = []
       @logged_in   = false
     end
 
@@ -27,6 +29,37 @@ module Urbit
       auth_cookie
     end
 
+    def graph(resource:)
+      self.graphs.find {|g| g.resource == resource}
+    end
+
+    #
+    # Answers a collection of all the top-level graphs on this ship.
+    # This collection is cached and will need to be invalidated to discover new graphs.
+    #
+    def graphs(flush_cache: false)
+      @graphs = [] if flush_cache
+      if @graphs.empty?
+        if self.logged_in?
+          r = self.scry(app: 'graph-store', path: '/keys')
+          if r[:body]
+            body = JSON.parse r[:body]
+            body["graph-update"]["keys"].each do |k|
+              @graphs << Graph.new(ship: self, graph_name: k["name"], host_ship_name: k["ship"])
+            end
+          end
+        end
+      end
+      @graphs
+    end
+
+    #
+    # A helper method to just print out the descriptive names of all the ship's graphs.
+    #
+    def graph_names
+      self.graphs.collect {|g| g.resource}
+    end
+
     def login
       return self if logged_in?
 
@@ -38,6 +71,23 @@ module Urbit
 
     def name
       config.name
+    end
+
+    def remove_graph(graph:)
+      delete_json = %Q({
+        "delete": {
+          "resource": {
+            "ship": "#{self.name}",
+            "name": "#{graph.name}"
+          }
+        }
+      })
+
+      spider = self.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: delete_json, args: ["NO_RESPONSE"])
+      if (retcode = (200 == spider[:status]))
+        self.graphs.delete graph
+      end
+      retcode
     end
 
     def untilded_name
@@ -52,9 +102,20 @@ module Urbit
       @channels.select {|c| c.open?}
     end
 
-    def scry(app, path, mark)
+    #
+    # Poke an app with a message using a mark.
+    #
+    # Returns a Channel which has been created and opened and will begin
+    #   to get back a stream of facts via its Receiver.
+    #
+    def poke(app:, mark:, message:)
+      (self.add_channel).poke(app: app, mark: mark, message: message)
+    end
+
+    def scry(app:, path:, mark: 'json')
       self.login
-      scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}.#{mark}"
+      mark = ".#{mark}" unless mark.empty?
+      scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}#{mark}"
 
       response = Faraday.get(scry_url) do |req|
         req.headers['Accept'] = 'application/json'
@@ -64,9 +125,28 @@ module Urbit
       {status: response.status, code: response.reason_phrase, body: response.body}
     end
 
-    def spider(mark_in, mark_out, thread, data)
+    def spider(mark_in:, mark_out:, thread:, data:, args: [])
       self.login
       url = "#{self.config.api_base_url}/spider/#{mark_in}/#{thread}/#{mark_out}.json"
+
+      # TODO: This is a huge hack due to the fact that certain spider operations are known to
+      #       not return when they should. Instead I just set the timeout low and catch the
+      #       error and act like everything is ok.
+      if args.include?("NO_RESPONSE")
+        conn = Faraday::Connection.new()
+        conn.options.timeout = 1
+        conn.options.open_timeout = 1
+
+        begin
+          response = conn.post(url) do |req|
+            req.headers['Accept'] = 'application/json'
+            req.headers['Cookie'] = self.cookie
+            req.body = data
+          end
+        rescue Faraday::TimeoutError
+          return {status: 200, code: "ok", body: "null"}
+        end
+      end
 
       response = Faraday.post(url) do |req|
         req.headers['Accept'] = 'application/json'
@@ -79,20 +159,29 @@ module Urbit
 
     #
     # Subscribe to an app at a path.
-    # Returns a Receiver which will begin to get back a stream of facts... which is a... Dictionary? Encyclopedia?
     #
-    def subscribe(app, path)
-      self.login
-      (c = Channel.new self, self.make_channel_name).open("Creating a Subscription Channel.")
-      self.channels << c
-      c.subscribe(app, path)
+    # Returns a Channel which has been created and opened and will begin
+    #   to get back a stream of facts via its Receiver.
+    #
+    def subscribe(app:, path:)
+      (self.add_channel).subscribe(app: app, path: path)
+    end
+
+    def to_h
+      {name: "#{self.pat_p}", host: "#{self.config.host}", port: "#{self.config.port}"}
     end
 
     def to_s
-      "a Ship(name: '#{self.pat_p}', host: '#{self.config.host}', port: '#{self.config.port}')"
+      "a Ship(#{self.to_h})"
     end
 
     private
+
+    def add_channel
+      self.login
+      self.channels << (c = Channel.new(ship: self, name: self.make_channel_name))
+      c
+    end
 
     def make_channel_name
       "Channel-#{self.open_channels.count}"
