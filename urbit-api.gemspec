@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name          = "urbit-api"
   spec.version       = Urbit::Api::VERSION
   spec.authors       = ["Daryl Richter"]
-  spec.email         = ["daryl@deliverycircle.com"]
+  spec.email         = ["daryl@ngzax.com"]
 
   spec.summary       = %q{The Ruby interface to the Urbit HTTP API}
   spec.description   = %q{Access your urbit ship the ruby way. It's a Martian gem.}
