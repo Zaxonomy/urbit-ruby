@@ -14,7 +14,7 @@ module Urbit
     end
 
     def add_node(node:)
-      @nodes << node
+      @nodes << node unless node.deleted?
     end
 
     def host_ship

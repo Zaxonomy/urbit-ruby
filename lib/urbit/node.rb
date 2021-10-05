@@ -23,6 +23,11 @@ module Urbit
       another_node.raw_index == self.raw_index
     end
 
+    def deleted?
+      # This is a "deleted" node. Not sure what to do yet, but for now don't create a Node.
+      @post_h["index"].nil?
+    end
+
     def hash
       self.raw_index.hash
     end
@@ -76,7 +81,7 @@ module Urbit
     end
 
     def raw_index
-      @post_h["index"].delete_prefix('/')
+      @post_h["index"].delete_prefix('/') unless self.deleted?
     end
 
     def time_sent
