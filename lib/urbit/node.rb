@@ -122,12 +122,15 @@ module Urbit
       {
         index: self.index,
         author: self.author,
+        sent: self.datetime_sent,
         contents: self.contents,
-        time_sent: self.time_sent,
-        datetime_sent: self.datetime_sent,
-        is_parent:     !self.children.empty?,
+        is_parent: !self.children.empty?,
         child_count: self.children.count
       }
+    end
+
+    def to_pretty_array
+      self.to_h.each.map {|k, v| "#{k}#{(' ' * (12 - k.length))}#{v}"}
     end
 
     def to_s
