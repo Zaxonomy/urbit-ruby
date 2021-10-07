@@ -11,8 +11,30 @@ module Urbit
       @index      = nil
     end
 
+    #
+    # Given a bigint representing an urbit date, returns a unix timestamp.
+    #
+    def self.da_to_unix(da)
+      # ported from urbit lib.ts which in turn was ported from +time:enjs:format in hoon.hoon
+      da_second = 18446744073709551616
+      da_unix_epoch = 170141184475152167957503069145530368000
+      offset = da_second / 2000
+      epoch_adjusted = offset + (da - da_unix_epoch)
+      return (epoch_adjusted * 1000) / da_second
+    end
+
+    #
+    # Given a unix timestamp, returns a bigint representing an urbit date
+    #
+    def self.unix_to_da(unix)
+      da_second = 18446744073709551616
+      da_unix_epoch = 170141184475152167957503069145530368000
+      time_since_epoch =  (unix * da_second) / 1000
+      return da_unix_epoch + time_since_epoch;
+    end
+
     def ==(another_node)
-      another_node.raw_index == self.raw_index
+      another_node.index == self.index
     end
 
     def <=>(another_node)
@@ -20,7 +42,7 @@ module Urbit
     end
 
     def eql?(another_node)
-      another_node.raw_index == self.raw_index
+      another_node.index == self.index
     end
 
     def deleted?
@@ -29,7 +51,7 @@ module Urbit
     end
 
     def hash
-      self.raw_index.hash
+      self.index.hash
     end
 
     def author
@@ -50,6 +72,10 @@ module Urbit
 
     def contents
       @post_h['contents']
+    end
+
+    def datetime_sent
+      Time.at(self.time_sent / 1000).to_datetime
     end
 
     def persistent?
@@ -81,9 +107,13 @@ module Urbit
     end
 
     def raw_index
-      @post_h["index"].delete_prefix('/') unless self.deleted?
+      return @post_h["index"].delete_prefix('/') unless self.deleted?
+      (Node.unix_to_da(Time.now.to_i)).to_s
     end
 
+    #
+    # This is the time sent as recorded by urbit in unix extended format.
+    #
     def time_sent
       @post_h['time-sent']
     end
@@ -94,7 +124,8 @@ module Urbit
         author: self.author,
         contents: self.contents,
         time_sent: self.time_sent,
-        is_parent: !self.children.empty?,
+        datetime_sent: self.datetime_sent,
+        is_parent:     !self.children.empty?,
         child_count: self.children.count
       }
     end
@@ -113,5 +144,6 @@ module Urbit
       end
       subatoms.join('/')
     end
+
   end
 end
