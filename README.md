@@ -1,9 +1,12 @@
 # Urbit::Api
+
 ## The Ruby interface to the Urbit HTTP API
 
 This library wraps the Urbit ship http interface exposing it as a Ruby gem.
 
 [![awesome urbit badge](https://img.shields.io/badge/~-awesome%20urbit-lightgrey)](https://github.com/urbit/awesome-urbit)
+[![Gem Version](https://badge.fury.io/rb/urbit-api.svg)](https://badge.fury.io/rb/urbit-api)
+[![License](https://img.shields.io/github/license/Zaxonomy/urbit-ruby)](https://github.com/Zaxonomy/urbit-ruby/blob/master/LICENSE.txt)
 
 ## Installation
 

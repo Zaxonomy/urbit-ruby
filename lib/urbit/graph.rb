@@ -14,7 +14,7 @@ module Urbit
     end
 
     def add_node(node:)
-      @nodes << node
+      @nodes << node unless node.deleted?
     end
 
     def host_ship
@@ -56,7 +56,8 @@ module Urbit
     def newest_nodes(count: 10)
       count = 1 if count < 1
       return self.fetch_newest_nodes(count) if @nodes.empty? || @nodes.count < count
-      self.nodes.reverse[0..(count - 1)]
+      last_node = self.nodes.count - 1
+      self.nodes[(last_node - count)..last_node]
     end
 
     def oldest_nodes(count: 10)
