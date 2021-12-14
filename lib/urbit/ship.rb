@@ -73,7 +73,7 @@ module Urbit
       config.name
     end
 
-    def remove_graph(graph:)
+    def remove_graph(desk: 'landscape', graph:)
       delete_json = %Q({
         "delete": {
           "resource": {
@@ -83,7 +83,7 @@ module Urbit
         }
       })
 
-      spider = self.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: delete_json, args: ["NO_RESPONSE"])
+      spider = self.spider(desk: desk, mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: delete_json, args: ["NO_RESPONSE"])
       if (retcode = (200 == spider[:status]))
         self.graphs.delete graph
       end
@@ -125,9 +125,9 @@ module Urbit
       {status: response.status, code: response.reason_phrase, body: response.body}
     end
 
-    def spider(mark_in:, mark_out:, thread:, data:, args: [])
+    def spider(desk: 'landscape', mark_in:, mark_out:, thread:, data:, args: [])
       self.login
-      url = "#{self.config.api_base_url}/spider/#{mark_in}/#{thread}/#{mark_out}.json"
+      url = "#{self.config.api_base_url}/spider/#{desk}/#{mark_in}/#{thread}/#{mark_out}.json"
 
       # TODO: This is a huge hack due to the fact that certain spider operations are known to
       #       not return when they should. Instead I just set the timeout low and catch the
