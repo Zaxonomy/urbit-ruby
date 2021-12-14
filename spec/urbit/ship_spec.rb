@@ -91,10 +91,10 @@ describe Urbit::Ship do
   # ------------------------------------------------------------------
   it "can scry" do
     ship.login
-    scry = ship.scry(app: 'file-server', path: '/clay/base/hash', mark: 'json')
+    scry = ship.scry(app: 'settings-store', path: '/desk/garden', mark: 'json')
     expect(scry[:status]).to eq(200)
     expect(scry[:code]).to eq("ok")
-    expect(scry[:body]).to eq("\"0\"")
+    expect(scry[:body]).to eq("{\"desk\":{}}")
   end
 
   it "returns 404/missing when scrying nonsense" do
