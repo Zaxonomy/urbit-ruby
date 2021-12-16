@@ -241,4 +241,25 @@ end
     # Clean up
     ship.remove_graph(graph: new_graph)
   end
+
+  # ------------------------------------------------------------------
+  # Settings Store
+  # ------------------------------------------------------------------
+  it "has an empty collection of Settings if never logged in" do
+    expect(ship.logged_in?).to be false
+    expect(ship.settings(desk: "landscape")).to be_empty
+  end
+
+  it "queries and retrieves settings if logged in" do
+    ship.login
+    expect(ship.logged_in?)
+    expect(ship.settings(desk: "landscape")).to_not eq([])
+    s = ship.settings(desk: "landscape").first
+    expect(s).to be_instance_of(Urbit::Setting)
+    expect(s.category).to eq("calm")
+    expect(s.contents).to eq({"hideGroups"=>false, "hideUnreads"=>true, "hideUtilities"=>true})
+    # Landscape is always the default desk.
+    expect(ship.settings.count).to be(1)
+  end
+
 end

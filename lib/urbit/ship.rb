@@ -3,6 +3,7 @@ require 'faraday'
 require 'urbit/channel'
 require 'urbit/config'
 require 'urbit/graph'
+require 'urbit/setting'
 
 module Urbit
   class Ship
@@ -14,6 +15,7 @@ module Urbit
       @channels    = []
       @config      = config
       @graphs      = []
+      @settings    = []
       @logged_in   = false
     end
 
@@ -88,6 +90,26 @@ module Urbit
         self.graphs.delete graph
       end
       retcode
+    end
+
+    #
+    # Answers a collection of all the settings for this ship.
+    # This collection is cached and will need to be invalidated to discover new settings.
+    #
+    def settings(desk: 'landscape', flush_cache: false)
+      @settings = [] if flush_cache
+      if @settings.empty?
+        if self.logged_in?
+          scry = self.scry(app: "settings-store", path: "/desk/#{desk}", mark: "json")
+          if scry[:body]
+            body = JSON.parse scry[:body]
+            body["desk"].each do |k|
+              @settings << Setting.new(ship: self, desk: desk, setting: k)
+            end
+          end
+        end
+      end
+      @settings
     end
 
     def untilded_name

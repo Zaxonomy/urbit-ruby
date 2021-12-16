@@ -1,0 +1,19 @@
+ship.scry(app: 'settings-store', path: '/desk/landscape', mark: 'json')
+
+{
+  :status => 200,
+  :code   => "ok",
+  :body   => {
+    "desk": {
+      "calm": {
+        "hideAvatars": true,
+        "hideNicknames": true
+      },
+      "urbit-visor-permissions": {
+        "https://urbitdashboard.com": [
+          "shipName", "shipURL", "scry", "subscribe", "poke", "thread"
+        ]
+      }
+    }
+  }
+}
