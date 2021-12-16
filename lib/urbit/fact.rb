@@ -73,74 +73,82 @@ module Urbit
     end
   end
 
-  class AddGraphFact < Fact
+  class GraphUpdateFact < Fact
     def initialize(channel:, event:)
       super channel: channel, event: event
+    end
 
-      # Attach this new fact as a node to its Graph.
+    #
+    # Attach this new fact as a node to its Graph.
+    #
+    def attach_parser
       # puts "Received a graph update for [#{self.ship.graph(resource: self.resource)}]"
-      if (incoming_graph = self.ship.graph(resource: self.resource))
+      if self.incoming_graph
         # puts "Received an add_graph event: #{self.raw_json} on #{self.resource}"
-        Urbit::AddGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
+        self.create_parser
       end
+    end
+
+    def create_parser
+      nil
     end
 
     def graph_update?
       true
     end
 
-    def raw_json
-      self.contents["json"]["graph-update"]["add-graph"]
+    def incoming_graph
+      self.ship.graph(resource: self.resource)
     end
 
     def resource_h
       self.raw_json["resource"]
     end
-  end
 
-  class AddNodesFact < Fact
-    def initialize(channel:, event:)
-      super channel: channel, event: event
-
-      # Attach this new fact as a node to its Graph.
-      # puts "Received a graph update for [#{self.ship.graph(resource: self.resource)}]"
-      if (incoming_graph = self.ship.graph(resource: self.resource))
-        # puts "Received an add_graph event: #{self.raw_json} on #{self.resource}"
-        Urbit::AddNodesParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
-      end
-    end
-
-    def graph_update?
-      true
-    end
-
-    def raw_json
-      self.contents["json"]["graph-update"]["add-nodes"]
-    end
-
-    def resource_h
-      self.raw_json["resource"]
+    def root_h
+      self.contents["json"]["graph-update"]
     end
   end
 
-  class RemoveGraphFact < Fact
+  class AddGraphFact < GraphUpdateFact
     def initialize(channel:, event:)
       super channel: channel, event: event
-
-      # Attach this new fact as a node to its Graph.
-      # puts "Received a graph update for [#{self.ship.graph(resource: self.resource)}]"
-      if (incoming_graph = self.ship.graph(resource: self.resource))
-        # puts "Received an add_graph event: #{self.raw_json} on #{self.resource}"
-        Urbit::RemoveGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json)
-      end
     end
 
-    def graph_update?
-      true
+    def create_parser
+      Urbit::AddGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
     end
 
     def raw_json
-      self.contents["json"]["graph-update"]["remove-graph"]
+      self.root_h["add-graph"]
+    end
+  end
+
+  class AddNodesFact < GraphUpdateFact
+    def initialize(channel:, event:)
+      super channel: channel, event: event
+    end
+
+    def create_parser
+      Urbit::AddNodesParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
+    end
+
+    def raw_json
+      self.root_h["add-nodes"]
+    end
+  end
+
+  class RemoveGraphFact < GraphUpdateFact
+    def initialize(channel:, event:)
+      super channel: channel, event: event
+    end
+
+    def create_parser
+      Urbit::RemoveGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json)
+    end
+
+    def raw_json
+      self.root_h["remove-graph"]
     end
 
     def resource_h
