@@ -13,7 +13,7 @@ module Urbit
         # We are now listening on a socket for SSE::Events. This block will be called for each one.
         rec.on_event do |event|
           # Wrap the returned event in a Fact.
-          @facts << (f = Fact.new(channel: channel, event: event))
+          @facts << (f = Fact.collect(channel: channel, event: event))
 
           # We need to acknowlege each message or urbit will eventually disconnect us.
           # We record the ack with the Fact itself.

@@ -10,21 +10,19 @@ module Urbit
       @channel = channel
       @data = event.data
       @type = event.type
+    end
 
-      # Attach this new fact as a node to its Graph.
-      if self.graph_update?
-        # puts "Received a graph update for [#{self.ship.graph(resource: self.resource)}]"
-        if (incoming_graph = self.ship.graph(resource: self.resource))
-          if self.add_graph?
-            # puts "Received an add_graph event: #{self.raw_json} on #{self.resource}"
-            Urbit::AddGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
-          elsif self.add_nodes?
-            Urbit::AddNodesParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
-          else
-            Urbit::RemoveGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json)
-          end
-        end
-      end
+    #
+    # This is a Facotry method to make the proper Fact subclass from
+    # a Channel Event.
+    #
+    def self.collect(channel:, event:)
+      contents = JSON.parse(event.data)
+      return Fact.new(channel: channel, event: event)            if (contents["json"].nil? || contents["json"]["graph-update"].nil?)
+      return AddGraphFact.new(channel: channel, event: event)    if contents["json"]["graph-update"]["add-graph"]
+      return AddNodesFact.new(channel: channel, event: event)    if contents["json"]["graph-update"]["add-nodes"]
+      return RemoveGraphFact.new(channel: channel, event: event) if contents["json"]["graph-update"]["remove-graph"]
+      return Fact.new(channel: channel, event: event)
     end
 
     def add_ack(ack:)
@@ -32,13 +30,11 @@ module Urbit
     end
 
     def add_graph?
-      return false unless self.graph_update?
-      self.contents["json"]["graph-update"]["add-graph"]
+      false
     end
 
     def add_nodes?
-      return false unless self.graph_update?
-      self.contents["json"]["graph-update"]["add-nodes"]
+      return false
     end
 
     def contents
@@ -60,8 +56,7 @@ module Urbit
 
 
     def remove_graph?
-      return false unless self.graph_update?
-      self.contents["json"]["graph-update"]["remove-graph"]
+      return false
     end
 
     def resource
@@ -95,6 +90,57 @@ module Urbit
 
     def to_s
       "a Fact(#{self.to_h})"
+    end
+  end
+
+  class AddGraphFact < Fact
+    def initialize(channel:, event:)
+      super channel: channel, event: event
+
+      # Attach this new fact as a node to its Graph.
+      # puts "Received a graph update for [#{self.ship.graph(resource: self.resource)}]"
+      if (incoming_graph = self.ship.graph(resource: self.resource))
+        # puts "Received an add_graph event: #{self.raw_json} on #{self.resource}"
+        Urbit::AddGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
+      end
+    end
+
+    def add_graph?
+      true
+    end
+  end
+
+  class AddNodesFact < Fact
+    def initialize(channel:, event:)
+      super channel: channel, event: event
+
+      # Attach this new fact as a node to its Graph.
+      # puts "Received a graph update for [#{self.ship.graph(resource: self.resource)}]"
+      if (incoming_graph = self.ship.graph(resource: self.resource))
+        # puts "Received an add_graph event: #{self.raw_json} on #{self.resource}"
+        Urbit::AddNodesParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
+      end
+    end
+
+    def add_nodes?
+      true
+    end
+  end
+
+  class RemoveGraphFact < Fact
+    def initialize(channel:, event:)
+      super channel: channel, event: event
+
+      # Attach this new fact as a node to its Graph.
+      # puts "Received a graph update for [#{self.ship.graph(resource: self.resource)}]"
+      if (incoming_graph = self.ship.graph(resource: self.resource))
+        # puts "Received an add_graph event: #{self.raw_json} on #{self.resource}"
+        Urbit::RemoveGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json)
+      end
+    end
+
+    def remove_graph?
+      true
     end
   end
 end
