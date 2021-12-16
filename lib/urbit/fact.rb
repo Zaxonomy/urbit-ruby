@@ -29,20 +29,12 @@ module Urbit
       @ack = :ack
     end
 
-    def add_graph?
-      false
-    end
-
-    def add_nodes?
-      return false
-    end
-
     def contents
       JSON.parse(@data)
     end
 
     def graph_update?
-      !self.contents["json"].nil? && !self.contents["json"]["graph-update"].nil?
+      false
     end
 
     def is_acknowledged?
@@ -50,27 +42,15 @@ module Urbit
     end
 
     def raw_json
-      return nil unless self.graph_update?
-      self.add_nodes? ? self.contents["json"]["graph-update"]["add-nodes"] : self.contents["json"]["graph-update"]["add-graph"]
-    end
-
-
-    def remove_graph?
-      return false
+      nil
     end
 
     def resource
-      return nil unless self.graph_update?
-      r =
-        if self.add_nodes?
-          self.contents["json"]["graph-update"]["add-nodes"]["resource"]
-        elsif self.add_graph?
-          self.contents["json"]["graph-update"]["add-graph"]["resource"]
-        elsif self.remove_graph?
-          self.contents["json"]["graph-update"]["remove-graph"]
-        end
+      return nil if self.resource_h.nil?
+      return "~#{self.resource_h["ship"]}/#{self.resource_h["name"]}" unless self.resource_h.nil?
+    end
 
-      return "~#{r["ship"]}/#{r["name"]}" unless r.nil?
+    def resource_h
       nil
     end
 
@@ -105,8 +85,16 @@ module Urbit
       end
     end
 
-    def add_graph?
+    def graph_update?
       true
+    end
+
+    def raw_json
+      self.contents["json"]["graph-update"]["add-graph"]
+    end
+
+    def resource_h
+      self.raw_json["resource"]
     end
   end
 
@@ -122,8 +110,16 @@ module Urbit
       end
     end
 
-    def add_nodes?
+    def graph_update?
       true
+    end
+
+    def raw_json
+      self.contents["json"]["graph-update"]["add-nodes"]
+    end
+
+    def resource_h
+      self.raw_json["resource"]
     end
   end
 
@@ -139,8 +135,16 @@ module Urbit
       end
     end
 
-    def remove_graph?
+    def graph_update?
       true
+    end
+
+    def raw_json
+      self.contents["json"]["graph-update"]["remove-graph"]
+    end
+
+    def resource_h
+      self.raw_json
     end
   end
 end
