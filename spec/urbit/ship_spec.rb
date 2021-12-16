@@ -133,10 +133,10 @@ describe Urbit::Ship do
     expect(spider[:code]).to eq("ok")
     expect(spider[:body]).to eq("null")
 
-    # expect(ship.graphs(flush_cache: true).count).to eq(2)   # add in our new graph
-    # new_graph = ship.graphs.select {|g| random_name == g.name}.first
-    # ship.remove_graph(graph: new_graph)
-    # expect(ship.graphs.count).to eq(1)   # this is just the default dm-inbox again
+    expect(ship.graphs(flush_cache: true).count).to eq(2)   # add in our new graph
+    new_graph = ship.graphs.select {|g| random_name == g.name}.first
+    ship.remove_graph(graph: new_graph)
+    expect(ship.graphs.count).to eq(1)   # this is just the default dm-inbox again
   end
 
 it "can create and delete an 'unmanaged' graph using 'spider'" do

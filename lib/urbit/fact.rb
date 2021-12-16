@@ -13,8 +13,17 @@ module Urbit
 
       # Attach this new fact as a node to its Graph.
       if self.graph_update?
-        puts self.add_nodes_json
-        Urbit::AddNodesParser.new(for_graph: (self.ship.graph(resource: self.resource)),  with_json: self.add_nodes_json).add_nodes
+        # puts "Received a graph update for [#{self.ship.graph(resource: self.resource)}]"
+        if (incoming_graph = self.ship.graph(resource: self.resource))
+          if self.add_graph?
+            # puts "Received an add_graph event: #{self.raw_json} on #{self.resource}"
+            Urbit::AddGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
+          elsif self.add_nodes?
+            Urbit::AddNodesParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
+          else
+            Urbit::RemoveGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json)
+          end
+        end
       end
     end
 
@@ -22,8 +31,13 @@ module Urbit
       @ack = :ack
     end
 
-    def add_nodes_json
-      return nil unless self.graph_update?
+    def add_graph?
+      return false unless self.graph_update?
+      self.contents["json"]["graph-update"]["add-graph"]
+    end
+
+    def add_nodes?
+      return false unless self.graph_update?
       self.contents["json"]["graph-update"]["add-nodes"]
     end
 
@@ -39,10 +53,30 @@ module Urbit
       !@ack.nil?
     end
 
+    def raw_json
+      return nil unless self.graph_update?
+      self.add_nodes? ? self.contents["json"]["graph-update"]["add-nodes"] : self.contents["json"]["graph-update"]["add-graph"]
+    end
+
+
+    def remove_graph?
+      return false unless self.graph_update?
+      self.contents["json"]["graph-update"]["remove-graph"]
+    end
+
     def resource
       return nil unless self.graph_update?
-      r = self.contents["json"]["graph-update"]["add-nodes"]["resource"]
-      "~#{r["ship"]}/#{r["name"]}"
+      r =
+        if self.add_nodes?
+          self.contents["json"]["graph-update"]["add-nodes"]["resource"]
+        elsif self.add_graph?
+          self.contents["json"]["graph-update"]["add-graph"]["resource"]
+        elsif self.remove_graph?
+          self.contents["json"]["graph-update"]["remove-graph"]
+        end
+
+      return "~#{r["ship"]}/#{r["name"]}" unless r.nil?
+      nil
     end
 
     def ship

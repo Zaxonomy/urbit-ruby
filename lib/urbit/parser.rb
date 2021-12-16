@@ -38,6 +38,9 @@ module Urbit
       @j["graph"]
     end
 
+    def resource_hash
+      @j["resource"]
+    end
   end
 
   class AddNodesParser < Parser
@@ -45,4 +48,15 @@ module Urbit
       @j["nodes"]
     end
   end
+
+  class RemoveGraphParser < Parser
+    def nodes_hash
+      nil
+    end
+
+    def resource_hash
+      @j["resource"]
+    end
+  end
+
 end
