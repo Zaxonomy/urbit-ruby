@@ -10,6 +10,7 @@ module Urbit
       @channel = channel
       @data = event.data
       @type = event.type
+      puts "Received a Fact for [#{channel}] -- [#{@type}] -- [#{@data}]"
     end
 
     #
@@ -18,10 +19,14 @@ module Urbit
     #
     def self.collect(channel:, event:)
       contents = JSON.parse(event.data)
-      return Fact.new(channel: channel, event: event)            if (contents["json"].nil? || contents["json"]["graph-update"].nil?)
-      return AddGraphFact.new(channel: channel, event: event)    if contents["json"]["graph-update"]["add-graph"]
-      return AddNodesFact.new(channel: channel, event: event)    if contents["json"]["graph-update"]["add-nodes"]
-      return RemoveGraphFact.new(channel: channel, event: event) if contents["json"]["graph-update"]["remove-graph"]
+      return Fact.new(channel: channel, event: event)              if contents["json"].nil?
+      return SettingsEventFact.new(channel: channel, event: event) if contents["json"]["settings-event"]
+
+      return Fact.new(channel: channel, event: event)              if contents["json"]["graph-update"].nil?
+      return AddGraphFact.new(channel: channel, event: event)      if contents["json"]["graph-update"]["add-graph"]
+      return AddNodesFact.new(channel: channel, event: event)      if contents["json"]["graph-update"]["add-nodes"]
+      return RemoveGraphFact.new(channel: channel, event: event)   if contents["json"]["graph-update"]["remove-graph"]
+
       return Fact.new(channel: channel, event: event)
     end
 
@@ -45,15 +50,6 @@ module Urbit
       nil
     end
 
-    def resource
-      return nil if self.resource_h.nil?
-      return "~#{self.resource_h["ship"]}/#{self.resource_h["name"]}" unless self.resource_h.nil?
-    end
-
-    def resource_h
-      nil
-    end
-
     def ship
       @channel.ship
     end
@@ -61,7 +57,6 @@ module Urbit
     def to_h
       {
         ship:            self.ship.to_h,
-        resource:        self.resource,
         acknowleged:     self.is_acknowledged?,
         is_graph_update: self.graph_update?
         # contents:        self.contents
@@ -69,7 +64,7 @@ module Urbit
     end
 
     def to_s
-      "a Fact(#{self.to_h})"
+      "a #{self.class.name}(#{self.to_h})"
     end
   end
 
@@ -101,12 +96,20 @@ module Urbit
       self.ship.graph(resource: self.resource)
     end
 
+    def resource
+      return "~#{self.resource_h["ship"]}/#{self.resource_h["name"]}" unless self.resource_h.nil?
+    end
+
     def resource_h
       self.raw_json["resource"]
     end
 
     def root_h
       self.contents["json"]["graph-update"]
+    end
+
+    def to_h
+      super.merge!(resource: self.resource)
     end
   end
 
@@ -154,5 +157,8 @@ module Urbit
     def resource_h
       self.raw_json
     end
+  end
+
+  class SettingsEventFact < Fact
   end
 end
