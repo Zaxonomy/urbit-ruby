@@ -159,12 +159,33 @@ module Urbit
   end
 
   class SettingsEventFact < Fact
+    def bucket
+      self.contents["bucket-key"]
+    end
+
     def contents
       JSON.parse(@data)["json"]["settings-event"]["put-entry"]
     end
 
+    def desk
+      self.contents["desk"]
+    end
+
+    def entry
+      self.contents["entry-key"]
+    end
+
     def to_h
-      super.merge!(contents: self.contents)
+      super.merge!({
+        bucket: self.bucket,
+        desk:   self.desk,
+        entry:  self.entry,
+        value:  self.value
+      })
+    end
+
+    def value
+      self.contents["value"]
     end
   end
 end
