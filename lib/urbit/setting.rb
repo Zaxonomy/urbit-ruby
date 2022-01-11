@@ -1,20 +1,20 @@
 
 module Urbit
   class Setting
-     attr_reader :category, :contents
+     attr_reader :bucket, :entries
 
     def initialize(ship:, desk:, setting:)
       @ship = ship
       @desk = desk
-      @category = setting.first
-      @contents = setting.last
+      @bucket = setting.first
+      @entries = setting.last
     end
 
     def to_h
       {
-        desk:     @desk,
-        category: self.category,
-        contents: self.contents
+        desk:    @desk,
+        bucket:  self.bucket,
+        entries: self.entries
       }
     end
 

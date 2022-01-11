@@ -59,7 +59,6 @@ module Urbit
         ship:            self.ship.to_h,
         acknowleged:     self.is_acknowledged?,
         is_graph_update: self.graph_update?
-        # contents:        self.contents
       }
     end
 
@@ -160,5 +159,12 @@ module Urbit
   end
 
   class SettingsEventFact < Fact
+    def contents
+      JSON.parse(@data)["json"]["settings-event"]["put-entry"]
+    end
+
+    def to_h
+      super.merge!(contents: self.contents)
+    end
   end
 end
