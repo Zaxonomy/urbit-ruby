@@ -17,3 +17,36 @@ ship.scry(app: 'settings-store', path: '/desk/landscape', mark: 'json')
     }
   }
 }
+
+
+pry(main)> ship.subscribe(app: 'settings-store', path: '/all')
+=> a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164192001782807f')
+
+pry(main)> Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164192001782807f')
+] -- [message
+] -- [
+  {
+    "ok": "ok",
+    "id": 1,
+    "response": "subscribe"
+  }
+]
+
+pry(main)> Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164192001782807f')
+] -- [message
+] -- [
+  {
+    "json": {
+      "settings-event": {
+        "put-entry": {
+          "bucket-key": "calm",
+          "desk": "landscape",
+          "entry-key": "hideUnreads",
+          "value": true
+        }
+      }
+    },
+    "id": 1,
+    "response": "diff"
+  }
+]

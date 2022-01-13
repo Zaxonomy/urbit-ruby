@@ -93,6 +93,20 @@ module Urbit
     end
 
     #
+    # Answers the entries for the specified desk and bucket.
+    #
+    def setting(desk: 'landscape', bucket:)
+      if (settings = self.settings(desk: desk))
+        settings.each do |setting|
+          if (entries = setting.entries(bucket: bucket))
+            return entries
+          end
+        end
+      end
+      {}
+    end
+
+    #
     # Answers a collection of all the settings for this ship.
     # This collection is cached and will need to be invalidated to discover new settings.
     #

@@ -38,6 +38,10 @@ module Urbit
       JSON.parse(@data)
     end
 
+    def for_this_ship?
+      self.ship == @channel.ship
+    end
+
     def graph_update?
       false
     end
@@ -161,14 +165,11 @@ module Urbit
   class SettingsEventFact < Fact
     def initialize(channel:, event:)
       super channel: channel, event: event
-      # See if we already have this setting, if no add it, if yes update it.
-      if self.ship == channel.ship
-        if (settings = channel.ship.settings(desk: self.desk))
-          settings.each do |setting|
-            if (entries = setting.entries(bucket: self.bucket))
-              entries[self.entry] = self.value
-            end
-          end
+
+      if self.for_this_ship?
+        # See if we already have this setting, if no add it, if yes update it.
+        if (entries = channel.ship.setting(bucket: self.bucket))
+          entries[self.entry] = self.value
         end
       end
     end
