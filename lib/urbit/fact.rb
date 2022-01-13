@@ -159,6 +159,20 @@ module Urbit
   end
 
   class SettingsEventFact < Fact
+    def initialize(channel:, event:)
+      super channel: channel, event: event
+      # See if we already have this setting, if no add it, if yes update it.
+      if self.ship == channel.ship
+        if (settings = channel.ship.settings(desk: self.desk))
+          settings.each do |setting|
+            if (entries = setting.entries(bucket: self.bucket))
+              entries[self.entry] = self.value
+            end
+          end
+        end
+      end
+    end
+
     def bucket
       self.contents["bucket-key"]
     end
