@@ -256,8 +256,8 @@ end
     expect(ship.settings(desk: "landscape")).to_not eq([])
     s = ship.settings(desk: "landscape").first
     expect(s).to be_instance_of(Urbit::Setting)
-    expect(s.category).to eq("calm")
-    expect(s.contents).to eq({"hideGroups"=>false, "hideUnreads"=>true, "hideUtilities"=>true})
+    expect(s.bucket).to eq("calm")
+    expect(s.entries).to eq({"hideGroups"=>false, "hideUnreads"=>true, "hideUtilities"=>false})
     # Landscape is always the default desk.
     expect(ship.settings.count).to be(1)
   end
