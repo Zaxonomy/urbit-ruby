@@ -1,5 +1,6 @@
-require_relative './config'
-require_relative './ship'
+require "urbit/config"
+require "urbit/ship"
+require "urbit/version"
 
 # This is the main namespace for Urbit.
 #
