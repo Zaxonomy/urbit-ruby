@@ -3,6 +3,7 @@ require 'faraday'
 require 'urbit/channel'
 require 'urbit/config'
 require 'urbit/graph'
+require 'urbit/setting'
 
 module Urbit
   class Ship
@@ -14,6 +15,7 @@ module Urbit
       @channels    = []
       @config      = config
       @graphs      = []
+      @settings    = []
       @logged_in   = false
     end
 
@@ -73,7 +75,7 @@ module Urbit
       config.name
     end
 
-    def remove_graph(graph:)
+    def remove_graph(desk: 'landscape', graph:)
       delete_json = %Q({
         "delete": {
           "resource": {
@@ -83,11 +85,45 @@ module Urbit
         }
       })
 
-      spider = self.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: delete_json, args: ["NO_RESPONSE"])
+      spider = self.spider(desk: desk, mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: delete_json, args: ["NO_RESPONSE"])
       if (retcode = (200 == spider[:status]))
         self.graphs.delete graph
       end
       retcode
+    end
+
+    #
+    # Answers the entries for the specified desk and bucket.
+    #
+    def setting(desk: 'landscape', bucket:)
+      if (settings = self.settings(desk: desk))
+        settings.each do |setting|
+          if (entries = setting.entries(bucket: bucket))
+            return entries
+          end
+        end
+      end
+      {}
+    end
+
+    #
+    # Answers a collection of all the settings for this ship.
+    # This collection is cached and will need to be invalidated to discover new settings.
+    #
+    def settings(desk: 'landscape', flush_cache: false)
+      @settings = [] if flush_cache
+      if @settings.empty?
+        if self.logged_in?
+          scry = self.scry(app: "settings-store", path: "/desk/#{desk}", mark: "json")
+          if scry[:body]
+            body = JSON.parse scry[:body]
+            body["desk"].each do |k|
+              @settings << Setting.new(ship: self, desk: desk, setting: k)
+            end
+          end
+        end
+      end
+      @settings
     end
 
     def untilded_name
@@ -125,9 +161,9 @@ module Urbit
       {status: response.status, code: response.reason_phrase, body: response.body}
     end
 
-    def spider(mark_in:, mark_out:, thread:, data:, args: [])
+    def spider(desk: 'landscape', mark_in:, mark_out:, thread:, data:, args: [])
       self.login
-      url = "#{self.config.api_base_url}/spider/#{mark_in}/#{thread}/#{mark_out}.json"
+      url = "#{self.config.api_base_url}/spider/#{desk}/#{mark_in}/#{thread}/#{mark_out}.json"
 
       # TODO: This is a huge hack due to the fact that certain spider operations are known to
       #       not return when they should. Instead I just set the timeout low and catch the

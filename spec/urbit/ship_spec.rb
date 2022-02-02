@@ -91,10 +91,10 @@ describe Urbit::Ship do
   # ------------------------------------------------------------------
   it "can scry" do
     ship.login
-    scry = ship.scry(app: 'file-server', path: '/clay/base/hash', mark: 'json')
+    scry = ship.scry(app: 'settings-store', path: '/desk/garden', mark: 'json')
     expect(scry[:status]).to eq(200)
     expect(scry[:code]).to eq("ok")
-    expect(scry[:body]).to eq("\"0\"")
+    expect(scry[:body]).to eq("{\"desk\":{}}")
   end
 
   it "returns 404/missing when scrying nonsense" do
@@ -120,13 +120,15 @@ describe Urbit::Ship do
   # It uses a POST request and both manipulates state and receives information back.
   # It also exposes the ability to send a sequence of commands, i.e. a "thread," hence the name.
   #
-  # It takes the form {url}/spider/{inputMark}/{threadname}/{outputmark}.json
+  # It takes the form {url}/spider/{desk}/{inputMark}/{threadname}/{outputmark}.json
+  #
+  # 'landscape' is the default desk if not provided like we did here.
   # ------------------------------------------------------------------
   it "can create a chat graph using spider" do
     ship.login
     expect(ship.graphs.count).to eq(1)   # this is the default dm-inbox
 
-    spider = ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-create', data: create_json)
+    spider = ship.spider(desk: 'landscape', mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-create', data: create_json)
     expect(spider[:status]).to eq(200)
     expect(spider[:code]).to eq("ok")
     expect(spider[:body]).to eq("null")
@@ -239,4 +241,25 @@ end
     # Clean up
     ship.remove_graph(graph: new_graph)
   end
+
+  # ------------------------------------------------------------------
+  # Settings Store
+  # ------------------------------------------------------------------
+  it "has an empty collection of Settings if never logged in" do
+    expect(ship.logged_in?).to be false
+    expect(ship.settings(desk: "landscape")).to be_empty
+  end
+
+  it "queries and retrieves settings if logged in" do
+    ship.login
+    expect(ship.logged_in?)
+    expect(ship.settings(desk: "landscape")).to_not eq([])
+    s = ship.settings(desk: "landscape").first
+    expect(s).to be_instance_of(Urbit::Setting)
+    expect(s.bucket).to eq("calm")
+    expect(s.entries).to eq({"hideGroups"=>false, "hideUnreads"=>true, "hideUtilities"=>false})
+    # Landscape is always the default desk.
+    expect(ship.settings.count).to be(1)
+  end
+
 end

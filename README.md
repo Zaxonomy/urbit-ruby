@@ -187,6 +187,32 @@ a Node({:index=>"170.141.184.505.209.627.337.970.761.265.544.429.568", :author=>
 "170.141.184.505.209.375.247.350.471.711.992.578.048"
 "170.141.184.505.209.545.972.004.310.065.795.301.376"
 "170.141.184.505.209.627.337.970.761.265.544.429.568"
+
+#
+# --------------------------------------------------------------------
+# %settings-store
+# --------------------------------------------------------------------
+#
+> ship.setting(desk: 'landscape', bucket: 'calm').each {|e| p e};nil
+["hideUtilities", false]
+["hideGroups", false]
+["hideAvatars", true]
+["hideUnreads", true]
+["hideNicknames", true]
+
+> ship.subscribe(app: 'settings-store', path: '/all')
+=> a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164375139513eacb')
+
+# We are now listening for changes in any settings on the ship. Go to Landscape and toggle the "Hide Groups" button...
+Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164375139513eacb')] -- [message] -- [{"json":{"settings-event":{"put-entry":{"bucket-key":"calm","desk":"landscape","entry-key":"hideGroups","value":true}}},"id":1,"response":"diff"}]
+
+> ship.setting(desk: 'landscape', bucket: 'calm').each {|e| p e};nil
+["hideUtilities", false]
+**["hideGroups", true]**
+["hideAvatars", true]
+["hideUnreads", true]
+["hideNicknames", true]
+
 ```
 ### Configuration
 
