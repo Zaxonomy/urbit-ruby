@@ -18,10 +18,6 @@ module Urbit
         end
       end
 
-      def create_parser
-        nil
-      end
-
       def graph_update?
         true
       end

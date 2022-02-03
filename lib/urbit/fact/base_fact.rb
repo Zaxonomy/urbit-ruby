@@ -9,7 +9,8 @@ module Urbit
         @channel = channel
         @data = event.data
         @type = event.type
-        puts "Received a Fact for [#{channel}] -- [#{@type}] -- [#{@data}]"
+        # TODO: Remove this debugging once Facts are finalized. DJR 2/3/2022
+        puts "Received a #{self.class.name.split('::').last} for [#{channel}] -- [#{@type}] -- [#{@data}]"
       end
 
       def add_ack(ack:)
@@ -18,6 +19,10 @@ module Urbit
 
       def contents
         JSON.parse(@data)
+      end
+
+      def create_parser
+        nil
       end
 
       def for_this_ship?
