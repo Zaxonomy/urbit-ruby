@@ -55,6 +55,12 @@ module Urbit
     end
   end
 
+  class InitialGroupParser < Parser
+    def group_names
+      @j.keys
+    end
+  end
+
   class RemoveGraphParser < GraphParser
     def nodes_hash
       nil

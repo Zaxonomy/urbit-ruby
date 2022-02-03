@@ -15,6 +15,7 @@ module Urbit
       @channels    = []
       @config      = config
       @graphs      = []
+      @groups      = []
       @settings    = []
       @logged_in   = false
     end
@@ -60,6 +61,26 @@ module Urbit
     #
     def graph_names
       self.graphs.collect {|g| g.resource}
+    end
+
+    #
+    # Answers a collection of all the Groups on this ship.
+    # This collection is cached and will need to be invalidated to discover new Groups.
+    #
+    def groups(flush_cache: false)
+      @groups = [] if flush_cache
+      if @groups.empty?
+        if self.logged_in?
+          self.subscribe(app: 'group-store', path: '/groups')
+          # if r[:body]
+          #   body = JSON.parse r[:body]
+          #   body["graph-update"]["keys"].each do |k|
+          #     @graphs << Graph.new(ship: self, graph_name: k["name"], host_ship_name: k["ship"])
+          #   end
+          # end
+        end
+      end
+      @groups
     end
 
     def login
