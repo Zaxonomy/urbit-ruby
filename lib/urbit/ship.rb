@@ -75,6 +75,24 @@ module Urbit
       config.name
     end
 
+    def open_channels
+      @channels.select {|c| c.open?}
+    end
+
+    def pat_p
+      config.name
+    end
+
+    #
+    # Poke an app with a message using a mark.
+    #
+    # Returns a Channel which has been created and opened and will begin
+    #   to get back a stream of facts via its Receiver.
+    #
+    def poke(app:, mark:, message:)
+      (self.add_channel).poke(app: app, mark: mark, message: message)
+    end
+
     def remove_graph(desk: 'landscape', graph:)
       delete_json = %Q({
         "delete": {
@@ -90,6 +108,19 @@ module Urbit
         self.graphs.delete graph
       end
       retcode
+    end
+
+    def scry(app:, path:, mark: 'json')
+      self.login
+      mark = ".#{mark}" unless mark.empty?
+      scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}#{mark}"
+
+      response = Faraday.get(scry_url) do |req|
+        req.headers['Accept'] = 'application/json'
+        req.headers['Cookie'] = self.cookie
+      end
+
+      {status: response.status, code: response.reason_phrase, body: response.body}
     end
 
     #
@@ -124,41 +155,6 @@ module Urbit
         end
       end
       @settings
-    end
-
-    def untilded_name
-      name.gsub('~', '')
-    end
-
-    def pat_p
-      config.name
-    end
-
-    def open_channels
-      @channels.select {|c| c.open?}
-    end
-
-    #
-    # Poke an app with a message using a mark.
-    #
-    # Returns a Channel which has been created and opened and will begin
-    #   to get back a stream of facts via its Receiver.
-    #
-    def poke(app:, mark:, message:)
-      (self.add_channel).poke(app: app, mark: mark, message: message)
-    end
-
-    def scry(app:, path:, mark: 'json')
-      self.login
-      mark = ".#{mark}" unless mark.empty?
-      scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}#{mark}"
-
-      response = Faraday.get(scry_url) do |req|
-        req.headers['Accept'] = 'application/json'
-        req.headers['Cookie'] = self.cookie
-      end
-
-      {status: response.status, code: response.reason_phrase, body: response.body}
     end
 
     def spider(desk: 'landscape', mark_in:, mark_out:, thread:, data:, args: [])
@@ -209,6 +205,10 @@ module Urbit
 
     def to_s
       "a Ship(#{self.to_h})"
+    end
+
+    def untilded_name
+      name.gsub('~', '')
     end
 
     private
