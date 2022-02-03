@@ -3,9 +3,15 @@ require 'urbit/node'
 
 module Urbit
   class Parser
-    def initialize(for_graph:, with_json:)
-      @g = for_graph
+    def initialize(with_json:)
       @j = with_json
+    end
+  end
+
+  class GraphParser < Parser
+    def initialize(for_graph:, with_json:)
+      super(with_json: with_json)
+      @g = for_graph
     end
 
     #
@@ -33,7 +39,7 @@ module Urbit
     end
   end
 
-  class AddGraphParser < Parser
+  class AddGraphParser < GraphParser
     def nodes_hash
       @j["graph"]
     end
@@ -43,13 +49,13 @@ module Urbit
     end
   end
 
-  class AddNodesParser < Parser
+  class AddNodesParser < GraphParser
     def nodes_hash
       @j["nodes"]
     end
   end
 
-  class RemoveGraphParser < Parser
+  class RemoveGraphParser < GraphParser
     def nodes_hash
       nil
     end
