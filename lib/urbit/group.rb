@@ -4,17 +4,40 @@ module Urbit
   class Group
      attr_reader :members, :path
 
-    def initialize(ship:, path:, members:)
-      @members = members
+    def initialize(path:, json:)
+      @members = json["members"]
       @path    = path
-      @ship    = ship
+    end
+
+    def ==(another_group)
+      another_group.path == self.path
+    end
+
+    def <=>(another_group)
+      self.key <=> another_group.key
+    end
+
+    def eql?(another_group)
+      another_group.path == self.path
+    end
+
+    def host
+      self.path_tokens[2]
+    end
+
+    def key
+      self.path_tokens[3]
+    end
+
+    def path_tokens
+      self.path.split('/')
     end
 
     def to_h
-      {
-        ship:    @ship,
-        path:    self.path,
-        members: self.members
+    {
+        host:         self.host,
+        key:          self.key,
+        member_count: self.members.count
       }
     end
 

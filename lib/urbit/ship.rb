@@ -24,6 +24,13 @@ module Urbit
       proc { channels.each { |c| c.close } }
     end
 
+    #
+    # Sets the Group uniquely keyed by path:
+    #
+    def add_group(a_group)
+      @groups << a_group
+    end
+
     def logged_in?
       logged_in
     end
@@ -61,6 +68,13 @@ module Urbit
     #
     def graph_names
       self.graphs.collect {|g| g.resource}
+    end
+
+    #
+    # Answers the Group uniquely keyed by path:, if it exists
+    #
+    def group(path:)
+      @groups.first {|g| g.path == path}
     end
 
     #

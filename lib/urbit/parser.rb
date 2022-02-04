@@ -56,8 +56,8 @@ module Urbit
   end
 
   class InitialGroupParser < Parser
-    def group_names
-      @j.keys
+    def group_hashes
+      @j
     end
   end
 

@@ -3,7 +3,7 @@
 module Urbit
   module Fact
     class BaseFact
-      attr_reader :ack
+      attr_reader :ack, :channel
 
       def initialize(channel:, event:)
         @channel = channel

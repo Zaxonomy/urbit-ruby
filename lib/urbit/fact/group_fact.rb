@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'urbit/group'
+
 module Urbit
   module Fact
     class GroupUpdateFact < BaseFact
@@ -15,15 +17,17 @@ module Urbit
     class InitialGroupFact < GroupUpdateFact
       def initialize(channel:, event:)
         super channel: channel, event: event
-        puts "Group Names: #{self.group_names}"
+        self.group_hashes.each do |k, v|
+          self.channel.ship.add_group(Group.new(path: k, json: v))
+        end
       end
 
       def parser
         Urbit::InitialGroupParser.new(with_json: self.raw_json)
       end
 
-      def group_names
-        self.parser.group_names
+      def group_hashes
+        self.parser.group_hashes
       end
 
       def raw_json
