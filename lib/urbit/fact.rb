@@ -15,15 +15,17 @@ module Urbit
         contents = JSON.parse(event.data)
         return BaseFact.new(channel: channel, event: event)          if contents["json"].nil?                           # TODO: This should be an ErrorFact. DJR 2/3/2022
 
-        # return GroupUpdateFact.new(channel: channel, event: event)   if contents["json"]["groupUpdate"]
-        return InitialGroupFact.new(channel: channel, event: event)   if contents["json"]["groupUpdate"]["initial"]
+        if contents["json"]["graph-update"]
+          return AddGraphFact.new(channel: channel, event: event)      if contents["json"]["graph-update"]["add-graph"]
+          return AddNodesFact.new(channel: channel, event: event)      if contents["json"]["graph-update"]["add-nodes"]
+          return RemoveGraphFact.new(channel: channel, event: event)   if contents["json"]["graph-update"]["remove-graph"]
+        end
+
+        if contents["json"]["groupUpdate"]
+          return InitialGroupFact.new(channel: channel, event: event)   if contents["json"]["groupUpdate"]["initial"]
+        end
 
         return SettingsEventFact.new(channel: channel, event: event) if contents["json"]["settings-event"]
-
-        return BaseFact.new(channel: channel, event: event)          if contents["json"]["graph-update"].nil?
-        return AddGraphFact.new(channel: channel, event: event)      if contents["json"]["graph-update"]["add-graph"]
-        return AddNodesFact.new(channel: channel, event: event)      if contents["json"]["graph-update"]["add-nodes"]
-        return RemoveGraphFact.new(channel: channel, event: event)   if contents["json"]["graph-update"]["remove-graph"]
 
         return BaseFact.new(channel: channel, event: event)
       end
