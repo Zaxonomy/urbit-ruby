@@ -25,11 +25,11 @@ module Urbit
     end
 
     def host
-      self.path_tokens[2]
+      self.path_tokens[0]
     end
 
     def key
-      self.path_tokens[3]
+      self.path_tokens[1]
     end
 
     def path_tokens

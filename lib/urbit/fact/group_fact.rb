@@ -17,17 +17,11 @@ module Urbit
     class InitialGroupFact < GroupUpdateFact
       def initialize(channel:, event:)
         super channel: channel, event: event
-        self.group_hashes.each do |k, v|
-          self.channel.ship.add_group(Group.new(path: k, json: v))
-        end
+        self.parser.groups.each {|g| self.channel.ship.add_group(g)}
       end
 
       def parser
         Urbit::InitialGroupParser.new(with_json: self.raw_json)
-      end
-
-      def group_hashes
-        self.parser.group_hashes
       end
 
       def raw_json
