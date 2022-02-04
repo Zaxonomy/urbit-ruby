@@ -10,7 +10,7 @@ module Urbit
         @data = event.data
         @type = event.type
         # TODO: Remove this debugging once Facts are finalized. DJR 2/3/2022
-        # puts "Received a #{self.class.name.split('::').last} for [#{channel}] -- [#{@type}] -- [#{@data}]"
+        puts "Received a #{self.class.name.split('::').last} for [#{channel}] -- [#{@type}] -- [#{@data}]"
       end
 
       def add_ack(ack:)
@@ -55,6 +55,23 @@ module Urbit
 
       def to_s
         "a #{self.class.name}(#{self.to_h})"
+      end
+    end
+
+    class ErrorFact < BaseFact
+      def error
+        self.contents["err"]
+      end
+
+      def response
+        self.contents["response"]
+      end
+
+      def to_h
+        super.merge!({
+          error:    self.error,
+          response: self.response,
+        })
       end
     end
   end

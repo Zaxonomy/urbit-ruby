@@ -13,7 +13,7 @@ module Urbit
       #
       def collect(channel:, event:)
         contents = JSON.parse(event.data)
-        return BaseFact.new(channel: channel, event: event)          if contents["json"].nil?                           # TODO: This should be an ErrorFact. DJR 2/3/2022
+        return ErrorFact.new(channel: channel, event: event) if contents["json"].nil?
 
         if contents["json"]["graph-update"]
           return AddGraphFact.new(channel: channel, event: event)      if contents["json"]["graph-update"]["add-graph"]
