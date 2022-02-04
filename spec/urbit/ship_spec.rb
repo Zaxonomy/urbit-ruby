@@ -58,7 +58,8 @@ describe Urbit::Ship do
   it "can subscribe which opens a channel" do
     expect(ship.open_channels.size).to eq(0)
     ship.subscribe(app: 'graph-store', path: '/updates')
-    expect(ship.open_channels.size).to eq(1)
+    # This is 2 channels, not 1, because initializing the ship opens a channel for the Groups
+    expect(ship.open_channels.size).to eq(2)
 
     c = ship.open_channels.last
     expect(c).to be_instance_of(Urbit::Channel)
@@ -75,7 +76,7 @@ describe Urbit::Ship do
     ship.subscribe(app: 'graph-store', path: '/updates')
     c = ship.open_channels.last
     c.close
-    expect(ship.open_channels.size).to eq(0)
+    expect(ship.open_channels.size).to eq(1)
   end
 
   # ------------------------------------------------------------------
