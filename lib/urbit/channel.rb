@@ -21,7 +21,6 @@ module Urbit
     end
 
     def close
-      # puts "closing #{name}"
       m = Urbit::CloseMessage.new(channel: self)
       @is_open = !self.send(message: m)
     end

@@ -81,19 +81,7 @@ module Urbit
     # Answers a collection of all the Groups on this ship.
     # This collection is cached and will need to be invalidated to discover new Groups.
     #
-    def groups(flush_cache: false)
-      @groups = [] if flush_cache
-      if @groups.empty?
-        if self.logged_in?
-          self.subscribe(app: 'group-store', path: '/groups')
-          # if r[:body]
-          #   body = JSON.parse r[:body]
-          #   body["graph-update"]["keys"].each do |k|
-          #     @graphs << Graph.new(ship: self, graph_name: k["name"], host_ship_name: k["ship"])
-          #   end
-          # end
-        end
-      end
+    def groups
       @groups
     end
 
@@ -103,6 +91,7 @@ module Urbit
       ensure_connections_closed
       response = Faraday.post(login_url, "password=#{config.code}")
       parse_cookie(response)
+      self.groups_init
       self
     end
 
@@ -261,6 +250,15 @@ module Urbit
     def ensure_connections_closed
       # Make sure all our created channels are closed by the GC
       ObjectSpace.define_finalizer( self, self.class.finalize(channels) )
+    end
+
+    def groups_init
+      if @groups.empty?
+        if self.logged_in?
+          self.subscribe(app: 'group-store', path: '/groups')
+        end
+      end
+      nil
     end
 
     def login_url
