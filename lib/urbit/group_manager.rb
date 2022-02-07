@@ -27,6 +27,11 @@ module Urbit
       self.groups.select {|g| g.path == group_path}.first
     end
 
+    def join(host:, name:, share_contact: false, auto_join: false)
+      poke_msg = {join: {resource: {ship: "#{host}", name: "#{name}"}, ship: "#{host}", shareContact: share_contact, app: "groups", autojoin: auto_join}}
+      self.ship.poke(app: 'group-view', mark: 'group-view-action', message: poke_msg)
+    end
+
     def leave(group_path)
       g = self.find_by_path(group_path)
       leave_json = %Q({"leave": {"ship": "#{g.host}", "name": "#{g.key}"}})
