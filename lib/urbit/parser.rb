@@ -55,16 +55,6 @@ module Urbit
     end
   end
 
-  class InitialGroupParser < Parser
-    def groups
-      self.group_hashes.collect {|k, v| Group.new(path: k.sub('/ship/', ''), json: v)}
-    end
-
-    def group_hashes
-      @j
-    end
-  end
-
   class RemoveGraphParser < GraphParser
     def nodes_hash
       nil

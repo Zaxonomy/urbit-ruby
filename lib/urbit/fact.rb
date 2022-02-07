@@ -21,8 +21,9 @@ module Urbit
           return RemoveGraphFact.new(channel: channel, event: event)   if contents["json"]["graph-update"]["remove-graph"]
         end
 
-        if contents["json"]["groupUpdate"]
-          return InitialGroupFact.new(channel: channel, event: event)   if contents["json"]["groupUpdate"]["initial"]
+        if (c = contents["json"]["groupUpdate"])
+          return InitialGroupFact.new(channel: channel, event: event)      if c["initial"]
+          return InitialGroupGroupFact.new(channel: channel, event: event) if c["initialGroup"]
         end
 
         return SettingsEventFact.new(channel: channel, event: event) if contents["json"]["settings-event"]

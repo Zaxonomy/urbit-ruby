@@ -1,0 +1,119 @@
+{
+      "groupUpdate": {
+        "initialGroup": {
+          "resource": {
+            "name": "interface-testing-facility",
+            "ship": "fabled-faster"
+          },
+          "group": {
+            "tags": {
+              "graph\\writers\\/ship/~fabled-faster/testing-facility-announcements-5039": [
+                "fabled-faster"
+              ],
+              "graph\\writers\\/ship/~hastuc-dibtux/test-chat-b-6833": [],
+              "admin": [
+                "radbur-sivmus",
+                "fabled-faster",
+                "hastuc-dibtux"
+              ]
+            },
+            "policy": {
+              "open": {
+                "banned": [],
+                "banRanks": []
+              }
+            },
+            "members": [
+              "tomder-moptyc",
+              "tacryt-socryp",
+              "biltem-lacsel-rinrum-ticnym--padmes-dacdys-dablec-binzod",
+              "tasdul-fanlec",
+              "normul-postem",
+              "digrel-sidmex",
+              "nodreb-borrus",
+              "risruc-habteb",
+              "nocsyx-lassul",
+              "difter-locsub-natsec-ponleg--pocryd-sitnys-wicsym-samzod",
+              "ralter-nosdeb",
+              "littel-hastuc-dibtux",
+              "ronreg-ribdev",
+              "midter-larfyl",
+              "mornut-baller",
+              "marzod-hopweb",
+              "midlev-mindyr",
+              "modmes-livheb",
+              "milbyt-moszod",
+              "lapmet-dotsem",
+              "bosser-hatber",
+              "wicdev-wisryt",
+              "hospub-tallux-wicsul-witput--dilmud-finwyx-lartyd-samzod",
+              "hodler-hastuc-dibtux",
+              "riprud-tidmel",
+              "locrev-finlys",
+              "sipfyn-pidmex",
+              "natryc-ladrup-fopbet-pagpun--laclus-ractes-pinryn-wanzod",
+              "novlud-padtyv",
+              "bacsec-nartex",
+              "banwes-faddyr",
+              "fosrud-ramlex-livrep-davtep--hidlyt-tamnet-nopsub-marzod",
+              "marpem",
+              "locsur-pitnul-nocsyx-lassul",
+              "sigmes-modfyn",
+              "hosnes-dacrys-nocsyx-lassul",
+              "soches-pilled",
+              "simfur-ritwed",
+              "samner-habfex-dildyn-tabpyx--lacdus-barpen-latwed-marzod",
+              "sopryx-mipsun",
+              "radbur-sivmus",
+              "marryp-worryd",
+              "dondyl-watryp",
+              "wiczod-hacmes",
+              "habsul-rignyr",
+              "sibpec-wacsef-tamsub-sonled--tidwer-nispex-sigbyl-samzod",
+              "hacres-binryt-nocsyx-lassul",
+              "barsyr-latreb",
+              "nopmex-ricmel",
+              "timbur-fogluc-pagtus-bandel--dotmer-pagdex-lavtux-litzod",
+              "torrup-nomsem-palhes-wanfes--tantex-wolned-fitfus-litzod",
+              "fogset-walrus",
+              "fabled-faster",
+              "naltyc-wornes",
+              "ridlur-figbud",
+              "toctyp-rivpyx-pasnep-fitsem--biltux-forper-napnep-binzod",
+              "narbes-ponrex",
+              "finned-palmer",
+              "mintep-hobreb-sarmec-lagdep--tilsyx-hopfed-santun-binzod",
+              "fotryt-nidmes",
+              "sipsen-pilser",
+              "satser-losred-bidneb-sillus--winbep-hilfed-polrev-marzod",
+              "sicrep-docrem",
+              "mocrux-nomdep",
+              "hadbur-sarpub",
+              "witfyl-ravped",
+              "mintyr-ravwer-tobpex-wolrel--sicnyl-rabbyr-mitnes-marzod",
+              "bacful-mapsyn",
+              "rostex-talsyn-soclys-taltem--silrum-doclup-nollyd-marzod",
+              "sorpex-fighut",
+              "haddef-sigwen",
+              "forfel-norfel",
+              "dabben-larbet",
+              "hastuc-dibtux",
+              "lorfeb-taglut",
+              "halfyl-firmev",
+              "fotrev-master",
+              "fallyn-balfus",
+              "bisfun-hatfes",
+              "winter-paches",
+              "hallen-solpem",
+              "litnes-ravlev",
+              "lomped-firser"
+            ],
+            "hidden": false
+          }
+        }
+      }
+    },
+    "id": 1,
+    "response": "diff"
+  }
+]

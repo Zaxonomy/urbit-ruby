@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'urbit/group'
+require 'urbit/group_parser'
 
 module Urbit
   module Fact
@@ -17,7 +18,7 @@ module Urbit
     class InitialGroupFact < GroupUpdateFact
       def initialize(channel:, event:)
         super channel: channel, event: event
-        self.parser.groups.each {|g| self.channel.ship.group_mgr.add(g)}
+        self.parser.groups.each {|g| self.channel.ship.groups.add(g)}
       end
 
       def parser
@@ -29,5 +30,20 @@ module Urbit
       end
     end
 
+
+    class InitialGroupGroupFact < GroupUpdateFact
+      def initialize(channel:, event:)
+        super channel: channel, event: event
+        self.channel.ship.groups.add(self.parser.group)
+      end
+
+      def parser
+        Urbit::InitialGroupGroupParser.new(with_json: self.raw_json)
+      end
+
+      def raw_json
+        self.root_h["initialGroup"]
+      end
+    end
   end # Module Fact
 end # Module Urbit
