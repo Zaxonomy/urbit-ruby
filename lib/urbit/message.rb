@@ -26,7 +26,7 @@ module Urbit
     end
 
     def request_body
-      self.to_a.to_json
+      JSON.generate(self.to_a)
     end
 
     def ship
