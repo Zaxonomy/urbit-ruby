@@ -72,11 +72,11 @@ module Urbit
     end
 
     #
-    # Answers a collection of all the Groups on this ship.
-    # This collection is cached and will need to be invalidated to discover new Groups.
+    # Answers the object managing the Groups on this ship.
+    # This object provides all the helper methods to list, join, leave, &c. a Group
     #
     def groups
-      @group_mgr.groups
+      @group_mgr
     end
 
     def login

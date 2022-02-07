@@ -30,13 +30,18 @@ module Urbit
     def join(host:, name:, share_contact: false, auto_join: false)
       poke_msg = {join: {resource: {ship: "#{host}", name: "#{name}"}, ship: "#{host}", shareContact: share_contact, app: "groups", autojoin: auto_join}}
       self.ship.poke(app: 'group-view', mark: 'group-view-action', message: poke_msg)
+      nil
     end
 
-    def leave(group_path)
-      g = self.find_by_path(group_path)
-      leave_json = %Q({"leave": {"ship": "#{g.host}", "name": "#{g.key}"}})
+    def leave(group:)
+      leave_json = %Q({"leave": {"ship": "#{group.host}", "name": "#{group.key}"}})
       self.ship.spider(mark_in: 'group-view-action', mark_out: 'json', thread: 'group-leave', data: leave_json)
-      @groups = self.groups.filter {|g| g.path != group_path}
+      @groups = self.groups.filter {|g| g != group}
+      nil
+    end
+
+    def list
+      self.groups
     end
 
     def load

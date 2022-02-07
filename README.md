@@ -190,6 +190,34 @@ a Node({:index=>"170.141.184.505.209.627.337.970.761.265.544.429.568", :author=>
 
 #
 # --------------------------------------------------------------------
+# %group-store
+# --------------------------------------------------------------------
+#
+> ship.groups.list.sort.each {|g| puts g};
+a Group(~barsyr-latreb/test0-996)
+a Group(~barsyr-latreb/test1-4287)
+a Group(~bitbet-bolbel/urbit-community)
+a Group(~darlur/aries)
+**a Group(~fabled-faster/interface-testing-facility)**
+a Group(~tirrel/the-marketplace)
+a Group(~winter-paches/the-great-north)
+
+> ship.groups.leave(group: ship.group(path: "~fabled-faster/interface-testing-facility"))
+=>
+
+> ship.groups.list.sort.each {|g| puts g};
+a Group(~barsyr-latreb/test0-996)
+a Group(~barsyr-latreb/test1-4287)
+a Group(~bitbet-bolbel/urbit-community)
+a Group(~darlur/aries)
+a Group(~tirrel/the-marketplace)
+a Group(~winter-paches/the-great-north)
+
+> ship.groups.join(host: "~fabled-faster", name: "interface-testing-facility")
+
+
+#
+# --------------------------------------------------------------------
 # %settings-store
 # --------------------------------------------------------------------
 #
