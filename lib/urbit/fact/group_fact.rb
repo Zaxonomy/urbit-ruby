@@ -17,7 +17,7 @@ module Urbit
     class InitialGroupFact < GroupUpdateFact
       def initialize(channel:, event:)
         super channel: channel, event: event
-        self.parser.groups.each {|g| self.channel.ship.add_group(g)}
+        self.parser.groups.each {|g| self.channel.ship.group_mgr.add(g)}
       end
 
       def parser

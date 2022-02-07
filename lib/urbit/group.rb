@@ -2,6 +2,7 @@
 
 module Urbit
   class Group
+     attr_accessor :ship
      attr_reader :hidden, :members, :path
 
     def initialize(path:, json:)
@@ -17,7 +18,7 @@ module Urbit
     end
 
     def <=>(another_group)
-      self.key <=> another_group.key
+      self.path <=> another_group.path
     end
 
     def eql?(another_group)
@@ -56,7 +57,7 @@ module Urbit
     end
 
     def to_s
-      "a Group(#{self.to_h})"
+      "a Group(#{self.path})"
     end
   end
 end

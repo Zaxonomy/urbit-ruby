@@ -3,32 +3,26 @@ require 'faraday'
 require 'urbit/channel'
 require 'urbit/config'
 require 'urbit/graph'
+require 'urbit/group_manager'
 require 'urbit/setting'
 
 module Urbit
   class Ship
     attr_accessor :logged_in
-    attr_reader :auth_cookie, :channels, :config
+    attr_reader :auth_cookie, :channels, :config, :group_mgr
 
     def initialize(config: Config.new)
       @auth_cookie = nil
       @channels    = []
       @config      = config
       @graphs      = []
-      @groups      = []
+      @group_mgr   = GroupManager.new ship: self
       @settings    = []
       @logged_in   = false
     end
 
     def self.finalize(channels)
       proc { channels.each { |c| c.close } }
-    end
-
-    #
-    # Sets the Group uniquely keyed by path:
-    #
-    def add_group(a_group)
-      @groups << a_group
     end
 
     def logged_in?
@@ -74,7 +68,7 @@ module Urbit
     # Answers the Group uniquely keyed by path:, if it exists
     #
     def group(path:)
-      @groups.first {|g| g.path == path}
+      @group_mgr.find_by_path(path)
     end
 
     #
@@ -82,7 +76,7 @@ module Urbit
     # This collection is cached and will need to be invalidated to discover new Groups.
     #
     def groups
-      @groups
+      @group_mgr.groups
     end
 
     def login
@@ -91,7 +85,7 @@ module Urbit
       ensure_connections_closed
       response = Faraday.post(login_url, "password=#{config.code}")
       parse_cookie(response)
-      self.groups_init
+      @group_mgr.load
       self
     end
 
@@ -250,15 +244,6 @@ module Urbit
     def ensure_connections_closed
       # Make sure all our created channels are closed by the GC
       ObjectSpace.define_finalizer( self, self.class.finalize(channels) )
-    end
-
-    def groups_init
-      if @groups.empty?
-        if self.logged_in?
-          self.subscribe(app: 'group-store', path: '/groups')
-        end
-      end
-      nil
     end
 
     def login_url
