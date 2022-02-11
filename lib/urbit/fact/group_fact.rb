@@ -15,6 +15,21 @@ module Urbit
       end
     end
 
+    class AddGroupFact < GroupUpdateFact
+      def initialize(channel:, event:)
+        super channel: channel, event: event
+        self.channel.ship.groups.add(self.parser.group)
+      end
+
+      def parser
+        Urbit::AddGroupParser.new(with_json: self.raw_json)
+      end
+
+      def raw_json
+        self.root_h["addGroup"]
+      end
+    end
+
     class InitialGroupFact < GroupUpdateFact
       def initialize(channel:, event:)
         super channel: channel, event: event

@@ -1,91 +1,34 @@
-Received a Fact for [a Channel (Open) on ~zod(name: 'Channel-0', key: '16438169911fa3fc')
-] -- [message
-] -- [
-  {
-    "json": {
-      "groupUpdate": {
-        "addMembers": {
-          "ships": [
-            "zod"
-          ],
-          "resource": {
-            "name": "test",
-            "ship": "zod"
-          }
-        }
+// Request
+{
+  "create": {
+    "name": "new-group",
+    "policy": {
+      "open": {
+        "banRanks": [],
+        "banned": []
       }
     },
-    "id": 1,
-    "response": "diff"
+    "title": "new-group",
+    "description": "great new group"
   }
-]
-Received a Fact for [a Channel (Open) on ~zod(name: 'Channel-0', key: '16438169911fa3fc')
-] -- [message
-] -- [
-  {
-    "json": {
-      "groupUpdate": {
-        "addGroup": {
-          "policy": {
-            "invite": {
-              "pending": []
-            }
-          },
-          "resource": {
-            "name": "test",
-            "ship": "zod"
-          },
-          "hidden": false
-        }
-      }
-    },
-    "id": 1,
-    "response": "diff"
-  }
-]
+}
 
-Received a Fact for [a Channel (Open) on ~zod(name: 'Channel-0', key: '16438169911fa3fc')
-] -- [message
-] -- [
-  {
-    "json": {
-      "groupUpdate": {
-        "addMembers": {
-          "ships": [
-            "zod"
-          ],
-          "resource": {
-            "name": "test",
-            "ship": "zod"
+// Response
+{
+  "json": {
+    "groupUpdate": {
+      "addGroup": {
+        "policy": {
+          "open": {
+            "banned": [],
+            "banRanks": []
           }
-        }
+        },
+        "resource": {
+          "name": "new-group",
+          "ship": "barsyr-latreb"
+        },
+        "hidden": false
       }
-    },
-    "id": 1,
-    "response": "diff"
+    }
   }
-]
-Received a Fact for [a Channel (Open) on ~zod(name: 'Channel-0', key: '16438169911fa3fc')
-] -- [message
-] -- [
-  {
-    "json": {
-      "groupUpdate": {
-        "addGroup": {
-          "policy": {
-            "invite": {
-              "pending": []
-            }
-          },
-          "resource": {
-            "name": "test",
-            "ship": "zod"
-          },
-          "hidden": false
-        }
-      }
-    },
-    "id": 1,
-    "response": "diff"
-  }
-]

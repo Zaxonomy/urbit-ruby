@@ -3,6 +3,29 @@
 require 'urbit/parser'
 
 module Urbit
+
+  class AddGroupParser < Parser
+    def group
+      Urbit::Group.new(path:    self.resource,
+                       members: [],
+                       policy:  @j["policy"],
+                       tags:    [],
+                       hidden:  @j["hidden"])
+    end
+
+    def group_hash
+      @j["group"]
+    end
+
+    def resource
+      "~#{self.resource_hash["ship"]}/#{self.resource_hash["name"]}"
+    end
+
+    def resource_hash
+      @j["resource"]
+    end
+  end
+
   class InitialGroupParser < Parser
     def groups
       self.group_hashes.collect {|k, v| Group.new(path:    k.sub('/ship/', ''),
