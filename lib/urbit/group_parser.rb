@@ -4,25 +4,23 @@ require 'urbit/parser'
 
 module Urbit
 
-  class AddGroupParser < Parser
-    def group
-      Urbit::Group.new(path:    self.resource,
-                       members: [],
-                       policy:  @j["policy"],
-                       tags:    [],
-                       hidden:  @j["hidden"])
-    end
-
-    def group_hash
-      @j["group"]
-    end
-
+  class GroupParser < Parser
     def resource
       "~#{self.resource_hash["ship"]}/#{self.resource_hash["name"]}"
     end
 
     def resource_hash
       @j["resource"]
+    end
+  end
+
+  class AddGroupParser < GroupParser
+    def group
+      Urbit::Group.new(path:    self.resource,
+                       members: [],
+                       policy:  @j["policy"],
+                       tags:    [],
+                       hidden:  @j["hidden"])
     end
   end
 
@@ -40,7 +38,7 @@ module Urbit
     end
   end
 
-  class InitialGroupGroupParser < Parser
+  class InitialGroupGroupParser < GroupParser
     def group
       Urbit::Group.new(path:    self.resource,
                        members: self.group_hash["members"],
@@ -51,14 +49,6 @@ module Urbit
 
     def group_hash
       @j["group"]
-    end
-
-    def resource
-      "~#{self.resource_hash["ship"]}/#{self.resource_hash["name"]}"
-    end
-
-    def resource_hash
-      @j["resource"]
     end
   end
 
