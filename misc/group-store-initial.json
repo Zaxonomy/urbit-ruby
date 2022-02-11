@@ -1,2271 +1,144 @@
-// Received a Fact for [a Channel (Open) on ~zod(name: 'Channel-0', key: '16438169911fa3fc')
+// Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '1643817958e6e77f')
 // ] -- [message
 // ] -- [
-//   {
-// "json":
-    {
+  {
+    "ok": "ok",
+    "id": 1,
+    "response": "subscribe"
+  }
+]
+// Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '1643817958e6e77f')
+// ] -- [message
+// ] -- [
+  {
+    "json": {
       "groupUpdate": {
         "initial": {
-          "/ship/~zod/47ec16b22d": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/38c7059e8e": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/a75c2ad35e": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/f00e1cee79": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/b74ae740b8": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/e0f34aaac3": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/d9795fa4fe": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/f77af99f0c": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/cf8d1160f3": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/6361d959f9": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/fdc10f3ac0": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/c1142df2e8": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/01cb14ebc9": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/3a7827acf1": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/b90d04fa00": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/141411e575": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/35ac1c8ecc": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/9afb8cea09": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/894fae3154": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/34074ff077": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/931ccc4657": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/1ccfb96b65": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/b250c01f65": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/cfb0c61487": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/6c91b6444c": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/d200608ffc": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/deea53392c": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/a6edd614fd": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/646989ac6e": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/40636d1e4d": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/3f3d98944c": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/f80a40ed0d": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/5ffb5cfc4f": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/87d26e119b": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4a4c9e6714": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/c825593604": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4dcbc3200d": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/76382883da": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/91f78a3b97": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/e2a4c5d107": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/662790628b": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/f805459ce1": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/b1ed0f91de": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/e8f792599f": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4af5d413d0": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/d5434234e0": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/093f7f35da": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/91381257c6": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/c6a5ffd961": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/18d42a9565": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/92d77b5050": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/47b4972052": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/e8a68737a4": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/9546493e52": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/49fbb4745b": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/96ce4b0537": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/be866893dc": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/720e0e92ab": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/3480065046": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/758a56ea94": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/797e16af8e": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/6a18465f97": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/04a2e041fd": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/386c3ea460": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/b91a7aaf41": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4f559e6d97": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/e4d9430ccb": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/244f41a00d": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/a43d0b1f1e": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/1507701be2": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/f5cef4dd66": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/02a9c893f4": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/7681340bb1": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/c6ea119485": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/cfdc1537cd": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/df6984a4a9": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/7251eb9d38": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/db81d80d75": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/1712442198": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/af06d66e7b": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/9057dd8782": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4aca9f31b5": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/0e3ee841e5": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4d328e3656": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/6acb91b270": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4c43a230f5": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/0cc3e908a7": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/a9069dc99a": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/157c76a861": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/d3bb7e28c4": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/026bf1f10f": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4b63dca917": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4db04d04d4": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/d78c56ae97": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/91e3463637": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/65b54e6747": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/2b7ac994c0": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/ac9c8a778c": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/7941c965cd": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/32d0259767": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/17135e2898": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/87479860e1": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/a94de5b7d9": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/175344a54b": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/5add2bbb69": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/553aa0a48e": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/73eda6ef16": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/1f54a04a24": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/b9853821e1": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/ddccd60c99": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/22fcdf275a": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4901565a7c": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/fab2f90e42": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/09d5082195": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/d18794cc2c": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/5d02f97f21": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/98f4c5e502": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/65fd61a520": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/9148b00d40": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/a4337bdb27": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/3c259a882a": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/04438bdfd5": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4d77afb669": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/ba2e370cfc": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/113025c016": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/d6d51fdcc5": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/5275c5df94": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4321bbf75b": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/90f086159e": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/ebcd441a40": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/88ee089aae": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/8036ebd7ce": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/312f96bc3d": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/d3712a424f": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/a8a0435c32": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/4e93c8e75b": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/c846455b2a": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/9a14b343fe": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/f95180fffd": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/58cfdc4a7f": {
-            "tags": {
-              "admin": [
-                "zod"
-              ]
-            },
-            "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
-          },
-          "/ship/~zod/26e237aa80": {
-            "tags": {
-              "admin": [
-                "zod"
+          "/ship/~darlur/aries": {
+            "tags": {
+              "admin": [
+                "darlur",
+                "winter-paches"
+              ]
+            },
+            "policy": {
+              "invite": {
+                "pending": [
+                  "sitdeg-fannyr",
+                  "niblys-holbyt",
+                  "tanwed-ponfet",
+                  "sicdeg-mapmeg",
+                  "hanrun-winter"
+                ]
+              }
+            },
+            "members": [
+              "tirwyd-sarmes",
+              "darlur",
+              "parlex-migref",
+              "ronful-dorsym",
+              "sitdeg-fannyr",
+              "dirres-dindeg",
+              "barsyr-latreb",
+              "winduc-dozser",
+              "sicdeg-mapmeg",
+              "hosneb-rosler",
+              "winter-paches"
+            ],
+            "hidden": false
+          },
+          "/ship/~winter-paches/the-great-north": {
+            "tags": {
+              "graph\\writers\\/ship/~winter-paches/winter-is-here": [
+                "winter-paches"
+              ],
+              "admin": [
+                "winter-paches"
               ]
             },
             "policy": {
-              "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
+              "open": {
+                "banned": [],
+                "banRanks": [
+                  "pawn"
+                ]
+              }
+            },
+            "members": [
+              "bordex-ripdur",
+              "sarlev-sarsen",
+              "pathus-hiddyn",
+              "nacdel-picryl",
+              "tasdul-fanlec",
+              "nodreb-borrus",
+              "risruc-habteb",
+              "sitful-hatred",
+              "sicdev-pilnup",
+              "tidpex-halsed",
+              "sorfel-dalsub",
+              "botwer-torsen",
+              "wanhus-battul",
+              "minder-folden",
+              "milbyt-moszod",
+              "sitbet-hiddys",
+              "tocrex-holpen",
+              "nidsyp-widsum",
+              "pidpub-siltex",
+              "sitsev-lomrem",
+              "sarpen-laplux",
+              "dopsel-patryx-loptyr-mipfyr--ravwyd-pacrel-waller-wanzod",
+              "master-lardyr",
+              "fitsec-dasdut",
+              "soches-pilled",
+              "simfur-ritwed",
+              "tanwyd-togdel",
+              "batbus-finfyn",
+              "mosfet-novpet",
+              "rinhut-loprux-nartes-fasrum",
+              "talleg-botsug",
+              "findeg-tidtec",
+              "barsyr-latreb",
+              "hardux-rigdel",
+              "tanwed-ponfet",
+              "dispen-bidnyr",
+              "rivlyt-dotnet",
+              "bilbus-hinryl",
+              "tirlyn-todnex",
+              "radtem-marsyx",
+              "dolret-lacdyr-nartes-fasrum",
+              "hosneb-rosler",
+              "racset-naltux",
+              "labmut-ripsec",
+              "tasnys-larper",
+              "botter-nidnul",
+              "daplyt-dopnut",
+              "palfun-foslup",
+              "mocrux-nomdep",
+              "modwex-ramnux",
+              "witfyl-ravped",
+              "ronmus-ridpur",
+              "lagsel-ragsyp",
+              "marred-libnem",
+              "dovwer-sipdep",
+              "lorfeb-taglut",
+              "datder-sonnet",
+              "lonwyc-datmyn",
+              "littel-wolfur",
+              "fansym-tasden",
+              "winter-paches",
+              "navluc-latmes",
+              "mallus-fabres-silsyn-wathep",
+              "tacduc-hobrum",
+              "poldec-tonteg",
+              "harsem-ribryn",
+              "minwyx-pocnys"
             ],
-            "hidden": true
+            "hidden": false
           },
-          "/ship/~zod/e2abaf3002": {
+          "/ship/~barsyr-latreb/test0-996": {
             "tags": {
               "admin": [
-                "zod"
+                "barsyr-latreb"
               ]
             },
             "policy": {
@@ -2274,41 +147,192 @@
               }
             },
             "members": [
-              "zod"
+              "barsyr-latreb"
             ],
             "hidden": true
           },
-          "/ship/~zod/4496f7995d": {
+          "/ship/~bitbet-bolbel/urbit-community": {
             "tags": {
               "admin": [
-                "zod"
+                "ravmel-ropdyl",
+                "wicdev-wisryt",
+                "bitbet-bolbel",
+                "riprud-tidmel",
+                "wolref-podlex",
+                "simfur-ritwed",
+                "darrux-landes",
+                "nibset-napwyn",
+                "difmex-passed",
+                "bitpyx-dildus",
+                "holfyn-doslyx",
+                "dabben-larbet",
+                "hastuc-dibtux"
               ]
             },
             "policy": {
-              "invite": {
-                "pending": []
+              "open": {
+                "banned": [
+                  "sictuc-pasfel-tachus-pocryg--watnut-banmev-partyl-samzod",
+                  "tolnem-sochus-nodsyl-rivsyp--mocrum-hopwer-dibtul-marzod",
+                  "riglyd-worsub-pilrum-hapfyr--dotnep-toppub-wacdef-wanzod",
+                  "wiczod-hacmes",
+                  "novmut-locfun-posfep-sapwyn--torhul-havmeb-rapdex-marzod",
+                  "radlut-hocreb-dotwer-borwyc--tadsup-tamsec-fonsul-samzod"
+                ],
+                "banRanks": []
               }
             },
             "members": [
-              "zod"
+              "modtec-halsyr",
+              "patpyx-napdes",
+              "pacfel-tilweg",
+              "dosnyt-londus",
+              "haphet-saptus-bolfen-fadmep--topmes-timsec-finter-samzod"
             ],
-            "hidden": true
+            "hidden": false
           },
-          "/ship/~zod/57514736e5": {
+          "/ship/~barsyr-latreb/test1-4287": {
             "tags": {
               "admin": [
-                "zod"
+                "barsyr-latreb"
               ]
             },
             "policy": {
               "invite": {
-                "pending": []
-              }
-            },
-            "members": [
-              "zod"
-            ],
-            "hidden": true
+                "pending": []
+              }
+            },
+            "members": [
+              "barsyr-latreb"
+            ],
+            "hidden": true
+          },
+          "/ship/~fabled-faster/interface-testing-facility": {
+            "tags": {
+              "graph\\writers\\/ship/~fabled-faster/testing-facility-announcements-5039": [
+                "fabled-faster"
+              ],
+              "graph\\writers\\/ship/~hastuc-dibtux/test-chat-b-6833": [],
+              "admin": [
+                "radbur-sivmus",
+                "fabled-faster",
+                "hastuc-dibtux"
+              ]
+            },
+            "policy": {
+              "open": {
+                "banned": [],
+                "banRanks": []
+              }
+            },
+            "members": [
+              "tomder-moptyc",
+              "tacryt-socryp",
+              "biltem-lacsel-rinrum-ticnym--padmes-dacdys-dablec-binzod",
+              "tasdul-fanlec",
+              "normul-postem",
+              "digrel-sidmex",
+              "nodreb-borrus",
+              "risruc-habteb",
+              "nocsyx-lassul",
+              "difter-locsub-natsec-ponleg--pocryd-sitnys-wicsym-samzod",
+              "ralter-nosdeb",
+              "littel-hastuc-dibtux",
+              "torret-ridpen",
+              "ronreg-ribdev",
+              "midter-larfyl",
+              "mornut-baller",
+              "marzod-hopweb",
+              "midlev-mindyr",
+              "modmes-livheb",
+              "milbyt-moszod",
+              "lapmet-dotsem",
+              "bosser-hatber",
+              "wicdev-wisryt",
+              "hospub-tallux-wicsul-witput--dilmud-finwyx-lartyd-samzod",
+              "hodler-hastuc-dibtux",
+              "riprud-tidmel",
+              "locrev-finlys",
+              "sipfyn-pidmex",
+              "natryc-ladrup-fopbet-pagpun--laclus-ractes-pinryn-wanzod",
+              "novlud-padtyv",
+              "banwes-faddyr",
+              "fosrud-ramlex-livrep-davtep--hidlyt-tamnet-nopsub-marzod",
+              "marpem",
+              "locsur-pitnul-nocsyx-lassul",
+              "sigmes-modfyn",
+              "hosnes-dacrys-nocsyx-lassul",
+              "soches-pilled",
+              "simfur-ritwed",
+              "samner-habfex-dildyn-tabpyx--lacdus-barpen-latwed-marzod",
+              "sopryx-mipsun",
+              "radbur-sivmus",
+              "marryp-worryd",
+              "dondyl-watryp",
+              "wiczod-hacmes",
+              "habsul-rignyr",
+              "sibpec-wacsef-tamsub-sonled--tidwer-nispex-sigbyl-samzod",
+              "hacres-binryt-nocsyx-lassul",
+              "barsyr-latreb",
+              "nopmex-ricmel",
+              "timbur-fogluc-pagtus-bandel--dotmer-pagdex-lavtux-litzod",
+              "torrup-nomsem-palhes-wanfes--tantex-wolned-fitfus-litzod",
+              "fogset-walrus",
+              "fabled-faster",
+              "naltyc-wornes",
+              "ridlur-figbud",
+              "toctyp-rivpyx-pasnep-fitsem--biltux-forper-napnep-binzod",
+              "narbes-ponrex",
+              "finned-palmer",
+              "mintep-hobreb-sarmec-lagdep--tilsyx-hopfed-santun-binzod",
+              "fotryt-nidmes",
+              "sipsen-pilser",
+              "satser-losred-bidneb-sillus--winbep-hilfed-polrev-marzod",
+              "sicrep-docrem",
+              "mocrux-nomdep",
+              "hadbur-sarpub",
+              "witfyl-ravped",
+              "mintyr-ravwer-tobpex-wolrel--sicnyl-rabbyr-mitnes-marzod",
+              "bacful-mapsyn",
+              "rostex-talsyn-soclys-taltem--silrum-doclup-nollyd-marzod",
+              "sorpex-fighut",
+              "haddef-sigwen",
+              "forfel-norfel",
+              "dabben-larbet",
+              "hastuc-dibtux",
+              "lorfeb-taglut",
+              "halfyl-firmev",
+              "fotrev-master",
+              "fallyn-balfus",
+              "bisfun-hatfes",
+              "winter-paches",
+              "hallen-solpem",
+              "litnes-ravlev",
+              "lomped-firser"
+            ],
+            "hidden": false
+          }
+        }
+      }
+    },
+    "id": 1,
+    "response": "diff"
+  }
+]
+
+Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '1643817958e6e77f')
+] -- [message
+] -- [
+  {
+    "json": {
+      "groupUpdate": {
+        "addMembers": {
+          "ships": [
+            "digmev-savrec"
+          ],
+          "resource": {
+            "name": "urbit-community",
+            "ship": "bitbet-bolbel"
           }
         }
       }

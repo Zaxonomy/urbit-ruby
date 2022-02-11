@@ -50,5 +50,9 @@ module Urbit
       end
       nil
     end
+
+    def to_s
+      self.list.sort.each {|g| puts g}
+    end
   end
 end

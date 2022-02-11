@@ -48,9 +48,9 @@ describe Urbit::Ship do
     expect(ship.to_s).to eq('a Ship({:name=>"~zod", :host=>"http://localhost", :port=>"8080"})')
   end
 
-  # ------------------------------------------------------------------
-  # Subscribing
-  # ------------------------------------------------------------------
+#   # ------------------------------------------------------------------
+#   # Subscribing
+#   # ------------------------------------------------------------------
   it "can subscribe" do
     expect(channel = ship.subscribe(app: 'graph-store', path: '/updates')).to_not be_nil
   end
@@ -79,9 +79,9 @@ describe Urbit::Ship do
     expect(ship.open_channels.size).to eq(1)
   end
 
-  # ------------------------------------------------------------------
-  # Poke
-  # ------------------------------------------------------------------
+#   # ------------------------------------------------------------------
+#   # Poke
+#   # ------------------------------------------------------------------
   it "can initiate a DM by poking the %hood app with a message using the %helm-hi mark" do
     poke_channel = ship.poke(app: 'hood', mark: 'helm-hi', message: 'Opening Airlock')
     expect(poke_channel.subscribed?)
@@ -216,9 +216,9 @@ end
   #   assert c.closed?
   # end
 
-  # ------------------------------------------------------------------
-  # Graph Store
-  # ------------------------------------------------------------------
+#   # ------------------------------------------------------------------
+#   # Graph Store
+#   # ------------------------------------------------------------------
   it "has an empty collection of Graphs if never logged in" do
     expect(ship.logged_in?).to be false
     expect(ship.graphs).to be_empty
@@ -242,6 +242,19 @@ end
     # Clean up
     ship.remove_graph(graph: new_graph)
   end
+
+  # ------------------------------------------------------------------
+  # Group Store
+  # ------------------------------------------------------------------
+#  leave_json = %q({"leave": {{"ship": "~bitbet-bolbel", "name": "urbit-community"}})
+#  ship.spider(desk: 'landscape', mark_in: 'group-view-action', mark_out: 'json', thread: 'group-leave', data: %q({"leave": {"ship":"~bitbet-bolbel", "name":"urbit-community"}}))
+
+#  ship.poke(app: 'group-view', mark: 'group-view-action', message: {join: {resource: {ship: '~fabled-faster', name: 'interface-testing-facility'}, ship: '~fabled-faster', shareContact: false, app: 'groups', autojoin: false}})
+#  ship.poke(app: 'group-view', mark: 'group-view-action', message: {done: "/ship/~fabled-faster/interface-testing-facility"})
+#
+# leave_json_string = %q({"leave": {"ship": "~fabled-faster", "name": "interface-testing-facility"}})
+# ship.spider(desk: 'landscape', mark_in: 'group-view-action', mark_out: 'json', thread: 'group-leave', data: leave_json_string)
+# ship.spider(desk: 'landscape', mark_in: 'group-view-action', mark_out: 'json', thread: 'group-leave', data: %q({"leave": {"ship": "~fabled-faster", "name": "interface-testing-facility"}}))
 
   # ------------------------------------------------------------------
   # Settings Store

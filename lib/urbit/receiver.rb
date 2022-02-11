@@ -8,7 +8,6 @@ module Urbit
     attr_accessor :facts
 
     def initialize(channel:)
-      @facts = []
       super(channel.url, {headers: self.headers(channel)}) do |rec|
         # We are now listening on a socket for SSE::Events. This block will be called for each one.
         rec.on_event do |event|
@@ -25,6 +24,8 @@ module Urbit
           self.facts += ["I received an error fact: #{error.class}"]
         end
       end
+
+      @facts   = []
       @is_open = true
     end
 
