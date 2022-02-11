@@ -5,7 +5,11 @@ require 'urbit/parser'
 module Urbit
   class InitialGroupParser < Parser
     def groups
-      self.group_hashes.collect {|k, v| Group.new(path: k.sub('/ship/', ''), json: v)}
+      self.group_hashes.collect {|k, v| Group.new(path:    k.sub('/ship/', ''),
+                                                  members: v["members"],
+                                                  policy:  v["policy"],
+                                                  tags:    v["tags"],
+                                                  hidden:  v["hidden"])}
     end
 
     def group_hashes
@@ -15,7 +19,11 @@ module Urbit
 
   class InitialGroupGroupParser < Parser
     def group
-      Urbit::Group.new(path: self.resource, json: self.group_hash)
+      Urbit::Group.new(path:    self.resource,
+                       members: self.group_hash["members"],
+                       policy:  self.group_hash["policy"],
+                       tags:    self.group_hash["tags"],
+                       hidden:  self.group_hash["hidden"])
     end
 
     def group_hash

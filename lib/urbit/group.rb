@@ -5,12 +5,12 @@ module Urbit
      attr_accessor :ship
      attr_reader :hidden, :members, :path
 
-    def initialize(path:, json:)
-      @hidden  = json["hidden"]
-      @members = json["members"]
+    def initialize(path:, members:, policy:, tags:, hidden:)
+      @hidden  = hidden
+      @members = members
       @path    = path
-      @policy  = json["policy"]
-      @tags    = json["tags"]
+      @policy  = policy
+      @tags    = tags
     end
 
     def ==(another_group)
