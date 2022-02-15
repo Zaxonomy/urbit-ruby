@@ -36,7 +36,9 @@ module Urbit
     # Answers the Group uniquely keyed by path:, if it exists
     #
     def find(path:)
-      self.groups.select {|g| g.path == group_path}.first
+      g = self.groups.select {|g| g.path == path}.first
+      g.manager = self
+      g
     end
 
     def first
@@ -66,6 +68,10 @@ module Urbit
       nil
     end
 
+    def spider(thread, data)
+      self.ship.spider(mark_in: 'group-view-action', mark_out: 'json', thread: thread, data: data)
+    end
+
     def to_s
       self.list.sort.each {|g| puts g}
     end
@@ -74,10 +80,6 @@ module Urbit
 
     def remove(group)
       @groups = self.groups.filter {|g| g != group}
-    end
-
-    def spider(thread, data)
-      self.ship.spider(mark_in: 'group-view-action', mark_out: 'json', thread: thread, data: data)
     end
   end
 end

@@ -2,11 +2,12 @@
 
 module Urbit
   class Group
-     attr_accessor :ship
+     attr_accessor :manager
      attr_reader :hidden, :members, :path
 
     def initialize(path:, members:, policy:, tags:, hidden:)
       @hidden  = hidden
+      @manager = nil
       @members = members
       @path    = path
       @policy  = policy
@@ -27,6 +28,22 @@ module Urbit
 
     def host
       self.path_tokens[0]
+    end
+
+    def invite(ship_names:, message:)
+      data = %Q({
+        "invite": {
+          "resource": {
+            "ship": "#{self.host}",
+            "name": "#{self.key}"
+          },
+          "ships": [
+            "#{ship_names.join(',')}"
+          ],
+          "description": "#{message}"
+        }
+      })
+      self.manager.spider('group-invite', data)
     end
 
     def key
