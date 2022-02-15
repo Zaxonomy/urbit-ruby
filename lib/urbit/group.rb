@@ -22,6 +22,15 @@ module Urbit
       self.path <=> another_group.path
     end
 
+    #
+    # This is the action labeled as "Archive" in the Landscape UI.
+    #
+    def delete
+      spdr = self.manager.spider('group-delete', %Q({"remove": {"ship": "#{self.host}", "name": "#{self.key}"}}))
+      self.manager.remove(self) if 200 == spdr[:status]
+      spdr
+    end
+
     def eql?(another_group)
       another_group.path == self.path
     end
@@ -48,6 +57,12 @@ module Urbit
 
     def key
       self.path_tokens[1]
+    end
+
+    def leave
+      spdr = self.manager.spider('group-leave', %Q({"leave": {"ship": "#{self.host}", "name": "#{self.key}"}}))
+      self.manager.remove(self) if 200 == spdr[:status]
+      spdr
     end
 
     def path_tokens

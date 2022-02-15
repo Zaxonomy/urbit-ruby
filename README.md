@@ -193,28 +193,48 @@ a Node({:index=>"170.141.184.505.209.627.337.970.761.265.544.429.568", :author=>
 # %group-store
 # --------------------------------------------------------------------
 #
+
+# List all your current Groups
 > ship.groups.list.sort.each {|g| puts g};
-a Group(~barsyr-latreb/test0-996)
-a Group(~barsyr-latreb/test1-4287)
 a Group(~bitbet-bolbel/urbit-community)
 a Group(~darlur/aries)
 **a Group(~fabled-faster/interface-testing-facility)**
-a Group(~tirrel/the-marketplace)
 a Group(~winter-paches/the-great-north)
 
-> ship.groups.leave(group: ship.group(path: "~fabled-faster/interface-testing-facility"))
-=>
+# Leave the highlighted Group above
+> ship.groups.find(path: "~fabled-faster/interface-testing-facility").leave
 
+# The Group is no longer in your list of Groups
 > ship.groups.list.sort.each {|g| puts g};
-a Group(~barsyr-latreb/test0-996)
-a Group(~barsyr-latreb/test1-4287)
 a Group(~bitbet-bolbel/urbit-community)
 a Group(~darlur/aries)
-a Group(~tirrel/the-marketplace)
 a Group(~winter-paches/the-great-north)
 
+# (Re-) Join the Group
 > ship.groups.join(host: "~fabled-faster", name: "interface-testing-facility")
 
+# The group is now back in your list of Groups
+> ship.groups.list.sort.each {|g| puts g};
+a Group(~bitbet-bolbel/urbit-community)
+a Group(~darlur/aries)
+**a Group(~fabled-faster/interface-testing-facility)**
+a Group(~winter-paches/the-great-north)
+
+# Create a new group
+> ship.groups.create(name: 'group-4', title: 'Fourth Group', description: "4th Group")
+
+> ship.groups.list.sort.each {|g| puts g};
+a Group(~barsyr-latreb/group-4)
+a Group(~bitbet-bolbel/urbit-community)
+a Group(~darlur/aries)
+a Group(~fabled-faster/interface-testing-facility)
+a Group(~winter-paches/the-great-north)
+
+# Send out an invitation to your new group
+> ship.groups.find(path: '~barsyr-latreb/group-4').invite(ship_names: ['~winter-paches'], message: 'hello!')
+
+# Archive your new group
+> ship.groups.find(path: '~barsyr-latreb/group-4').delete
 
 #
 # --------------------------------------------------------------------
