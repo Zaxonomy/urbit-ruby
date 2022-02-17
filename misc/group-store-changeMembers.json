@@ -1,0 +1,35 @@
+{
+    "json": {
+        "groupUpdate": {
+            "addMembers": {
+                "ships": [
+                    "winter-paches"
+                ],
+                "resource": {
+                    "name": "group-4",
+                    "ship": "barsyr-latreb"
+                }
+            }
+        }
+    },
+    "id": 1,
+    "response": "diff"
+}
+
+{
+  "json": {
+    "groupUpdate": {
+      "removeMembers": {
+        "ships": [
+          "winter-paches"
+        ],
+        "resource": {
+          "name": "group-4",
+          "ship": "barsyr-latreb"
+        }
+      }
+    }
+  },
+  "id": 1,
+  "response": "diff"
+}

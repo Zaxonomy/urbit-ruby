@@ -69,6 +69,14 @@ module Urbit
       end
     end
 
+    def remove_tag(group_path:, ships:, tag:)
+      if (group = self.find(path: group_path))
+        if (group.tags.include? tag)
+          group.tags[tag] -= ships
+        end
+      end
+    end
+
     def load
       if self.ship.logged_in?
         self.ship.subscribe(app: 'group-store', path: '/groups')

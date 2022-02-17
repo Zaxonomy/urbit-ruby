@@ -52,7 +52,7 @@ module Urbit
       end
 
       def parser
-        Urbit::AddTagParser.new(with_json: self.raw_json)
+        Urbit::ChangeTagParser.new(with_json: self.raw_json)
       end
 
       def raw_json
@@ -104,5 +104,21 @@ module Urbit
         self.root_h["removeMembers"]
       end
     end
+
+    class RemoveTagFact < GroupUpdateFact
+      def initialize(channel:, event:)
+        super channel: channel, event: event
+        self.channel.ship.groups.remove_tag group_path: self.parser.resource, ships: self.parser.ships, tag: self.parser.tag
+      end
+
+      def parser
+        Urbit::ChangeTagParser.new(with_json: self.raw_json)
+      end
+
+      def raw_json
+        self.root_h["removeTag"]
+      end
+    end
+
   end # Module Fact
 end # Module Urbit

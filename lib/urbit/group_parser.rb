@@ -24,7 +24,7 @@ module Urbit
     end
   end
 
-  class AddTagParser < GroupParser
+  class ChangeTagParser < GroupParser
     def ships
       @j["ships"]
     end
