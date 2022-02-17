@@ -2,8 +2,8 @@
 
 module Urbit
   class Group
-     attr_accessor :manager
-     attr_reader :hidden, :members, :path
+     attr_accessor :manager, :members
+     attr_reader :hidden, :path
 
     def initialize(path:, members:, policy:, tags:, hidden:)
       @hidden  = hidden

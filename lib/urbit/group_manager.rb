@@ -16,6 +16,12 @@ module Urbit
       @groups << a_group
     end
 
+    def add_members(group_path:, ships:)
+      if (group = self.find(path: group_path))
+        group.members += ships
+      end
+    end
+
     def create(name:, title:, description:)
       self.spider('group-create', %Q({"create": {"name": "#{name}", "title": "#{title}", "description": "#{description}", "policy": {"open": {"banRanks": [], "banned": []}}}}))
     end

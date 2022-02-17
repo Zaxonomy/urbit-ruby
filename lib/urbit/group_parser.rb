@@ -24,6 +24,12 @@ module Urbit
     end
   end
 
+  class AddGroupMemberParser < GroupParser
+    def ships
+      @j["ships"]
+    end
+  end
+
   class InitialGroupParser < Parser
     def groups
       self.group_hashes.collect {|k, v| Group.new(path:    k.sub('/ship/', ''),
