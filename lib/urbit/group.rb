@@ -8,7 +8,7 @@ module Urbit
     def initialize(path:, members:, policy:, tags:, hidden:)
       @hidden  = hidden
       @manager = nil
-      @members = members
+      @members = Set.new(members)
       @path    = path
       @policy  = policy
       @tags    = tags
