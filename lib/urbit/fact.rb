@@ -24,6 +24,7 @@ module Urbit
         if (c = contents["json"]["groupUpdate"])
           return AddGroupFact.new(channel: channel, event: event)          if c["addGroup"]
           return AddGroupMemberFact.new(channel: channel, event: event)    if c["addMembers"]
+          return AddTagFact.new(channel: channel, event: event)            if c["addTag"]
           return InitialGroupFact.new(channel: channel, event: event)      if c["initial"]
           return InitialGroupGroupFact.new(channel: channel, event: event) if c["initialGroup"]
           return RemoveGroupMemberFact.new(channel: channel, event: event) if c["removeMembers"]

@@ -45,6 +45,21 @@ module Urbit
       end
     end
 
+    class AddTagFact < GroupUpdateFact
+      def initialize(channel:, event:)
+        super channel: channel, event: event
+        self.channel.ship.groups.add_tag group_path: self.parser.resource, ships: self.parser.ships, tag: self.parser.tag
+      end
+
+      def parser
+        Urbit::AddTagParser.new(with_json: self.raw_json)
+      end
+
+      def raw_json
+        self.root_h["addTag"]
+      end
+    end
+
     class InitialGroupFact < GroupUpdateFact
       def initialize(channel:, event:)
         super channel: channel, event: event

@@ -22,6 +22,14 @@ module Urbit
       end
     end
 
+    def add_tag(group_path:, ships:, tag:)
+      if (group = self.find(path: group_path))
+        if (group.tags.include? tag)
+          group.tags[tag] += ships
+        end
+      end
+    end
+
     def create(name:, title:, description:)
       self.spider('group-create', %Q({"create": {"name": "#{name}", "title": "#{title}", "description": "#{description}", "policy": {"open": {"banRanks": [], "banned": []}}}}))
     end

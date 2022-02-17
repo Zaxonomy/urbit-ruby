@@ -2,7 +2,7 @@
 
 module Urbit
   class Group
-     attr_accessor :manager, :members
+     attr_accessor :manager, :members, :tags
      attr_reader :hidden, :path
 
     def initialize(path:, members:, policy:, tags:, hidden:)
@@ -11,7 +11,7 @@ module Urbit
       @members = Set.new(members)
       @path    = path
       @policy  = policy
-      @tags    = tags
+      @tags    = self.parse_tags(tags)
     end
 
     def ==(another_group)
@@ -91,5 +91,14 @@ module Urbit
     def to_s
       "a Group(#{self.path})"
     end
+
+    private
+
+    def parse_tags(tags)
+      h = {}
+      tags.each {|k, v| h[k] = Set.new(v)}
+      tags.replace(h)
+    end
+
   end
 end
