@@ -37,7 +37,7 @@ module Urbit
       end
 
       def parser
-        Urbit::AddGroupMemberParser.new(with_json: self.raw_json)
+        Urbit::ChangeMemberParser.new(with_json: self.raw_json)
       end
 
       def raw_json
@@ -60,7 +60,6 @@ module Urbit
       end
     end
 
-
     class InitialGroupGroupFact < GroupUpdateFact
       def initialize(channel:, event:)
         super channel: channel, event: event
@@ -73,6 +72,21 @@ module Urbit
 
       def raw_json
         self.root_h["initialGroup"]
+      end
+    end
+
+    class RemoveGroupMemberFact < GroupUpdateFact
+      def initialize(channel:, event:)
+        super channel: channel, event: event
+        self.channel.ship.groups.remove_members group_path: self.parser.resource, ships: self.parser.ships
+      end
+
+      def parser
+        Urbit::ChangeMemberParser.new(with_json: self.raw_json)
+      end
+
+      def raw_json
+        self.root_h["removeMembers"]
       end
     end
   end # Module Fact

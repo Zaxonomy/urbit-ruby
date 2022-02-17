@@ -55,6 +55,12 @@ module Urbit
       self.groups
     end
 
+    def remove_members(group_path:, ships:)
+      if (group = self.find(path: group_path))
+        group.members -= ships
+      end
+    end
+
     def load
       if self.ship.logged_in?
         self.ship.subscribe(app: 'group-store', path: '/groups')
