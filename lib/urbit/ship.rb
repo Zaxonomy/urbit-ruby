@@ -131,7 +131,7 @@ module Urbit
     def scry(app:, path:, mark: 'json')
       self.login
       mark = ".#{mark}" unless mark.empty?
-      scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}#{mark}"
+      scry_url = "#{self.url}/~/scry/#{app}#{path}#{mark}"
 
       response = Faraday.get(scry_url) do |req|
         req.headers['Accept'] = 'application/json'
@@ -177,7 +177,7 @@ module Urbit
 
     def spider(desk: 'landscape', mark_in:, mark_out:, thread:, data:, args: [])
       self.login
-      url = "#{self.config.api_base_url}/spider/#{desk}/#{mark_in}/#{thread}/#{mark_out}.json"
+      url = "#{self.url}/spider/#{desk}/#{mark_in}/#{thread}/#{mark_out}.json"
 
       # TODO: This is a huge hack due to the fact that certain spider operations are known to
       #       not return when they should. Instead I just set the timeout low and catch the
@@ -251,7 +251,7 @@ module Urbit
     end
 
     def login_url
-      "#{config.api_base_url}/~/login"
+      "#{self.url}/~/login"
     end
 
     def parse_cookie(resp)

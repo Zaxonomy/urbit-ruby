@@ -42,9 +42,10 @@ module Urbit
     # Answers the Group uniquely keyed by path:, if it exists
     #
     def find(path:)
-      g = self.groups.select {|g| g.path == path}.first
-      g.manager = self
-      g
+      if (g = self.groups.select {|g| g.path == path}.first)
+        g.manager = self
+        g
+      end
     end
 
     def first
@@ -61,6 +62,10 @@ module Urbit
 
     def list
       self.groups
+    end
+
+    def remove(group)
+      @groups = self.groups.filter {|g| g != group}
     end
 
     def remove_members(group_path:, ships:)
@@ -90,12 +95,6 @@ module Urbit
 
     def to_s
       self.list.sort.each {|g| puts g}
-    end
-
-    private
-
-    def remove(group)
-      @groups = self.groups.filter {|g| g != group}
     end
   end
 end

@@ -24,11 +24,15 @@ module Urbit
 
     #
     # This is the action labeled as "Archive" in the Landscape UI.
+    # As of now, you can only do this to groups on your own ship.
     #
     def delete
-      spdr = self.manager.spider('group-delete', %Q({"remove": {"ship": "#{self.host}", "name": "#{self.key}"}}))
-      self.manager.remove(self) if 200 == spdr[:status]
-      spdr
+      if (self.host == self.manager.ship.name)
+        spdr = self.manager.spider('group-delete', %Q({"remove": {"ship": "#{self.host}", "name": "#{self.key}"}}))
+        self.manager.remove(self) if 200 == spdr[:status]
+        return spdr
+      end
+      {status: 400, code: 'bad_request', body: 'Can only delete Groups on your own ship.'}
     end
 
     def eql?(another_group)
