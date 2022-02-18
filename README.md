@@ -193,48 +193,58 @@ a Node({:index=>"170.141.184.505.209.627.337.970.761.265.544.429.568", :author=>
 # %group-store
 # --------------------------------------------------------------------
 #
+# Shoe all your current Groups
+> ship.groups
+a Group({:host=>"~bitbet-bolbel", :key=>"urbit-community", :member_count=>6609, :pending_invites=>"?", :hidden=>false})
+a Group({:host=>"~fabled-faster", :key=>"interface-testing-facility", :member_count=>82, :pending_invites=>"?", :hidden=>false})
+a Group({:host=>"~winter-paches", :key=>"the-great-north", :member_count=>67, :pending_invites=>"?", :hidden=>false})
+=> #<Urbit::GroupManager:0x00007f825d2b9328>
 
-# List all your current Groups
-> ship.groups.list.sort.each {|g| puts g};
-a Group(~bitbet-bolbel/urbit-community)
-a Group(~darlur/aries)
-**a Group(~fabled-faster/interface-testing-facility)**
-a Group(~winter-paches/the-great-north)
+# List just the paths of all your current Groups
+> ship.groups.list
+=> ~darlur/aries
+~winter-paches/the-great-north
+~bitbet-bolbel/urbit-community
+**~fabled-faster/interface-testing-facility**
 
 # Leave the highlighted Group above
-> ship.groups.find(path: "~fabled-faster/interface-testing-facility").leave
+> group = ship.groups.find(path: "~fabled-faster/interface-testing-facility")
+> group.leave
+=> {:status=>200, :code=>"ok", :body=>"null"}
 
 # The Group is no longer in your list of Groups
-> ship.groups.list.sort.each {|g| puts g};
-a Group(~bitbet-bolbel/urbit-community)
-a Group(~darlur/aries)
-a Group(~winter-paches/the-great-north)
+> ship.groups.list
+=> ~darlur/aries
+~winter-paches/the-great-north
+~bitbet-bolbel/urbit-community
 
 # (Re-) Join the Group
 > ship.groups.join(host: "~fabled-faster", name: "interface-testing-facility")
 
 # The group is now back in your list of Groups
-> ship.groups.list.sort.each {|g| puts g};
-a Group(~bitbet-bolbel/urbit-community)
-a Group(~darlur/aries)
-**a Group(~fabled-faster/interface-testing-facility)**
-a Group(~winter-paches/the-great-north)
+> ship.groups.list
+=> ~darlur/aries
+~winter-paches/the-great-north
+~bitbet-bolbel/urbit-community
+~fabled-faster/interface-testing-facility
 
 # Create a new group
 > ship.groups.create(name: 'group-4', title: 'Fourth Group', description: "4th Group")
 
-> ship.groups.list.sort.each {|g| puts g};
-a Group(~barsyr-latreb/group-4)
-a Group(~bitbet-bolbel/urbit-community)
-a Group(~darlur/aries)
-a Group(~fabled-faster/interface-testing-facility)
-a Group(~winter-paches/the-great-north)
+> ship.groups
+a Group({:host=>"~barsyr-latreb", :key=>"group-4", :member_count=>1, :pending_invites=>"?", :hidden=>false})
+a Group({:host=>"~bitbet-bolbel", :key=>"urbit-community", :member_count=>6609, :pending_invites=>"?", :hidden=>false})
+a Group({:host=>"~fabled-faster", :key=>"interface-testing-facility", :member_count=>82, :pending_invites=>"?", :hidden=>false})
+a Group({:host=>"~winter-paches", :key=>"the-great-north", :member_count=>67, :pending_invites=>"?", :hidden=>false})
+=> #<Urbit::GroupManager:0x00007f825d2b9328>
 
 # Send out an invitation to your new group
-> ship.groups.find(path: '~barsyr-latreb/group-4').invite(ship_names: ['~winter-paches'], message: 'hello!')
+> group = ship.groups.find(path: '~barsyr-latreb/group-4')
+> group.invite(ship_names: ['~winter-paches'], message: 'hello!')
 
 # Archive your new group
-> ship.groups.find(path: '~barsyr-latreb/group-4').delete
+> group.delete
+=> {:status=>200, :code=>"ok", :body=>"null"}
 
 #
 # --------------------------------------------------------------------

@@ -3,7 +3,7 @@
 module Urbit
   class Group
      attr_accessor :manager, :members, :tags
-     attr_reader :hidden, :path
+     attr_reader :hidden, :path, :policy
 
     def initialize(path:, members:, policy:, tags:, hidden:)
       @hidden  = hidden
@@ -93,7 +93,7 @@ module Urbit
     end
 
     def to_s
-      "a Group(#{self.path})"
+      "a Group(#{self.to_h})"
     end
 
     private

@@ -61,7 +61,7 @@ module Urbit
     end
 
     def list
-      self.groups
+      self.groups.map {|g| g.path}.join("\n")
     end
 
     def remove(group)
@@ -94,7 +94,7 @@ module Urbit
     end
 
     def to_s
-      self.list.sort.each {|g| puts g}
+      self.groups.sort.each {|g| puts g}
     end
   end
 end
