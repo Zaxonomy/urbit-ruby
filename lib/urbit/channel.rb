@@ -83,7 +83,7 @@ module Urbit
     end
 
     def url
-      "http://localhost:8080/~/channel/#{self.key}"
+      "#{self.ship.url}/~/channel/#{self.key}"
     end
   end
 end

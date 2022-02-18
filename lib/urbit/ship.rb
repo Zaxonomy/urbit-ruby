@@ -229,6 +229,10 @@ module Urbit
       name.gsub('~', '')
     end
 
+    def url
+      self.config.api_base_url
+    end
+
     private
 
     def add_channel

@@ -22,7 +22,7 @@ module Urbit
     end
 
     def channel_url
-      "#{self.ship.config.api_base_url}/~/channel/#{self.channel.key}"
+      "#{self.ship.url}/~/channel/#{self.channel.key}"
     end
 
     def request_body
