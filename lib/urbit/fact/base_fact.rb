@@ -3,7 +3,7 @@
 module Urbit
   module Fact
     class BaseFact
-      attr_reader :ack, :channel
+      attr_reader :ack, :channel, :data, :type
 
       def initialize(channel:, event:)
         @channel = channel
@@ -58,6 +58,9 @@ module Urbit
       end
     end
 
+    class EmptyFact < BaseFact
+    end
+
     class ErrorFact < BaseFact
       def error
         self.contents["err"]
@@ -73,6 +76,24 @@ module Urbit
           response: self.response,
         })
       end
+    end
+
+    class SuccessFact < BaseFact
+      def code
+        self.contents["ok"]
+      end
+
+      def response
+        self.contents["response"]
+      end
+
+      def to_h
+        super.merge!({
+          code:     self.code,
+          response: self.response,
+        })
+      end
+
     end
   end
 end

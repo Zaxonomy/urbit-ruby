@@ -13,7 +13,11 @@ module Urbit
       #
       def collect(channel:, event:)
         contents = JSON.parse(event.data)
-        return ErrorFact.new(channel: channel, event: event) if contents["json"].nil?
+        if contents["json"].nil?
+          return SuccessFact.new(channel: channel, event: event) if contents["ok"]
+          return ErrorFact.new(channel: channel, event: event)   if contents["err"]
+          return EmptyFact.new(channel: channel, event: event)
+        end
 
         if contents["json"]["graph-update"]
           return AddGraphFact.new(channel: channel, event: event)      if contents["json"]["graph-update"]["add-graph"]

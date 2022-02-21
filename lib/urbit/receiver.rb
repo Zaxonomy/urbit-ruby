@@ -5,7 +5,7 @@ require 'urbit/fact'
 
 module Urbit
   class Receiver < SSE::Client
-    attr_accessor :facts
+    attr_accessor :errors, :facts
 
     def initialize(channel:)
       super(channel.url, {headers: self.headers(channel)}) do |rec|
@@ -21,10 +21,11 @@ module Urbit
         end
 
         rec.on_error do |error|
-          self.facts += ["I received an error fact: #{error.class}"]
+          self.errors += ["I received an error fact: #{error.class}"]
         end
       end
 
+      @errors   = []
       @facts   = []
       @is_open = true
     end
