@@ -100,6 +100,7 @@ module Urbit
 
     def parse_tags(tags)
       h = {}
+      return h if tags.empty?
       tags.each {|k, v| h[k] = Set.new(v)}
       tags.replace(h)
     end
