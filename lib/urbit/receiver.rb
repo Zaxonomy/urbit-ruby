@@ -21,7 +21,7 @@ module Urbit
         end
 
         rec.on_error do |error|
-          self.errors += ["I received an error fact: #{error.class}"]
+          self.errors << ["I received an error fact: #{error.class}"]
         end
       end
 
