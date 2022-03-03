@@ -1,4 +1,5 @@
 require 'ld-eventsource'
+require "logger"
 
 require 'urbit/ack_message'
 require 'urbit/fact'
@@ -8,7 +9,7 @@ module Urbit
     attr_accessor :errors, :facts
 
     def initialize(channel:)
-      super(channel.url, {headers: self.headers(channel)}) do |rec|
+      super(channel.url, headers: self.headers(channel), logger: self.default_logger) do |rec|
         # We are now listening on a socket for SSE::Events. This block will be called for each one.
         rec.on_event do |event|
           # Wrap the returned event in a Fact.
@@ -28,6 +29,13 @@ module Urbit
       @errors   = []
       @facts   = []
       @is_open = true
+    end
+
+    def default_logger
+      log           = ::Logger.new($stdout)
+      log.level     = ::Logger::WARN
+      log.progname  = 'ld-eventsource'
+      log
     end
 
     def open?
