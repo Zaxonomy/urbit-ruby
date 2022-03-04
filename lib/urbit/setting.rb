@@ -1,25 +1,38 @@
 
 module Urbit
   class Setting
-     attr_reader :bucket
+     attr_reader :desk
 
-    def initialize(ship:, desk:, setting:)
-      @ship = ship
-      @desk = desk
-      @bucket = setting.first
-      @entries = setting.last
+    def initialize(desk:, buckets:)
+      @desk    = desk
+      @buckets = buckets  # buckets is a hash of bucket_name and an entries hash.
+      @entries = {}
     end
 
-    def entries(bucket: nil)
-      return @entries if (bucket.nil? || @bucket == bucket)
-      {}
+    def ==(another_group)
+      another_setting.desk == self.desk
+    end
+
+    def <=>(another_group)
+      self.desk <=> another_group.desk
+    end
+
+    def buckets
+      @buckets
+    end
+
+    def entries(bucket_name)
+      if @entries.empty?
+        @buckets.each {|k, v| @entries[k] = v}
+      end
+      @entries[bucket_name]
     end
 
     def to_h
       {
         desk:    @desk,
-        bucket:  self.bucket,
-        entries: self.entries
+        buckets: self.buckets,
+        # entries: self.entries
       }
     end
 

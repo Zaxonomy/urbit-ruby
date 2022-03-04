@@ -1,17 +1,50 @@
-ship.scry(app: 'settings-store', path: '/desk/landscape', mark: 'json')
+ship.scry(app: 'settings-store', path: '/all', mark: 'json')
 
 {
-  :status => 200,
-  :code   => "ok",
-  :body   => {
+  :status=>200,
+  :code=>"ok",
+  :body=> {
+    "all": {
+      "landscape": {
+        "calm": {
+          "hideUtilities": false,
+          "hideGroups\":false,\"hideAvatars\":true,\"hideUnreads\":true,\"hideNicknames\":true
+        },
+        "display": {
+          "backgroundType\":\"color\",\"background\":\"0xa8.90ea\"
+        },
+        "urbit-visor-permissions\":{
+          "https://urbitdashboard.com\":[\"shipName\",\"shipURL\",\"scry\",\"subscribe\",\"poke\",\"thread\"]
+        }
+      },
+      "bitcoin": {\"btc-wallet\":{\"currency\":\"USD\",\"warning\":true}}}}"
+}
+
+ship.scry(app: 'settings-store', path: '/desk/landscape', mark: 'json')
+{
+  :status=>200,
+  :code=>"ok",
+  :body=> {
     "desk": {
       "calm": {
+        "hideUtilities": false,
+        "hideGroups": false,
         "hideAvatars": true,
-        "hideNicknames": true
+        "hideUnreads": false,
+        "hideNicknames":true
       },
-      "urbit-visor-permissions": {
+      "display": {
+        "backgroundType": "color",
+        "background": "0xa8.90ea"
+      },
+      "urbit-visor-permissions":{
         "https://urbitdashboard.com": [
-          "shipName", "shipURL", "scry", "subscribe", "poke", "thread"
+          "shipName",
+          "shipURL",
+          "scry",
+          "subscribe",
+          "poke",
+          "thread"
         ]
       }
     }
@@ -32,6 +65,7 @@ pry(main)> Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channe
   }
 ]
 
+// This is an example of the message received when a ship's settings change.
 pry(main)> Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164192001782807f')
 ] -- [message
 ] -- [
