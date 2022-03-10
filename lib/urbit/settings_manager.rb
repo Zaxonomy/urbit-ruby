@@ -27,7 +27,7 @@ module Urbit
     end
 
     def list
-      self.settings.map {|s| s.buckets.keys.map {|b| "{desk: #{s.desk}, bucket: #{b}}"}}.join("\n")
+      self.settings.map {|s| s.to_list}.join("\n")
     end
 
   end

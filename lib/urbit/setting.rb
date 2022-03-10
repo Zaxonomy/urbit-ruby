@@ -36,6 +36,10 @@ module Urbit
       }
     end
 
+    def to_list
+      self.buckets.keys.map {|b| "{desk: #{self.desk}, bucket: #{b}}"}
+    end
+
     def to_s
       "a Setting(#{self.to_h})"
     end
