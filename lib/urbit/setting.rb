@@ -21,11 +21,11 @@ module Urbit
       @buckets
     end
 
-    def entries(bucket_name)
+    def entries(bucket:)
       if @entries.empty?
         @buckets.each {|k, v| @entries[k] = v}
       end
-      @entries[bucket_name]
+      @entries[bucket]
     end
 
     def to_h

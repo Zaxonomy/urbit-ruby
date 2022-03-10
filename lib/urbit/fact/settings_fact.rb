@@ -8,7 +8,7 @@ module Urbit
 
         if self.for_this_ship?
           # See if we already have this setting, if no add it, if yes update it.
-          if (entries = channel.ship.setting(bucket: self.bucket))
+          if (entries = channel.ship.settings[desk: self.desk].entries(bucket: self.bucket))
             entries[self.entry] = self.value
           end
         end

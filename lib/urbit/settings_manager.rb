@@ -11,6 +11,10 @@ module Urbit
       @settings = Set.new
     end
 
+    def [](desk:)
+      @settings.select {|s| desk == s.desk}.first
+    end
+
     def load(ship:)
       scry = ship.scry(app: "settings-store", path: "/all", mark: "json")
       # scry = self.scry(app: "settings-store", path: "/desk/#{desk}", mark: "json")
@@ -23,7 +27,7 @@ module Urbit
     end
 
     def list
-      self.settings.map {|s| s.to_s}.join("\n")
+      self.settings.map {|s| s.buckets.keys.map {|b| "{desk: #{s.desk}, bucket: #{b}}"}}.join("\n")
     end
 
   end

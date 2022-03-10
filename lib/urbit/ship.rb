@@ -4,7 +4,7 @@ require 'urbit/channel'
 require 'urbit/config'
 require 'urbit/graph'
 require 'urbit/group_manager'
-require 'urbit/setting'
+require 'urbit/settings_manager'
 
 module Urbit
   class Ship
@@ -12,13 +12,13 @@ module Urbit
     attr_reader :auth_cookie, :channels, :config, :group_mgr
 
     def initialize(config: Config.new)
-      @auth_cookie = nil
-      @channels    = []
-      @config      = config
-      @graphs      = []
-      @group_mgr   = GroupManager.new ship: self
-      @settings    = []
-      @logged_in   = false
+      @auth_cookie  = nil
+      @channels     = []
+      @config       = config
+      @graphs       = []
+      @group_mgr    = GroupManager.new ship: self
+      @settings_mgr = nil                         # Use lazy initialization here
+      @logged_in    = false
     end
 
     def self.finalize(channels)
@@ -142,37 +142,18 @@ module Urbit
     end
 
     #
-    # Answers the entries for the specified desk and bucket.
+    # Answers the object managing the Settings on this ship.
+    # This object provides all the helper methods to list, update, and remove a Setting
     #
-    def setting(desk: 'landscape', bucket:)
-      if (settings = self.settings(desk: desk))
-        settings.each do |setting|
-          if (entries = setting.entries(bucket: bucket))
-            return entries
-          end
+    def settings
+      if self.logged_in?
+        if @settings_mgr.nil?
+          channel = self.subscribe(app: 'settings-store', path: '/all')
+          @settings_mgr = SettingsManager.new(channel: channel)
+          @settings_mgr.load(ship: self)
         end
       end
-      {}
-    end
-
-    #
-    # Answers a collection of all the settings for this ship.
-    # This collection is cached and will need to be invalidated to discover new settings.
-    #
-    def settings(desk: 'landscape', flush_cache: false)
-      @settings = [] if flush_cache
-      if @settings.empty?
-        if self.logged_in?
-          scry = self.scry(app: "settings-store", path: "/desk/#{desk}", mark: "json")
-          if scry[:body]
-            body = JSON.parse scry[:body]
-            body["desk"].each do |k|
-              @settings << Setting.new(ship: self, desk: desk, setting: k)
-            end
-          end
-        end
-      end
-      @settings
+      @settings_mgr
     end
 
     def spider(desk: 'landscape', mark_in:, mark_out:, thread:, data:, args: [])
