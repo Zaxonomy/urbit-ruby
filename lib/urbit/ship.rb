@@ -4,7 +4,7 @@ require 'urbit/channel'
 require 'urbit/config'
 require 'urbit/graph'
 require 'urbit/group_manager'
-require 'urbit/settings_manager'
+require 'urbit/settings'
 
 module Urbit
   class Ship
@@ -12,13 +12,13 @@ module Urbit
     attr_reader :auth_cookie, :channels, :config, :group_mgr
 
     def initialize(config: Config.new)
-      @auth_cookie  = nil
-      @channels     = []
-      @config       = config
-      @graphs       = []
-      @group_mgr    = GroupManager.new ship: self
-      @settings_mgr = nil                         # Use lazy initialization here
-      @logged_in    = false
+      @auth_cookie = nil
+      @channels    = []
+      @config      = config
+      @graphs      = []
+      @group_mgr   = GroupManager.new ship: self
+      @settings    = nil                         # Use lazy initialization here
+      @logged_in   = false
     end
 
     def self.finalize(channels)
@@ -147,13 +147,9 @@ module Urbit
     #
     def settings
       if self.logged_in?
-        if @settings_mgr.nil?
-          channel = self.subscribe(app: 'settings-store', path: '/all')
-          @settings_mgr = SettingsManager.new(channel: channel)
-          @settings_mgr.load(ship: self)
-        end
+        @settings = Settings.load(ship: self) if @settings.nil?
       end
-      @settings_mgr
+      @settings
     end
 
     def spider(desk: 'landscape', mark_in:, mark_out:, thread:, data:, args: [])
