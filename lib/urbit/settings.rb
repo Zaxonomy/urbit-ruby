@@ -4,12 +4,13 @@ require 'urbit/bucket'
 
 module Urbit
   class Setting
-    attr_reader :buckets, :desk
+    attr_reader :buckets, :desk, :ship
 
-    def initialize(desk:, buckets:)
+    def initialize(ship:, desk:, buckets:)
+      @ship    = ship
       @desk    = desk
       @buckets = Set.new
-      buckets.each {|k, v| @buckets << Bucket.new(name: k, entries: v)}
+      buckets.each {|k, v| @buckets << Bucket.new(setting: self, name: k, entries: v)}
     end
 
     def ==(another_group)
@@ -45,26 +46,23 @@ module Urbit
   end
 
   class Settings < Set
-    attr_accessor :channel
-
     class << self
       def load(ship:)
-        channel = ship.subscribe(app: 'settings-store', path: '/all')
+        ship.subscribe(app: 'settings-store', path: '/all')
         scry = ship.scry(app: "settings-store", path: "/all", mark: "json")
         # scry = self.scry(app: "settings-store", path: "/desk/#{desk}", mark: "json")
-        s = Settings.new(channel: channel)
+        s = Settings.new
         if scry[:body]
           body = JSON.parse scry[:body]
           body["all"].each do |k, v|  # At this level the keys are the desks and the values are the buckets
-            s << Setting.new(desk: k, buckets: v)
+            s << Setting.new(ship: ship, desk: k, buckets: v)
           end
         end
         s
       end
     end
 
-    def initialize(channel:)
-      @channel = channel
+    def initialize
       @hash    = {}
     end
 
