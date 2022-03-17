@@ -13,6 +13,7 @@ module Urbit
       #
       def collect(channel:, event:)
         contents = JSON.parse(event.data)
+
         if contents["json"].nil?
           return SuccessFact.new(channel: channel, event: event) if contents["ok"]
           return ErrorFact.new(channel: channel, event: event)   if contents["err"]
@@ -35,8 +36,11 @@ module Urbit
           return RemoveTagFact.new(channel: channel, event: event)         if c["removeTag"]
         end
 
-        return SettingsEventPutBucketFact.new(channel: channel, event: event) if contents["json"]["settings-event"]["put-bucket"]
-        return SettingsEventPutEntryFact.new(channel: channel, event: event) if contents["json"]["settings-event"]["put-entry"]
+        if (c = contents["json"]["settings-event"])
+          return SettingsEventPutBucketFact.new(channel: channel, event: event) if c["put-bucket"]
+          return SettingsEventPutEntryFact.new(channel: channel, event: event)  if c["put-entry"]
+          return SettingsEventDelBucketFact.new(channel: channel, event: event) if c["del-bucket"]
+        end
 
         return BaseFact.new(channel: channel, event: event)
       end

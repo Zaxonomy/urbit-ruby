@@ -251,25 +251,56 @@ a Group({:host=>"~winter-paches", :key=>"the-great-north", :member_count=>67, :p
 # %settings-store
 # --------------------------------------------------------------------
 #
-> ship.setting(desk: 'landscape', bucket: 'calm').each {|e| p e};nil
-["hideUtilities", false]
-["hideGroups", false]
-["hideAvatars", true]
-["hideUnreads", true]
-["hideNicknames", true]
+# Show all your ship's settings as a list of {desk: , bucket:}
+> ship.settings.list
+desk: landscape
+  buckets: ["calm: 5 entries", "display: 2 entries", "urbit-visor-permissions: 1 entries"]
+desk: bitcoin
+  buckets: ["btc-wallet: 2 entries"]
+=>
 
-> ship.subscribe(app: 'settings-store', path: '/all')
-=> a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164375139513eacb')
+# Behind the scenes your ship has now done the following to retrieve the settings
+# and we are now also listening for changes in any settings on the ship...
+# ship.subscribe(app: 'settings-store', path: '/all')
 
-# We are now listening for changes in any settings on the ship. Go to Landscape and toggle the "Hide Groups" button...
-Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164375139513eacb')] -- [message] -- [{"json":{"settings-event":{"put-entry":{"bucket-key":"calm","desk":"landscape","entry-key":"hideGroups","value":true}}},"id":1,"response":"diff"}]
+# Settings for a single desk
+> ship.settings[desk: 'landscape']
+=> a Setting({:desk=>"landscape", :buckets=>#<Set: {#<Urbit::Bucket:0x00007fa6c99aa7a0 @name="calm", @entries={"hideUtilities"=>false, "hideGroups"=>false, "hideAvatars"=>true, "hideUnreads"=>false, "hideNicknames"=>true}>, #<Urbit::Bucket:0x00007fa6c99aa6b0 @name="display", @entries={"backgroundType"=>"color", "background"=>"0xa8.90ea"}>, #<Urbit::Bucket:0x00007fa6c99aa638 @name="urbit-visor-permissions", @entries={"https://urbitdashboard.com"=>["shipName", "shipURL", "scry", "subscribe", "poke", "thread"]}>}>})
 
-> ship.setting(desk: 'landscape', bucket: 'calm').each {|e| p e};nil
-["hideUtilities", false]
-**["hideGroups", true]**
-["hideAvatars", true]
-["hideUnreads", true]
-["hideNicknames", true]
+> ship.settings[desk: 'landscape'].entries(bucket: 'calm')
+=> {"hideUtilities"=>false, "hideGroups"=>true, "hideAvatars"=>true, "hideUnreads"=>false, "hideNicknames"=>true}
+
+# Go to Landscape and toggle the "Hide Groups" button inside the Calm Engine settings page...
+> ship.settings[desk: 'landscape'].entries(bucket: 'calm')
+=> {"hideUtilities"=>false, "hideGroups"=>false, "hideAvatars"=>true, "hideUnreads"=>false, "hideNicknames"=>true}
+
+# Alternatively you can directly access the bucket instance using this syntax:
+)> ship.settings[desk: 'landscape'][bucket: 'calm']
+=> a Bucket({:name=>"calm", :entries=>{"hideUtilities"=>false, "hideGroups"=>false, "hideAvatars"=>true, "hideUnreads"=>false, "hideNicknames"=>true}})
+
+# Then you can also set them yourself if you like.
+> ship.settings[desk: 'landscape'][bucket: 'calm'][key: 'hideGroups'] = true
+
+# Your Group tiles will now disappear. And:
+> ship.settings[desk: 'landscape'][bucket: 'calm']
+=> a Bucket({:name=>"calm", :entries=>{"hideUtilities"=>false, "hideGroups"=>true, "hideavatars"=>true, "hideUnreads"=>false, "hideNicknames"=>true}})
+
+# You can add a new Bucket to a Desk.
+> ship.settings[desk: 'landscape'].add_bucket(name: 'mars-base-10', entries: {"current_pane" => 1, "current-view" => "graph-rover"})
+=>
+
+> ship.settings.list
+desk: garden
+  buckets: ["tiles: 1 entries"]
+desk: landscape
+  buckets: ["calm: 5 entries", "display: 2 entries", "urbit-visor-permissions: 1 entries", "mars-base-10: 2 entries"]
+desk: bitcoin
+  buckets: ["btc-wallet: 2 entries"]
+
+# And remove it entirely if you change your mind.
+> ship.settings[desk: 'landscape'].remove_bucket(name: 'mars-base-10')
+=>
+
 
 ```
 ### Configuration

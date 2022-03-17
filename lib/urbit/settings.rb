@@ -27,21 +27,30 @@ module Urbit
     end
 
     def add_bucket(name:, entries:)
-      entries_s = entries.map {|k, v| %Q('#{k}': '#{v}')}.join(',')
       msg = {
         "put-bucket": {
-          "desk":       "#{self.desk}",
           "bucket-key": "#{name}",
+          "desk":       "#{self.desk}",
           "bucket":     entries
         }
       }
-      puts msg
       self.ship.poke(app: 'settings-store', mark: 'settings-event', message: msg)
       nil
     end
 
     def entries(bucket:)
       self[bucket: bucket].entries
+    end
+
+    def remove_bucket(name:)
+      msg = {
+        "del-bucket": {
+          "bucket-key": "#{name}",
+          "desk":       "#{self.desk}"
+        }
+      }
+      self.ship.poke(app: 'settings-store', mark: 'settings-event', message: msg)
+      nil
     end
 
     def to_h

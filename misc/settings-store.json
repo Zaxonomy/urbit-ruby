@@ -51,20 +51,6 @@ ship.scry(app: 'settings-store', path: '/desk/landscape', mark: 'json')
   }
 }
 
-
-pry(main)> ship.subscribe(app: 'settings-store', path: '/all')
-=> a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164192001782807f')
-
-pry(main)> Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164192001782807f')
-] -- [message
-] -- [
-  {
-    "ok": "ok",
-    "id": 1,
-    "response": "subscribe"
-  }
-]
-
 // This is an example of the message received when a ship's settings change.
 {
   "json": {
@@ -95,3 +81,6 @@ pry(main)> Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channe
     }
   }
 }
+
+// Bucket deleted
+{"json":{"settings-event":{"del-bucket":{"bucket-key":"mars-base-12","desk":"landscape"}}},"id":1,"response":"diff"}
