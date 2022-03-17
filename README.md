@@ -261,7 +261,7 @@ desk: bitcoin
 
 # Behind the scenes your ship has now done the following to retrieve the settings
 # and we are now also listening for changes in any settings on the ship...
-# ship.subscribe(app: 'settings-store', path: '/all')
+> ship.subscribe(app: 'settings-store', path: '/all')
 
 # Settings for a single desk
 > ship.settings[desk: 'landscape']
@@ -296,6 +296,11 @@ desk: landscape
   buckets: ["calm: 5 entries", "display: 2 entries", "urbit-visor-permissions: 1 entries", "mars-base-10: 2 entries"]
 desk: bitcoin
   buckets: ["btc-wallet: 2 entries"]
+=>
+
+# And remove an entry...
+> ship.settings[desk: 'landscape'][bucket: 'mars-base-10'].remove_entry(key: 'current_view')
+=>
 
 # And remove it entirely if you change your mind.
 > ship.settings[desk: 'landscape'].remove_bucket(name: 'mars-base-10')

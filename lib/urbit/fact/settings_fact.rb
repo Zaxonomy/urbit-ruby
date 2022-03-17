@@ -43,15 +43,25 @@ module Urbit
 
     class SettingsEventDelBucketFact < SettingsEventFact
       def accept
-        self.remove_bucket
+        self.desk.buckets.delete(self.bucket)
       end
 
       def contents
         self.base_contents["del-bucket"]
       end
+    end
 
-      def remove_bucket
-        self.desk.buckets.delete(self.bucket)
+    class SettingsEventDelEntryFact < SettingsEventFact
+      def accept
+        self.bucket.entries.delete(self.entry)
+      end
+
+      def contents
+        self.base_contents["del-entry"]
+      end
+
+      def entry
+        self.contents["entry-key"]
       end
     end
 

@@ -1,7 +1,7 @@
 
 module Urbit
   class Bucket
-    attr_accessor :entries, :name
+    attr_accessor :entries, :name, :setting
 
     def initialize(setting:, name:, entries:)
       @setting = setting
@@ -15,8 +15,18 @@ module Urbit
 
     def []=(key, val)
       msg = {"put-entry": {"desk": "#{@setting.desk}", "bucket-key": "#{self.name}", "entry-key": "#{key[:key]}", "value": val}}
-      @setting.ship.poke(app: 'settings-store', mark: 'settings-event', message: msg)
+      self.ship.poke(app: 'settings-store', mark: 'settings-event', message: msg)
       nil
+    end
+
+    def remove_entry(key:)
+      msg = {"del-entry": {"desk": "#{@setting.desk}", "bucket-key": "#{self.name}", "entry-key": "#{key}"}}
+      self.ship.poke(app: 'settings-store', mark: 'settings-event', message: msg)
+      nil
+    end
+
+    def ship
+      self.setting.ship
     end
 
     def to_h

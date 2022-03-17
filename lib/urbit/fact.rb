@@ -37,9 +37,10 @@ module Urbit
         end
 
         if (c = contents["json"]["settings-event"])
+          return SettingsEventDelBucketFact.new(channel: channel, event: event) if c["del-bucket"]
+          return SettingsEventDelEntryFact.new(channel: channel, event: event)  if c["del-entry"]
           return SettingsEventPutBucketFact.new(channel: channel, event: event) if c["put-bucket"]
           return SettingsEventPutEntryFact.new(channel: channel, event: event)  if c["put-entry"]
-          return SettingsEventDelBucketFact.new(channel: channel, event: event) if c["del-bucket"]
         end
 
         return BaseFact.new(channel: channel, event: event)
