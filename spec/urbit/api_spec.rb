@@ -1,5 +1,5 @@
-describe Urbit::Api do
+describe Urbit do
   it "has a version number" do
-    expect(Urbit::Api::VERSION).to_not be_nil
+    expect(Urbit::VERSION).to_not be_nil
   end
 end

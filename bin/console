@@ -2,7 +2,7 @@
 
 require "bundler/setup"
 require "pry"
-require "urbit/urbit"
+require "urbit"
 
 puts "Welcome! This is an interactive environment to explore your Urbit ship."
 puts "You create a config file with connection details for your ship and off you go."

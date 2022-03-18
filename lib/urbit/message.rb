@@ -22,11 +22,11 @@ module Urbit
     end
 
     def channel_url
-      "#{self.ship.config.api_base_url}/~/channel/#{self.channel.key}"
+      "#{self.ship.url}/~/channel/#{self.channel.key}"
     end
 
     def request_body
-      self.to_a.to_json
+      JSON.generate(self.to_a)
     end
 
     def ship

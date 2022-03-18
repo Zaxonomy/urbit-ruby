@@ -1,52 +1,86 @@
-ship.scry(app: 'settings-store', path: '/desk/landscape', mark: 'json')
+ship.scry(app: 'settings-store', path: '/all', mark: 'json')
 
 {
-  :status => 200,
-  :code   => "ok",
-  :body   => {
+  :status=>200,
+  :code=>"ok",
+  :body=> {
+    "all": {
+      "landscape": {
+        "calm": {
+          "hideUtilities": false,
+          "hideGroups\":false,\"hideAvatars\":true,\"hideUnreads\":true,\"hideNicknames\":true
+        },
+        "display": {
+          "backgroundType\":\"color\",\"background\":\"0xa8.90ea\"
+        },
+        "urbit-visor-permissions\":{
+          "https://urbitdashboard.com\":[\"shipName\",\"shipURL\",\"scry\",\"subscribe\",\"poke\",\"thread\"]
+        }
+      },
+      "bitcoin": {\"btc-wallet\":{\"currency\":\"USD\",\"warning\":true}}}}"
+}
+
+ship.scry(app: 'settings-store', path: '/desk/landscape', mark: 'json')
+{
+  :status=>200,
+  :code=>"ok",
+  :body=> {
     "desk": {
       "calm": {
+        "hideUtilities": false,
+        "hideGroups": false,
         "hideAvatars": true,
-        "hideNicknames": true
+        "hideUnreads": false,
+        "hideNicknames":true
       },
-      "urbit-visor-permissions": {
+      "display": {
+        "backgroundType": "color",
+        "background": "0xa8.90ea"
+      },
+      "urbit-visor-permissions":{
         "https://urbitdashboard.com": [
-          "shipName", "shipURL", "scry", "subscribe", "poke", "thread"
+          "shipName",
+          "shipURL",
+          "scry",
+          "subscribe",
+          "poke",
+          "thread"
         ]
       }
     }
   }
 }
 
+// This is an example of the message received when a ship's settings change.
+{
+  "json": {
+    "settings-event": {
+      "put-entry": {
+        "bucket-key": "calm",
+        "desk": "landscape",
+        "entry-key": "hideUnreads",
+        "value": true
+      }
+    }
+  },
+  "id": 1,
+  "response": "diff"
+}
 
-pry(main)> ship.subscribe(app: 'settings-store', path: '/all')
-=> a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164192001782807f')
-
-pry(main)> Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164192001782807f')
-] -- [message
-] -- [
-  {
-    "ok": "ok",
-    "id": 1,
-    "response": "subscribe"
-  }
-]
-
-pry(main)> Received a Fact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-0', key: '164192001782807f')
-] -- [message
-] -- [
-  {
-    "json": {
-      "settings-event": {
-        "put-entry": {
-          "bucket-key": "calm",
-          "desk": "landscape",
-          "entry-key": "hideUnreads",
-          "value": true
+// This is an example of the message received when a new Bucket is added.
+{
+  "json": {
+    "settings-event": {
+      "put-bucket": {
+        "bucket-key": "mars-base-10",
+        "desk": "landscape",
+        "bucket": {
+          "current-view": "graph-rover"
         }
       }
-    },
-    "id": 1,
-    "response": "diff"
+    }
   }
-]
+}
+
+// Bucket deleted
+{"json":{"settings-event":{"del-bucket":{"bucket-key":"mars-base-12","desk":"landscape"}}},"id":1,"response":"diff"}

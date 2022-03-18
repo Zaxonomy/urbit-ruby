@@ -1,0 +1,34 @@
+// Request
+{
+  "create": {
+    "name": "new-group",
+    "policy": {
+      "open": {
+        "banRanks": [],
+        "banned": []
+      }
+    },
+    "title": "new-group",
+    "description": "great new group"
+  }
+}
+
+// Response
+{
+  "json": {
+    "groupUpdate": {
+      "addGroup": {
+        "policy": {
+          "open": {
+            "banned": [],
+            "banRanks": []
+          }
+        },
+        "resource": {
+          "name": "new-group",
+          "ship": "barsyr-latreb"
+        },
+        "hidden": false
+      }
+    }
+  }

@@ -1,15 +1,15 @@
 require 'ld-eventsource'
+require "logger"
 
 require 'urbit/ack_message'
 require 'urbit/fact'
 
 module Urbit
   class Receiver < SSE::Client
-    attr_accessor :facts
+    attr_accessor :errors, :facts
 
     def initialize(channel:)
-      @facts = []
-      super(channel.url, {headers: self.headers(channel)}) do |rec|
+      super(channel.url, headers: self.headers(channel), logger: self.default_logger) do |rec|
         # We are now listening on a socket for SSE::Events. This block will be called for each one.
         rec.on_event do |event|
           # Wrap the returned event in a Fact.
@@ -22,10 +22,20 @@ module Urbit
         end
 
         rec.on_error do |error|
-          self.facts += ["I received an error fact: #{error.class}"]
+          self.errors << ["I received an error fact: #{error.class}"]
         end
       end
+
+      @errors   = []
+      @facts   = []
       @is_open = true
+    end
+
+    def default_logger
+      log           = ::Logger.new($stdout)
+      log.level     = ::Logger::WARN
+      log.progname  = 'ld-eventsource'
+      log
     end
 
     def open?

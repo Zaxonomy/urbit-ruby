@@ -1,0 +1,41 @@
+{
+  "json": {
+    "groupUpdate": {
+      "addTag": {
+        "ships": [
+          "winter-paches"
+        ],
+        "resource": {
+          "name": "group-4",
+          "ship": "barsyr-latreb"
+        },
+        "tag": {
+          "tag": "admin"
+        }
+      }
+    }
+  },
+  "id": 1,
+  "response": "diff"
+}
+
+{
+  "json": {
+    "groupUpdate": {
+      "removeTag": {
+        "ships": [
+          "winter-paches"
+        ],
+        "resource": {
+          "name": "group-4",
+          "ship": "barsyr-latreb"
+        },
+        "tag": {
+          "tag": "admin"
+        }
+      }
+    }
+  },
+  "id": 1,
+  "response": "diff"
+}

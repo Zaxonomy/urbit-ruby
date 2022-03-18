@@ -1,0 +1,14 @@
+{
+  "json": {
+    "groupUpdate": {
+      "removeGroup": {
+        "resource": {
+          "name": "group-3",
+          "ship": "barsyr-latreb"
+        }
+      }
+    }
+  },
+  "id": 1,
+  "response": "diff"
+}

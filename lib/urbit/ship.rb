@@ -3,19 +3,21 @@ require 'faraday'
 require 'urbit/channel'
 require 'urbit/config'
 require 'urbit/graph'
-require 'urbit/setting'
+require 'urbit/group_manager'
+require 'urbit/settings'
 
 module Urbit
   class Ship
     attr_accessor :logged_in
-    attr_reader :auth_cookie, :channels, :config
+    attr_reader :auth_cookie, :channels, :config, :group_mgr
 
     def initialize(config: Config.new)
       @auth_cookie = nil
       @channels    = []
       @config      = config
       @graphs      = []
-      @settings    = []
+      @group_mgr   = GroupManager.new ship: self
+      @settings    = nil                         # Use lazy initialization here
       @logged_in   = false
     end
 
@@ -62,17 +64,51 @@ module Urbit
       self.graphs.collect {|g| g.resource}
     end
 
+    #
+    # Answers the Group uniquely keyed by path:, if it exists
+    #
+    def group(path:)
+      @group_mgr.find_by_path(path)
+    end
+
+    #
+    # Answers the object managing the Groups on this ship.
+    # This object provides all the helper methods to list, join, leave, &c. a Group
+    #
+    def groups
+      @group_mgr
+    end
+
     def login
       return self if logged_in?
 
       ensure_connections_closed
       response = Faraday.post(login_url, "password=#{config.code}")
       parse_cookie(response)
+      @group_mgr.load
       self
     end
 
     def name
       config.name
+    end
+
+    def open_channels
+      @channels.select {|c| c.open?}
+    end
+
+    def pat_p
+      config.name
+    end
+
+    #
+    # Poke an app with a message using a mark.
+    #
+    # Returns a Channel which has been created and opened and will begin
+    #   to get back a stream of facts via its Receiver.
+    #
+    def poke(app:, mark:, message:)
+      (self.add_channel).poke(app: app, mark: mark, message: message)
     end
 
     def remove_graph(desk: 'landscape', graph:)
@@ -92,66 +128,10 @@ module Urbit
       retcode
     end
 
-    #
-    # Answers the entries for the specified desk and bucket.
-    #
-    def setting(desk: 'landscape', bucket:)
-      if (settings = self.settings(desk: desk))
-        settings.each do |setting|
-          if (entries = setting.entries(bucket: bucket))
-            return entries
-          end
-        end
-      end
-      {}
-    end
-
-    #
-    # Answers a collection of all the settings for this ship.
-    # This collection is cached and will need to be invalidated to discover new settings.
-    #
-    def settings(desk: 'landscape', flush_cache: false)
-      @settings = [] if flush_cache
-      if @settings.empty?
-        if self.logged_in?
-          scry = self.scry(app: "settings-store", path: "/desk/#{desk}", mark: "json")
-          if scry[:body]
-            body = JSON.parse scry[:body]
-            body["desk"].each do |k|
-              @settings << Setting.new(ship: self, desk: desk, setting: k)
-            end
-          end
-        end
-      end
-      @settings
-    end
-
-    def untilded_name
-      name.gsub('~', '')
-    end
-
-    def pat_p
-      config.name
-    end
-
-    def open_channels
-      @channels.select {|c| c.open?}
-    end
-
-    #
-    # Poke an app with a message using a mark.
-    #
-    # Returns a Channel which has been created and opened and will begin
-    #   to get back a stream of facts via its Receiver.
-    #
-    def poke(app:, mark:, message:)
-      (self.add_channel).poke(app: app, mark: mark, message: message)
-    end
-
     def scry(app:, path:, mark: 'json')
       self.login
       mark = ".#{mark}" unless mark.empty?
-      scry_url = "#{self.config.api_base_url}/~/scry/#{app}#{path}#{mark}"
+      scry_url = "#{self.url}/~/scry/#{app}#{path}#{mark}"
 
       response = Faraday.get(scry_url) do |req|
         req.headers['Accept'] = 'application/json'
@@ -161,9 +141,20 @@ module Urbit
       {status: response.status, code: response.reason_phrase, body: response.body}
     end
 
+    #
+    # Answers the object managing the Settings on this ship.
+    # This object provides all the helper methods to list, update, and remove a Setting
+    #
+    def settings
+      if self.logged_in?
+        @settings = Settings.load(ship: self) if @settings.nil?
+      end
+      @settings
+    end
+
     def spider(desk: 'landscape', mark_in:, mark_out:, thread:, data:, args: [])
       self.login
-      url = "#{self.config.api_base_url}/spider/#{desk}/#{mark_in}/#{thread}/#{mark_out}.json"
+      url = "#{self.url}/spider/#{desk}/#{mark_in}/#{thread}/#{mark_out}.json"
 
       # TODO: This is a huge hack due to the fact that certain spider operations are known to
       #       not return when they should. Instead I just set the timeout low and catch the
@@ -211,6 +202,14 @@ module Urbit
       "a Ship(#{self.to_h})"
     end
 
+    def untilded_name
+      name.gsub('~', '')
+    end
+
+    def url
+      self.config.api_base_url
+    end
+
     private
 
     def add_channel
@@ -229,7 +228,7 @@ module Urbit
     end
 
     def login_url
-      "#{config.api_base_url}/~/login"
+      "#{self.url}/~/login"
     end
 
     def parse_cookie(resp)
