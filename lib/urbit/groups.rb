@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Urbit
-  class GroupManager
+  class Groups
     attr_accessor :groups, :ship
 
     def initialize(ship:)
