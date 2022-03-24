@@ -3,20 +3,20 @@ require 'faraday'
 require 'urbit/channel'
 require 'urbit/config'
 require 'urbit/graph'
-require 'urbit/group_manager'
+require 'urbit/groups'
 require 'urbit/settings'
 
 module Urbit
   class Ship
     attr_accessor :logged_in
-    attr_reader :auth_cookie, :channels, :config, :group_mgr
+    attr_reader :auth_cookie, :channels, :config
 
     def initialize(config: Config.new)
       @auth_cookie = nil
       @channels    = []
       @config      = config
       @graphs      = []
-      @group_mgr   = GroupManager.new ship: self
+      @groups      = Groups.new ship: self
       @settings    = nil                         # Use lazy initialization here
       @logged_in   = false
     end
@@ -68,7 +68,7 @@ module Urbit
     # Answers the Group uniquely keyed by path:, if it exists
     #
     def group(path:)
-      @group_mgr.find_by_path(path)
+      @groups.find_by_path(path)
     end
 
     #
@@ -76,7 +76,7 @@ module Urbit
     # This object provides all the helper methods to list, join, leave, &c. a Group
     #
     def groups
-      @group_mgr
+      @groups
     end
 
     def login
@@ -85,7 +85,7 @@ module Urbit
       ensure_connections_closed
       response = Faraday.post(login_url, "password=#{config.code}")
       parse_cookie(response)
-      @group_mgr.load
+      @groups.load
       self
     end
 
