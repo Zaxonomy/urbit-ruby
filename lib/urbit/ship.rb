@@ -65,13 +65,6 @@ module Urbit
     end
 
     #
-    # Answers the Group uniquely keyed by path:, if it exists
-    #
-    def group(path:)
-      @groups.find_by_path(path)
-    end
-
-    #
     # Answers the object managing the Groups on this ship.
     # This object provides all the helper methods to list, join, leave, &c. a Group
     #

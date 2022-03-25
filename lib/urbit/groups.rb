@@ -1,29 +1,37 @@
 # frozen_string_literal: true
 
 module Urbit
-  class Groups
-    attr_accessor :groups, :ship
+  class Groups < Set
+    attr_accessor :ship
 
     def initialize(ship:)
       @ship   = ship
-      @groups = []
+      @hash = {}
+    end
+
+    def [](path:)
+      if (g = self.select {|g| g.path == path}.first)
+        g.manager = self
+        g
+      end
     end
 
     #
     # Adds a Group to this Manager's groups collection
     #
     def add(a_group)
-      @groups << a_group
+      a_group.manager = self
+      self << a_group
     end
 
     def add_members(group_path:, ships:)
-      if (group = self.find(path: group_path))
+      if (group = self[path: group_path])
         group.members += ships
       end
     end
 
     def add_tag(group_path:, ships:, tag:)
-      if (group = self.find(path: group_path))
+      if (group = self[path: group_path])
         if (group.tags.include? tag)
           group.tags[tag] += ships
         end
@@ -35,23 +43,7 @@ module Urbit
     end
 
     def empty?
-      self.groups.empty?
-    end
-
-    #
-    # Answers the Group uniquely keyed by path:, if it exists
-    #
-    def find(path:)
-      if (g = self.groups.select {|g| g.path == path}.first)
-        g.manager = self
-        g
-      end
-    end
-
-    def first
-      g = self.groups.first
-      g.manager = self
-      g
+      self.empty?
     end
 
     def join(host:, name:, share_contact: false, auto_join: false)
@@ -61,21 +53,21 @@ module Urbit
     end
 
     def list
-      self.groups.map {|g| g.path}.join("\n")
+      self.map {|g| g.path}.join("\n")
     end
 
     def remove(group)
-      @groups = self.groups.filter {|g| g != group}
+      self.delete(group)
     end
 
     def remove_members(group_path:, ships:)
-      if (group = self.find(path: group_path))
+      if (group = self[path: group_path])
         group.members -= ships
       end
     end
 
     def remove_tag(group_path:, ships:, tag:)
-      if (group = self.find(path: group_path))
+      if (group = self[path: group_path])
         if (group.tags.include? tag)
           group.tags[tag] -= ships
         end
@@ -94,7 +86,7 @@ module Urbit
     end
 
     def to_s
-      self.groups.sort.each {|g| puts g}
+      self.sort.each {|g| puts g}
     end
   end
 end
