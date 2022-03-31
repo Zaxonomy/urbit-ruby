@@ -2,10 +2,11 @@
 
 module Urbit
   class Group
-     attr_accessor :manager, :members, :tags
+     attr_accessor :graphs, :manager, :members, :tags
      attr_reader :hidden, :path, :policy
 
     def initialize(path:, members:, policy:, tags:, hidden:)
+      @graphs  = Set.new
       @hidden  = hidden
       @manager = nil
       @members = Set.new(members)

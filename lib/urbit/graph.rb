@@ -4,12 +4,14 @@ require 'urbit/parser'
 
 module Urbit
   class Graph
-    attr_reader :host_ship_name, :name, :ship
+    attr_accessor :group
+    attr_reader   :host_ship_name, :name, :ship
 
     def initialize(ship:, graph_name:, host_ship_name:)
       @ship           = ship
-      @name           = graph_name
+      @group          = nil
       @host_ship_name = host_ship_name
+      @name           = graph_name
       @nodes          = SortedSet.new
     end
 

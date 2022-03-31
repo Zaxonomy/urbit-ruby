@@ -2,11 +2,11 @@
 
 module Urbit
   class Links < Set
-    class << self
-    end
+    attr_reader :ship
 
     def initialize
-      @hash    = {}
+      @hash = {}
+      @ship = nil
     end
 
     def [](path:)
@@ -20,6 +20,7 @@ module Urbit
 
     def load(ship:)
       ship.subscribe(app: 'metadata-store', path: '/all')
+      @ship = ship
       nil
     end
   end
@@ -27,9 +28,12 @@ module Urbit
   class Link
     attr_reader :path, :data
 
-    def initialize(path:, data:)
-      @path    = path
-      @data    = data
+    def initialize(chain:, path:, data:)
+      @chain = chain
+      @graph = nil
+      @group = nil
+      @path  = path
+      @data  = data
     end
 
     def ==(another)
@@ -38,6 +42,38 @@ module Urbit
 
     def <=>(another)
       self.path <=> another.path
+    end
+
+    def eql?(another)
+      another.path == self.path
+    end
+
+    def graph
+      if @graph.nil?
+        @graph = @chain.ship.graph(resource: self.resource)
+        @graph.group = self.group
+      end
+      @graph
+    end
+
+    def group
+      if @group.nil?
+        @group = @chain.ship.groups[path: self.group_path]
+        @group.graphs << self.graph
+      end
+      @group
+    end
+
+    def group_path
+      @data['group'].sub('/ship/', '')
+    end
+
+    def resource
+      @data['resource'].sub('/ship/', '')
+    end
+
+    def type
+      @data['app-name']
     end
 
     # scry = ship.scry(app: "metadata-store", path: "/all", mark: "json")
