@@ -4,6 +4,7 @@ require 'urbit/channel'
 require 'urbit/config'
 require 'urbit/graph'
 require 'urbit/groups'
+require 'urbit/links'
 require 'urbit/settings'
 
 module Urbit
@@ -17,6 +18,7 @@ module Urbit
       @config      = config
       @graphs      = []
       @groups      = Groups.new ship: self
+      @links       = Links.new
       @settings    = nil                         # Use lazy initialization here
       @logged_in   = false
     end
@@ -72,6 +74,10 @@ module Urbit
       @groups
     end
 
+    def links
+      @links
+    end
+
     def login
       return self if logged_in?
 
@@ -79,6 +85,13 @@ module Urbit
       response = Faraday.post(login_url, "password=#{config.code}")
       parse_cookie(response)
       @groups.load
+
+      # For now we will require a subscription to all metadata. it's the glue between %graphs and %groups.
+      # A key issue that arose is that these are both async %subscribe calls and so there are sync issues
+      #   if we try to directly link the groups and the graphs. Instead we need to just store the links
+      #   and lazy-instatiate the metadata _if_ we have received it.
+      @links.load ship: self
+
       self
     end
 

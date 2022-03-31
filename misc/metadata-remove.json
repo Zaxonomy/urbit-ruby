@@ -1,0 +1,13 @@
+{
+  "json": {
+    "metadata-update": {
+      "remove": {
+        "app-name": "graph",
+        "resource": "/ship/~hastuc-dibtux/pirated-ed-are-na-863",
+        "group": "/ship/~fabled-faster/interface-testing-facility"
+      }
+    }
+  },
+  "id": 1,
+  "response": "diff"
+}

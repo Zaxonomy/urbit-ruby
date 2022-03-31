@@ -11,9 +11,7 @@ module Urbit
       # Attach this new fact as a node to its Graph.
       #
       def attach_parser
-        # puts "Received a graph update for [#{self.ship.graph(resource: self.resource)}]"
         if self.incoming_graph
-          # puts "Received an add_graph event: #{self.raw_json} on #{self.resource}"
           self.create_parser
         end
       end
@@ -49,7 +47,7 @@ module Urbit
       end
 
       def create_parser
-        Urbit::AddGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
+        Urbit::AddGraphParser.new(for_graph: self.incoming_graph,  with_json: self.raw_json).add_nodes
       end
 
       def raw_json
@@ -63,7 +61,7 @@ module Urbit
       end
 
       def create_parser
-        Urbit::AddNodesParser.new(for_graph: incoming_graph,  with_json: self.raw_json).add_nodes
+        Urbit::AddNodesParser.new(for_graph: self.incoming_graph,  with_json: self.raw_json).add_nodes
       end
 
       def raw_json
@@ -77,7 +75,7 @@ module Urbit
       end
 
       def create_parser
-        Urbit::RemoveGraphParser.new(for_graph: incoming_graph,  with_json: self.raw_json)
+        Urbit::RemoveGraphParser.new(for_graph: self.incoming_graph,  with_json: self.raw_json)
       end
 
       def raw_json
