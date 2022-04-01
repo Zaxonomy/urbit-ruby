@@ -13,8 +13,12 @@ module Urbit
       self.select {|l| path == l.path}.first
     end
 
+    def findGraph(resource:)
+      self.select{|l| l.type == 'graph' && resource == l.resource}.first
+    end
+
     def list
-      self.each {|l| puts l.to_string}
+      self.sort.each {|l| puts l.to_list}
       nil
     end
 
@@ -68,8 +72,16 @@ module Urbit
       @data['group'].sub('/ship/', '')
     end
 
+    def metadata
+      @data['metadata']
+    end
+
     def resource
       @data['resource'].sub('/ship/', '')
+    end
+
+    def to_list
+      @path
     end
 
     def type

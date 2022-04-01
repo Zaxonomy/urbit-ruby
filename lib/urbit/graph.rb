@@ -4,7 +4,6 @@ require 'urbit/parser'
 
 module Urbit
   class Graph
-    attr_accessor :group
     attr_reader   :host_ship_name, :name, :ship
 
     def initialize(ship:, graph_name:, host_ship_name:)
@@ -17,6 +16,28 @@ module Urbit
 
     def add_node(node:)
       @nodes << node unless node.deleted?
+    end
+
+    def creator
+      self.fetch_link if @creator.nil?
+      @creator
+    end
+
+    def description
+      self.fetch_link if @description.nil?
+      @description
+    end
+
+    def group
+      if @group.nil?
+        @group_link = self.fetch_link
+        @group = @group_link.group unless @group_link.nil?
+      end
+      @group
+    end
+
+    def group=(a_group)
+      @group = a_group
     end
 
     def host_ship
@@ -86,6 +107,16 @@ module Urbit
       self.fetch_sibling_nodes(node, :older, count)[0..(count - 1)]
     end
 
+    def title
+      self.fetch_link if @title.nil?
+      @title
+    end
+
+    def type
+      self.fetch_link if @type.nil?
+      @type
+    end
+
     #
     # the canonical printed representation of a Graph
     def to_s
@@ -98,6 +129,14 @@ module Urbit
       self.fetch_nodes("#{self.graph_resource}/",
                        AddGraphParser,
                        "add-graph")
+    end
+
+    def fetch_link
+      @graph_link = self.ship.links.findGraph(resource: self.resource)
+      @creator     = @graph_link.metadata['creator']
+      @description = @graph_link.metadata['description']
+      @title       = @graph_link.metadata['title']
+      @type        = @graph_link.metadata['config']['graph']
     end
 
     def fetch_newest_nodes(count)
