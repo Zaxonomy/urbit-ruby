@@ -17,6 +17,10 @@ module Urbit
       self.select{|l| l.type == 'graph' && resource == l.resource}.first
     end
 
+    def findGroup(path:)
+      self.select{|l| l.type == 'groups' && path == l.resource}.first
+    end
+
     def list
       self.sort.each {|l| puts l.to_list}
       nil
@@ -87,16 +91,5 @@ module Urbit
     def type
       @data['app-name']
     end
-
-    # scry = ship.scry(app: "metadata-store", path: "/all", mark: "json")
-    # # scry = self.scry(app: "settings-store", path: "/desk/#{desk}", mark: "json")
-    # s = Settings.new
-    # if scry[:body]
-    #   body = JSON.parse scry[:body]
-    #   body["all"].each do |k, v|  # At this level the keys are the desks and the values are the buckets
-    #     s << Setting.new(ship: ship, desk: k, buckets: v)
-    #   end
-    # end
-    # s
   end
 end

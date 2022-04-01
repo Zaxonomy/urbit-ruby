@@ -53,7 +53,7 @@ module Urbit
     end
 
     def list
-      self.map {|g| g.path}.join("\n")
+      self.map {|g| g.to_list}.join("\n")
     end
 
     def remove(group)

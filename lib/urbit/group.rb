@@ -2,7 +2,7 @@
 
 module Urbit
   class Group
-     attr_accessor :graphs, :manager, :members, :tags
+     attr_accessor :graphs, :manager, :members, :tags, :title
      attr_reader :hidden, :path, :policy
 
     def initialize(path:, members:, policy:, tags:, hidden:)
@@ -21,6 +21,16 @@ module Urbit
 
     def <=>(another_group)
       self.path <=> another_group.path
+    end
+
+    def creator
+      self.fetch_link if @creator.nil?
+      @creator
+    end
+
+    def description
+      self.fetch_link if @description.nil?
+      @description
     end
 
     #
@@ -83,8 +93,20 @@ module Urbit
       '?'
     end
 
+    def picture
+      self.fetch_link if @picture.nil?
+      @picture
+    end
+
+    def title
+      self.fetch_link if @title.nil?
+      @title
+    end
+
     def to_h
     {
+        title:           self.title,
+        description:     self.description,
         host:            self.host,
         key:             self.key,
         member_count:    self.members.count,
@@ -93,11 +115,25 @@ module Urbit
       }
     end
 
+    def to_list
+      self.title || "Untitled - #{self.path}"
+    end
+
     def to_s
       "a Group(#{self.to_h})"
     end
 
     private
+
+    def fetch_link
+      @group_link = self.manager.ship.links.findGroup(path: self.path)
+      unless @group_link.nil?
+        @creator     = @group_link.metadata['creator']
+        @description = @group_link.metadata['description']
+        @picture     = @group_link.metadata['picture']
+        @title       = @group_link.metadata['title']
+      end
+    end
 
     def parse_tags(tags)
       h = {}
