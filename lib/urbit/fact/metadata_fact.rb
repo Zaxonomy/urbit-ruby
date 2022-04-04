@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../link.rb'
+
 module Urbit
   module Fact
     class MetadataUpdateFact < BaseFact

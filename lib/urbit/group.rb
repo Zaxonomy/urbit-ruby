@@ -50,6 +50,13 @@ module Urbit
       another_group.path == self.path
     end
 
+    def graphs
+      if @graphs.empty?
+        self.graph_links.each {|gl| @graphs << gl.graph}
+      end
+      @graphs
+    end
+
     def host
       self.path_tokens[0]
     end
@@ -126,13 +133,24 @@ module Urbit
     private
 
     def fetch_link
-      @group_link = self.manager.ship.links.findGroup(path: self.path)
+      @group_link = self.manager.ship.links.find_group(path: self.path)
       unless @group_link.nil?
         @creator     = @group_link.metadata['creator']
         @description = @group_link.metadata['description']
         @picture     = @group_link.metadata['picture']
         @title       = @group_link.metadata['title']
       end
+    end
+
+    def graph_links
+      self.group_link.graph_links
+    end
+
+    def group_link
+      if @group_link.nil?
+        self.fetch_link
+      end
+      @group_link
     end
 
     def parse_tags(tags)

@@ -30,8 +30,8 @@ module Urbit
 
     def group
       if @group.nil?
-        @group_link = self.fetch_link
-        @group = @group_link.group unless @group_link.nil?
+        @link = self.fetch_link
+        @group = @link.group unless @link.nil?
       end
       @group
     end
@@ -132,11 +132,12 @@ module Urbit
     end
 
     def fetch_link
-      @graph_link = self.ship.links.findGraph(resource: self.resource)
-      @creator     = @graph_link.metadata['creator']
-      @description = @graph_link.metadata['description']
-      @title       = @graph_link.metadata['title']
-      @type        = @graph_link.metadata['config']['graph']
+      @link  = self.ship.links.find_graph(resource: self.resource)
+      @creator     = @link.metadata['creator']
+      @description = @link.metadata['description']
+      @title       = @link.metadata['title']
+      @type        = @link.metadata['config']['graph']
+      @link
     end
 
     def fetch_newest_nodes(count)
