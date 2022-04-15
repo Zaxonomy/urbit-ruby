@@ -7,7 +7,9 @@ module Urbit
     class MetadataUpdateFact < BaseFact
       def initialize(channel:, event:)
         super channel: channel, event: event
-        self.accept if self.for_this_ship?
+        unless self.is_remove
+          self.accept if self.for_this_ship?
+        end
         # TODO: Remove this debugging once Facts are finalized. DJR 2/3/2022
         # puts "Received a #{self.class.name.split('::').last} for [#{channel}] -- [#{@type}] -- [#{@data}]"
       end
@@ -28,6 +30,10 @@ module Urbit
           return self.root_h["initial-group"]["associations"]
         end
         a
+      end
+
+      def is_remove
+        self.root_h["remove"]
       end
 
       def root_h
