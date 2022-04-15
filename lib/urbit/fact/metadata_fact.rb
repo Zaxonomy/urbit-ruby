@@ -22,7 +22,12 @@ module Urbit
       end
 
       def associations
-        self.root_h["associations"]
+        # An ugly hack around the fact that when you first join a group there is another
+        # useless "initial-update" enclosing hash.
+        unless (a = self.root_h["associations"])
+          return self.root_h["initial-group"]["associations"]
+        end
+        a
       end
 
       def root_h
