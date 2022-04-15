@@ -15,16 +15,25 @@ module Urbit
       end
 
       def accept
-        # This is an new incoming Link, add it. If its a dupe, the Links Set will filter it.
-        links = channel.ship.links
-        self.associations.each do |k, v|
-          links << Link.new(chain: links, path: k, data: v)
+        links = self.channel.ship.links
+        if self.add_root.nil?
+          # This is an new incoming Link, add it. If its a dupe, the Links Set will filter it.
+          self.associations.each do |k, v|
+            links << Link.new(chain: links, path: k, data: v)
+          end
+        else
+          g = self.add_root["group"]
+          links << Link.new(chain: links, path: "#{g}/groups#{g}", data: self.add_root)
         end
         nil
       end
 
+      def add_root
+        self.root_h["add"]
+      end
+
       def associations
-        # An ugly hack around the fact that when you first join a group there is another
+        # An ugly hacks around the fact that when you first join a group there is another
         # useless "initial-update" enclosing hash.
         unless (a = self.root_h["associations"])
           return self.root_h["initial-group"]["associations"]

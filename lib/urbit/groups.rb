@@ -9,11 +9,19 @@ module Urbit
       @hash = {}
     end
 
-    def [](path:)
-      if (g = self.select {|g| g.path == path}.first)
-        g.manager = self
-        g
+    def [](path: nil, title: nil)
+      if title.nil?
+        if (g = self.select {|g| g.path == path}.first)
+          g.manager = self
+          return g
+        end
+      else
+        if (g = self.select {|g| g.title == title}.first)
+          g.manager = self
+          return g
+        end
       end
+      nil
     end
 
     #
