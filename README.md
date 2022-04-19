@@ -195,39 +195,49 @@ a Node({:index=>"170.141.184.505.209.627.337.970.761.265.544.429.568", :author=>
 #
 # Show the paths of all your current Groups
 > ship.groups.list
-=> ~darlur/aries
-~winter-paches/the-great-north
-**~bitbet-bolbel/urbit-community**
+=> Hammock Coast
+The Darlur System
+The Great North
 
 # Leave the highlighted Group above
-> group = ship.groups[path: '~bitbet-bolbel/urbit-community']
-=> a Group({:host=>"~bitbet-bolbel", :key=>"urbit-community", :member_count=>6992, :pending_invites=>"?", :hidden=>false})
+> group = ship.groups[title: 'Hammock Coast']
+=> a Group({:title=>"Hammock Coast", :description=>"Martians living in God's Country: Coastal South Carolina between Georgetown and Myrtle Beach", :host=>"~darlur", :key=>"hammock-coast", :member_count=>3, :pending_invites=>"?", :hidden=>false})
 
 > group.leave
 => {:status=>200, :code=>"ok", :body=>"null"}
 
 # The Group is no longer in your list of Groups
 > ship.groups.list
-=> ~darlur/aries
-~winter-paches/the-great-north
+=> The Darlur System
+The Great North
 
 # (Re-) Join the Group
-> ship.groups.join(host: "~fabled-faster", name: "interface-testing-facility")
+> ship.groups.join(host: "~darlur", name: "hammock-coast")
+
+# A group knows about it's Graphs
+> g = ship.groups[title: 'Hammock Coast']
+=> a Group({:title=>"Hammock Coast", :description=>"Martians living in God's Country: Coastal South Carolina between Georgetown and Myrtle Beach", :host=>"~darlur", :key=>"hammock-coast", :member_count=>3, :pending_invites=>"?", :hidden=>false})
+
+> g.graphs.map {|g| g.name}
+=> ["the-beach-2315"]
+
+> g.graphs.map {|g| g.title}
+=> ["The Beach"]
 
 # The group is now back in your list of Groups (With large groups this may take a moment)
 > ship.groups.list
-=> ~darlur/aries
-~winter-paches/the-great-north
-~bitbet-bolbel/urbit-community
+=> Hammock Coast
+The Darlur System
+The Great North
 
 # Create a new group
 > ship.groups.create(name: 'group-4', title: 'Fourth Group', description: "4th Group")
 
 > ship.groups.list
-=> ~darlur/aries
-~winter-paches/the-great-north
-~bitbet-bolbel/urbit-community
-~barsyr-latreb/group-4
+=> Fourth Group
+Hammock Coast
+The Darlur System
+The Great North
 
 # Send out an invitation to your new group
 > group = ship.groups[path: '~barsyr-latreb/group-4']

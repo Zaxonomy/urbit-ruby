@@ -1,0 +1,52 @@
+{
+  "metadata-update": {
+    "initial-group": {
+      "associations": {
+        "/ship/~darlur/hammock-coast/groups/ship/~darlur/hammock-coast": {
+          "metadata": {
+            "preview":true,
+            "vip":"",
+            "title": "Hammock Coast",
+            "description": "Martians living in God's Country: Coastal South Carolina between Georgetown and Myrtle Beach",
+            "creator": "~darlur",
+            "picture": "",
+            "hidden": false,
+            "config": {
+              "group": null
+            },
+            "date-created": "~2022.4.15..17.29.56..22ab",
+            "color": "0x0"
+          },
+          "app-name": "groups",
+          "resource": "/ship/~darlur/hammock-coast",
+          "group": "/ship/~darlur/hammock-coast"
+        },
+        "/ship/~darlur/hammock-coast/graph/ship/~darlur/the-beach-2315": {
+          "metadata": {
+            "preview":false,"vip":"","title":"The Beach","description":"A great place top hangout and chat","creator":"~darlur","picture":"","hidden":false,"config":{"graph":"chat"},"date-created":"~2022.4.15..17.31.40..af59","color":"0x0"},"app-name":"graph","resource":"/ship/~darlur/the-beach-2315","group":"/ship/~darlur/hammock-coast"}},"group":"/ship/~darlur/hammock-coast"}}},"id":1,"response":"diff"}
+
+{
+  "metadata-update": {
+    "remove": {
+      "app-name": "groups",
+      "resource": "/ship/~darlur/hammock-coast",
+      "group":"/ship/~darlur/hammock-coast"
+    }
+  }
+}
+
+{
+  "metadata-update":{
+    "add":{
+      "metadata": {
+        "preview":true,
+        "vip":"",
+        "title":"Fifth Group",
+        "description":"5th Group","creator":"~barsyr-latreb","picture":"","hidden":false,"config":{"group":null},"date-created":"~2022.4.15..20.19.30..9064","color":"0x0"
+      },
+      "app-name":"groups",
+      "resource":"/ship/~barsyr-latreb/group-5",
+      "group":"/ship/~barsyr-latreb/group-5"
+    }
+  }
+}
