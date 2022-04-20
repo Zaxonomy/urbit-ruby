@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'urbit/setting'
+
 module Urbit
   class Settings < Set
     class << self
