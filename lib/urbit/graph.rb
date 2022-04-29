@@ -4,17 +4,40 @@ require 'urbit/parser'
 
 module Urbit
   class Graph
-    attr_reader :host_ship_name, :name, :ship
+    attr_reader   :host_ship_name, :name, :ship
 
     def initialize(ship:, graph_name:, host_ship_name:)
       @ship           = ship
-      @name           = graph_name
+      @group          = nil
       @host_ship_name = host_ship_name
+      @name           = graph_name
       @nodes          = SortedSet.new
     end
 
     def add_node(node:)
       @nodes << node unless node.deleted?
+    end
+
+    def creator
+      self.fetch_link if @creator.nil?
+      @creator
+    end
+
+    def description
+      self.fetch_link if @description.nil?
+      @description
+    end
+
+    def group
+      if @group.nil?
+        @link = self.fetch_link
+        @group = @link.group unless @link.nil?
+      end
+      @group
+    end
+
+    def group=(a_group)
+      @group = a_group
     end
 
     def host_ship
@@ -84,6 +107,16 @@ module Urbit
       self.fetch_sibling_nodes(node, :older, count)[0..(count - 1)]
     end
 
+    def title
+      self.fetch_link if @title.nil?
+      @title
+    end
+
+    def type
+      self.fetch_link if @type.nil?
+      @type
+    end
+
     #
     # the canonical printed representation of a Graph
     def to_s
@@ -96,6 +129,15 @@ module Urbit
       self.fetch_nodes("#{self.graph_resource}/",
                        AddGraphParser,
                        "add-graph")
+    end
+
+    def fetch_link
+      @link  = self.ship.links.find_graph(resource: self.resource)
+      @creator     = @link.metadata['creator']
+      @description = @link.metadata['description']
+      @title       = @link.metadata['title']
+      @type        = @link.metadata['config']['graph']
+      @link
     end
 
     def fetch_newest_nodes(count)

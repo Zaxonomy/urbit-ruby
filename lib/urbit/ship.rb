@@ -3,20 +3,22 @@ require 'faraday'
 require 'urbit/channel'
 require 'urbit/config'
 require 'urbit/graph'
-require 'urbit/group_manager'
+require 'urbit/groups'
+require 'urbit/links'
 require 'urbit/settings'
 
 module Urbit
   class Ship
     attr_accessor :logged_in
-    attr_reader :auth_cookie, :channels, :config, :group_mgr
+    attr_reader :auth_cookie, :channels, :config
 
     def initialize(config: Config.new)
       @auth_cookie = nil
       @channels    = []
       @config      = config
       @graphs      = []
-      @group_mgr   = GroupManager.new ship: self
+      @groups      = Groups.new ship: self
+      @links       = Links.new
       @settings    = nil                         # Use lazy initialization here
       @logged_in   = false
     end
@@ -41,7 +43,7 @@ module Urbit
     # Answers a collection of all the top-level graphs on this ship.
     # This collection is cached and will need to be invalidated to discover new graphs.
     #
-    def graphs(flush_cache: false)
+    def graphs(flush_cache: true)
       @graphs = [] if flush_cache
       if @graphs.empty?
         if self.logged_in?
@@ -65,18 +67,15 @@ module Urbit
     end
 
     #
-    # Answers the Group uniquely keyed by path:, if it exists
-    #
-    def group(path:)
-      @group_mgr.find_by_path(path)
-    end
-
-    #
     # Answers the object managing the Groups on this ship.
     # This object provides all the helper methods to list, join, leave, &c. a Group
     #
     def groups
-      @group_mgr
+      @groups
+    end
+
+    def links
+      @links
     end
 
     def login
@@ -85,7 +84,14 @@ module Urbit
       ensure_connections_closed
       response = Faraday.post(login_url, "password=#{config.code}")
       parse_cookie(response)
-      @group_mgr.load
+      @groups.load
+
+      # For now we will require a subscription to all metadata. it's the glue between %graphs and %groups.
+      # A key issue that arose is that these are both async %subscribe calls and so there are sync issues
+      #   if we try to directly link the groups and the graphs. Instead we need to just store the links
+      #   and lazy-instatiate the metadata _if_ we have received it.
+      @links.load ship: self
+
       self
     end
 

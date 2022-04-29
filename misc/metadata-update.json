@@ -1,988 +1,1068 @@
-{
-  "action": "sse",
-  "data": {
-    "metadata-update": {
-      "associations": {
-        "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/hotel-de-glace-5106": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Hotel de Glace",
-            "description": "Come in for spirited conversation about current events and the World",
-            "creator": "~winter-paches",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+Received a BaseFact for [a Channel (Open) on ~barsyr-latreb(name: 'Channel-1', key: '1648156624154c8f')
+] -- [message
+] -- [
+  {
+    "json": {
+      "metadata-update": {
+        "associations": {
+          "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/hotel-de-glace-5106": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Hotel de Glace",
+              "description": "Come in for spirited conversation about current events and the World",
+              "creator": "~winter-paches",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2020.4.16..19.08.29..9835",
+              "color": "0x0"
             },
-            "date-created": "~2020.4.16..19.08.29..9835",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~winter-paches/hotel-de-glace-5106",
+            "group": "/ship/~winter-paches/the-great-north"
           },
-          "app-name": "graph",
-          "resource": "/ship/~winter-paches/hotel-de-glace-5106",
-          "group": "/ship/~winter-paches/the-great-north"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/testing-facility-announcements-5039": {
-          "metadata": {
-            "preview": true,
-            "vip": "",
-            "title": "Testing Facility Announcements",
-            "description": "Please check in for regular announcements",
-            "creator": "~fabled-faster",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/the-great-north-7.579": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Group Feed",
+              "description": "",
+              "creator": "~winter-paches",
+              "picture": "",
+              "hidden": true,
+              "config": {
+                "graph": "post"
+              },
+              "date-created": "~2021.6.7..15.34.31..a3ae",
+              "color": "0x0"
             },
-            "date-created": "~2021.3.12..18.15.09..abdb",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~winter-paches/the-great-north-7.579",
+            "group": "/ship/~winter-paches/the-great-north"
           },
-          "app-name": "graph",
-          "resource": "/ship/~fabled-faster/testing-facility-announcements-5039",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/the-great-north-7.579": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Group Feed",
-            "description": "",
-            "creator": "~winter-paches",
-            "picture": "",
-            "hidden": true,
-            "config": {
-              "graph": "post"
+          "/ship/~bitbet-bolbel/urbit-community/groups/ship/~bitbet-bolbel/urbit-community": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Urbit Community",
+              "description": "World hub, help desk, meet and greet, etc.",
+              "creator": "~bitbet-bolbel",
+              "picture": "https://fabled-faster.nyc3.digitaloceanspaces.com/fabled-faster/2021.4.02..21.52.41-UC.png",
+              "hidden": false,
+              "config": {
+                "group": {
+                  "app-name": "graph",
+                  "resource": "/ship/~bitbet-bolbel/urbit-community-5.963"
+                }
+              },
+              "date-created": "~2020.6.25..21.39.35..2fd2",
+              "color": "0x8f.9c9d"
             },
-            "date-created": "~2021.6.7..15.34.31..a3ae",
-            "color": "0x0"
+            "app-name": "groups",
+            "resource": "/ship/~bitbet-bolbel/urbit-community",
+            "group": "/ship/~bitbet-bolbel/urbit-community"
           },
-          "app-name": "graph",
-          "resource": "/ship/~winter-paches/the-great-north-7.579",
-          "group": "/ship/~winter-paches/the-great-north"
-        },
-        "/ship/~bitbet-bolbel/urbit-community/groups/ship/~bitbet-bolbel/urbit-community": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Urbit Community",
-            "description": "World hub, help desk, meet and greet, etc.",
-            "creator": "~bitbet-bolbel",
-            "picture": "https://fabled-faster.nyc3.digitaloceanspaces.com/fabled-faster/2021.4.02..21.52.41-UC.png",
-            "hidden": false,
-            "config": {
-              "group": {
-                "app-name": "graph",
-                "resource": "/ship/~bitbet-bolbel/urbit-community-5.963"
-              }
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/embed-providers-test-3334": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Embed Providers Test",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "link"
+              },
+              "date-created": "~2021.6.7..03.46.29..f548",
+              "color": "0x0"
             },
-            "date-created": "~2020.6.25..21.39.35..2fd2",
-            "color": "0x8f.9c9d"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/embed-providers-test-3334",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "groups",
-          "resource": "/ship/~bitbet-bolbel/urbit-community",
-          "group": "/ship/~bitbet-bolbel/urbit-community"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/embed-providers-test-3334": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Embed Providers Test",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "link"
+          "/ship/~darlur/aries/graph/ship/~darlur/help-desk-4556": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "help-desk",
+              "description": "Help line exclusively for our Solar System -- https://t.me/joinchat/SYrkC-D3MzBNCb8V",
+              "creator": "~darlur",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2020.8.25..14.54.13..8ca7",
+              "color": "0xff.2600"
             },
-            "date-created": "~2021.6.7..03.46.29..f548",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~darlur/help-desk-4556",
+            "group": "/ship/~darlur/aries"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/embed-providers-test-3334",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~darlur/aries/graph/ship/~darlur/help-desk-4556": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "help-desk",
-            "description": "Help line exclusively for our Solar System -- https://t.me/joinchat/SYrkC-D3MzBNCb8V",
-            "creator": "~darlur",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~barsyr-latreb/test0-996/graph/ship/~barsyr-latreb/test0-996": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Test0",
+              "description": "Test0",
+              "creator": "~barsyr-latreb",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.2.18..21.43.17..f809",
+              "color": "0x0"
             },
-            "date-created": "~2020.8.25..14.54.13..8ca7",
-            "color": "0xff.2600"
+            "app-name": "graph",
+            "resource": "/ship/~barsyr-latreb/test0-996",
+            "group": "/ship/~barsyr-latreb/test0-996"
           },
-          "app-name": "graph",
-          "resource": "/ship/~darlur/help-desk-4556",
-          "group": "/ship/~darlur/aries"
-        },
-        "/ship/~barsyr-latreb/test0-996/graph/ship/~barsyr-latreb/test0-996": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Test0",
-            "description": "Test0",
-            "creator": "~barsyr-latreb",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "publish"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/notebook-a-4589": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Notebook A",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.12.9..19.55.26..d1d7",
+              "color": "0x0"
             },
-            "date-created": "~2021.2.18..21.43.17..f809",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/notebook-a-4589",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~barsyr-latreb/test0-996",
-          "group": "/ship/~barsyr-latreb/test0-996"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/notebook-a-4589": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Notebook A",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "publish"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/the-firehose-2245": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "The Firehose",
+              "description": "Learn to drink from the firehose, and you shall have reached enlightenment",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.3.19..02.44.40..5c81",
+              "color": "0x0"
             },
-            "date-created": "~2021.12.9..19.55.26..d1d7",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/the-firehose-2245",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/notebook-a-4589",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/the-firehose-2245": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "The Firehose",
-            "description": "Learn to drink from the firehose, and you shall have reached enlightenment",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~bitbet-bolbel/urbit-community/graph/ship/~bitbet-bolbel/urbit-dialogue-archives-1750": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Urbit Dialogue Archives",
+              "description": "Transcripts of past Urbit Dialogues",
+              "creator": "~bitbet-bolbel",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.2.5..19.34.17..6411",
+              "color": "0x0"
             },
-            "date-created": "~2021.3.19..02.44.40..5c81",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~bitbet-bolbel/urbit-dialogue-archives-1750",
+            "group": "/ship/~bitbet-bolbel/urbit-community"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/the-firehose-2245",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~bitbet-bolbel/urbit-community/graph/ship/~bitbet-bolbel/urbit-dialogue-archives-1750": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Urbit Dialogue Archives",
-            "description": "Transcripts of past Urbit Dialogues",
-            "creator": "~bitbet-bolbel",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "publish"
+          "/ship/~bitbet-bolbel/urbit-community/graph/ship/~bitpyx-dildus/assembly-2021-6523": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Assembly 2021",
+              "description": "Questions + updates for Assembly 2021",
+              "creator": "~bitpyx-dildus",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.8.4..17.55.37..a0f1",
+              "color": "0x0"
             },
-            "date-created": "~2021.2.5..19.34.17..6411",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~bitpyx-dildus/assembly-2021-6523",
+            "group": "/ship/~bitbet-bolbel/urbit-community"
           },
-          "app-name": "graph",
-          "resource": "/ship/~bitbet-bolbel/urbit-dialogue-archives-1750",
-          "group": "/ship/~bitbet-bolbel/urbit-community"
-        },
-        "/ship/~bitbet-bolbel/urbit-community/graph/ship/~bitpyx-dildus/assembly-2021-6523": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Assembly 2021",
-            "description": "Questions + updates for Assembly 2021",
-            "creator": "~bitpyx-dildus",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~bitbet-bolbel/urbit-community/graph/ship/~darrux-landes/general": {
+            "metadata": {
+              "preview": true,
+              "vip": "",
+              "title": "General",
+              "description": "",
+              "creator": "~darrux-landes",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2020.4.6..21.52.18..65e2",
+              "color": "0x0"
             },
-            "date-created": "~2021.8.4..17.55.37..a0f1",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~darrux-landes/general",
+            "group": "/ship/~bitbet-bolbel/urbit-community"
           },
-          "app-name": "graph",
-          "resource": "/ship/~bitpyx-dildus/assembly-2021-6523",
-          "group": "/ship/~bitbet-bolbel/urbit-community"
-        },
-        "/ship/~bitbet-bolbel/urbit-community/graph/ship/~darrux-landes/general": {
-          "metadata": {
-            "preview": true,
-            "vip": "",
-            "title": "General",
-            "description": "",
-            "creator": "~darrux-landes",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/winter-is-here": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Winter is Here",
+              "description": "My personal commentary on my readings on the boomernet. One of the oldest urbit shared notebooks. :)",
+              "creator": "~winter-paches",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2020.4.3..15.35.46..9dda",
+              "color": "0x4.33ff"
             },
-            "date-created": "~2020.4.6..21.52.18..65e2",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~winter-paches/winter-is-here",
+            "group": "/ship/~winter-paches/the-great-north"
           },
-          "app-name": "graph",
-          "resource": "/ship/~darrux-landes/general",
-          "group": "/ship/~bitbet-bolbel/urbit-community"
-        },
-        "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/winter-is-here": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Winter is Here",
-            "description": "My personal commentary on my readings on the boomernet. One of the oldest urbit shared notebooks. :)",
-            "creator": "~winter-paches",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "publish"
+          "/ship/~bitbet-bolbel/urbit-community/graph/ship/~dopzod/urbit-help": {
+            "metadata": {
+              "preview": true,
+              "vip": "",
+              "title": "Help",
+              "description": "Please refer to https://urbit.org/faq/ for often-asked questions",
+              "creator": "~dopzod",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2020.6.30..00.53.11..75b1",
+              "color": "0x0"
             },
-            "date-created": "~2020.4.3..15.35.46..9dda",
-            "color": "0x4.33ff"
+            "app-name": "graph",
+            "resource": "/ship/~dopzod/urbit-help",
+            "group": "/ship/~bitbet-bolbel/urbit-community"
           },
-          "app-name": "graph",
-          "resource": "/ship/~winter-paches/winter-is-here",
-          "group": "/ship/~winter-paches/the-great-north"
-        },
-        "/ship/~bitbet-bolbel/urbit-community/graph/ship/~dopzod/urbit-help": {
-          "metadata": {
-            "preview": true,
-            "vip": "",
-            "title": "Help",
-            "description": "Please refer to https://urbit.org/faq/ for often-asked questions",
-            "creator": "~dopzod",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~haddef-sigwen/haddef-makes-book-5445": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "haddef makes book",
+              "description": "",
+              "creator": "~haddef-sigwen",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.4.1..16.25.54..98ff",
+              "color": "0x0"
             },
-            "date-created": "~2020.6.30..00.53.11..75b1",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~haddef-sigwen/haddef-makes-book-5445",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~dopzod/urbit-help",
-          "group": "/ship/~bitbet-bolbel/urbit-community"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~haddef-sigwen/haddef-makes-book-5445": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "haddef makes book",
-            "description": "",
-            "creator": "~haddef-sigwen",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "publish"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~rilfun-lidlen/punished-notes-190": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Punished Notes",
+              "description": "extremely long channel description far far away, behind the word mountains, far from the countries vokalia and consonantia, there live the blind texts",
+              "creator": "~rilfun-lidlen",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.3.29..00.58.26..7c70",
+              "color": "0x0"
             },
-            "date-created": "~2021.4.1..16.25.54..98ff",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~rilfun-lidlen/punished-notes-190",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~haddef-sigwen/haddef-makes-book-5445",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~rilfun-lidlen/punished-notes-190": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Punished Notes",
-            "description": "extremely long channel description far far away, behind the word mountains, far from the countries vokalia and consonantia, there live the blind texts",
-            "creator": "~rilfun-lidlen",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "publish"
+          "/ship/~darlur/aries/graph/ship/~darlur/announce": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "announcements",
+              "description": "~darlur solar system notifications",
+              "creator": "~darlur",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2020.4.3..17.47.47..a674",
+              "color": "0x0"
             },
-            "date-created": "~2021.3.29..00.58.26..7c70",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~darlur/announce",
+            "group": "/ship/~darlur/aries"
           },
-          "app-name": "graph",
-          "resource": "/ship/~rilfun-lidlen/punished-notes-190",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~darlur/aries/graph/ship/~darlur/announce": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "announcements",
-            "description": "~darlur solar system notifications",
-            "creator": "~darlur",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~tirrel/the-marketplace/graph/ship/~tirrel/trader-reputation-log-6079": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Reputations",
+              "description": "Gonna find out who's naughty and nice",
+              "creator": "~tirrel",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.2.27..08.37.32..738f",
+              "color": "0x0"
             },
-            "date-created": "~2020.4.3..17.47.47..a674",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~tirrel/trader-reputation-log-6079",
+            "group": "/ship/~tirrel/the-marketplace"
           },
-          "app-name": "graph",
-          "resource": "/ship/~darlur/announce",
-          "group": "/ship/~darlur/aries"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/test-book-7531": {
-          "metadata": {
-            "preview": true,
-            "vip": "",
-            "title": "Test book",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "publish"
+          "/ship/~tirrel/the-marketplace/graph/ship/~marbus/the-marketplace": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Star Squawk ",
+              "description": "General Market Discussion",
+              "creator": "~marbus",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2020.11.10..04.20.26..f6da",
+              "color": "0x0"
             },
-            "date-created": "~2021.2.4..04.12.53..505b",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~marbus/the-marketplace",
+            "group": "/ship/~tirrel/the-marketplace"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/test-book-7531",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/remote-content-gallery-2215": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Remote Content Gallery",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/test-book-7531": {
+            "metadata": {
+              "preview": true,
+              "vip": "",
+              "title": "Test book",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.2.4..04.12.53..505b",
+              "color": "0x0"
             },
-            "date-created": "~2021.6.21..20.40.53..469c",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/test-book-7531",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/remote-content-gallery-2215",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/small-chat-7050": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Small chat",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~tirrel/the-marketplace/graph/ship/~tirrel/the-pit-4391": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "The Pit (Trading Only)",
+              "description": "Open Outcry Exchange - DISCUSSION BELONGS IN STAR SQUAWK",
+              "creator": "~tirrel",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.2.25..23.20.06..d6ef",
+              "color": "0x0"
             },
-            "date-created": "~2021.6.28..02.40.11..183a.ba6a",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~tirrel/the-pit-4391",
+            "group": "/ship/~tirrel/the-marketplace"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/small-chat-7050",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/new-chat-7616": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "New chat",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/remote-content-gallery-2215": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Remote Content Gallery",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.6.21..20.40.53..469c",
+              "color": "0x0"
             },
-            "date-created": "~2021.5.10..04.33.28..8598",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/remote-content-gallery-2215",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/new-chat-7616",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/reallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllly-long-chat-name-5280": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "reallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllly long chat name",
-            "description": "testing chat title",
-            "creator": "~fabled-faster",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/small-chat-7050": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Small chat",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.6.28..02.40.11..183a.ba6a",
+              "color": "0x0"
             },
-            "date-created": "~2021.1.19..20.14.13..72dd",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/small-chat-7050",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~fabled-faster/reallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllly-long-chat-name-5280",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/one-message-per-day-9656": {
-          "metadata": {
-            "preview": true,
-            "vip": "",
-            "title": "One Message Per Day",
-            "description": "Only one message per day is allowed here, please don't fuck this up",
-            "creator": "~fabled-faster",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/new-chat-7616": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "New chat",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.5.10..04.33.28..8598",
+              "color": "0x0"
             },
-            "date-created": "~2021.3.15..20.47.23..33dd",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/new-chat-7616",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~fabled-faster/one-message-per-day-9656",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/interface-testing-facility-683": {
-          "metadata": {
-            "preview": false,
-            "vip": "admin-feed",
-            "title": "Group Feed",
-            "description": "",
-            "creator": "~fabled-faster",
-            "picture": "",
-            "hidden": true,
-            "config": {
-              "graph": "post"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/reallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllly-long-chat-name-5280": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "reallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllly long chat name",
+              "description": "testing chat title",
+              "creator": "~fabled-faster",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.1.19..20.14.13..72dd",
+              "color": "0x0"
             },
-            "date-created": "~2021.4.2..04.08.49..29df",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~fabled-faster/reallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllly-long-chat-name-5280",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~fabled-faster/interface-testing-facility-683",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/black-diamond-2312": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Black Diamond",
-            "description": "Going downhill fast",
-            "creator": "~winter-paches",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/one-message-per-day-9656": {
+            "metadata": {
+              "preview": true,
+              "vip": "",
+              "title": "One Message Per Day",
+              "description": "Only one message per day is allowed here, please don't fuck this up",
+              "creator": "~fabled-faster",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.3.15..20.47.23..33dd",
+              "color": "0x0"
             },
-            "date-created": "~2021.1.1..16.24.36..657a",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~fabled-faster/one-message-per-day-9656",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~winter-paches/black-diamond-2312",
-          "group": "/ship/~winter-paches/the-great-north"
-        },
-        "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/glide-zone-2159": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Glide Zone",
-            "description": "For enthusiasts of nature's favorite sport: Cross-Country Skiing",
-            "creator": "~winter-paches",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/interface-testing-facility-683": {
+            "metadata": {
+              "preview": false,
+              "vip": "admin-feed",
+              "title": "Group Feed",
+              "description": "",
+              "creator": "~fabled-faster",
+              "picture": "",
+              "hidden": true,
+              "config": {
+                "graph": "post"
+              },
+              "date-created": "~2021.4.2..04.08.49..29df",
+              "color": "0x0"
             },
-            "date-created": "~2021.1.1..16.26.41..8e63",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~fabled-faster/interface-testing-facility-683",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~winter-paches/glide-zone-2159",
-          "group": "/ship/~winter-paches/the-great-north"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/music-audio-test-9562": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Music (Audio Test)",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "link"
+          "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/black-diamond-2312": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Black Diamond",
+              "description": "Going downhill fast",
+              "creator": "~winter-paches",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.1.1..16.24.36..657a",
+              "color": "0x0"
             },
-            "date-created": "~2021.6.22..00.12.38..395e",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~winter-paches/black-diamond-2312",
+            "group": "/ship/~winter-paches/the-great-north"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/music-audio-test-9562",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~rilfun-lidlen/punished-collection-3881": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Punished Collection",
-            "description": "extremely long channel description far far away, behind the word mountains, far from the countries vokalia and consonantia, there live the blind texts",
-            "creator": "~rilfun-lidlen",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "link"
+          "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/glide-zone-2159": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Glide Zone",
+              "description": "For enthusiasts of nature's favorite sport: Cross-Country Skiing",
+              "creator": "~winter-paches",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.1.1..16.26.41..8e63",
+              "color": "0x0"
             },
-            "date-created": "~2021.3.29..00.50.31..5139",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~winter-paches/glide-zone-2159",
+            "group": "/ship/~winter-paches/the-great-north"
           },
-          "app-name": "graph",
-          "resource": "/ship/~rilfun-lidlen/punished-collection-3881",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/bot-land-671": {
-          "metadata": {
-            "preview": true,
-            "vip": "",
-            "title": "Bot Land",
-            "description": "Realm of the Machines",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/music-audio-test-9562": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Music (Audio Test)",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "link"
+              },
+              "date-created": "~2021.6.22..00.12.38..395e",
+              "color": "0x0"
             },
-            "date-created": "~2021.2.2..07.12.46..6400",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/music-audio-test-9562",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/bot-land-671",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/will-remove-8970": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "will remove",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~rilfun-lidlen/punished-collection-3881": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Punished Collection",
+              "description": "extremely long channel description far far away, behind the word mountains, far from the countries vokalia and consonantia, there live the blind texts",
+              "creator": "~rilfun-lidlen",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "link"
+              },
+              "date-created": "~2021.3.29..00.50.31..5139",
+              "color": "0x0"
             },
-            "date-created": "~2021.7.8..02.16.29..38c0",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~rilfun-lidlen/punished-collection-3881",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/will-remove-8970",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~haddef-sigwen/a-notebook-b-4685": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "a notebook B",
-            "description": "",
-            "creator": "~haddef-sigwen",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "publish"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/bot-land-671": {
+            "metadata": {
+              "preview": true,
+              "vip": "",
+              "title": "Bot Land",
+              "description": "Realm of the Machines",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.2.2..07.12.46..6400",
+              "color": "0x0"
             },
-            "date-created": "~2021.3.12..02.40.45..ab5f",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/bot-land-671",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~haddef-sigwen/a-notebook-b-4685",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~haddef-sigwen/haddef-makes-channel-755": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "haddef makes channel",
-            "description": "",
-            "creator": "~haddef-sigwen",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/will-remove-8970": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "will remove",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.7.8..02.16.29..38c0",
+              "color": "0x0"
             },
-            "date-created": "~2021.4.1..16.25.45..c2b7",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/will-remove-8970",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~haddef-sigwen/haddef-makes-channel-755",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/the-rink-3369": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Bonspiel!",
-            "description": "Discuss your latest Bonspiel and that great Eight-ender",
-            "creator": "~winter-paches",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~haddef-sigwen/a-notebook-b-4685": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "a notebook B",
+              "description": "",
+              "creator": "~haddef-sigwen",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.3.12..02.40.45..ab5f",
+              "color": "0x0"
             },
-            "date-created": "~2021.1.1..16.23.42..da9d",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~haddef-sigwen/a-notebook-b-4685",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~winter-paches/the-rink-3369",
-          "group": "/ship/~winter-paches/the-great-north"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/pirated-ed-are-na-863": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Pirated Ed/James are.na",
-            "description": "STOLEN CONTENT!",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "link"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~haddef-sigwen/haddef-makes-channel-755": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "haddef makes channel",
+              "description": "",
+              "creator": "~haddef-sigwen",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.4.1..16.25.45..c2b7",
+              "color": "0x0"
             },
-            "date-created": "~2021.6.1..03.01.06..5e02",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~haddef-sigwen/haddef-makes-channel-755",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/pirated-ed-are-na-863",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~haddef-sigwen/haddef-makes-collection-1106": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "haddef makes collection",
-            "description": "",
-            "creator": "~haddef-sigwen",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "link"
+          "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/the-rink-3369": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Bonspiel!",
+              "description": "Discuss your latest Bonspiel and that great Eight-ender",
+              "creator": "~winter-paches",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.1.1..16.23.42..da9d",
+              "color": "0x0"
             },
-            "date-created": "~2021.4.1..16.26.03..4f08",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~winter-paches/the-rink-3369",
+            "group": "/ship/~winter-paches/the-great-north"
           },
-          "app-name": "graph",
-          "resource": "/ship/~haddef-sigwen/haddef-makes-collection-1106",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~darlur/aries/groups/ship/~darlur/aries": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "The Darlur System",
-            "description": "A private, dedicated group for planets in the ~darlur solar system (and friends)",
-            "creator": "~darlur",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "group": null
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/pirated-ed-are-na-863": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Pirated Ed/James are.na",
+              "description": "STOLEN CONTENT!",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "link"
+              },
+              "date-created": "~2021.6.1..03.01.06..5e02",
+              "color": "0x0"
             },
-            "date-created": "~2020.4.3..17.44.43..1a15",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/pirated-ed-are-na-863",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "groups",
-          "resource": "/ship/~darlur/aries",
-          "group": "/ship/~darlur/aries"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/more-audio-testsq-1088": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Some Audio Links",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "link"
+          "/ship/~tirrel/the-marketplace/graph/ship/~tirrel/pit-rules-5550": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Pit Rules",
+              "description": "Rules for Open Outcry Market",
+              "creator": "~tirrel",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.2.25..23.23.45..16f7",
+              "color": "0x0"
             },
-            "date-created": "~2021.6.27..23.11.05..aff4.86e1",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~tirrel/pit-rules-5550",
+            "group": "/ship/~tirrel/the-marketplace"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/more-audio-testsq-1088",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/test-chat-b-6833": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Test Chat B",
-            "description": "Testingfdsadfsadsafdsafdsadfsafdsadsdsfasdfdsadfddfasdfsa",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~haddef-sigwen/haddef-makes-collection-1106": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "haddef makes collection",
+              "description": "",
+              "creator": "~haddef-sigwen",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "link"
+              },
+              "date-created": "~2021.4.1..16.26.03..4f08",
+              "color": "0x0"
             },
-            "date-created": "~2021.1.15..00.25.25..4857",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~haddef-sigwen/haddef-makes-collection-1106",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/test-chat-b-6833",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~winter-paches/the-great-north/groups/ship/~winter-paches/the-great-north": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "The Great North",
-            "description": "Sportsmen and Philosophers who love the cold. A place to discuss North American cold weather sports, politics and current events.",
-            "creator": "~winter-paches",
-            "picture": "https://zax-urbit.nyc3.digitaloceanspaces.com/winter-paches/2021.5.10..15.34.18-the-great-north.jpeg",
-            "hidden": false,
-            "config": {
-              "group": {
-                "app-name": "graph",
-                "resource": "/ship/~winter-paches/the-great-north-7.579"
-              }
+          "/ship/~darlur/aries/groups/ship/~darlur/aries": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "The Darlur System",
+              "description": "A private, dedicated group for planets in the ~darlur solar system (and friends)",
+              "creator": "~darlur",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "group": null
+              },
+              "date-created": "~2020.4.3..17.44.43..1a15",
+              "color": "0x0"
             },
-            "date-created": "~2020.3.17..14.58.51..43e3",
-            "color": "0xff.ffff"
+            "app-name": "groups",
+            "resource": "/ship/~darlur/aries",
+            "group": "/ship/~darlur/aries"
           },
-          "app-name": "groups",
-          "resource": "/ship/~winter-paches/the-great-north",
-          "group": "/ship/~winter-paches/the-great-north"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/testing-unreads-2226": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Testing Unreads",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/more-audio-testsq-1088": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Some Audio Links",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "link"
+              },
+              "date-created": "~2021.6.27..23.11.05..aff4.86e1",
+              "color": "0x0"
             },
-            "date-created": "~2021.12.13..13.34.05..1ed7",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/more-audio-testsq-1088",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/testing-unreads-2226",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~bitbet-bolbel/urbit-community/graph/ship/~darrux-landes/development": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Development",
-            "description": "Urbit Development Mailing List: https://groups.google.com/a/urbit.org/forum/#!forum/dev",
-            "creator": "~darrux-landes",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/test-chat-b-6833": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Test Chat B",
+              "description": "Testingfdsadfsadsafdsafdsadfsafdsadsdsfasdfdsadfddfasdfsa",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.1.15..00.25.25..4857",
+              "color": "0x0"
             },
-            "date-created": "~2020.4.6..21.53.30..dc68",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/test-chat-b-6833",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~darrux-landes/development",
-          "group": "/ship/~bitbet-bolbel/urbit-community"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/test-collection-a-1183": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Test Collection A",
-            "description": "",
-            "creator": "~fabled-faster",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "link"
+          "/ship/~winter-paches/the-great-north/groups/ship/~winter-paches/the-great-north": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "The Great North",
+              "description": "Sportsmen and Philosophers who love the cold. A place to discuss North American cold weather sports, politics and current events.",
+              "creator": "~winter-paches",
+              "picture": "https://zax-urbit.nyc3.digitaloceanspaces.com/winter-paches/2021.5.10..15.34.18-the-great-north.jpeg",
+              "hidden": false,
+              "config": {
+                "group": {
+                  "app-name": "graph",
+                  "resource": "/ship/~winter-paches/the-great-north-7.579"
+                }
+              },
+              "date-created": "~2020.3.17..14.58.51..43e3",
+              "color": "0xff.ffff"
             },
-            "date-created": "~2020.12.14..04.11.12..92e3",
-            "color": "0x0"
+            "app-name": "groups",
+            "resource": "/ship/~winter-paches/the-great-north",
+            "group": "/ship/~winter-paches/the-great-north"
           },
-          "app-name": "graph",
-          "resource": "/ship/~fabled-faster/test-collection-a-1183",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~bitbet-bolbel/urbit-community/graph/ship/~bitbet-bolbel/urbit-community-5.963": {
-          "metadata": {
-            "preview": false,
-            "vip": "admin-feed",
-            "title": "Group Feed",
-            "description": "",
-            "creator": "~bitbet-bolbel",
-            "picture": "",
-            "hidden": true,
-            "config": {
-              "graph": "post"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/testing-unreads-2226": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Testing Unreads",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.12.13..13.34.05..1ed7",
+              "color": "0x0"
             },
-            "date-created": "~2021.5.11..02.01.08..5660",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/testing-unreads-2226",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~bitbet-bolbel/urbit-community-5.963",
-          "group": "/ship/~bitbet-bolbel/urbit-community"
-        },
-        "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/top-shelf-6391": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Top Shelf",
-            "description": "Let's chat about the greatest game ever invented.",
-            "creator": "~winter-paches",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~bitbet-bolbel/urbit-community/graph/ship/~darrux-landes/development": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Development",
+              "description": "Urbit Development Mailing List: https://groups.google.com/a/urbit.org/forum/#!forum/dev",
+              "creator": "~darrux-landes",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2020.4.6..21.53.30..dc68",
+              "color": "0x0"
             },
-            "date-created": "~2020.9.24..00.34.28..bedb",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~darrux-landes/development",
+            "group": "/ship/~bitbet-bolbel/urbit-community"
           },
-          "app-name": "graph",
-          "resource": "/ship/~winter-paches/top-shelf-6391",
-          "group": "/ship/~winter-paches/the-great-north"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/test-chat-c-868": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Test Chat C",
-            "description": "",
-            "creator": "~hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/test-collection-a-1183": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Test Collection A",
+              "description": "",
+              "creator": "~fabled-faster",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "link"
+              },
+              "date-created": "~2020.12.14..04.11.12..92e3",
+              "color": "0x0"
             },
-            "date-created": "~2021.5.18..02.20.39..46aa",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~fabled-faster/test-collection-a-1183",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hastuc-dibtux/test-chat-c-868",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hodler-hastuc-dibtux/another-firehose-1085": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Another Firehose",
-            "description": "",
-            "creator": "~hodler-hastuc-dibtux",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~bitbet-bolbel/urbit-community/graph/ship/~bitbet-bolbel/urbit-community-5.963": {
+            "metadata": {
+              "preview": false,
+              "vip": "admin-feed",
+              "title": "Group Feed",
+              "description": "",
+              "creator": "~bitbet-bolbel",
+              "picture": "",
+              "hidden": true,
+              "config": {
+                "graph": "post"
+              },
+              "date-created": "~2021.5.11..02.01.08..5660",
+              "color": "0x0"
             },
-            "date-created": "~2021.3.22..03.05.53..74a3",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~bitbet-bolbel/urbit-community-5.963",
+            "group": "/ship/~bitbet-bolbel/urbit-community"
           },
-          "app-name": "graph",
-          "resource": "/ship/~hodler-hastuc-dibtux/another-firehose-1085",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~rilfun-lidlen/extremely-long-channel-title-far-far-away-behind-the-word-mountains-far-from-the-countries-vokalia-and-consonantia-there-live-the-blind-texts-2805": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "extremely long channel title far far away, behind the word mountains, far from the countries vokalia and consonantia, there live the blind texts",
-            "description": "extremely long channel description far far away, behind the word mountains, far from the countries vokalia and consonantia, there live the blind texts",
-            "creator": "~rilfun-lidlen",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/top-shelf-6391": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Top Shelf",
+              "description": "Let's chat about the greatest game ever invented.",
+              "creator": "~winter-paches",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2020.9.24..00.34.28..bedb",
+              "color": "0x0"
             },
-            "date-created": "~2021.3.28..17.00.43..0047",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~winter-paches/top-shelf-6391",
+            "group": "/ship/~winter-paches/the-great-north"
           },
-          "app-name": "graph",
-          "resource": "/ship/~rilfun-lidlen/extremely-long-channel-title-far-far-away-behind-the-word-mountains-far-from-the-countries-vokalia-and-consonantia-there-live-the-blind-texts-2805",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/groups/ship/~fabled-faster/interface-testing-facility": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Interface Testing Facility",
-            "description": "Total Destruction: Anyone can make channels, Please Feel Free",
-            "creator": "~fabled-faster",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "group": {
-                "app-name": "graph",
-                "resource": "/ship/~fabled-faster/interface-testing-facility-683"
-              }
+          "/ship/~tirrel/the-marketplace/groups/ship/~tirrel/the-marketplace": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "The Marketplace",
+              "description": "Welcome to The Marketplace, featuring The Pit, Urbit's first open-outcry market!",
+              "creator": "~tirrel",
+              "picture": "https://snipboard.io/U0IYyi.jpg",
+              "hidden": false,
+              "config": {
+                "group": null
+              },
+              "date-created": "~2020.11.10..04.12.25..29ef",
+              "color": "0xff6a"
             },
-            "date-created": "~2020.12.14..04.10.24..0d5d",
-            "color": "0xfe.9300"
+            "app-name": "groups",
+            "resource": "/ship/~tirrel/the-marketplace",
+            "group": "/ship/~tirrel/the-marketplace"
           },
-          "app-name": "groups",
-          "resource": "/ship/~fabled-faster/interface-testing-facility",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/test-chat-a-5919": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Test Chat A",
-            "description": "Test!!",
-            "creator": "~fabled-faster",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "chat"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hastuc-dibtux/test-chat-c-868": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Test Chat C",
+              "description": "",
+              "creator": "~hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.5.18..02.20.39..46aa",
+              "color": "0x0"
             },
-            "date-created": "~2020.12.14..04.10.40..957a",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~hastuc-dibtux/test-chat-c-868",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~fabled-faster/test-chat-a-5919",
-          "group": "/ship/~fabled-faster/interface-testing-facility"
-        },
-        "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/snowflake-news": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Snowflake News",
-            "description": "Interesting links that I don't have time to make a comment on. Usually tab link dumps.",
-            "creator": "~winter-paches",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "link"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~hodler-hastuc-dibtux/another-firehose-1085": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Another Firehose",
+              "description": "",
+              "creator": "~hodler-hastuc-dibtux",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.3.22..03.05.53..74a3",
+              "color": "0x0"
             },
-            "date-created": "~2020.11.20..20.54.00..b9e3",
-            "color": "0xff.2600"
+            "app-name": "graph",
+            "resource": "/ship/~hodler-hastuc-dibtux/another-firehose-1085",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~winter-paches/snowflake-news",
-          "group": "/ship/~winter-paches/the-great-north"
-        },
-        "/ship/~barsyr-latreb/test1-4287/graph/ship/~barsyr-latreb/test1-4287": {
-          "metadata": {
-            "preview": false,
-            "vip": "",
-            "title": "Test1",
-            "description": "Second Phase of Airlock Implementation",
-            "creator": "~barsyr-latreb",
-            "picture": "",
-            "hidden": false,
-            "config": {
-              "graph": "publish"
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~rilfun-lidlen/extremely-long-channel-title-far-far-away-behind-the-word-mountains-far-from-the-countries-vokalia-and-consonantia-there-live-the-blind-texts-2805": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "extremely long channel title far far away, behind the word mountains, far from the countries vokalia and consonantia, there live the blind texts",
+              "description": "extremely long channel description far far away, behind the word mountains, far from the countries vokalia and consonantia, there live the blind texts",
+              "creator": "~rilfun-lidlen",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2021.3.28..17.00.43..0047",
+              "color": "0x0"
             },
-            "date-created": "~2021.4.23..15.29.06..4fca",
-            "color": "0x0"
+            "app-name": "graph",
+            "resource": "/ship/~rilfun-lidlen/extremely-long-channel-title-far-far-away-behind-the-word-mountains-far-from-the-countries-vokalia-and-consonantia-there-live-the-blind-texts-2805",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
           },
-          "app-name": "graph",
-          "resource": "/ship/~barsyr-latreb/test1-4287",
-          "group": "/ship/~barsyr-latreb/test1-4287"
+          "/ship/~fabled-faster/interface-testing-facility/groups/ship/~fabled-faster/interface-testing-facility": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Interface Testing Facility",
+              "description": "Total Destruction: Anyone can make channels, Please Feel Free",
+              "creator": "~fabled-faster",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "group": {
+                  "app-name": "graph",
+                  "resource": "/ship/~fabled-faster/interface-testing-facility-683"
+                }
+              },
+              "date-created": "~2020.12.14..04.10.24..0d5d",
+              "color": "0xfe.9300"
+            },
+            "app-name": "groups",
+            "resource": "/ship/~fabled-faster/interface-testing-facility",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
+          },
+          "/ship/~fabled-faster/interface-testing-facility/graph/ship/~fabled-faster/test-chat-a-5919": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Test Chat A",
+              "description": "Test!!",
+              "creator": "~fabled-faster",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "chat"
+              },
+              "date-created": "~2020.12.14..04.10.40..957a",
+              "color": "0x0"
+            },
+            "app-name": "graph",
+            "resource": "/ship/~fabled-faster/test-chat-a-5919",
+            "group": "/ship/~fabled-faster/interface-testing-facility"
+          },
+          "/ship/~winter-paches/the-great-north/graph/ship/~winter-paches/snowflake-news": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Snowflake News",
+              "description": "Interesting links that I don't have time to make a comment on. Usually tab link dumps.",
+              "creator": "~winter-paches",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "link"
+              },
+              "date-created": "~2020.11.20..20.54.00..b9e3",
+              "color": "0xff.2600"
+            },
+            "app-name": "graph",
+            "resource": "/ship/~winter-paches/snowflake-news",
+            "group": "/ship/~winter-paches/the-great-north"
+          },
+          "/ship/~barsyr-latreb/test1-4287/graph/ship/~barsyr-latreb/test1-4287": {
+            "metadata": {
+              "preview": false,
+              "vip": "",
+              "title": "Test1",
+              "description": "Second Phase of Airlock Implementation",
+              "creator": "~barsyr-latreb",
+              "picture": "",
+              "hidden": false,
+              "config": {
+                "graph": "publish"
+              },
+              "date-created": "~2021.4.23..15.29.06..4fca",
+              "color": "0x0"
+            },
+            "app-name": "graph",
+            "resource": "/ship/~barsyr-latreb/test1-4287",
+            "group": "/ship/~barsyr-latreb/test1-4287"
+          }
         }
       }
-    }
-  },
-  "requestID": "rdyjsgzpj"
-}
+    },
+    "id": 1,
+    "response": "diff"
+  }
+]

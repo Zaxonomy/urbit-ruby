@@ -58,8 +58,8 @@ describe Urbit::Ship do
   it "can subscribe which opens a channel" do
     expect(ship.open_channels.size).to eq(0)
     ship.subscribe(app: 'graph-store', path: '/updates')
-    # This is 2 channels, not 1, because initializing the ship opens a channel for the Groups
-    expect(ship.open_channels.size).to eq(2)
+    # This is channel 2, not 0 or 1, because initializing the ship now opens channels for the Groups and Metadata.
+    expect(ship.open_channels.size).to eq(3)
 
     c = ship.open_channels.last
     expect(c).to be_instance_of(Urbit::Channel)
@@ -76,7 +76,7 @@ describe Urbit::Ship do
     ship.subscribe(app: 'graph-store', path: '/updates')
     c = ship.open_channels.last
     c.close
-    expect(ship.open_channels.size).to eq(1)
+    expect(ship.open_channels.size).to eq(2)
   end
 
 #   # ------------------------------------------------------------------
@@ -259,21 +259,21 @@ end
   # ------------------------------------------------------------------
   # Settings Store
   # ------------------------------------------------------------------
-  it "has an empty collection of Settings if never logged in" do
+  it "has no Settings collection if never logged in" do
     expect(ship.logged_in?).to be false
-    expect(ship.settings(desk: "landscape")).to be_empty
+    expect(ship.settings).to be_nil
   end
 
   it "queries and retrieves settings if logged in" do
     ship.login
     expect(ship.logged_in?)
-    expect(ship.settings(desk: "landscape")).to_not eq([])
-    s = ship.settings(desk: "landscape").first
+    expect(ship.settings[desk: "landscape"]).to_not be_nil
+    s = ship.settings[desk: "landscape"]
     expect(s).to be_instance_of(Urbit::Setting)
-    expect(s.bucket).to eq("calm")
-    expect(s.entries).to eq({"hideGroups"=>false, "hideUnreads"=>true, "hideUtilities"=>false})
+    expect(s[bucket: "calm"]).to_not be_nil
+    expect(s[bucket: "calm"].entries).to eq({"hideGroups"=>false, "hideUnreads"=>true, "hideUtilities"=>false})
     # Landscape is always the default desk.
-    expect(ship.settings.count).to be(1)
+    expect(ship.settings.count).to be(2)
   end
 
 end

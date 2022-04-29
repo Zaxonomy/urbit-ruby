@@ -3,6 +3,7 @@
 require_relative 'fact/base_fact'
 require_relative 'fact/graph_fact'
 require_relative 'fact/group_fact'
+require_relative 'fact/metadata_fact'
 require_relative 'fact/settings_fact'
 
 module Urbit
@@ -34,6 +35,10 @@ module Urbit
           return InitialGroupGroupFact.new(channel: channel, event: event) if c["initialGroup"]
           return RemoveGroupMemberFact.new(channel: channel, event: event) if c["removeMembers"]
           return RemoveTagFact.new(channel: channel, event: event)         if c["removeTag"]
+        end
+
+        if (c = contents["json"]["metadata-update"])
+          return MetadataUpdateFact.new(channel: channel, event: event) if contents["json"]["metadata-update"]
         end
 
         if (c = contents["json"]["settings-event"])
