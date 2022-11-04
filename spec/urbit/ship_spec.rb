@@ -256,24 +256,4 @@ end
 # ship.spider(desk: 'landscape', mark_in: 'group-view-action', mark_out: 'json', thread: 'group-leave', data: leave_json_string)
 # ship.spider(desk: 'landscape', mark_in: 'group-view-action', mark_out: 'json', thread: 'group-leave', data: %q({"leave": {"ship": "~fabled-faster", "name": "interface-testing-facility"}}))
 
-  # ------------------------------------------------------------------
-  # Settings Store
-  # ------------------------------------------------------------------
-  it "has no Settings collection if never logged in" do
-    expect(ship.logged_in?).to be false
-    expect(ship.settings).to be_nil
-  end
-
-  it "queries and retrieves settings if logged in" do
-    ship.login
-    expect(ship.logged_in?)
-    expect(ship.settings[desk: "landscape"]).to_not be_nil
-    s = ship.settings[desk: "landscape"]
-    expect(s).to be_instance_of(Urbit::Setting)
-    expect(s[bucket: "calm"]).to_not be_nil
-    expect(s[bucket: "calm"].entries).to eq({"hideGroups"=>false, "hideUnreads"=>true, "hideUtilities"=>false})
-    # Landscape is always the default desk.
-    expect(ship.settings.count).to be(2)
-  end
-
 end
