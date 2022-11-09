@@ -140,48 +140,6 @@ describe Urbit::Ship do
     expect(ship.graphs.count).to eq(1)   # this is just the default dm-inbox again
   end
 
-it "can create and delete an 'unmanaged' graph using 'spider'" do
-  ship.login
-  create_json = %Q({
-    "create": {
-      "resource": {
-        "ship": "~zod",
-        "name": "#{random_name}"
-      },
-      "title": "TUG",
-      "description": "Testing Un-Managed Graph Creation",
-      "associated": {
-        "policy": {
-          "invite": {
-            "pending": []
-          }
-        }
-      },
-      "module"     : "publish",
-      "mark"       : "graph-validator-publish"
-    }
-  })
-
-  spider = ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-create', data: create_json)
-  expect(spider[:status]).to eq(200)
-  expect(spider[:code]).to eq("ok")
-  expect(spider[:body]).to eq("null")
-
-  delete_json = %Q({
-    "delete": {
-      "resource": {
-        "ship": "~zod",
-        "name": "#{random_name}"
-      }
-    }
-  })
-
-  spider = ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: delete_json, args: ["NO_RESPONSE"])
-  expect(spider[:status]).to eq(200)
-  expect(spider[:code]).to eq("ok")
-  expect(spider[:body]).to eq("null")
-end
-
   # it "can fetch a url using spider" do
   #   ship.login
   #   fetch_json = %q({
