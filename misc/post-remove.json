@@ -1,0 +1,20 @@
+[
+  {
+    "id": 72,
+    "action": "poke",
+    "ship": "barsyr-latreb",
+    "app": "graph-push-hook",
+    "mark": "graph-update-3",
+    "json": {
+      "remove-posts": {
+        "resource": {
+          "ship": "~barsyr-latreb",
+          "name": "test1-4287"
+        },
+        "indices": [
+          "/170141184505913816375739117002098212864"
+        ]
+      }
+    }
+  }
+]

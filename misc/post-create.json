@@ -1,0 +1,63 @@
+{
+  "add-nodes": {
+    "resource": {
+      "ship": "~barsyr-latreb",
+      "name": "test1-4287"
+    },
+    "nodes": {
+      "/170141184505913806450093257495119034056": {
+        "post": {
+          "author": "~barsyr-latreb",
+          "index": "/170141184505913806450093257495119034056",
+          "time-sent": 1667591764144,
+          "contents": [],
+          "hash": null,
+          "signatures": []
+        },
+        "children": {
+          "1": {
+            "post": {
+              "author": "~barsyr-latreb",
+              "index": "/170141184505913806450093257495119034056/1",
+              "time-sent": 1667591764144,
+              "contents": [],
+              "hash": null,
+              "signatures": []
+            },
+            "children": {
+              "1": {
+                "post": {
+                  "author": "~barsyr-latreb",
+                  "index": "/170141184505913806450093257495119034056/1/1",
+                  "time-sent": 1667591764144,
+                  "contents": [
+                    {
+                      "text": "Post 6"
+                    },
+                    {
+                      "text": "This is the first attem t Post via the Airlock using a thread."
+                    }
+                  ],
+                  "hash": null,
+                  "signatures": []
+                },
+                "children": null
+              }
+            }
+          },
+          "2": {
+            "post": {
+              "author": "~barsyr-latreb",
+              "index": "/170141184505913806450093257495119034056/2",
+              "time-sent": 1667591764144,
+              "contents": [],
+              "hash": null,
+              "signatures": []
+            },
+            "children": null
+          }
+        }
+      }
+    }
+  }
+}

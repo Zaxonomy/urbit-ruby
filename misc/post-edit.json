@@ -1,0 +1,28 @@
+{
+  "add-nodes": {
+    "resource": {
+      "ship": "~barsyr-latreb",
+      "name": "test1-4287"
+    },
+    "nodes": {
+      "/170141184505913816375739117002098212864/1/2": {
+        "post": {
+          "author": "~barsyr-latreb",
+          "index": "/170141184505913816375739117002098212864/1/2",
+          "time-sent": 1667594034444,
+          "contents": [
+            {
+              "text": "Post 6"
+            },
+            {
+              "text": "Not sure that last one was right?\nedit 1"
+            }
+          ],
+          "hash": null,
+          "signatures": []
+        },
+        "children": null
+      }
+    }
+  }
+}
