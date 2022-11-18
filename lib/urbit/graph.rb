@@ -23,6 +23,11 @@ module Urbit
       @creator
     end
 
+    def delete
+      resp = self.ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: self.delete_graph_json, args: ["NO_RESPONSE"])
+      @persistent = !(200 == resp[:status])
+    end
+
     def description
       self.fetch_link if @description.nil?
       @description
@@ -51,6 +56,19 @@ module Urbit
     # def mark
     #   r = self.ship.scry(app: 'graph-store', path: "/graph/#{self.to_s}/mark")
     # end
+
+    #
+    # Transform this Graph into a PublishGraph.
+    #
+    # TODO: This is a very crude way to do this since we don't get the type of graph back from
+    #       our initial call to retrieve the graphs, only later with the metadata.
+    #
+    #       This will need some more thought.
+    #
+    def molt
+      return PublishGraph.new(ship: self.ship, graph_name: self.name, title: self.title, description: self.description, persistent: true) if 'publish' == self.type
+      self
+    end
 
     #
     # Finds a single node in this graph by its index.
@@ -120,15 +138,17 @@ module Urbit
     #
     # the canonical printed representation of a Graph
     def to_s
-      "a Graph(#{self.resource})"
+      "a #{self.class.name.split('::').last}(#{self.resource})"
     end
 
     private
 
+    def delete_graph_json
+      %Q({"delete": {"resource": {"ship": "#{self.ship.name}", "name": "#{self.name}"}}})
+    end
+
     def fetch_all_nodes
-      self.fetch_nodes("#{self.graph_resource}/",
-                       AddGraphParser,
-                       "add-graph")
+      self.fetch_nodes("#{self.graph_resource}/", AddGraphParser, "add-graph")
     end
 
     def fetch_link
@@ -180,6 +200,77 @@ module Urbit
 
     def graph_resource
       "/graph/#{self.resource}"
+    end
+  end
+
+  class PublishGraph < Graph
+
+    attr_accessor :description, :title
+
+    def initialize(ship:, graph_name:, title:, description:, persistent: false)
+      super ship: ship, graph_name: graph_name, host_ship_name: ship.untilded_name
+      @persistent = persistent
+      @title = title
+      @description = description
+    end
+
+    def add_post(author:, title:, body:)
+      j = self.create_post_json(author, title, body)
+      resp = self.ship.spider(mark_in: 'graph-update-3', mark_out: 'graph-view-action', thread: 'graph-add-nodes', data: j)
+      (200 == resp[:status])
+    end
+
+    def persist
+      # PublishGraph, persist thyself in urbit...
+      resp = self.ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-create', data: self.create_graph_json)
+      @persistent = (200 == resp[:status])
+    end
+
+    def persistent?
+      @persistent
+    end
+
+    private
+
+    def create_graph_json
+      %Q({"create": {"resource"   : {"ship": "#{self.ship.name}", "name": "#{self.name}"},
+                     "title"      : "#{self.title}",
+                     "description": "#{self.description}",
+                     "associated" : {"policy": {"invite": {"pending": []}}},
+                     "module"     : "publish",
+                     "mark"       : "graph-validator-publish"
+                    }
+         })
+    end
+
+    def create_post_json(author, title, body)
+      time = Time.now.to_i
+      index = Urbit::Node.unix_to_da(time)
+      %Q({
+         "add-nodes": {
+           "resource": {"ship": "#{self.host_ship}", "name": "#{self.name}"},
+           "nodes": {
+             "/#{index}": {
+               "post": {"author": "#{author}", "index": "/#{index}", "time-sent": #{time}, "contents": [], "hash": null, "signatures": []},
+               "children": {
+                 "1": {
+                   "post": { "author": "#{author}", "index": "/#{index}/1", "time-sent": #{time}, "contents": [], "hash": null, "signatures": []},
+                   "children": {
+                     "1": {
+                       "post": {"author": "#{author}", "index": "/#{index}/1/1", "time-sent": #{time}, "contents": [{"text": "#{title}"}, {"text": "#{body}"}], "hash": null, "signatures": []},
+                       "children": null
+                     }
+                   }
+                 },
+                 "2": {
+                   "post": {"author": "#{author}", "index": "/#{index}/2", "time-sent": #{time}, "contents": [], "hash": null, "signatures": []},
+                   "children": null
+                 }
+               }
+             }
+           }
+         }
+      })
     end
   end
 end
