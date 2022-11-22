@@ -140,48 +140,6 @@ describe Urbit::Ship do
     expect(ship.graphs.count).to eq(1)   # this is just the default dm-inbox again
   end
 
-it "can create and delete an 'unmanaged' graph using 'spider'" do
-  ship.login
-  create_json = %Q({
-    "create": {
-      "resource": {
-        "ship": "~zod",
-        "name": "#{random_name}"
-      },
-      "title": "TUG",
-      "description": "Testing Un-Managed Graph Creation",
-      "associated": {
-        "policy": {
-          "invite": {
-            "pending": []
-          }
-        }
-      },
-      "module"     : "publish",
-      "mark"       : "graph-validator-publish"
-    }
-  })
-
-  spider = ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-create', data: create_json)
-  expect(spider[:status]).to eq(200)
-  expect(spider[:code]).to eq("ok")
-  expect(spider[:body]).to eq("null")
-
-  delete_json = %Q({
-    "delete": {
-      "resource": {
-        "ship": "~zod",
-        "name": "#{random_name}"
-      }
-    }
-  })
-
-  spider = ship.spider(mark_in: 'graph-view-action', mark_out: 'json', thread: 'graph-delete', data: delete_json, args: ["NO_RESPONSE"])
-  expect(spider[:status]).to eq(200)
-  expect(spider[:code]).to eq("ok")
-  expect(spider[:body]).to eq("null")
-end
-
   # it "can fetch a url using spider" do
   #   ship.login
   #   fetch_json = %q({
@@ -255,25 +213,5 @@ end
 # leave_json_string = %q({"leave": {"ship": "~fabled-faster", "name": "interface-testing-facility"}})
 # ship.spider(desk: 'landscape', mark_in: 'group-view-action', mark_out: 'json', thread: 'group-leave', data: leave_json_string)
 # ship.spider(desk: 'landscape', mark_in: 'group-view-action', mark_out: 'json', thread: 'group-leave', data: %q({"leave": {"ship": "~fabled-faster", "name": "interface-testing-facility"}}))
-
-  # ------------------------------------------------------------------
-  # Settings Store
-  # ------------------------------------------------------------------
-  it "has no Settings collection if never logged in" do
-    expect(ship.logged_in?).to be false
-    expect(ship.settings).to be_nil
-  end
-
-  it "queries and retrieves settings if logged in" do
-    ship.login
-    expect(ship.logged_in?)
-    expect(ship.settings[desk: "landscape"]).to_not be_nil
-    s = ship.settings[desk: "landscape"]
-    expect(s).to be_instance_of(Urbit::Setting)
-    expect(s[bucket: "calm"]).to_not be_nil
-    expect(s[bucket: "calm"].entries).to eq({"hideGroups"=>false, "hideUnreads"=>true, "hideUtilities"=>false})
-    # Landscape is always the default desk.
-    expect(ship.settings.count).to be(2)
-  end
 
 end

@@ -98,6 +98,10 @@ module Urbit
       @graph.newer_sibling_nodes(node: self, count: count)
     end
 
+    def parent?
+      !self.children.empty?
+    end
+
     #
     # Answers the previous {count} Nodes relative to this Node.
     # Defaults to the next Node if no {count} is passed.
@@ -124,7 +128,7 @@ module Urbit
         author: self.author,
         sent: self.datetime_sent,
         contents: self.contents,
-        is_parent: !self.children.empty?,
+        is_parent: self.parent?,
         child_count: self.children.count
       }
     end

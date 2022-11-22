@@ -188,6 +188,19 @@ a Node({:index=>"170.141.184.505.209.627.337.970.761.265.544.429.568", :author=>
 "170.141.184.505.209.545.972.004.310.065.795.301.376"
 "170.141.184.505.209.627.337.970.761.265.544.429.568"
 
+# Creating a Document New Post in a Publish Graph
+> graph = ship.graph(resource: '~barsyr-latreb/NPG')
+=> a Graph(~barsyr-latreb/NPG)
+
+> graph.type
+=> publish
+
+> graph = graph.molt                     # This is necessary for now since a Graph initially doesn't know it's type.
+=> a PublishGraph(~barsyr-latreb/NPG)
+
+> graph.add_post(author: '~barsyr-latreb', title: 'Titleist', body: 'What a body!')
+=> true
+
 #
 # --------------------------------------------------------------------
 # %group-store
@@ -215,13 +228,13 @@ The Great North
 > ship.groups.join(host: "~darlur", name: "hammock-coast")
 
 # A group knows about it's Graphs
-> g = ship.groups[title: 'Hammock Coast']
+> group = ship.groups[title: 'Hammock Coast']
 => a Group({:title=>"Hammock Coast", :description=>"Martians living in God's Country: Coastal South Carolina between Georgetown and Myrtle Beach", :host=>"~darlur", :key=>"hammock-coast", :member_count=>3, :pending_invites=>"?", :hidden=>false})
 
-> g.graphs.map {|g| g.name}
+> group.graphs.map {|g| g.name}
 => ["the-beach-2315"]
 
-> g.graphs.map {|g| g.title}
+> group.graphs.map {|g| g.title}
 => ["The Beach"]
 
 # The group is now back in your list of Groups (With large groups this may take a moment)
